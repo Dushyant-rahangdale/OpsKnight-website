@@ -50,6 +50,45 @@ helm upgrade --install opssentinal ./helm/opssentinal \
   --values values.yaml
 ```
 
+## Common Overrides
+
+### Resources
+
+```yaml
+resources:
+  requests:
+    cpu: "200m"
+    memory: "512Mi"
+  limits:
+    cpu: "1"
+    memory: "1Gi"
+```
+
+### Autoscaling
+
+```yaml
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+```
+
+### Ingress TLS
+
+```yaml
+ingress:
+  enabled: true
+  host: opssentinal.example.com
+  tls:
+    enabled: true
+    secretName: opssentinal-tls
+```
+
+## Secrets Management
+
+Store secrets in your `values.yaml` or use an external secret manager. Ensure `DATABASE_URL`, `NEXTAUTH_URL`, and `NEXTAUTH_SECRET` are set before first boot.
+
 ## Next Steps
 
 - Review the Kubernetes guide for scaling, secrets, and ingress setup.

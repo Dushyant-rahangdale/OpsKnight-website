@@ -481,21 +481,21 @@ h4 {
 
 /* Typography Overrides */
 .prose {
-  --tw-prose-body: var(--foreground-secondary);
-  --tw-prose-headings: var(--foreground);
-  --tw-prose-links: var(--accent);
-  --tw-prose-bold: var(--foreground);
-  --tw-prose-counters: var(--foreground-muted);
-  --tw-prose-bullets: var(--foreground-muted);
-  --tw-prose-hr: var(--border);
-  --tw-prose-quotes: var(--foreground-secondary);
-  --tw-prose-quote-borders: var(--accent);
-  --tw-prose-captions: var(--foreground-muted);
-  --tw-prose-code: var(--foreground);
+  --tw-prose-body: #d7e3f4;
+  --tw-prose-headings: #f1f5f9;
+  --tw-prose-links: #93c5fd;
+  --tw-prose-bold: #f8fafc;
+  --tw-prose-counters: #94a3b8;
+  --tw-prose-bullets: #94a3b8;
+  --tw-prose-hr: rgba(148, 163, 184, 0.25);
+  --tw-prose-quotes: #cbd5f5;
+  --tw-prose-quote-borders: #60a5fa;
+  --tw-prose-captions: #94a3b8;
+  --tw-prose-code: #e2e8f0;
   --tw-prose-pre-code: #e2e8f0;
-  --tw-prose-pre-bg: #0b1220;
-  --tw-prose-th-borders: var(--border);
-  --tw-prose-td-borders: var(--border);
+  --tw-prose-pre-bg: #111c2f;
+  --tw-prose-th-borders: rgba(148, 163, 184, 0.35);
+  --tw-prose-td-borders: rgba(148, 163, 184, 0.2);
 }
 
 .prose :where(h1, h2, h3, h4) {
@@ -505,59 +505,64 @@ h4 {
 
 .prose :where(a) {
   text-decoration: underline;
-  text-decoration-color: rgba(37, 99, 235, 0.35);
+  text-decoration-color: rgba(147, 197, 253, 0.45);
   text-underline-offset: 3px;
   font-weight: 500;
 }
 
 .prose :where(a):hover {
-  color: var(--accent-strong);
-  text-decoration-color: var(--accent);
+  color: #bfdbfe;
+  text-decoration-color: #93c5fd;
 }
 
 .prose :where(pre) {
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  border: 1px solid rgba(148, 163, 184, 0.3);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .prose :where(blockquote) {
   font-style: normal;
-  background: rgba(37, 99, 235, 0.06);
+  background: rgba(59, 130, 246, 0.12);
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   border-left-width: 4px;
 }
 
 .prose :where(code):not(:where(pre code)) {
-  background: rgba(148, 163, 184, 0.15);
+  background: rgba(148, 163, 184, 0.22);
   padding: 0.2em 0.4em;
   border-radius: 0.25rem;
   font-weight: 500;
-  color: var(--accent-strong);
+  color: #e2e8f0;
 }
 
 .docs-markdown :where(h2) {
   margin-top: 2.25rem;
   padding-left: 0.75rem;
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid #60a5fa;
 }
 
 .docs-markdown :where(h3) {
-  color: var(--accent-strong);
+  color: #a5b4fc;
 }
 
 .docs-markdown :where(table) {
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  border: 1px solid rgba(148, 163, 184, 0.28);
   border-radius: 0.5rem;
   overflow: hidden;
 }
 
 .docs-markdown :where(thead th) {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(30, 41, 59, 0.7);
 }
 
 .docs-markdown :where(tbody tr:nth-child(even)) {
-  background: rgba(148, 163, 184, 0.04);
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.docs-markdown {
+  background: #111827;
+  border: 1px solid rgba(148, 163, 184, 0.25);
 }
 
 .prose :where(sup)>a {

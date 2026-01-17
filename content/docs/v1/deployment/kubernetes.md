@@ -4,16 +4,16 @@ order: 2
 
 # Kubernetes Deployment
 
-Deploy OpsSentinal on Kubernetes for production workloads.
+Deploy OpsSentinal on Kubernetes for production workloads and horizontal scaling.
 
 ## Prerequisites
 
 - Kubernetes 1.24+
-- kubectl configured
-- Ingress controller (nginx-ingress recommended)
+- `kubectl` configured
+- Ingress controller (nginx-ingress or similar)
 - PostgreSQL (in-cluster or managed)
 
-## Quick Start
+## Quick Start (Manifests)
 
 ```bash
 cd k8s
@@ -28,7 +28,7 @@ kubectl apply -f secret.yaml
 kubectl apply -f .
 ```
 
-## Manifests
+## Manifest Overview
 
 | File              | Purpose                   |
 | ----------------- | ------------------------- |
@@ -72,9 +72,11 @@ data:
   ENABLE_INTERNAL_CRON: 'true'
 ```
 
+> **Note:** Store secrets in `Secret` objects and keep the ConfigMap non-sensitive.
+
 ## Ingress
 
-Configure for your domain:
+Configure for your domain and TLS:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -130,7 +132,7 @@ spec:
 
 ### In-Cluster PostgreSQL
 
-Use provided manifests:
+Apply the included manifests:
 
 ```bash
 kubectl apply -f postgres-pvc.yaml
@@ -142,8 +144,8 @@ kubectl apply -f postgres-service.yaml
 
 Use AWS RDS, GCP Cloud SQL, or Azure Database:
 
-- Update `DATABASE_URL` in secrets
-- Ensure network connectivity
+- Update `DATABASE_URL` in your Secret.
+- Ensure network connectivity from the cluster.
 
 ## Updating
 
@@ -168,3 +170,9 @@ kubectl logs -f deploy/opssentinal -n opssentinal
 # Shell access
 kubectl exec -it deploy/opssentinal -n opssentinal -- sh
 ```
+
+## Verification
+
+- Ensure the deployment is `Ready`.
+- Confirm ingress routes to the service.
+- Log in and create a test service to validate persistence.

@@ -4,64 +4,59 @@ order: 2
 
 # Encryption System User Guide
 
+OpsSentinal encrypts sensitive secrets (SSO client secrets, Slack tokens, API keys) using a zero-trust approach.
+
 ## Overview
 
-OpsSentinel uses a **Zero-Trust, Fault-Tolerant** encryption system to secure sensitive credentials (SSO Client Secrets, Slack Tokens, API Keys).
+- Secrets are encrypted before being stored.
+- Encryption keys must be backed up securely.
+- Rotation re-encrypts data with a new key.
 
-## 1. First Time Setup (Bootstrap)
+## First-Time Setup
 
 When you first access **System Settings**, the Encryption Key will be unconfigured.
 
-1.  Click **"Generate"** to create a secure 32-byte (64 char) hex key.
-2.  **CRITICAL**: Click the **Copy (📋)** button and save this key in your Password Manager (1Password, Bitwarden, etc.).
-3.  Check the box **"I have saved this key"**.
-4.  Click **"Save Encryption Key"**.
+1. Click **Generate** to create a secure 32-byte (64 char) hex key.
+2. Copy the key and store it in a password manager.
+3. Confirm you have saved the key.
+4. Click **Save Encryption Key**.
 
-> **Note**: The system will explicitly refuse to save if you do not confirm you have backed up the key.
+> **Important:** The system will refuse to save if you do not confirm backup.
 
-## 2. Key Rotation (Routine Maintenance)
+## Key Rotation
 
-To change your encryption key (e.g. every 90 days):
+Rotate keys on a regular schedule (e.g., every 90 days):
 
-1.  Click **"Replace Key"**.
-2.  Generate or Paste your **New Key**.
-3.  Ensure the **"Safe Key Rotation"** box is checked.
-4.  Click **"Save Encryption Key"**.
+1. Click **Replace Key**.
+2. Generate or paste the new key.
+3. Ensure **Safe Key Rotation** is enabled.
+4. Click **Save Encryption Key**.
 
-### What happens?
+### What Happens During Rotation
 
-The system performs an **Atomic Transaction**:
+1. Decrypt data with the current key.
+2. Re-encrypt data with the new key.
+3. Update the verification canary.
 
-1.  Decrypts all data with the _Current_ key.
-2.  Re-encrypts all data with the _New_ key.
-3.  updates the Verification Canary.
-4.  Saves everything at once.
+> **Note:** If decryption fails, the rotation aborts and the old key remains active.
 
-> **Failure Safety**: If the system cannot decrypt your data (e.g. corruption), the rotation **ABORTS**. Your data remains safe and encrypted with the Old Key.
+## Emergency Recovery
 
-## 3. Disaster Recovery (Emergency Mode)
+If the system enters **Emergency Recovery Mode**, the stored key does not match encrypted data.
 
-If you see the Red **"Emergency Recovery Mode"** alert:
+1. Retrieve the original key from your password manager.
+2. Paste it into the input field.
+3. Click **Save Encryption Key**.
 
-**Cause**: The database contains encrypted data, but the stored key is invalid (e.g. bad DB restore, manual tampering).
-
-**Resolution**:
-
-1.  Retrieve your **Original Master Key** from your Password Manager.
-2.  Paste it into the input field.
-3.  Click **"Save Encryption Key"**.
-4.  The system will validate the key against the "Canary". If it works, the system unlocks immediately.
+If the key matches, the system unlocks immediately.
 
 ## FAQ
 
 **Q: What if I lost my key?**
-A: Since this is a zero-trust system, lost keys mean **Data Loss**. You will need to Reset the key (entering a new one during Emergency Mode) and legally manually re-enter all your Client Secrets and Tokens.
+A: Lost keys mean encrypted data cannot be recovered. You must set a new key and re-enter secrets.
 
 **Q: Can I use `process.env.ENCRYPTION_KEY`?**
-A: Yes, but it is treated as a fallback. The **Database Key** (System Settings) takes priority. We recommend managing the key via the UI for the safety features (Canary, Rotation) which `.env` cannot provide.
+A: Yes, but it is a fallback. The key saved in System Settings takes priority.
 
-**Q: If I restore an old database encrypted with a different key, can I just "Rotate" to a new key?**
-A: **No.** Rotation requires the _current_ system key to be able to decrypt the _current_ data.
-
-- If you have a mismatch (Old DB + Wrong Key), the system effectively cannot read the data, so it cannot re-encrypt it.
-- **Solution**: You must first use **Emergency Recovery** to restore the _Original Key_ that matches the old database. Once the system unlocks (files are readable), you can _then_ perform a Safe Rotation to a new key.
+**Q: Can I rotate without the current key?**
+A: No. Rotation requires access to the current key to decrypt existing secrets.

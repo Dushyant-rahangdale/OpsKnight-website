@@ -51,9 +51,7 @@ curl -H "Authorization: Bearer YOUR_API_KEY" \
 }
 ```
 
----
-
-## Get Incident
+## Get an Incident
 
 ```
 GET /api/incidents/:id
@@ -61,24 +59,18 @@ GET /api/incidents/:id
 
 **Scope:** `incidents:read`
 
-### Example
-
 ```bash
 curl -H "Authorization: Bearer YOUR_API_KEY" \
   "https://your-ops.com/api/incidents/inc_abc123"
 ```
 
----
-
-## Create Incident
+## Create an Incident
 
 ```
 POST /api/incidents
 ```
 
 **Scope:** `incidents:write`
-
-### Request Body
 
 ```json
 {
@@ -90,19 +82,7 @@ POST /api/incidents
 }
 ```
 
-### Fields
-
-| Field         | Type   | Required |
-| ------------- | ------ | -------- |
-| `title`       | string | ✅       |
-| `serviceId`   | string | ✅       |
-| `description` | string | -        |
-| `urgency`     | string | -        |
-| `priority`    | string | -        |
-
----
-
-## Update Incident
+## Update an Incident
 
 ```
 PATCH /api/incidents/:id
@@ -110,11 +90,9 @@ PATCH /api/incidents/:id
 
 **Scope:** `incidents:write`
 
-### Request Body
-
 ```json
 {
-  "status": "acknowledged",
+  "status": "ACKNOWLEDGED",
   "assigneeId": "user_123"
 }
 ```
@@ -127,11 +105,7 @@ PATCH /api/incidents/:id
 | `urgency`    | `HIGH`, `LOW`                                 |
 | `assigneeId` | User ID or empty to unassign                  |
 
-### Example
+## Best Practices
 
-```bash
-curl -X PATCH "https://your-ops.com/api/incidents/inc_abc123" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"status": "ACKNOWLEDGED"}'
-```
+- Use the Events API for alert-driven incidents.
+- Use the Incidents API for manual workflows.

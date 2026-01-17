@@ -19,7 +19,7 @@ export function Hero() {
                     <div className="text-center lg:text-left">
                         {/* Development Badge */}
                         <motion.div
-                            initial={{ opacity: 0, y: 10 }}
+                            initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4 }}
                             className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/5 text-amber-300 text-xs font-medium mb-6 backdrop-blur-sm"
@@ -32,7 +32,7 @@ export function Hero() {
                         </motion.div>
 
                         <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1, duration: 0.5 }}
                             className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-6"
@@ -42,7 +42,7 @@ export function Hero() {
                         </motion.h1>
 
                         <motion.p
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.5 }}
                             className="text-base md:text-lg text-slate-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
@@ -52,7 +52,7 @@ export function Hero() {
                         </motion.p>
 
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3, duration: 0.5 }}
                             className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3"
@@ -75,7 +75,7 @@ export function Hero() {
                         </motion.div>
 
                         <motion.div
-                            initial={{ opacity: 0 }}
+                            initial={false}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 0.5 }}
                             className="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-4 text-slate-500 text-xs font-medium"
@@ -88,7 +88,7 @@ export function Hero() {
 
                     {/* Right Content - Compact Dashboard Preview */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, rotateY: 10 }}
+                        initial={false}
                         animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                         transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
                         className="relative mt-8 lg:mt-0 perspective-[2000px]"

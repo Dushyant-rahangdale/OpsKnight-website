@@ -22,7 +22,7 @@ export function Pricing() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="text-center mb-16"
@@ -45,7 +45,7 @@ export function Pricing() {
 
                 {/* Main Pricing Card */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="max-w-2xl mx-auto relative"
@@ -71,7 +71,7 @@ export function Pricing() {
                             {features.map((feature, index) => (
                                 <motion.div
                                     key={feature}
-                                    initial={{ opacity: 0, x: -10 }}
+                                    initial={false}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.05 }}
@@ -100,7 +100,7 @@ export function Pricing() {
 
                 {/* License Note */}
                 <motion.div
-                    initial={{ opacity: 0 }}
+                    initial={false}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     className="text-center mt-12"

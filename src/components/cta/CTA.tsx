@@ -2,95 +2,72 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Github, Terminal, Copy, Rocket } from "lucide-react";
+import { Github, Terminal, Copy, ArrowRight } from "lucide-react";
 
 export function CTA() {
     return (
-        <section className="relative py-24 section-shell overflow-hidden">
-            {/* Enhanced Background Effects */}
-            <div className="absolute inset-0">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-3xl" />
-            </div>
+        <section className="relative py-32 bg-slate-950 overflow-hidden">
+            {/* Background Grid */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+
+            {/* Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
+
 
             <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    {/* Badge */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6"
-                    >
-                        <Rocket className="w-4 h-4" />
-                        Ready to deploy
-                    </motion.div>
-
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-                        Launch OpsSentinal in your{" "}
-                        <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">own infrastructure</span>
+                    <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6">
+                        Ready to take control?
                     </h2>
-
-                    <p className="text-lg text-foreground-secondary mb-10 max-w-2xl mx-auto">
-                        Clone the repository, spin up Docker, and start routing incidents in minutes.
+                    <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
+                        Join the community of SREs building the future of open source incident response.
                     </p>
 
-                    {/* Quick Start */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="relative max-w-xl mx-auto mb-10"
-                    >
-                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-emerald-500/20 rounded-2xl blur-lg opacity-50" />
-                        <div className="relative surface-panel rounded-xl p-6 border border-white/10">
-                            <div className="flex items-center justify-between mb-4">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                                        <Terminal className="w-4 h-4 text-white" />
-                                    </div>
-                                    <span className="text-foreground font-medium">Quick Start</span>
+                    {/* Quick Start Terminal */}
+                    <div className="relative max-w-lg mx-auto mb-10 text-left">
+                        <div className="relative rounded-xl border border-white/10 bg-slate-900 shadow-2xl overflow-hidden">
+                            <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-slate-800/50">
+                                <div className="flex gap-1.5">
+                                    <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
                                 </div>
-                                <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-white text-xs transition-all">
-                                    <Copy className="w-3 h-3" />
-                                    Copy
-                                </button>
+                                <span className="text-xs text-slate-500 font-mono">bash</span>
                             </div>
-                            <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm text-left overflow-x-auto border border-slate-800/50">
-                                <div className="flex items-center">
-                                    <span className="text-emerald-400 mr-2">$</span>
-                                    <span className="text-slate-300">git clone https://github.com/Dushyant-rahangdale/OpsSentinal.git</span>
+                            <div className="p-4 font-mono text-sm">
+                                <div className="flex items-center mb-2">
+                                    <span className="text-emerald-500 mr-2">$</span>
+                                    <span className="text-slate-300">git clone https://github.com/opssentinal</span>
                                 </div>
-                                <div className="flex items-center mt-2">
-                                    <span className="text-emerald-400 mr-2">$</span>
-                                    <span className="text-slate-300">cd OpsSentinal && docker-compose up -d</span>
+                                <div className="flex items-center">
+                                    <span className="text-emerald-500 mr-2">$</span>
+                                    <span className="text-slate-300">docker compose up -d</span>
                                 </div>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
-                    {/* CTA Button */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 }}
-                    >
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link
                             href="https://github.com/Dushyant-rahangdale/OpsSentinal"
                             target="_blank"
-                            className="inline-flex items-center gap-2 text-base px-10 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-400 hover:to-cyan-400 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-105 transition-all duration-300"
+                            className="btn-primary h-12 px-8 bg-white text-slate-950 hover:bg-slate-200 border-none shadow-lg shadow-white/5 transition-all w-full sm:w-auto flex items-center justify-center"
                         >
-                            <Github className="w-5 h-5" />
-                            View on GitHub
+                            <Github className="w-5 h-5 mr-2" />
+                            Star on GitHub
                         </Link>
-                    </motion.div>
+                        <Link
+                            href="/docs"
+                            className="btn-secondary h-12 px-8 bg-transparent border-white/10 text-white hover:bg-white/5 w-full sm:w-auto flex items-center justify-center"
+                        >
+                            Read the Docs
+                            <ArrowRight className="w-4 h-4 ml-2 opacity-50" />
+                        </Link>
+                    </div>
                 </motion.div>
             </div>
         </section>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Menu, X, Github } from "lucide-react";
+import { Menu, X, Github, Heart } from "lucide-react";
 
 const navItems = [
     { label: "Features", href: "/#features" },
@@ -58,6 +58,14 @@ export function Navbar() {
                     {/* Desktop CTAs */}
                     <div className="hidden md:flex items-center gap-3">
                         <Link
+                            href="https://github.com/sponsors/Dushyant-rahangdale"
+                            target="_blank"
+                            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-pink-400 hover:text-pink-300 hover:bg-pink-400/10 rounded-full transition-colors border border-pink-400/20"
+                        >
+                            <Heart className="w-3.5 h-3.5 fill-current" />
+                            <span>Sponsor</span>
+                        </Link>
+                        <Link
                             href="https://github.com/Dushyant-rahangdale/OpsSentinal"
                             target="_blank"
                             className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-400 hover:text-white transition-colors"
@@ -102,6 +110,14 @@ export function Navbar() {
                                 </Link>
                             ))}
                             <div className="flex flex-col gap-3 p-4 mt-2 border-t border-white/10">
+                                <Link
+                                    href="https://github.com/sponsors/Dushyant-rahangdale"
+                                    target="_blank"
+                                    className="flex items-center gap-2 text-pink-400 hover:text-pink-300 text-sm"
+                                >
+                                    <Heart className="w-4 h-4 fill-current" />
+                                    <span>Sponsor Project</span>
+                                </Link>
                                 <Link
                                     href="https://github.com/Dushyant-rahangdale/OpsSentinal"
                                     target="_blank"

@@ -36,7 +36,7 @@ export function TelemetryDisplay() {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
             className="glass rounded-2xl p-6 max-w-md"
@@ -78,7 +78,7 @@ export function TelemetryDisplay() {
                     {activityFeed.map((event, index) => (
                         <motion.div
                             key={event.label}
-                            initial={{ opacity: 0, x: -10 }}
+                            initial={false}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.15, duration: 0.3 }}
                             className={`flex items-start justify-between gap-3 rounded-md px-3 py-2 text-xs font-mono ${

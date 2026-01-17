@@ -5,6 +5,8 @@ import matter from "gray-matter";
 import { getAllDocSlugs, getDocFilePath } from "@/lib/docs/content";
 import { DOC_VERSIONS } from "@/lib/docs/versions";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
     return DOC_VERSIONS.map((v) => ({ version: v.id }));
 }

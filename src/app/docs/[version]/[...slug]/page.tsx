@@ -3,6 +3,8 @@ import { getDocPage, getAllDocSlugs } from "@/lib/docs/content";
 import { DocsToc } from "@/components/docs/DocsToc";
 import { DOC_VERSIONS } from "@/lib/docs/versions";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const params = [];
   for (const version of DOC_VERSIONS) {

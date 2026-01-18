@@ -3,12 +3,71 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Github, ArrowRight, Activity, Shield, Zap } from "lucide-react";
+import { Github, ArrowRight, Activity, Shield, Zap, Bell, Clock, CheckCircle, Star, Users, Code2 } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
+import { BRAND } from "@/lib/brand";
+
+// Floating metric cards data
+const floatingCards = [
+    {
+        icon: Bell,
+        label: "Alerts Processed",
+        value: "1.2M+",
+        color: "from-rose-500 to-pink-500",
+        position: "top-[15%] -left-[5%]",
+        delay: 0.6,
+    },
+    {
+        icon: Clock,
+        label: "Avg Response",
+        value: "<100ms",
+        color: "from-amber-500 to-orange-500",
+        position: "top-[60%] -left-[8%]",
+        delay: 0.8,
+    },
+    {
+        icon: CheckCircle,
+        label: "Uptime",
+        value: "99.99%",
+        color: "from-emerald-500 to-cyan-500",
+        position: "top-[35%] -right-[5%]",
+        delay: 1.0,
+    },
+];
+
+function FloatingCard({ card, index }: { card: typeof floatingCards[0]; index: number }) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: card.delay, duration: 0.5, ease: "easeOut" }}
+            className={`absolute ${card.position} z-20 hidden lg:block`}
+        >
+            <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 }}
+                className="relative group"
+            >
+                {/* Glow */}
+                <div className={`absolute -inset-1 bg-gradient-to-r ${card.color} rounded-xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity`} />
+
+                <div className="relative flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 backdrop-blur-xl shadow-2xl">
+                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${card.color} flex items-center justify-center shadow-lg`}>
+                        <card.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                        <p className="text-[10px] text-slate-400 uppercase tracking-wider font-medium">{card.label}</p>
+                        <p className="text-lg font-bold text-white">{card.value}</p>
+                    </div>
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+}
 
 export function Hero() {
     return (
-        <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32"
+        <section className="relative overflow-hidden pt-36 pb-24 md:pt-44 md:pb-32"
             style={{ background: 'var(--gradient-hero)' }}
         >
             <AnimatedBackground />
@@ -17,105 +76,204 @@ export function Hero() {
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
                     {/* Left Content */}
                     <div className="text-center lg:text-left">
-                        {/* Development Badge */}
+                        {/* Brand Logo Badge */}
                         <motion.div
-                            initial={false}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4 }}
-                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/5 text-amber-300 text-xs font-medium mb-6 backdrop-blur-sm"
+                            className="inline-flex items-center gap-3 mb-6"
                         >
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                            </span>
-                            In Development &bull; Launching in 2 months
+                            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/20">
+                                <div className="relative">
+                                    <div className="absolute inset-0 bg-emerald-500/30 rounded blur" />
+                                    <Image
+                                        src={BRAND.assets.logo}
+                                        alt={BRAND.name}
+                                        width={20}
+                                        height={20}
+                                        className="relative w-5 h-5 object-contain"
+                                    />
+                                </div>
+                                <span className="text-xs font-bold text-emerald-400 tracking-wide">
+                                    {BRAND.name}
+                                </span>
+                            </div>
+                            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/5 text-amber-300 text-xs font-medium">
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                                </span>
+                                {BRAND.status}
+                            </div>
                         </motion.div>
 
+                        {/* Main Headline */}
                         <motion.h1
-                            initial={false}
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1, duration: 0.5 }}
                             className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-6 drop-shadow-lg"
                         >
-                            The future of open source <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 animate-shimmer bg-[length:200%_auto]">incident response.</span>
+                            The future of{" "}
+                            <span className="relative inline-block">
+                                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 animate-shimmer bg-[length:200%_auto]">
+                                    open source
+                                </span>
+                            </span>
+                            <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-white">
+                                incident response.
+                            </span>
                         </motion.h1>
 
+                        {/* Subtitle */}
                         <motion.p
-                            initial={false}
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.5 }}
                             className="text-base md:text-lg text-slate-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
                         >
-                            OpsSentinal is building the ultimate self-hosted command center for modern engineering teams.
-                            Join us as we build towards our v1.0 release.
+                            {BRAND.fullDescription}
                         </motion.p>
 
+                        {/* CTA Buttons */}
                         <motion.div
-                            initial={false}
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3, duration: 0.5 }}
                             className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3"
                         >
                             <Link
-                                href="https://github.com/Dushyant-rahangdale/OpsSentinal"
+                                href={BRAND.links.github}
                                 target="_blank"
-                                className="btn-primary h-10 px-6 text-sm bg-white text-slate-950 hover:bg-slate-200 border-none shadow-lg shadow-white/5 transition-all w-full sm:w-auto flex items-center justify-center"
+                                className="group relative h-12 px-6 text-sm font-semibold rounded-full w-full sm:w-auto flex items-center justify-center gap-2 overflow-hidden"
                             >
-                                <Github className="w-4 h-4 mr-2" />
-                                Star on GitHub
+                                {/* Gradient background */}
+                                <span className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-500" />
+                                <span className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <span className="relative flex items-center gap-2 text-slate-950">
+                                    <Github className="w-4 h-4" />
+                                    Star on GitHub
+                                    <Star className="w-3.5 h-3.5 fill-current opacity-70" />
+                                </span>
                             </Link>
                             <Link
                                 href="/docs"
-                                className="btn-secondary h-10 px-6 text-sm bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20 backdrop-blur-sm transition-all w-full sm:w-auto flex items-center justify-center"
+                                className="group h-12 px-6 text-sm font-medium rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 backdrop-blur-sm transition-all w-full sm:w-auto flex items-center justify-center gap-2"
                             >
-                                Explorer Docs
-                                <ArrowRight className="w-3.5 h-3.5 ml-2 opacity-50" />
+                                Get Started
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                             </Link>
                         </motion.div>
 
+                        {/* Trust Badges */}
                         <motion.div
-                            initial={false}
+                            initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 0.5 }}
-                            className="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-4 text-slate-500 text-xs font-medium"
+                            className="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-3"
                         >
-                            <span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5" /> Enterprise Security</span>
-                            <span className="flex items-center gap-1.5"><Activity className="w-3.5 h-3.5" /> Active Development</span>
-                            <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5" /> High Performance</span>
+                            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
+                                <Shield className="w-4 h-4 text-emerald-400" />
+                                Enterprise Security
+                            </div>
+                            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
+                                <Code2 className="w-4 h-4 text-cyan-400" />
+                                Self-Hosted
+                            </div>
+                            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
+                                <Zap className="w-4 h-4 text-amber-400" />
+                                High Performance
+                            </div>
+                        </motion.div>
+
+                        {/* Open Source Badge */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.6, duration: 0.5 }}
+                            className="mt-6 flex items-center justify-center lg:justify-start"
+                        >
+                            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-900/50 border border-white/5">
+                                <span className="text-xs text-slate-500">Licensed under</span>
+                                <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-xs font-mono font-medium">
+                                    {BRAND.license}
+                                </span>
+                                <span className="text-xs text-slate-500">•</span>
+                                <span className="text-xs text-slate-400">100% Open Source</span>
+                            </div>
                         </motion.div>
                     </div>
 
-                    {/* Right Content - Compact Dashboard Preview */}
-                    <motion.div
-                        initial={false}
-                        animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                        transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-                        className="relative mt-8 lg:mt-0 perspective-[2000px]"
-                    >
-                        <div className="absolute -inset-4 bg-gradient-to-tr from-emerald-500/20 to-blue-500/20 rounded-[2rem] blur-2xl opacity-40 pointer-events-none" />
+                    {/* Right Content - Dashboard Preview with Floating Cards */}
+                    <div className="relative mt-8 lg:mt-0">
+                        {/* Floating Metric Cards */}
+                        {floatingCards.map((card, index) => (
+                            <FloatingCard key={card.label} card={card} index={index} />
+                        ))}
 
-                        <div className="relative rounded-xl border border-white/10 bg-slate-950/80 backdrop-blur-sm shadow-2xl overflow-hidden ring-1 ring-white/5 transform transition-transform hover:scale-[1.01] duration-500">
-                            {/* Mini Toolbar */}
-                            <div className="h-7 bg-slate-900/50 border-b border-white/5 flex items-center px-3 gap-1.5">
-                                <div className="w-2 h-2 rounded-full bg-slate-700/50" />
-                                <div className="w-2 h-2 rounded-full bg-slate-700/50" />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+                            className="relative perspective-[2000px]"
+                        >
+                            {/* Glow effect */}
+                            <div className="absolute -inset-4 bg-gradient-to-tr from-emerald-500/20 via-cyan-500/10 to-blue-500/20 rounded-[2rem] blur-2xl opacity-40 pointer-events-none animate-pulse" />
+
+                            <div className="relative rounded-2xl border border-white/10 bg-slate-950/80 backdrop-blur-sm shadow-2xl overflow-hidden ring-1 ring-white/5 transform transition-transform hover:scale-[1.01] duration-500">
+                                {/* Browser Chrome */}
+                                <div className="h-10 bg-slate-900/90 border-b border-white/5 flex items-center justify-between px-4">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-3 h-3 rounded-full bg-rose-500/80" />
+                                        <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                                        <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                                    </div>
+                                    <div className="flex-1 mx-8">
+                                        <div className="flex items-center justify-center gap-2 px-4 py-1 rounded-lg bg-slate-800/50 border border-white/5">
+                                            <span className="text-[10px] text-slate-500 font-mono">command-center.opssentinal.io</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <span className="relative flex h-2 w-2">
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                        </span>
+                                        <span className="text-[10px] text-emerald-400 font-medium">Live</span>
+                                    </div>
+                                </div>
+
+                                {/* Dashboard Screenshot */}
+                                <Image
+                                    src={BRAND.assets.dashboard}
+                                    alt="OpsSentinal Command Center Dashboard"
+                                    width={1200}
+                                    height={675}
+                                    priority
+                                    className="w-full h-auto opacity-95 transition-opacity duration-700 hover:opacity-100"
+                                />
+
+                                {/* Bottom bar with brand */}
+                                <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-slate-950 to-transparent flex items-end justify-center pb-2">
+                                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-white/10 backdrop-blur">
+                                        <Image
+                                            src={BRAND.assets.logo}
+                                            alt={BRAND.name}
+                                            width={14}
+                                            height={14}
+                                            className="w-3.5 h-3.5 object-contain"
+                                        />
+                                        <span className="text-[10px] text-slate-400 font-medium">{BRAND.name}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <Image
-                                src="/dashboard-command-center.png"
-                                alt="OpsSentinal Dashboard"
-                                width={1200}
-                                height={675}
-                                priority
-                                className="w-full h-auto opacity-90 transition-opacity duration-700"
-                            />
-                        </div>
-                    </motion.div>
+                        </motion.div>
+                    </div>
                 </div>
             </div>
 
             {/* Bottom Fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#020617] to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-950 to-transparent pointer-events-none" />
         </section>
     );
 }

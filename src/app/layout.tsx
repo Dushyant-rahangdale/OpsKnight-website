@@ -18,14 +18,11 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   // ... (unchanged)
-  title: {
-    default: `${BRAND.name} | ${BRAND.tagline}`,
-    template: `%s | ${BRAND.name}`,
-  },
+  title: 'OpsKnight | Incident Management',
   description: BRAND.description,
   keywords: [...BRAND.keywords],
   openGraph: {
-    title: `${BRAND.name} | ${BRAND.tagline}`,
+    title: 'OpsKnight | Incident Management',
     description: BRAND.description,
     url: `https://${BRAND.domain}`,
     siteName: BRAND.name,
@@ -41,14 +38,16 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${BRAND.name} | ${BRAND.tagline}`,
+    title: 'OpsKnight | Incident Management',
     description: BRAND.description,
     images: [BRAND.assets.banner],
   },
   icons: {
-    icon: BRAND.assets.logo,
-    apple: BRAND.assets.logo,
-    shortcut: BRAND.assets.logo,
+    icon: [
+      { url: '/logo.svg', type: 'image/svg+xml' },
+      { url: '/logo.png', type: 'image/png' },
+    ],
+    apple: '/logo.png', // Fallback to logo.png as explicit apple icon might be missing
   },
   metadataBase: new URL(`https://${BRAND.domain}`),
 };

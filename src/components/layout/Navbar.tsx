@@ -63,7 +63,7 @@ export function Navbar() {
                             </div>
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-lg font-bold tracking-[0.2em] text-white group-hover:text-emerald-50 transition-colors">
+                            <span className="text-lg font-bold tracking-tight text-white group-hover:text-emerald-50 transition-colors">
                                 {BRAND.name}
                             </span>
                             <span className="text-[9px] text-emerald-500/70 font-medium uppercase tracking-wider hidden sm:block">

@@ -21,6 +21,7 @@ export const BRAND = {
         docs: "/docs/v1",
         twitter: "https://twitter.com/opsknight",
         email: "help@opsknight.com",
+        status: "https://status.opsknight.com",
         issues: "https://github.com/Dushyant-rahangdale/OpsKnight/issues",
         discussions: "https://github.com/Dushyant-rahangdale/OpsKnight/discussions",
         releases: "https://github.com/Dushyant-rahangdale/OpsKnight/releases",

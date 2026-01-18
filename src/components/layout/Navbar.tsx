@@ -99,6 +99,17 @@ export function Navbar() {
                             <span>Sponsor</span>
                         </Link>
                         <Link
+                            href={BRAND.links.status}
+                            target="_blank"
+                            className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-emerald-300 hover:text-emerald-200 transition-colors"
+                        >
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            <span>Status</span>
+                        </Link>
+                        <Link
                             href={BRAND.links.github}
                             target="_blank"
                             className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-400 hover:text-white transition-colors"
@@ -166,6 +177,18 @@ export function Navbar() {
                                 >
                                     <Github className="w-4 h-4" />
                                     <span>View on GitHub</span>
+                                </Link>
+                                <Link
+                                    href={BRAND.links.status}
+                                    target="_blank"
+                                    className="flex items-center gap-2 text-emerald-300 hover:text-emerald-200 text-sm font-medium"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    <span className="relative flex h-2 w-2">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                    </span>
+                                    <span>Status Page</span>
                                 </Link>
                                 <Link
                                     href="/docs"

@@ -143,7 +143,29 @@ export function Hero() {
                             transition={{ delay: 0.3, duration: 0.5 }}
                             className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3"
                         >
-
+                            <Link
+                                href={BRAND.links.github}
+                                target="_blank"
+                                className="group relative inline-flex h-11 items-center justify-center overflow-hidden rounded-full px-6 text-sm font-semibold text-slate-950"
+                            >
+                                <span className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-cyan-400" />
+                                <span className="absolute inset-0 bg-gradient-to-r from-emerald-300 to-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <span className="relative flex items-center gap-2">
+                                    Star on GitHub
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                                </span>
+                            </Link>
+                            <Link
+                                href={BRAND.links.status}
+                                target="_blank"
+                                className="inline-flex items-center gap-2 h-11 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-6 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20 transition-colors"
+                            >
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                </span>
+                                View status page
+                            </Link>
                         </motion.div>
 
                         {/* Trust Badges */}
@@ -165,6 +187,17 @@ export function Hero() {
                                 <Zap className="w-4 h-4 text-amber-400" />
                                 High Performance
                             </div>
+                            <Link
+                                href={BRAND.links.status}
+                                target="_blank"
+                                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-medium text-emerald-200 hover:bg-emerald-500/20 transition-colors"
+                            >
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                </span>
+                                Live Status
+                            </Link>
                         </motion.div>
 
                         {/* Open Source Badge */}

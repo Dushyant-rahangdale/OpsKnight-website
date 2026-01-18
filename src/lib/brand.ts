@@ -9,7 +9,7 @@ export const BRAND = {
     tagline: "Open Source Incident Response",
     description: "The complete open-source platform for on-call management, incident response, and status pages.",
     fullDescription: "OpsSentinel is building the ultimate self-hosted command center for modern engineering teams. Self-hosted, extensible, and built for DevOps & SRE teams.",
-    domain: "opssentinel.io",
+    domain: "opssentinal.com",
 
     // Status
     status: "In Development",
@@ -20,7 +20,7 @@ export const BRAND = {
         sponsor: "https://github.com/sponsors/Dushyant-rahangdale",
         docs: "/docs/v1",
         twitter: "https://twitter.com/opssentinel",
-        email: "hello@opssentinel.io",
+        email: "hello@opssentinal.com",
         issues: "https://github.com/Dushyant-rahangdale/OpsSentinel/issues",
         discussions: "https://github.com/Dushyant-rahangdale/OpsSentinel/discussions",
         releases: "https://github.com/Dushyant-rahangdale/OpsSentinel/releases",

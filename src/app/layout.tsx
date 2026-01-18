@@ -20,46 +20,39 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://opssentinel.com"),
-  title: "OpsSentinel | Open-Source Incident Management Platform",
-  description:
-    "The complete open-source platform for on-call management, incident response, and status pages. Self-hosted, extensible, and built for DevOps & SRE teams.",
-  keywords: [
-    "incident management",
-    "on-call",
-    "DevOps",
-    "SRE",
-    "status page",
-    "open source",
-    "PagerDuty alternative",
-  ],
+  title: {
+    default: `${BRAND.name} | ${BRAND.tagline}`,
+    template: `%s | ${BRAND.name}`,
+  },
+  description: BRAND.description,
+  keywords: BRAND.keywords,
   openGraph: {
-    title: "OpsSentinel | Open-Source Incident Management Platform",
-    description:
-      "The complete open-source platform for on-call management, incident response, and status pages.",
-    url: "https://opssentinel.com",
-    siteName: "OpsSentinel",
+    title: `${BRAND.name} | ${BRAND.tagline}`,
+    description: BRAND.description,
+    url: `https://${BRAND.domain}`,
+    siteName: BRAND.name,
     images: [
       {
-        url: "/banner.png",
+        url: BRAND.assets.banner,
         width: 1200,
         height: 630,
-        alt: "OpsSentinel - Open-Source Incident Management",
+        alt: `${BRAND.name} - ${BRAND.tagline}`,
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "OpsSentinel | Open-Source Incident Management Platform",
-    description:
-      "The complete open-source platform for on-call management, incident response, and status pages.",
-    images: ["/banner.png"],
+    title: `${BRAND.name} | ${BRAND.tagline}`,
+    description: BRAND.description,
+    images: [BRAND.assets.banner],
   },
   icons: {
-    icon: "/logo-compressed.png",
-    apple: "/logo-compressed.png",
+    icon: BRAND.assets.logo,
+    apple: BRAND.assets.logo,
+    shortcut: BRAND.assets.logo,
   },
+  metadataBase: new URL(`https://${BRAND.domain}`),
 };
 
 export default function RootLayout({

@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Outfit, JetBrains_Mono } from "next/font/google"; // [MODIFIED]
+import { Manrope, JetBrains_Mono } from "next/font/google"; // [MODIFIED]
 import "./globals.css";
 import { BRAND } from "@/lib/brand";
 import { ConditionalNavbar } from "@/components/layout/ConditionalNavbar";
 import { ConditionalFooter } from "@/components/layout/ConditionalFooter";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
 });
 
@@ -65,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${inter.variable} ${outfit.variable} ${jetBrainsMono.variable} antialiased bg-background text-foreground`}
+        className={`${manrope.variable} ${jetBrainsMono.variable} antialiased bg-background text-foreground`}
       >
         <ConditionalNavbar />
         <main>{children}</main>

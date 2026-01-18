@@ -150,7 +150,7 @@ export default async function DocsPage({
             Last updated for {version}
           </p>
           <Link
-            href={`https://github.com/Dushyant-rahangdale/OpsSentinal`}
+            href={`https://github.com/Dushyant-rahangdale/OpsSentinel`}
             target="_blank"
             className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-emerald-400 transition-colors"
           >

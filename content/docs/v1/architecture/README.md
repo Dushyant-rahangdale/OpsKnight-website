@@ -4,7 +4,7 @@ order: 8
 
 # Architecture
 
-System design notes and operational architecture for OpsSentinal.
+System design notes and operational architecture for OpsSentinel.
 
 ## In This Section
 

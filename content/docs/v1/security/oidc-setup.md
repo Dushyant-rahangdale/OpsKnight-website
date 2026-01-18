@@ -4,13 +4,13 @@ order: 1
 
 # OIDC Single Sign-On (SSO) Setup
 
-Configure OIDC SSO in OpsSentinal for common identity providers.
+Configure OIDC SSO in OpsSentinel for common identity providers.
 
 ## Prerequisites
 
-- OpsSentinal admin access
+- OpsSentinel admin access
 - An IdP OIDC app registration created
-- A stable base URL for OpsSentinal (used for redirect/callback)
+- A stable base URL for OpsSentinel (used for redirect/callback)
 - `ENCRYPTION_KEY` configured (required to store client secrets)
 
 ## Common Configuration Fields
@@ -19,11 +19,11 @@ Configure OIDC SSO in OpsSentinal for common identity providers.
 - Client ID: From your IdP app
 - Client Secret: From your IdP app
 - Callback URL: `https://YOUR_BASE_URL/api/auth/callback/oidc`
-- Scopes: OpsSentinal requests `openid email profile` by default
+- Scopes: OpsSentinel requests `openid email profile` by default
 - Allowed domains: Optional allowlist of email domains for SSO
 - Auto-provision users: If disabled, only existing users can sign in
 
-## OpsSentinal Setup Steps
+## OpsSentinel Setup Steps
 
 1. Go to **Settings → Security → Single sign-on (OIDC)**.
 2. Enable SSO.

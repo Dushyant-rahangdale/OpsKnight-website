@@ -4,7 +4,7 @@ order: 2
 
 # Kubernetes Deployment
 
-Deploy OpsSentinal on Kubernetes for production workloads and horizontal scaling.
+Deploy OpsSentinel on Kubernetes for production workloads and horizontal scaling.
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ kubectl apply -f .
 
 | File              | Purpose                   |
 | ----------------- | ------------------------- |
-| `namespace.yaml`  | OpsSentinal namespace     |
+| `namespace.yaml`  | OpsSentinel namespace     |
 | `secret.yaml`     | Sensitive configuration   |
 | `configmap.yaml`  | Non-sensitive config      |
 | `deployment.yaml` | Application deployment    |
@@ -51,11 +51,11 @@ Edit `secret.yaml` before applying:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: opssentinal-secrets
-  namespace: opssentinal
+  name: opssentinel-secrets
+  namespace: opssentinel
 type: Opaque
 stringData:
-  DATABASE_URL: postgresql://user:pass@postgres:5432/opssentinal
+  DATABASE_URL: postgresql://user:pass@postgres:5432/opssentinel
   NEXTAUTH_SECRET: your-32-char-secret
   NEXTAUTH_URL: https://ops.yourcompany.com
 ```
@@ -66,8 +66,8 @@ stringData:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: opssentinal-config
-  namespace: opssentinal
+  name: opssentinel-config
+  namespace: opssentinel
 data:
   ENABLE_INTERNAL_CRON: 'true'
 ```
@@ -82,14 +82,14 @@ Configure for your domain and TLS:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: opssentinal-ingress
+  name: opssentinel-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   tls:
     - hosts:
         - ops.yourcompany.com
-      secretName: opssentinal-tls
+      secretName: opssentinel-tls
   rules:
     - host: ops.yourcompany.com
       http:
@@ -98,7 +98,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: opssentinal
+                name: opssentinel
                 port:
                   number: 3000
 ```
@@ -111,12 +111,12 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: opssentinal-hpa
+  name: opssentinel-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: opssentinal
+    name: opssentinel
   minReplicas: 2
   maxReplicas: 10
   metrics:
@@ -151,8 +151,8 @@ Use AWS RDS, GCP Cloud SQL, or Azure Database:
 
 ```bash
 # Update image
-kubectl set image deployment/opssentinal \
-  opssentinal=ghcr.io/your-org/opssentinal:latest
+kubectl set image deployment/opssentinel \
+  opssentinel=ghcr.io/your-org/opssentinel:latest
 
 # Or apply updated manifests
 kubectl apply -f deployment.yaml
@@ -162,13 +162,13 @@ kubectl apply -f deployment.yaml
 
 ```bash
 # View pods
-kubectl get pods -n opssentinal
+kubectl get pods -n opssentinel
 
 # View logs
-kubectl logs -f deploy/opssentinal -n opssentinal
+kubectl logs -f deploy/opssentinel -n opssentinel
 
 # Shell access
-kubectl exec -it deploy/opssentinal -n opssentinal -- sh
+kubectl exec -it deploy/opssentinel -n opssentinel -- sh
 ```
 
 ## Verification

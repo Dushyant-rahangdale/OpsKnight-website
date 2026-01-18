@@ -211,7 +211,7 @@ export function Hero() {
                                     </div>
                                     <div className="flex-1 mx-8">
                                         <div className="flex items-center justify-center gap-2 px-4 py-1 rounded-lg bg-slate-800/50 border border-white/5">
-                                            <span className="text-[10px] text-slate-500 font-mono">command-center.opssentinal.io</span>
+                                            <span className="text-[10px] text-slate-500 font-mono">command-center.opssentinel.io</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-2">
@@ -226,7 +226,7 @@ export function Hero() {
                                 {/* Dashboard Screenshot */}
                                 <Image
                                     src={BRAND.assets.dashboard}
-                                    alt="OpsSentinal Command Center Dashboard"
+                                    alt="OpsSentinel Command Center Dashboard"
                                     width={1200}
                                     height={675}
                                     priority

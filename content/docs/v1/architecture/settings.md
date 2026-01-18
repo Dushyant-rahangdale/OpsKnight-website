@@ -4,7 +4,7 @@ order: 2
 
 # Settings Component Architecture
 
-This document describes the component architecture for the OpsSentinal settings section.
+This document describes the component architecture for the OpsSentinel settings section.
 
 ## Overview
 

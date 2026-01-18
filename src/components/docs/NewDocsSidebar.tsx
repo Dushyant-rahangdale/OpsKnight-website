@@ -266,14 +266,14 @@ export function NewDocsSidebar({ items, version }: { items: SidebarItem[], versi
                         <div className="absolute inset-0 bg-emerald-500/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
                         <Image
                             src="/logo-compressed.png"
-                            alt="OpsSentinal Logo"
+                            alt="OpsSentinel Logo"
                             width={32}
                             height={32}
                             className="relative w-8 h-8 object-contain"
                         />
                     </div>
                     <div className="flex flex-col gap-0.5 leading-none transition-all group-data-[collapsible=icon]:hidden">
-                        <span className="font-bold text-white group-hover:text-emerald-50 transition-colors">OpsSentinal</span>
+                        <span className="font-bold text-white group-hover:text-emerald-50 transition-colors">OpsSentinel</span>
                         <span className="text-[10px] text-emerald-400/70 uppercase tracking-wider font-medium">Documentation</span>
                     </div>
                 </Link>
@@ -318,7 +318,7 @@ export function NewDocsSidebar({ items, version }: { items: SidebarItem[], versi
 
                 {/* GitHub Link */}
                 <Link
-                    href="https://github.com/Dushyant-rahangdale/OpsSentinal"
+                    href="https://github.com/Dushyant-rahangdale/OpsSentinel"
                     target="_blank"
                     className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/20 text-xs text-emerald-400 hover:from-emerald-500/20 hover:to-cyan-500/20 transition-all group"
                 >

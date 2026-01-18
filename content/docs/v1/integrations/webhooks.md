@@ -8,7 +8,7 @@ Send incident events to external systems.
 
 ## What are Webhooks?
 
-Webhooks are HTTP callbacks that notify external systems when events occur in OpsSentinal.
+Webhooks are HTTP callbacks that notify external systems when events occur in OpsSentinel.
 
 ## Creating a Webhook
 
@@ -61,7 +61,7 @@ Webhooks are HTTP callbacks that notify external systems when events occur in Op
 Webhooks are signed with HMAC-SHA256:
 
 ```
-X-OpsSentinal-Signature: sha256=abc123...
+X-OpsSentinel-Signature: sha256=abc123...
 ```
 
 ### Verifying Signatures

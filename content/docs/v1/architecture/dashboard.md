@@ -4,7 +4,7 @@ order: 1
 
 # Dashboard Component Architecture
 
-This document describes the component architecture for the OpsSentinal dashboard, introduced during the UI refactoring initiative.
+This document describes the component architecture for the OpsSentinel dashboard, introduced during the UI refactoring initiative.
 
 ## Overview
 

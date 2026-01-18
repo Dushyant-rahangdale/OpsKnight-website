@@ -4,7 +4,7 @@ order: 1
 
 # Installation Guide
 
-This guide covers the recommended ways to install OpsSentinal and get a working instance quickly.
+This guide covers the recommended ways to install OpsSentinel and get a working instance quickly.
 
 ## Before You Begin
 
@@ -25,13 +25,13 @@ This guide covers the recommended ways to install OpsSentinal and get a working 
 
 ## Docker Compose
 
-The fastest way to run OpsSentinal locally or in a small environment.
+The fastest way to run OpsSentinel locally or in a small environment.
 
 ### Step 1: Clone and Configure
 
 ```bash
-git clone https://github.com/dushyant-rahangdale/opssentinal.git
-cd opssentinal
+git clone https://github.com/dushyant-rahangdale/opssentinel.git
+cd opssentinel
 cp env.example .env
 ```
 
@@ -41,7 +41,7 @@ Edit `.env` and set the required values:
 
 ```bash
 # Required
-DATABASE_URL=postgresql://opssentinal:your_password@postgres:5432/opssentinal_db
+DATABASE_URL=postgresql://opssentinel:your_password@postgres:5432/opssentinel_db
 NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=your-secret-key-here  # Generate with: openssl rand -base64 32
 
@@ -60,7 +60,7 @@ docker compose up -d
 ### Step 4: Create Admin User
 
 ```bash
-docker exec -it opssentinal_app npm run opssentinal -- \
+docker exec -it opssentinel_app npm run opssentinel -- \
   --user "Admin" \
   --email admin@example.com \
   --password SecurePass123! \

@@ -20,8 +20,8 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://opssentinal.com"),
-  title: "OpsSentinal | Open-Source Incident Management Platform",
+  metadataBase: new URL("https://opssentinel.com"),
+  title: "OpsSentinel | Open-Source Incident Management Platform",
   description:
     "The complete open-source platform for on-call management, incident response, and status pages. Self-hosted, extensible, and built for DevOps & SRE teams.",
   keywords: [
@@ -34,24 +34,24 @@ export const metadata: Metadata = {
     "PagerDuty alternative",
   ],
   openGraph: {
-    title: "OpsSentinal | Open-Source Incident Management Platform",
+    title: "OpsSentinel | Open-Source Incident Management Platform",
     description:
       "The complete open-source platform for on-call management, incident response, and status pages.",
-    url: "https://opssentinal.com",
-    siteName: "OpsSentinal",
+    url: "https://opssentinel.com",
+    siteName: "OpsSentinel",
     images: [
       {
         url: "/banner.png",
         width: 1200,
         height: 630,
-        alt: "OpsSentinal - Open-Source Incident Management",
+        alt: "OpsSentinel - Open-Source Incident Management",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "OpsSentinal | Open-Source Incident Management Platform",
+    title: "OpsSentinel | Open-Source Incident Management Platform",
     description:
       "The complete open-source platform for on-call management, incident response, and status pages.",
     images: ["/banner.png"],

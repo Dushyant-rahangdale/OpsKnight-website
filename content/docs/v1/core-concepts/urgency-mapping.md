@@ -4,7 +4,7 @@ order: 12
 
 # Urgency and Severity Mapping
 
-OpsSentinal normalizes alerts into a standard Severity and Urgency model so notifications are consistent across providers.
+OpsSentinel normalizes alerts into a standard Severity and Urgency model so notifications are consistent across providers.
 
 ## Severity (Event Level)
 

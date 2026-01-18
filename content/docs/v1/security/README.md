@@ -4,7 +4,7 @@ order: 7
 
 # Security
 
-Identity, encryption, and secure operations for OpsSentinal.
+Identity, encryption, and secure operations for OpsSentinel.
 
 ## In This Section
 

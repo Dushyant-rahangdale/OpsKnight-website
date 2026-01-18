@@ -133,7 +133,7 @@ export default async function DocsIndexPage({
 
           <p className="text-slate-400 max-w-2xl mt-4 text-lg leading-relaxed">
             {doc.description ??
-              "Dive into the OpsSentinal platform, learn the core concepts, and follow step-by-step guides to get operational fast."}
+              "Dive into the OpsSentinel platform, learn the core concepts, and follow step-by-step guides to get operational fast."}
           </p>
 
           {/* Quick actions */}

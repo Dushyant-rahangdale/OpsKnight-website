@@ -4,7 +4,7 @@ order: 1
 
 # Authentication
 
-Configure how users authenticate with OpsSentinal and how identities map to roles.
+Configure how users authenticate with OpsSentinel and how identities map to roles.
 
 ## Authentication Methods
 
@@ -20,7 +20,7 @@ Local authentication uses email and password.
 ### Create a User
 
 ```bash
-npm run opssentinal -- \
+npm run opssentinel -- \
   --user "John Doe" \
   --email john@company.com \
   --password SecurePass123! \
@@ -37,12 +37,12 @@ Single sign-on is recommended for production. Configure your identity provider i
 
 ### Role Mapping
 
-Map identity provider claims to OpsSentinal roles in **Settings → Authentication → Role Mapping**.
+Map identity provider claims to OpsSentinel roles in **Settings → Authentication → Role Mapping**.
 
 Example mapping:
 
 ```
-Provider Role    → OpsSentinal Role
+Provider Role    → OpsSentinel Role
 admin            → Admin
 engineer         → Responder
 viewer           → User

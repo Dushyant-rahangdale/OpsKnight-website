@@ -4,7 +4,7 @@ order: 3
 
 # Helm Deployment
 
-Use the Helm chart to install OpsSentinal on Kubernetes with repeatable, versioned releases.
+Use the Helm chart to install OpsSentinel on Kubernetes with repeatable, versioned releases.
 
 ## Prerequisites
 
@@ -16,11 +16,11 @@ Use the Helm chart to install OpsSentinal on Kubernetes with repeatable, version
 ## Quick Start
 
 ```bash
-git clone https://github.com/dushyant-rahangdale/opssentinal.git
-cd opssentinal
+git clone https://github.com/dushyant-rahangdale/opssentinel.git
+cd opssentinel
 
-helm install opssentinal ./helm/opssentinal \
-  --namespace opssentinal \
+helm install opssentinel ./helm/opssentinel \
+  --namespace opssentinel \
   --create-namespace
 ```
 
@@ -34,18 +34,18 @@ image:
 
 ingress:
   enabled: true
-  host: opssentinal.example.com
+  host: opssentinel.example.com
 
 env:
-  NEXTAUTH_URL: "https://opssentinal.example.com"
-  DATABASE_URL: "postgresql://user:pass@db:5432/opssentinal"
+  NEXTAUTH_URL: "https://opssentinel.example.com"
+  DATABASE_URL: "postgresql://user:pass@db:5432/opssentinel"
 ```
 
 Apply updates with:
 
 ```bash
-helm upgrade --install opssentinal ./helm/opssentinal \
-  --namespace opssentinal \
+helm upgrade --install opssentinel ./helm/opssentinel \
+  --namespace opssentinel \
   --create-namespace \
   --values values.yaml
 ```
@@ -79,10 +79,10 @@ autoscaling:
 ```yaml
 ingress:
   enabled: true
-  host: opssentinal.example.com
+  host: opssentinel.example.com
   tls:
     enabled: true
-    secretName: opssentinal-tls
+    secretName: opssentinel-tls
 ```
 
 ## Secrets Management

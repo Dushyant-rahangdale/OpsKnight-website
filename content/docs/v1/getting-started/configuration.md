@@ -4,7 +4,7 @@ order: 2
 
 # Configuration Reference
 
-This page lists the primary environment variables used by OpsSentinal and how to set them.
+This page lists the primary environment variables used by OpsSentinel and how to set them.
 
 ## Required
 
@@ -20,9 +20,9 @@ This page lists the primary environment variables used by OpsSentinal and how to
 
 | Variable            | Description       | Default          |
 | ------------------- | ----------------- | ---------------- |
-| `POSTGRES_USER`     | Database user     | `opssentinal`    |
+| `POSTGRES_USER`     | Database user     | `opssentinel`    |
 | `POSTGRES_PASSWORD` | Database password | -                |
-| `POSTGRES_DB`       | Database name     | `opssentinal_db` |
+| `POSTGRES_DB`       | Database name     | `opssentinel_db` |
 
 These are used by Docker Compose. For Kubernetes or Helm, configure your database connection in the chart values and ensure `DATABASE_URL` points to the correct host.
 
@@ -82,7 +82,7 @@ See [Encryption](../security/encryption.md) for key rotation guidance.
 
 ```bash
 # Database
-DATABASE_URL=postgresql://opssentinal:secure_password@localhost:5432/opssentinal_db
+DATABASE_URL=postgresql://opssentinel:secure_password@localhost:5432/opssentinel_db
 
 # NextAuth
 NEXTAUTH_URL=https://ops.yourcompany.com

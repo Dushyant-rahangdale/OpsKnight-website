@@ -32,8 +32,8 @@ export function Pricing() {
                     <span className="text-accent-blue text-sm font-medium uppercase tracking-wide">
                         Community Edition
                     </span>
-                    <h2 className="text-3xl sm:text-4xl font-bold text-foreground mt-2 mb-4">
-                        Free and <span className="gradient-text">open-source</span>
+                    <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">
+                        Free and <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">open-source</span>
                     </h2>
                     <p className="text-foreground-secondary max-w-2xl mx-auto mb-6">
                         {BRAND.name} is free to self-host with all features included.

@@ -4,7 +4,7 @@ order: 6
 
 # Deployment
 
-Guides for deploying OpsSentinal in production.
+Guides for deploying OpsSentinel in production.
 
 ## In This Section
 

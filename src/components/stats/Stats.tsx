@@ -133,7 +133,7 @@ export function Stats() {
                         Built for performance at scale
                     </h2>
                     <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-                        OpsSentinal is designed to handle enterprise-grade incident management
+                        OpsSentinel is designed to handle enterprise-grade incident management
                         while maintaining blazing-fast response times.
                     </p>
                 </motion.div>

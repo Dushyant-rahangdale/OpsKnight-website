@@ -4,7 +4,7 @@ order: 1
 
 # Docker Deployment
 
-Deploy OpsSentinal with Docker Compose. This is the fastest way to run the platform locally and is suitable for small production environments.
+Deploy OpsSentinel with Docker Compose. This is the fastest way to run the platform locally and is suitable for small production environments.
 
 ## Prerequisites
 
@@ -16,8 +16,8 @@ Deploy OpsSentinal with Docker Compose. This is the fastest way to run the platf
 
 ```bash
 # Clone repository
-git clone https://github.com/dushyant-rahangdale/opssentinal.git
-cd opssentinal
+git clone https://github.com/dushyant-rahangdale/opssentinel.git
+cd opssentinel
 
 # Configure
 cp env.example .env
@@ -26,7 +26,7 @@ cp env.example .env
 docker compose up -d
 
 # Create admin user
-docker exec -it opssentinal_app npm run opssentinal -- \
+docker exec -it opssentinel_app npm run opssentinel -- \
   --user "Admin" --email admin@example.com \
   --password SecurePass123! --role admin
 ```
@@ -36,7 +36,7 @@ docker exec -it opssentinal_app npm run opssentinal -- \
 Set the core variables in `.env`:
 
 ```bash
-DATABASE_URL=postgresql://opssentinal:password@postgres:5432/opssentinal_db
+DATABASE_URL=postgresql://opssentinel:password@postgres:5432/opssentinel_db
 NEXTAUTH_URL=https://your-domain.com
 NEXTAUTH_SECRET=your-32-char-secret
 ```
@@ -101,10 +101,10 @@ docker compose up -d
 
 ```bash
 # Database backup
-docker exec opssentinal_postgres pg_dump -U opssentinal opssentinal_db > backup.sql
+docker exec opssentinel_postgres pg_dump -U opssentinel opssentinel_db > backup.sql
 
 # Restore
-cat backup.sql | docker exec -i opssentinal_postgres psql -U opssentinal opssentinal_db
+cat backup.sql | docker exec -i opssentinel_postgres psql -U opssentinel opssentinel_db
 ```
 
 ## Troubleshooting

@@ -4,14 +4,14 @@ order: 3
 
 # First Steps
 
-This walkthrough sets up a working incident flow end-to-end so you can validate OpsSentinal quickly.
+This walkthrough sets up a working incident flow end-to-end so you can validate OpsSentinel quickly.
 
 ## 1) Create the Admin User
 
 If you did not create an admin during install:
 
 ```bash
-docker exec -it opssentinal_app npm run opssentinal -- \
+docker exec -it opssentinel_app npm run opssentinel -- \
   --user "Your Name" \
   --email admin@yourcompany.com \
   --password SecurePassword123! \

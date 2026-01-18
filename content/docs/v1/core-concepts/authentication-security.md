@@ -4,7 +4,7 @@ order: 13
 
 # Authentication and Security
 
-OpsSentinal implements defense-in-depth to protect authentication flows, sessions, and sensitive data.
+OpsSentinel implements defense-in-depth to protect authentication flows, sessions, and sensitive data.
 
 ## Security Controls
 

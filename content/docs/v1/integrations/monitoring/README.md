@@ -4,7 +4,7 @@ order: 4
 
 # Monitoring Tool Integrations
 
-Connect your monitoring tools to OpsSentinal.
+Connect your monitoring tools to OpsSentinel.
 
 ## Supported Tools
 
@@ -31,7 +31,7 @@ Connect your monitoring tools to OpsSentinal.
 
 ## How It Works
 
-All monitoring tools use the OpsSentinal Events API:
+All monitoring tools use the OpsSentinel Events API:
 
 ```
 Monitoring Tool → HTTP POST → /api/events → Incident
@@ -39,14 +39,14 @@ Monitoring Tool → HTTP POST → /api/events → Incident
 
 ## Common Setup Pattern
 
-1. Create an Integration in OpsSentinal
+1. Create an Integration in OpsSentinel
 2. Copy the Routing Key
 3. Configure your monitoring tool to send webhooks
-4. Map fields to OpsSentinal format
+4. Map fields to OpsSentinel format
 
 ## Event Format
 
-OpsSentinal accepts events in this format:
+OpsSentinel accepts events in this format:
 
 ```json
 {
@@ -67,7 +67,7 @@ OpsSentinal accepts events in this format:
 
 ## Severity Mapping
 
-| Your Tool     | OpsSentinal |
+| Your Tool     | OpsSentinel |
 | ------------- | ----------- |
 | Critical / P1 | `critical`  |
 | Error / P2    | `error`     |

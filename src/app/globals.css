@@ -4,130 +4,161 @@
 @custom-variant dark (&:is(.dark *));
 @plugin "@tailwindcss/typography";
 
-/* OpsSentinal Website Design System (aligned to app themes) */
-/* OpsSentinal Website Design System (aligned to App's Cinematic Dark Theme) */
+/* OpsSentinal Layout System - Aligned with App Muted Executive Theme */
 :root {
-  /* Core Palette - Cinematic Slate (Greyscale) */
-  /* Slate 900 */
-  --background-secondary: #1e293b;
-  /* Slate 800 */
-  --background-card: #1e293b;
-  /* Slate 800 */
-  --background-deep: #020617;
-  /* Slate 950 */
+  /* Core Palette - Muted Executive Slate (Light Mode Default) */
+  --background: #f8fafc;
   /* Slate 50 */
-  --foreground-secondary: #cbd5e1;
-  /* Slate 300 */
-  --foreground-muted: #94a3b8;
-  /* Slate 400 */
+  --foreground: #111827;
+  /* Slate 900 */
 
-  /* Monochromatic Accents */
-  --accent: oklch(0.97 0 0);
-  /* Slate 200 - Grey Accent */
-  --accent-strong: #f8fafc;
-  /* Slate 50 - White Accent */
+  --primary: #1e293b;
+  /* Slate 800 */
+  --primary-foreground: #ffffff;
 
-  /* Semantic Colors (kept subtle) */
-  --accent-emerald: #10b981;
-  --accent-amber: #f59e0b;
-  --accent-rose: #f43f5e;
+  --secondary: #f1f5f9;
+  /* Slate 100 */
+  --secondary-foreground: #1e293b;
 
-  --border: oklch(0.922 0 0);
-  /* Slate 700 */
-  --border-strong: #475569;
-  /* Slate 600 */
+  --muted: #f1f5f9;
+  /* Slate 100 */
+  --muted-foreground: #64748b;
+  /* Slate 500 */
 
-  --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-  --shadow-card: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 20px rgba(255, 255, 255, 0.1);
+  --accent: #f1f5f9;
+  /* Slate 100 */
+  --accent-foreground: #1e293b;
 
-  /* Greyscale Gradients */
-  --gradient-accent: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-  --gradient-hero: linear-gradient(-45deg, #0f172a, #1e293b, #0f172a, #020617);
-  --gradient-surface: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-  --gradient-glass: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.6) 100%);
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  /* Force Dark Sidebar by default - matching docs theme */
+  --card: #ffffff;
+  --card-foreground: #111827;
+
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+
+  --border: #e2e8f0;
+  /* Slate 200 */
+  --input: #e2e8f0;
+  --ring: #1e293b;
+  /* Slate 800 */
+
+  /* Semantic Colors - Muted Professional */
+  --destructive: #be123c;
+  --destructive-foreground: #ffffff;
+
+  --success: #059669;
+  --success-foreground: #ffffff;
+
+  --warning: #d97706;
+  --warning-foreground: #ffffff;
+
+  --info: #3b82f6;
+  --info-foreground: #ffffff;
+
+  /* Custom Accents (Mapped to App Palette) */
+  --accent-emerald: #059669;
+  /* Was #10b981 */
+  --accent-amber: #d97706;
+  /* Was #f59e0b */
+  --accent-rose: #be123c;
+  /* Was #f43f5e */
+  --accent-blue: #2563eb;
+  /* Added from App */
+
+  --radius: 0.5rem;
+
+  /* Gradients */
+  --gradient-hero: radial-gradient(circle at 10% 10%, rgba(148, 163, 184, 0.1) 0%, transparent 40%), radial-gradient(circle at 80% 0%, rgba(148, 163, 184, 0.05) 0%, transparent 35%);
+  --gradient-accent: linear-gradient(135deg, #334155 0%, #1e293b 55%, #0f172a 100%);
+
+  /* Sidebar Specific (Dark Sidebar from App) */
   --sidebar: #0f172a;
-  /* Slate 900 - docs background */
   --sidebar-foreground: #f8fafc;
-  /* White */
   --sidebar-primary: #10b981;
-  /* Emerald - matching docs accent */
+  /* Keep emerald for brand identity in sidebar */
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: rgba(255, 255, 255, 0.05);
-  /* Subtle hover */
   --sidebar-accent-foreground: #f8fafc;
   --sidebar-border: rgba(255, 255, 255, 0.05);
   --sidebar-ring: #10b981;
 }
 
+.dark {
+  --background: #020617;
+  /* Slate 950 */
+  --foreground: #f8fafc;
+  /* Slate 50 */
+
+  --primary: #f8fafc;
+  /* Slate 50 */
+  --primary-foreground: #020617;
+
+  --secondary: #1e293b;
+  /* Slate 800 */
+  --secondary-foreground: #f8fafc;
+
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  /* Slate 400 */
+
+  --accent: #1e293b;
+  --accent-foreground: #f8fafc;
+
+  --card: #0f172a;
+  /* Slate 900 */
+  --card-foreground: #f8fafc;
+
+  --popover: #0f172a;
+  --popover-foreground: #f8fafc;
+
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #cbd5e1;
+
+  --destructive: #7f1d1d;
+  --destructive-foreground: #f8fafc;
+}
+
 @theme inline {
   --color-background: var(--background);
-  --color-background-secondary: var(--background-secondary);
-  --color-background-deep: var(--background-deep);
   --color-foreground: var(--foreground);
-  --color-foreground-secondary: var(--foreground-secondary);
-  --color-foreground-muted: var(--foreground-muted);
-  --color-accent-blue: var(--accent);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
   --color-accent-emerald: var(--accent-emerald);
   --color-accent-amber: var(--accent-amber);
   --color-accent-rose: var(--accent-rose);
-  --color-border: var(--border);
+  --color-accent-blue: var(--accent-blue);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
 
+  /* Retain animations */
   --animate-sidebar-ambient: sidebar-ambient 15s ease infinite;
   --animate-breathing-glow: breathing-glow 3s ease-in-out infinite;
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
 
   @keyframes sidebar-ambient {
     0% {
@@ -154,30 +185,6 @@
       box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.1);
     }
   }
-
-  @keyframes shimmer {
-    from {
-      transform: translateX(-100%);
-    }
-
-    to {
-      transform: translateX(400%);
-    }
-  }
-
-  --radius-sm: calc(var(--radius) - 4px);
-
-  --radius-md: calc(var(--radius) - 2px);
-
-  --radius-lg: var(--radius);
-
-  --radius-xl: calc(var(--radius) + 4px);
-
-  --radius-2xl: calc(var(--radius) + 8px);
-
-  --radius-3xl: calc(var(--radius) + 12px);
-
-  --radius-4xl: calc(var(--radius) + 16px)
 }
 
 * {
@@ -193,10 +200,9 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.6;
-  background-image:
-    radial-gradient(circle at 15% 10%, rgba(37, 99, 235, 0.14), transparent 55%),
-    radial-gradient(circle at 85% 0%, rgba(96, 165, 250, 0.12), transparent 60%),
-    linear-gradient(180deg, rgba(248, 250, 252, 0.85), rgba(241, 245, 249, 0.95));
+  background-color: var(--background);
+  color: var(--foreground);
+  background-image: var(--gradient-hero);
 }
 
 h1,
@@ -343,6 +349,7 @@ h4 {
   0% {
     background-position: -200% center;
   }
+
   100% {
     background-position: 200% center;
   }
@@ -354,9 +361,12 @@ h4 {
 
 /* Glow pulse animation */
 @keyframes glow-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
   }
@@ -371,6 +381,7 @@ h4 {
   0% {
     transform: rotate(0deg) translateX(100px) rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg) translateX(100px) rotate(-360deg);
   }
@@ -382,9 +393,12 @@ h4 {
 
 /* Scale pulse for attention */
 @keyframes scale-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
@@ -396,9 +410,12 @@ h4 {
 
 /* Border glow animation */
 @keyframes border-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     border-color: rgba(16, 185, 129, 0.3);
   }
+
   50% {
     border-color: rgba(16, 185, 129, 0.8);
   }
@@ -413,9 +430,11 @@ h4 {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }

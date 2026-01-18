@@ -4,7 +4,7 @@ order: 4
 
 # Integrations
 
-Connect OpsSentinal with your existing tools and workflows.
+Connect OpsSentinel with your existing tools and workflows.
 
 ## In This Section
 
@@ -53,13 +53,13 @@ Connect OpsSentinal with your existing tools and workflows.
 
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│  Monitoring │────▶│ OpsSentinal │────▶│    Slack    │
+│  Monitoring │────▶│ OpsSentinel │────▶│    Slack    │
 │    Tool     │     │   (Events)  │     │  (Notify)   │
 └─────────────┘     └─────────────┘     └─────────────┘
 ```
 
-1. Monitoring tools send alerts to OpsSentinal Events API
-2. OpsSentinal creates/updates incidents
+1. Monitoring tools send alerts to OpsSentinel Events API
+2. OpsSentinel creates/updates incidents
 3. Notifications sent via configured channels
 
 ## Quick Links

@@ -4,7 +4,7 @@ order: 2
 
 # Notifications
 
-Configure how OpsSentinal alerts users about incidents and status changes.
+Configure how OpsSentinel alerts users about incidents and status changes.
 
 ## Notification Channels
 

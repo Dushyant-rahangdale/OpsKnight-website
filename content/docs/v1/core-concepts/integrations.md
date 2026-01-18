@@ -4,12 +4,12 @@ order: 8
 
 # Integrations
 
-Integrations connect OpsSentinal to monitoring, alerting, and workflow tools. Events from integrations create or update incidents.
+Integrations connect OpsSentinel to monitoring, alerting, and workflow tools. Events from integrations create or update incidents.
 
 ## How Integrations Work
 
 1. External system sends a webhook
-2. OpsSentinal validates and normalizes the payload
+2. OpsSentinel validates and normalizes the payload
 3. Incidents are created or updated
 4. Notifications are routed via escalation policies
 

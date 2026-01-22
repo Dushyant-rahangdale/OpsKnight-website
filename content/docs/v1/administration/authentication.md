@@ -50,11 +50,13 @@ viewer           → User
 
 ## Session Management
 
-Users can view and revoke active sessions:
+Manage your active sessions from the Security settings:
 
 1. Go to **Settings → Security**
-2. Open **Active Sessions**
-3. Click **Revoke** to end a session
+2. Scroll to **Active Sessions**
+3. Click **Revoke All Sessions** to sign out from all devices
+
+> **Note:** This will immediately invalidate all your sessions across all devices. You will need to sign in again.
 
 ## Security Notes
 

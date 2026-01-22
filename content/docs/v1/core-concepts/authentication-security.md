@@ -41,7 +41,7 @@ Login attempts are tracked by email + IP.
 | Standard | 7 days   |
 | Remember Me | 30 days |
 
-Sessions can be revoked by admins or users.
+Sessions can be revoked in **Settings → Security → Active Sessions**.
 
 ## Audit Logging
 

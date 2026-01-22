@@ -30,7 +30,6 @@ Audit logs record:
 | `login.success`   | User logged in           |
 | `login.failure`   | Failed login attempt     |
 | `logout`          | User logged out          |
-| `session.revoked` | Session manually revoked |
 
 ### User Management
 

@@ -655,11 +655,17 @@ h4 {
 
 /* Docs images: keep high quality but constrained to doc-friendly width */
 .docs-content img {
-  max-width: 420px;
+  max-width: 900px;
   width: 100%;
   height: auto;
   display: block;
   margin: 1.25rem auto;
+}
+
+/* Keep mobile screenshots smaller for doc readability */
+.docs-content img[src*="mobile-dashboard"],
+.docs-content img[src*="push-notification"] {
+  max-width: 420px;
 }
 
 .docs-markdown :where(h2) {

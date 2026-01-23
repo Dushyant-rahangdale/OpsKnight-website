@@ -8,8 +8,7 @@ description: Manage user accounts, roles, permissions, and notification preferen
 
 Users are the people who interact with OpsKnight — from responders handling incidents to administrators managing the platform. This guide covers user management, roles, permissions, and personal settings.
 
-<!-- placeholder:users-overview -->
-<!-- Add: Screenshot of the Users management page -->
+![Users management](/users-page.png)
 
 ---
 
@@ -290,4 +289,3 @@ When someone leaves or no longer needs access:
 - [Schedules](./schedules.md) — On-call rotation management
 - [Notifications](../administration/notifications.md) — Notification channel configuration
 - [Authentication](../administration/authentication.md) — SSO and security settings
-

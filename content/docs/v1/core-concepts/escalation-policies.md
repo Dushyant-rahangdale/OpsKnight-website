@@ -8,8 +8,7 @@ description: Define who gets notified, when, and how incidents escalate
 
 Escalation policies are the rules that determine who gets notified when an incident occurs and how alerts escalate if no one responds. They're the backbone of reliable incident response.
 
-<!-- placeholder:escalation-policies-overview -->
-<!-- Add: Screenshot of the escalation policies list page -->
+![Escalation policies list](/escalation-policies.png)
 
 ---
 
@@ -206,7 +205,7 @@ When channels are specified, only those channels are used (user preferences igno
 3. Repeat for additional steps
 
 <!-- placeholder:policy-step-form -->
-<!-- Add: Screenshot of adding an escalation step -->
+![Escalation step configuration](/escalation-step.png)
 
 ### Step 3: Review & Save
 

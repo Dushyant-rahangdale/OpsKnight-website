@@ -137,7 +137,7 @@ Single Sign-On (SSO) via OIDC is recommended for production environments.
 
 ### SSO Configuration
 
-1. Go to **Settings** → **System Setting** → **Single Sign-On (OIDC)**
+1. Go to **Settings** → **System Settings** → **Single Sign-On (OIDC)**
 2. Enable SSO toggle
 3. Configure provider settings:
 
@@ -188,7 +188,7 @@ User assigned matching role
 
 ### Configuring Role Mapping
 
-1. Go to **Settings** → **System Setting** → **Single Sign-On**
+1. Go to **Settings** → **System Settings** → **Single Sign-On (OIDC)**
 2. Scroll to **Role Mapping**
 3. Add mapping rules as JSON:
 
@@ -263,7 +263,7 @@ Automatically create users on first SSO login.
 
 ### Enabling Auto-Provisioning
 
-1. Go to **Settings** → **System Setting** → **Single Sign-On**
+1. Go to **Settings** → **System Settings** → **Single Sign-On (OIDC)**
 2. Enable **Auto-provision users**
 
 ### Provisioning Behavior

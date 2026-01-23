@@ -58,6 +58,9 @@ Webhooks are HTTP callbacks that notify external systems when events occur in Op
 
 ### HMAC Signature
 
+> [!WARNING]
+> **Strict Security Enforcement**: If you generate a Signing Secret for this integration, OpsKnight will **reject** any requests that do not include a valid signature. If you do not want to enforce signature verification, leave the **Secret** field empty during setup.
+
 Webhooks are signed with HMAC-SHA256:
 
 ```

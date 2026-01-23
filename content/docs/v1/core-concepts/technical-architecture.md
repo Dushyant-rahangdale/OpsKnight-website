@@ -22,15 +22,16 @@ The entry point for all chaos.
 *   **Deduplication**: Before persisting, the engine checks for existing open incidents with the same `dedup_key` to prevent alert storms.
 *   **Enrichment**: Metadata is added (Service ownership, tagging) before the incident is written to Postgres.
 
-### 2. The Reliability Engine (Custom Job Queue)
-We chose **PostgreSQL** over Redis for our job queue to guarantee **Transactional Reliability**.
-*   **The Problem**: If a Redis worker crashes after popping a job but before finishing, the alert is lost.
-*   **Our Solution**: Jobs are stored in the `BackgroundJob` table.
-*   **Mechanism**: Workers use `SELECT ... FOR UPDATE SKIP LOCKED` to atomically claim jobs. If a worker crashes, the transaction rolls back, and the job remains available for another worker.
-*   **Capabilities**:
-    -   **Escalation Steps**: "Page Alice, wait 15m, then page Bob".
-    -   **SLA Monitoring**: "Warning: 5 minutes until SLA Breach".
-    -   **Notification Retries**: Exponential backoff (5s, 30s, 2m, 10m) for flaky upstream providers (Twilio/Slack).
+### 2. Background Processing (Cron)
+We use **node-cron** for reliable background task scheduling within the main application instance.
+*   **Mechanism**: A scheduled task runner initializes on server startup (`server.ts`).
+*   **Core Responsibilities**:
+    -   **Escalation Processing**: Polls every minute for incidents requiring escalation steps.
+    -   **SLA Monitoring**: Checks for SLA breaches and updates status snapshots.
+    -   **Data Retention**: Specific jobs (like `data-cleanup.ts`) handle pruning of old logs and metrics.
+*   **Reliability**:
+    -   **Atomic Operations**: Uses Prisma transactions to ensure data consistency during processing.
+    -   **Idempotency**: Jobs are designed to be safe to run multiple times (skip if already processed).
 
 ### 3. The PWA (Client)
 The frontend is a **Progressive Web App** built with Next.js App Router.

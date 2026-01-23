@@ -55,7 +55,6 @@ Manage "Alert Storms" effectively with the sticky command bar.
 ![Bulk Actions Bar](/bulk-actions.png)
 
 ### Selection Logic
-*   **Range Select**: Click one checkbox, then `Shift + Click` another to select the entire range.
 *   **Smart Hints**: The bar analyzes your selection and displays hints like *"Selected contains SUPPRESSED"* if you've accidentally grabbed hidden items.
 
 ### Command Reference

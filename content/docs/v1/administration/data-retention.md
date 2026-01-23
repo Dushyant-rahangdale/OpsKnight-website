@@ -22,40 +22,36 @@ Retention policies help:
 
 ## Retention Settings
 
-| Data Type            | Default  | Recommended |
-| -------------------- | -------- | ----------- |
-| Resolved Incidents   | 90 days  | 90-365 days |
-| Event Logs           | 30 days  | 30-90 days  |
-| Notification History | 30 days  | 30-60 days  |
-| Audit Logs           | 365 days | 365+ days   |
+| Setting | Applies To | Default |
+| ------- | ---------- | ------- |
+| **Incident History** | Resolved incidents and postmortems | 2 years (730 days) |
+| **Alert Logs** | Raw alerts from integrations | 1 year (365 days) |
+| **System Logs** | Audit trails (`audit_logs`) and debug events | 90 days |
+| **Metric Rollups** | Aggregated performance data (hourly/daily) | 1 year (365 days) |
+| **High-Precision Metrics** | Raw, real-time metric data points | 90 days |
 
 ## How Cleanup Works
 
-The cleanup job runs automatically:
-
-- **Frequency**: Daily (via internal cron)
-- **Time**: Off-peak hours
-- **Method**: Soft delete, then purge
-
-### Cleanup Process
-
-1. Identify data older than retention period
-2. Mark for deletion
-3. Delete in batches
-4. Log cleanup results
+The cleanup job runs automatically (via internal system cron) during off-peak hours. It permanently deletes data older than the configured retention period.
 
 ## Manual Cleanup
 
-Force immediate cleanup:
+You can trigger a manual cleanup job (or a dry run) via the Admin UI settings.
+
+> **Note**: If the automated cleanup job fails to run for any reason (e.g., system downtime during scheduled hours), you can use this option in **Settings → System → Data Retention** to manually enforce retention policies immediately.
+
+### Via API
+
+To trigger cleanup programmatically:
 
 ```bash
-# Via API (Admin only)
-curl -X POST https://your-ops.com/api/settings/retention/cleanup \
-  -H "Authorization: Bearer ADMIN_API_KEY" \
-  -H "X-Cron-Secret: YOUR_CRON_SECRET"
-```
+# Force Cleanup (POST request, requires Admin session cookie or API Key if implemented)
+# Currently, this is primarily an internal Admin UI action.
+POST /api/settings/retention
+Content-Type: application/json
 
-## Data Export
+{ "dryRun": false }
+```
 
 Before data is deleted, export if needed:
 

@@ -16,18 +16,14 @@ Send Prometheus alerts to OpsKnight via Alertmanager.
 
 ### Step 2: Configure Alertmanager
 
-Add OpsKnight as a receiver in `alertmanager.yml`:
+Add OpsKnight as a receiver in `alertmanager.yml` using your Integration ID:
 
 ```yaml
 receivers:
   - name: 'opsknight'
     webhook_configs:
-      - url: 'https://your-ops.com/api/events'
+      - url: 'https://your-ops.com/api/integrations/prometheus?integrationId=YOUR_INTEGRATION_ID'
         send_resolved: true
-        http_config:
-          basic_auth:
-            username: 'api'
-            password: 'YOUR_API_KEY'
 
 route:
   receiver: 'opsknight'
@@ -37,35 +33,7 @@ route:
       receiver: 'opsknight'
 ```
 
-### Step 3: Configure Payload
-
-For custom payload mapping, use a template:
-
-```yaml
-templates:
-  - '/etc/alertmanager/templates/*.tmpl'
-```
-
-Template file:
-
-```
-{{ define "opsknight.payload" }}
-{
-  "routing_key": "YOUR_ROUTING_KEY",
-  "event_action": "{{ if eq .Status "firing" }}trigger{{ else }}resolve{{ end }}",
-  "dedup_key": "{{ .GroupKey }}",
-  "payload": {
-    "summary": "{{ .CommonAnnotations.summary }}",
-    "source": "prometheus",
-    "severity": "{{ .CommonLabels.severity }}",
-    "custom_details": {
-      "alertname": "{{ .CommonLabels.alertname }}",
-      "description": "{{ .CommonAnnotations.description }}"
-    }
-  }
-}
-{{ end }}
-```
+OpsKnight automatically parses the standard Prometheus Alertmanager JSON payload. No custom templates are required.
 
 ## Severity Mapping
 

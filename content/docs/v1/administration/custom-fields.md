@@ -25,7 +25,7 @@ Custom fields let you capture extra context such as:
 | ------------- | -------------------------- |
 | Name          | Field identifier           |
 | Display Label | User-friendly name         |
-| Type          | Text, Select, Multi-Select |
+| Type          | Text, Select               |
 | Required      | Mandatory on incidents     |
 | Default Value | Pre-filled value           |
 
@@ -44,12 +44,6 @@ Free-form text input.
 Single selection from predefined options.
 
 **Example:** Environment → [Production, Staging, Development]
-
-### Multi-Select
-
-Multiple selections allowed.
-
-**Example:** Affected Regions → [US-East, US-West, EU-West]
 
 ## Using Custom Fields
 
@@ -101,21 +95,7 @@ Custom fields appear in:
 | Options  | Enterprise, Business, Free |
 | Required | No                         |
 
-## API Usage
 
-Include custom fields in API requests:
-
-```bash
-curl -X POST /api/incidents \
-  -d '{
-    "title": "Database timeout",
-    "serviceId": "...",
-    "customFields": {
-      "environment": "production",
-      "customer_tier": "enterprise"
-    }
-  }'
-```
 
 ## Best Practices
 

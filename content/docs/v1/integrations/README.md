@@ -93,7 +93,7 @@ Trigger a test alert to verify the integration is working.
 
 ### APM & Application Monitoring
 
-#### [Datadog](./monitoring/datadog.md)
+#### [Datadog](./datadog)
 Full-stack monitoring with APM, infrastructure metrics, and logs.
 
 ```
@@ -101,7 +101,7 @@ Endpoint: /api/integrations/datadog
 Supports: Monitors, Synthetics, APM alerts
 ```
 
-#### New Relic
+#### [New Relic](./new-relic)
 Application performance monitoring and infrastructure.
 
 ```
@@ -109,7 +109,7 @@ Endpoint: /api/integrations/newrelic
 Supports: Alert policies, incidents, synthetics
 ```
 
-#### Dynatrace
+#### [Dynatrace](./dynatrace)
 AI-powered full-stack observability.
 
 ```
@@ -117,7 +117,7 @@ Endpoint: /api/integrations/dynatrace
 Supports: Problems, anomaly detection
 ```
 
-#### AppDynamics
+#### [AppDynamics](./appdynamics)
 Business-aware application performance management.
 
 ```
@@ -125,11 +125,51 @@ Endpoint: /api/integrations/appdynamics
 Supports: Health rules, policy violations
 ```
 
+#### [Grafana](./grafana)
+Visualization and alerting platform.
+
+```
+Endpoint: /api/integrations/grafana
+Supports: Alert notifications
+```
+
+#### [Honeycomb](./honeycomb)
+Observability for distributed systems.
+
+```
+Endpoint: /api/integrations/honeycomb
+Supports: Triggers
+```
+
+#### [Sentry](./sentry)
+Error tracking and performance monitoring.
+
+```
+Endpoint: /api/integrations/sentry
+Supports: Issues, errors, performance alerts
+```
+
+#### [Splunk Observability](./splunk-observability)
+Splunk's observability platform.
+
+```
+Endpoint: /api/integrations/splunk-observability
+Supports: Detectors, alerts
+```
+
+#### [Elastic / Kibana](./elastic-kibana)
+Elasticsearch and Kibana alerting.
+
+```
+Endpoint: /api/integrations/elastic
+Supports: Watcher alerts, Kibana alerting
+```
+
 ---
 
 ### Infrastructure & Cloud
 
-#### AWS CloudWatch
+#### [AWS CloudWatch](./aws-cloudwatch)
 Native AWS monitoring and alerting.
 
 ```
@@ -137,7 +177,7 @@ Endpoint: /api/integrations/cloudwatch
 Supports: CloudWatch Alarms via SNS
 ```
 
-#### Azure Monitor
+#### [Azure Monitor](./azure-monitor)
 Microsoft Azure monitoring service.
 
 ```
@@ -145,7 +185,7 @@ Endpoint: /api/integrations/azure-monitor
 Supports: Alerts, action groups
 ```
 
-#### Google Cloud Monitoring
+#### [Google Cloud Monitoring](./google-cloud-monitoring)
 GCP native monitoring (formerly Stackdriver).
 
 ```
@@ -157,7 +197,7 @@ Supports: Alerting policies
 
 ### Metrics & Alerting
 
-#### [Prometheus/Alertmanager](./monitoring/prometheus.md)
+#### [Prometheus/Alertmanager](./prometheus)
 Open-source metrics and alerting.
 
 ```
@@ -165,31 +205,11 @@ Endpoint: /api/integrations/prometheus
 Supports: Alertmanager webhooks
 ```
 
-#### Grafana
-Visualization and alerting platform.
-
-```
-Endpoint: /api/integrations/grafana
-Supports: Alert notifications
-```
-
----
-
-### Error Tracking
-
-#### Sentry
-Error tracking and performance monitoring.
-
-```
-Endpoint: /api/integrations/sentry
-Supports: Issues, errors, performance alerts
-```
-
 ---
 
 ### Uptime Monitoring
 
-#### UptimeRobot
+#### [UptimeRobot](./uptimerobot)
 Website and API uptime monitoring.
 
 ```
@@ -197,7 +217,7 @@ Endpoint: /api/integrations/uptimerobot
 Supports: Monitor alerts (down/up)
 ```
 
-#### Pingdom
+#### [Pingdom](./pingdom)
 Website uptime and performance monitoring.
 
 ```
@@ -205,7 +225,7 @@ Endpoint: /api/integrations/pingdom
 Supports: Uptime checks, transaction checks
 ```
 
-#### Better Uptime
+#### [Better Uptime](./better-uptime)
 Modern uptime monitoring with status pages.
 
 ```
@@ -213,7 +233,7 @@ Endpoint: /api/integrations/betteruptime
 Supports: Monitor incidents
 ```
 
-#### Uptime Kuma
+#### [Uptime Kuma](./uptime-kuma)
 Self-hosted uptime monitoring.
 
 ```
@@ -225,7 +245,7 @@ Supports: Monitor notifications
 
 ### Log & Event Analysis
 
-#### Splunk On-Call
+#### [Splunk On-Call](./splunk-oncall)
 Incident management from Splunk.
 
 ```
@@ -233,35 +253,11 @@ Endpoint: /api/integrations/splunk-oncall
 Supports: Alerts, incidents
 ```
 
-#### Splunk Observability
-Splunk's observability platform.
-
-```
-Endpoint: /api/integrations/splunk-observability
-Supports: Detectors, alerts
-```
-
-#### Elastic
-Elasticsearch and Kibana alerting.
-
-```
-Endpoint: /api/integrations/elastic
-Supports: Watcher alerts, Kibana alerting
-```
-
-#### Honeycomb
-Observability for distributed systems.
-
-```
-Endpoint: /api/integrations/honeycomb
-Supports: Triggers
-```
-
 ---
 
 ### CI/CD & DevOps
 
-#### GitHub
+#### [GitHub](./github)
 GitHub Actions and repository events.
 
 ```
@@ -269,7 +265,7 @@ Endpoint: /api/integrations/github
 Supports: Workflow failures, security alerts
 ```
 
-#### Bitbucket
+#### [Bitbucket](./bitbucket)
 Bitbucket Pipelines and repository events.
 
 ```
@@ -281,7 +277,7 @@ Supports: Pipeline failures
 
 ### Communication
 
-#### [Slack](./slack.md)
+#### [Slack](./slack)
 Team communication with interactive incident management.
 
 - Rich message formatting with incident details
@@ -289,13 +285,13 @@ Team communication with interactive incident management.
 - Thread updates for incident timeline
 - Channel-based routing
 
-[Full Setup Guide →](./slack-oauth-setup.md)
+[Full Setup Guide →](./slack-oauth-setup)
 
 ---
 
 ### Custom Integrations
 
-#### [Generic Webhooks](./webhooks.md)
+#### [Generic Webhooks](./webhooks)
 Connect any tool that can send HTTP webhooks.
 
 ```
@@ -311,7 +307,7 @@ Endpoint: /api/events
 Supports: trigger, acknowledge, resolve actions
 ```
 
-[Events API Reference →](../api/events.md)
+[Events API Reference →](../api/events)
 
 ---
 
@@ -378,106 +374,3 @@ The dedup key prevents duplicate incidents from the same root cause:
 2. **New dedup key** → Creates new incident
 
 This is crucial during alert storms when the same issue triggers multiple alerts.
-
----
-
-## Integration Configuration
-
-### Creating an Integration
-
-1. Go to **Settings** → **Integrations**
-2. Click **Add Integration**
-3. Select the integration type
-4. Configure options:
-   - **Name**: Descriptive identifier
-   - **Service**: Which service this routes to
-   - **Routing Key**: Unique identifier (auto-generated or custom)
-5. Copy the **Webhook URL**
-6. Configure the source tool to send to this URL
-
-### Per-Service Integrations
-
-You can create multiple integrations per service for different alert sources:
-
-```
-Payment API Service
-├── Integration: Datadog APM
-├── Integration: Sentry Errors
-└── Integration: UptimeRobot Uptime
-```
-
-### Webhook Security
-
-Most integrations support signature verification:
-
-1. Configure a **Signing Secret** in OpsKnight
-2. Configure the same secret in your monitoring tool
-3. OpsKnight verifies the signature on each request
-4. Invalid signatures are rejected
-
----
-
-## Troubleshooting Integrations
-
-### Alerts Not Creating Incidents
-
-**Check**:
-1. Webhook URL is correct
-2. Routing key matches a service
-3. Integration is enabled
-4. Check **System Logs** for errors
-
-### Duplicate Incidents
-
-**Check**:
-1. Verify dedup key is being sent
-2. Check if dedup key format changed
-3. Review deduplication window settings
-
-### Missing Data in Incidents
-
-**Check**:
-1. Verify payload format matches expected schema
-2. Check integration-specific field mappings
-3. Review normalization logic in system logs
-
-### Authentication Errors
-
-**Check**:
-1. API key or integration key is valid
-2. Signature verification settings match
-3. Request headers include required auth
-
----
-
-## Best Practices
-
-### For Alert Sources
-
-- **Use meaningful dedup keys** — Include alert ID or source identifier
-- **Set appropriate urgency** — Map severity to OpsKnight urgency
-- **Include context** — Add relevant details in custom_details
-- **Test integrations** — Verify before relying on them
-
-### For Notification Channels
-
-- **Configure multiple channels** — Don't rely on one method
-- **Set up Slack for teams** — Interactive buttons improve response time
-- **Use SMS for critical** — Ensure HIGH urgency reaches people
-- **Test delivery** — Verify notifications actually arrive
-
-### For Maintenance
-
-- **Review integrations periodically** — Remove unused ones
-- **Update API keys** — Rotate credentials regularly
-- **Monitor integration health** — Check for failures
-- **Document configurations** — Keep runbooks updated
-
----
-
-## Related Topics
-
-- [Events API](../api/events.md) — Programmatic event submission
-- [Slack Setup](./slack.md) — Interactive Slack integration
-- [Webhooks](./webhooks.md) — Custom webhook integrations
-- [Services](../core-concepts/services.md) — Where alerts route to

@@ -302,26 +302,6 @@ Both work — choose based on your escalation policy needs.
 2. Each schedule shows the current on-call person
 3. Click a schedule to see the full calendar
 
-### Via API
-
-```bash
-GET /api/schedules/{id}/on-call?timestamp=2024-01-15T10:00:00Z
-```
-
-Response:
-```json
-{
-  "user": {
-    "id": "user_123",
-    "name": "Alice Smith",
-    "email": "alice@example.com"
-  },
-  "layer": "Primary Rotation",
-  "shift_start": "2024-01-15T00:00:00Z",
-  "shift_end": "2024-01-22T00:00:00Z"
-}
-```
-
 ---
 
 ## Connecting Schedules to Escalation Policies

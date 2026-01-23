@@ -36,7 +36,7 @@ Different situations call for different notification methods:
 |---------|------------------|----------|
 | **Email** | SMTP, SendGrid, AWS SES, Resend | All users, reliable delivery |
 | **SMS** | Twilio, AWS SNS | Critical alerts, on-call |
-| **Push** | Firebase (FCM), OneSignal | Mobile/PWA users |
+| **Push** | Web Push (PWA) | Mobile/PWA users |
 | **Slack** | Slack OAuth | Team collaboration |
 | **WhatsApp** | Twilio | International teams |
 | **Webhooks** | Any HTTP endpoint | Custom integrations |
@@ -60,7 +60,7 @@ Email is the most universal notification channel — every user has an email add
 
 For Gmail, Microsoft 365, or any SMTP server:
 
-1. Go to **Settings** → **Notifications** → **Email**
+1. Go to **Settings** → **Notification Provider** → **Email**
 2. Select **SMTP** provider
 3. Enter credentials:
 
@@ -188,57 +188,45 @@ Users must add and verify their phone numbers:
 
 ---
 
-## Push Notifications
+## Push Notifications (PWA)
 
-Push notifications reach users on their mobile devices via the OpsKnight PWA.
+Push notifications reach users on their mobile and desktop devices via the OpsKnight Progressive Web App (PWA).
 
-### Firebase Cloud Messaging (FCM)
+### VAPID Configuration
 
-1. **Create Firebase Project**
-   - Go to Firebase Console
-   - Create a new project or use existing
+OpsKnight uses standard Web Push with VAPID keys, independent of third-party services like Firebase.
 
-2. **Get Server Credentials**
-   - Go to Project Settings → Cloud Messaging
-   - Note the Server Key and Sender ID
+1. **Generate VAPID Keys**
+   - You can generate these via command line: `npx web-push generate-vapid-keys`
+   - Or use an online VAPID generator
 
-3. **Configure in OpsKnight**
-   - Go to **Settings** → **Notifications** → **Push**
-   - Select **Firebase** provider
-   - Enter credentials:
+2. **Configure in OpsKnight**
+   - Go to **Settings** → **Notification Provider** → **Web Push (PWA)**
+   - Enter your VAPID details:
 
 | Field | Description |
 |-------|-------------|
-| **Server Key** | From Firebase Console |
-| **Sender ID** | From Firebase Console |
+| **VAPID Public Key** | The public key string |
+| **VAPID Private Key** | The private key string |
+| **Contact Email** | `mailto:admin@yourcompany.com` |
 
-4. **Test** and **Save**
-
-### OneSignal Setup
-
-Alternative to Firebase with additional features:
-
-1. **Create OneSignal Account**
-   - Sign up at onesignal.com
-   - Create a new app
-
-2. **Get Credentials**
-   - App ID and REST API Key from Settings
-
-3. **Configure in OpsKnight**
-   - Select **OneSignal** provider
-   - Enter App ID and REST API Key
-   - Test and Save
+3. **Save** configuration
 
 ### User Device Registration
 
-For push notifications to work, users must:
+For push notifications to work, users must install the PWA:
 
-1. **Open OpsKnight PWA** in their mobile browser
-2. **Accept notification permission** when prompted
-3. **Device is automatically registered**
+1. **Open OpsKnight** in a browser (Chrome/Edge/Safari)
+2. **Install App**:
+   - Desktop: Click install icon in address bar
+   - Mobile (iOS): Share → Add to Home Screen
+   - Mobile (Android): Install App prompt
+3. **Enable Notifications**:
+   - Open the installed app
+   - Accept notification permission when prompted
+   - Device is automatically registered
 
-Users can manage devices in **Profile** → **Devices**.
+Users can manage their push preferences in **Settings** → **Profile**.
 
 ---
 
@@ -287,7 +275,7 @@ Slack provides rich, interactive notifications with buttons for quick actions.
 
 ### Setup
 
-Full setup guide: [Slack OAuth Setup](../integrations/slack-oauth-setup.md)
+Full setup guide: [Slack OAuth Setup](../integrations/slack-oauth-setup)
 
 Quick overview:
 1. Go to **Settings** → **Integrations** → **Slack**
@@ -312,15 +300,19 @@ Send notifications to any HTTP endpoint for custom integrations.
 
 ### Configuration
 
-1. Go to **Settings** → **Notifications** → **Webhooks**
-2. Click **Add Webhook**
-3. Configure:
+Webhooks are configured per-service, allowing specific routing for different services.
+
+1. Go to **Services** and select a service
+2. Click **Settings** (tab)
+3. Under **Service Notification Channels**, check **WEBHOOK**
+4. In the **Webhook Integrations** card that appears, click **Add Webhook**
+5. Configure:
 
 | Field | Description |
 |-------|-------------|
+| **Name** | Display name (e.g., "Internal Ops Dashboard") |
 | **URL** | Your webhook endpoint |
-| **Secret** | For HMAC signature verification |
-| **Events** | Which events trigger the webhook |
+| **Type** | Generic, Google Chat, Microsoft Teams, etc. |
 
 ### Webhook Payload
 
@@ -340,13 +332,14 @@ Send notifications to any HTTP endpoint for custom integrations.
 
 ### Signature Verification
 
-OpsKnight signs webhooks with HMAC-SHA256:
+OpsKnight signs webhooks with HMAC-SHA256 if a secret is configured. Requests include these headers:
 
 ```
 X-OpsKnight-Signature: sha256=abc123...
+X-OpsKnight-Timestamp: 1706179200000
 ```
 
-Verify by computing HMAC of request body with your secret.
+Verify by computing HMAC of the request body with your secret. You can use the timestamp to protect against replay attacks.
 
 ---
 
@@ -364,16 +357,7 @@ Each user controls their notification preferences:
 | **SMS notifications** | Enable/disable SMS |
 | **Push notifications** | Enable/disable push |
 | **WhatsApp notifications** | Enable/disable WhatsApp |
-| **Quiet hours** | Do not disturb window |
 | **Digest level** | ALL, HIGH only, or NONE |
-
-### Quiet Hours
-
-Users can set quiet hours to avoid notifications during sleep:
-
-- **Start time**: e.g., 10pm
-- **End time**: e.g., 7am
-- **Override for HIGH urgency**: Still notify for critical
 
 ### Service-Level Settings
 
@@ -407,7 +391,7 @@ OpsKnight tracks delivery status for all notifications:
 
 ### Troubleshooting Failed Notifications
 
-1. Check **System Logs** for error details
+1. Check **Event Logs** for error details
 2. Verify provider credentials
 3. Check user has valid contact info
 4. Verify user has channel enabled
@@ -417,20 +401,13 @@ OpsKnight tracks delivery status for all notifications:
 
 ## Best Practices
 
-### Channel Selection
-
-| Urgency | Recommended Channels |
-|---------|---------------------|
-| **HIGH** | SMS + Push + Slack |
-| **MEDIUM** | Email + Slack |
-| **LOW** | Email only |
+## Notification Best Practices
 
 ### Reduce Alert Fatigue
 
-- Use **quiet hours** for off-duty users
-- Set **digest level** to HIGH for non-critical channels
-- Use **Slack threads** instead of channel spam
-- Configure **deduplication** to prevent flood
+- **Tune Triggers**: Ensure only actionable events trigger high-urgency incidents.
+- **Use Service Isolation**: Configure service-specific channels for non-critical alerts.
+- **Review Regularly**: Check Event Logs to identify noisy services.
 
 ### Testing
 
@@ -455,7 +432,7 @@ OpsKnight tracks delivery status for all notifications:
 2. Verify SMTP credentials
 3. Check if From Address is verified (SES, SendGrid)
 4. Test with "Send Test Email"
-5. Check system logs for errors
+5. Check **Event Logs** for errors
 
 ### SMS Not Received
 
@@ -468,8 +445,8 @@ OpsKnight tracks delivery status for all notifications:
 ### Push Not Working
 
 1. User must accept notification permission
-2. Check device is registered in Profile → Devices
-3. Verify FCM/OneSignal credentials
+2. **Check Push notifications are enabled** in Settings → Profile
+3. Verify VAPID keys
 4. Check service worker is installed (PWA)
 
 ### Slack Not Posting
@@ -483,6 +460,6 @@ OpsKnight tracks delivery status for all notifications:
 
 ## Related Topics
 
-- [Slack Integration](../integrations/slack.md) — Full Slack setup
-- [User Management](../core-concepts/users.md) — User notification preferences
-- [Escalation Policies](../core-concepts/escalation-policies.md) — Channel routing
+- [Slack Integration](../integrations/slack) — Full Slack setup
+- [User Management](../core-concepts/users) — User notification preferences
+- [Escalation Policies](../core-concepts/escalation-policies) — Channel routing

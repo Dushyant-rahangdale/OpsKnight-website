@@ -20,31 +20,13 @@ Send Datadog alerts to OpsKnight.
 2. Click **+ New Webhook**
 3. Configure:
 
-| Field   | Value                             |
+| Field   | Value |
 | ------- | --------------------------------- |
-| Name    | OpsKnight                       |
-| URL     | `https://your-ops.com/api/events` |
-| Payload | See below                         |
+| Name    | OpsKnight |
+| URL     | `https://your-ops.com/api/integrations/datadog?integrationId=YOUR_INTEGRATION_ID` |
+| Payload | Use the default Datadog payload (JSON) |
 
-### Payload Template
-
-```json
-{
-  "routing_key": "YOUR_ROUTING_KEY",
-  "event_action": "$ALERT_TRANSITION",
-  "dedup_key": "$ALERT_ID",
-  "payload": {
-    "summary": "$EVENT_TITLE",
-    "source": "datadog",
-    "severity": "$ALERT_PRIORITY",
-    "custom_details": {
-      "monitor_id": "$ALERT_ID",
-      "tags": "$TAGS",
-      "link": "$LINK"
-    }
-  }
-}
-```
+OpsKnight automatically parses the standard Datadog webhook format. No custom payload template is required.
 
 ### Step 3: Add to Monitor
 

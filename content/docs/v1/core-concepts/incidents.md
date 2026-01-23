@@ -88,3 +88,239 @@ You don't always need to open the full details page.
 *   **Status Toggles**: Use the "meatball" menu (`...`) on the right of any row to quickly **Resolve**, **Snooze**, or **Ack** that single item.
 
     ![Incident Actions Menu](/incident-actions-menu.png)
+
+---
+
+## 5. Incident Statuses
+
+Incidents move through a defined lifecycle with five possible statuses:
+
+| Status | Description | Visual |
+| :----- | :---------- | :----- |
+| **OPEN** | New incident requiring attention. Escalation is active. | Red border |
+| **ACKNOWLEDGED** | Someone is working on it. Escalation paused. | Amber border |
+| **SNOOZED** | Temporarily hidden. Auto-reopens after snooze period. | Grey border |
+| **SUPPRESSED** | Marked as noise/false positive. Hidden from default view. | Grey border |
+| **RESOLVED** | Issue fixed. Incident closed. | Green border |
+
+### Status Transitions
+
+```
+         ┌──────────────────────────────────────┐
+         │                                      │
+         ▼                                      │
+      OPEN ──────► ACKNOWLEDGED ──────► RESOLVED
+         │              │                   ▲
+         │              │                   │
+         ▼              ▼                   │
+      SNOOZED ◄────► SUPPRESSED ───────────┘
+         │
+         │ (auto-unsnooze)
+         ▼
+       OPEN
+```
+
+- **OPEN → ACKNOWLEDGED**: User acknowledges, stopping escalation
+- **ACKNOWLEDGED → RESOLVED**: Issue fixed, incident closed
+- **OPEN → SNOOZED**: Temporarily defer (auto-returns to OPEN)
+- **Any → SUPPRESSED**: Mark as false positive/noise
+- **SUPPRESSED → RESOLVED**: Clean up suppressed incidents
+
+---
+
+## 6. Incident Detail Page
+
+Click any incident to open the full detail view with rich context and actions.
+
+<!-- placeholder:incident-detail-page -->
+<!-- Add: Screenshot of the incident detail page -->
+
+### Header Section
+
+- **Title**: Incident summary from the triggering alert
+- **Status Badge**: Current status with quick-action buttons
+- **Service**: The affected service (links to service page)
+- **Created**: When the incident was triggered
+
+### Properties Panel
+
+| Property | Description |
+| :------- | :---------- |
+| **Urgency** | Impact level: `HIGH`, `MEDIUM`, or `LOW` |
+| **Priority** | Business priority: `P1` (critical) through `P5` (minimal) |
+| **Assignee** | Current owner — can be a **User** OR a **Team** |
+| **Service** | The service this incident belongs to |
+| **Escalation Policy** | The policy handling notifications |
+
+### Reassigning Incidents
+
+Incidents can be assigned to:
+- **Individual Users**: Direct assignment to a specific person
+- **Teams**: Assignment to a team (any member can work on it)
+
+To reassign:
+1. Click the assignee field
+2. Search by name/email (for users) or team name
+3. Select the new assignee
+
+---
+
+## 7. Timeline
+
+The timeline is the complete audit trail of everything that happened during the incident.
+
+### Timeline Events
+
+| Event Type | Description |
+| :--------- | :---------- |
+| **Triggered** | Incident was created |
+| **Acknowledged** | Someone acknowledged the incident |
+| **Resolved** | Incident was marked resolved |
+| **Escalated** | Notification escalated to next step |
+| **Notification Sent** | Alert sent via Email/SMS/Push/Slack |
+| **Note Added** | User added a comment |
+| **Reassigned** | Assignee changed |
+| **Priority Changed** | Priority level updated |
+| **Urgency Changed** | Urgency level updated |
+| **Snoozed** | Incident was snoozed |
+| **Unsnoozed** | Incident returned from snooze |
+| **Suppressed** | Incident marked as noise |
+
+Each event shows:
+- **Timestamp**: When it occurred
+- **Actor**: Who/what triggered it (user or system)
+- **Details**: Additional context
+
+---
+
+## 8. Notes
+
+Add notes to incidents to capture investigation progress, findings, or handoff information.
+
+### Adding Notes
+
+1. Scroll to the **Notes** section
+2. Type your note in the text field
+3. Click **Add Note**
+
+### Note Features
+
+- **Markdown Support**: Format notes with headers, lists, code blocks
+- **@Mentions**: Tag team members (they receive notifications)
+- **Timestamps**: Each note shows when it was added and by whom
+- **Persistence**: Notes remain even after incident is resolved
+
+### Best Practices
+
+- Document investigation steps as you go
+- Note any temporary fixes or workarounds applied
+- Tag incoming on-call when handing off
+- Include relevant links (dashboards, logs, runbooks)
+
+---
+
+## 9. Tags
+
+Tags help categorize and filter incidents for better organization and reporting.
+
+### Using Tags
+
+- **Add Tags**: Click the tags field and type or select existing tags
+- **Remove Tags**: Click the × on any tag to remove it
+- **Filter by Tags**: Use the tag filter in the incident list
+
+### Common Tag Patterns
+
+| Pattern | Example Tags |
+| :------ | :----------- |
+| **Environment** | `prod`, `staging`, `dev` |
+| **Region** | `us-east`, `eu-west`, `apac` |
+| **Category** | `database`, `network`, `auth` |
+| **Root Cause** | `config-change`, `capacity`, `dependency` |
+
+---
+
+## 10. Resolution Notes
+
+When resolving an incident, you can add a resolution note to document what fixed the issue.
+
+### Adding a Resolution Note
+
+1. Click **Resolve** on the incident
+2. In the modal, enter the resolution note
+3. Click **Resolve Incident**
+
+### What to Include
+
+- **Root Cause**: What caused the incident
+- **Fix Applied**: What was done to resolve it
+- **Prevention**: Any follow-up actions needed
+- **Duration**: How long the incident lasted
+
+Resolution notes are visible in the incident timeline and analytics reports.
+
+---
+
+## 11. Postmortems
+
+For significant incidents, create a postmortem to conduct a structured retrospective.
+
+### Creating a Postmortem
+
+1. Open the resolved incident
+2. Click **Create Postmortem**
+3. Fill in the postmortem template
+
+### Postmortem Sections
+
+| Section | Purpose |
+| :------ | :------ |
+| **Summary** | Brief description of what happened |
+| **Impact** | Users/services affected, duration |
+| **Timeline** | Chronological sequence of events |
+| **Root Cause** | The underlying cause(s) |
+| **Resolution** | How the incident was fixed |
+| **Action Items** | Follow-up tasks to prevent recurrence |
+| **Lessons Learned** | What the team learned |
+
+### Postmortem Workflow
+
+1. **Draft**: Initial creation, editable
+2. **In Review**: Team reviewing and adding input
+3. **Published**: Finalized and shared
+
+---
+
+## 12. Creating Incidents Manually
+
+While most incidents are created automatically via integrations, you can create them manually.
+
+### When to Create Manually
+
+- Customer-reported issues not triggering alerts
+- Internal incidents (process failures, etc.)
+- Training and testing scenarios
+
+### How to Create
+
+1. Click **Create Incident** button
+2. Fill in required fields:
+   - **Title**: Clear summary of the issue
+   - **Service**: Which service is affected
+   - **Urgency**: HIGH, MEDIUM, or LOW
+3. Optional fields:
+   - **Description**: Detailed information
+   - **Priority**: P1-P5
+   - **Assignee**: User or Team
+4. Click **Create**
+
+The incident follows the normal escalation flow based on the service's escalation policy.
+
+---
+
+## Related Topics
+
+- [Services](./services.md) — Service configuration
+- [Escalation Policies](./escalation-policies.md) — Notification routing
+- [Analytics](./analytics.md) — Incident metrics and SLAs
+- [Postmortems](./postmortems.md) — Retrospective process

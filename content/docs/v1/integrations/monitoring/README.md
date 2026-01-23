@@ -12,8 +12,8 @@ Connect your monitoring tools to OpsKnight.
 | ----------------------------- | ------------ |
 | [Datadog](./datadog.md)       | ✅ Supported |
 | [Prometheus](./prometheus.md) | ✅ Supported |
-| [Grafana](./grafana.md)       | ✅ Supported |
-| [Sentry](./sentry.md)         | ✅ Supported |
+| Grafana                       | ✅ Supported |
+| Sentry                        | ✅ Supported |
 | AWS CloudWatch                | ✅ Supported |
 | Azure Monitor                 | ✅ Supported |
 | Google Cloud Monitoring       | ✅ Supported |
@@ -80,5 +80,9 @@ Choose your monitoring tool:
 
 - [Datadog](./datadog.md)
 - [Prometheus/Alertmanager](./prometheus.md)
-- [Grafana](./grafana.md)
-- [Sentry](./sentry.md)
+- Grafana (use generic webhook setup)
+- Sentry (use generic webhook setup)
+
+For tools without dedicated guides, use the [Generic Webhook](../webhooks.md) setup with the appropriate endpoint:
+- Grafana: `/api/integrations/grafana?integrationId=<id>`
+- Sentry: `/api/integrations/sentry?integrationId=<id>`

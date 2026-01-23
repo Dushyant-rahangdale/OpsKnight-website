@@ -17,17 +17,26 @@ Configure how users authenticate with OpsKnight and how identities map to roles.
 
 Local authentication uses email and password.
 
-### Create a User
+### First-Time Setup
 
-```bash
-npm run opsknight -- \
-  --user "John Doe" \
-  --email john@company.com \
-  --password SecurePass123! \
-  --role responder
-```
+When no users exist, access `/setup` to create the initial admin account:
 
-> **Tip:** Use a password manager and rotate passwords periodically.
+1. Navigate to your OpsKnight URL
+2. You'll be redirected to `/setup`
+3. Enter your name and email
+4. Save the generated password securely (shown only once)
+
+### Adding Users
+
+The recommended way to add users is through the **Invite** feature:
+
+1. Go to **Settings** → **Users**
+2. Click **Invite User**
+3. Enter the user's email and select a role
+4. The user receives an email with a 7-day invitation link
+5. They set their own password upon accepting
+
+> **Tip:** Use the CLI tool only as a recovery option if locked out. See [CLI Tool](../api/cli.md).
 
 ## SSO / OIDC Authentication
 

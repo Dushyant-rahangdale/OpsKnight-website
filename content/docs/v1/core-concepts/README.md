@@ -35,7 +35,7 @@ OpsKnight is built around a simple but powerful model: **Alerts become Incidents
     ┌─────────────────────────────────────────────────┐
     │                    INCIDENTS                     │
     │  Actionable work items with lifecycle tracking   │
-    │  OPEN → ACKNOWLEDGED → RESOLVED                  │
+    │  OPEN • ACKNOWLEDGED • SNOOZED • SUPPRESSED • RESOLVED │
     └─────────────────────────┬───────────────────────┘
                               │
                               ▼

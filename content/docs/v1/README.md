@@ -91,7 +91,7 @@ Understanding the relationship between OpsKnight components helps you design eff
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                            INCIDENTS                                    │
 │   Created when alerts fire • Tracked through lifecycle                  │
-│   OPEN → ACKNOWLEDGED → RESOLVED                                        │
+│   OPEN • ACKNOWLEDGED • SNOOZED • SUPPRESSED • RESOLVED                 │
 └──────────────────────────────┬──────────────────────────────────────────┘
                                │
                                ▼

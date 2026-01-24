@@ -319,7 +319,7 @@ The incident follows the normal escalation flow based on the service's escalatio
 
 ## Related Topics
 
-- [Services](./services.md) — Service configuration
-- [Escalation Policies](./escalation-policies.md) — Notification routing
-- [Analytics](./analytics.md) — Incident metrics and SLAs
-- [Postmortems](./postmortems.md) — Retrospective process
+- [Services](./services) — Service configuration
+- [Escalation Policies](./escalation-policies) — Notification routing
+- [Analytics](./analytics) — Incident metrics and SLAs
+- [Postmortems](./postmortems) — Retrospective process

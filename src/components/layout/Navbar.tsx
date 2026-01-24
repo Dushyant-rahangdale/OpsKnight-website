@@ -10,7 +10,6 @@ import { BRAND } from "@/lib/brand";
 const navItems = [
     { label: "Features", href: "/#features" },
     { label: "Integrations", href: "/#integrations" },
-    { label: "Pricing", href: "/#pricing" },
     { label: "Docs", href: "/docs" },
     { label: "Compare", href: "/compare" },
     { label: "Contact", href: "/contact" },
@@ -55,7 +54,7 @@ export function Navbar() {
                             <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 group-hover:border-emerald-500/30 transition-all shadow-lg">
                                 <Image
-                                    src="/logo-compressed.png"
+                                    src="/logo-mark.png"
                                     alt={BRAND.name}
                                     width={24}
                                     height={24}

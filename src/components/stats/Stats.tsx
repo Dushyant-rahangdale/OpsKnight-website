@@ -2,39 +2,40 @@
 
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { TrendingUp, Clock, Shield, Zap } from "lucide-react";
+import Link from "next/link";
+import { Users, AlertTriangle, Bell, Activity, TrendingUp } from "lucide-react";
 
 const stats = [
     {
-        label: "Rapid Setup",
-        value: 5,
-        suffix: "m",
-        description: "Deploy in minutes with Docker or K8s",
-        icon: Clock,
+        label: "Concurrent Users",
+        value: 500,
+        suffix: "+",
+        description: "200-500 active users with SSE streams open.",
+        icon: Users,
         color: "from-emerald-500 to-cyan-500",
     },
     {
-        label: "Event Throughput",
-        value: 1000,
-        suffix: "/s",
-        description: "High-performance ingestion engine",
-        icon: TrendingUp,
+        label: "Incidents",
+        value: 300,
+        suffix: "/min",
+        description: "New incidents created via API or integrations.",
+        icon: AlertTriangle,
         color: "from-blue-500 to-indigo-500",
     },
     {
-        label: "Data Control",
-        value: 100,
-        suffix: "%",
-        description: "Full ownership of your data and infrastructure",
-        icon: Shield,
+        label: "Notifications",
+        value: 600,
+        suffix: "/min",
+        description: "Email, SMS, Slack, push, and webhooks combined.",
+        icon: Bell,
         color: "from-amber-500 to-orange-500",
     },
     {
-        label: "Integrations",
-        value: 20,
+        label: "SSE Streams",
+        value: 500,
         suffix: "+",
-        description: "Connect with your favorite tools instantly",
-        icon: Zap,
+        description: "Live dashboards with cached reads every few seconds.",
+        icon: Activity,
         color: "from-rose-500 to-pink-500",
     },
 ];
@@ -143,6 +144,16 @@ export function Stats() {
                     {stats.map((stat, index) => (
                         <StatCard key={stat.label} stat={stat} index={index} />
                     ))}
+                </div>
+
+                <div className="mt-10 text-center">
+                    <Link
+                        href="/docs/v1/core-concepts/scalability"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 bg-white/5 text-sm font-semibold text-white hover:bg-white/10 transition"
+                    >
+                        <TrendingUp className="w-4 h-4 text-emerald-400" />
+                        Read the scalability guide
+                    </Link>
                 </div>
             </div>
         </section>

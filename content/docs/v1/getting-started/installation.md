@@ -17,8 +17,8 @@ This guide covers the recommended ways to install OpsKnight and get a working in
 | Method                                    | Best For                          |
 | ----------------------------------------- | --------------------------------- |
 | [Docker Compose](#docker-compose)         | Development and small deployments |
-| [Kubernetes](../deployment/kubernetes.md) | Production and scaling            |
-| [Helm](../deployment/helm.md)             | Templated Kubernetes installs     |
+| [Kubernetes](../deployment/kubernetes) | Production and scaling            |
+| [Helm](../deployment/helm)             | Templated Kubernetes installs     |
 | [Local Development](#local-development)   | Contributing and testing          |
 
 ---
@@ -75,7 +75,7 @@ After setup, log in with your email and the generated password.
 
 Use the Helm chart for repeatable Kubernetes installs.
 
-Follow the full guide here: [Helm Deployment](../deployment/helm.md).
+Follow the full guide here: [Helm Deployment](../deployment/helm).
 
 ---
 

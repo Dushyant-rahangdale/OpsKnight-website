@@ -273,7 +273,7 @@ Before testing, set up at least one notification channel.
 3. Authorize OpsKnight in your workspace
 4. Select a default channel for notifications
 
-See the [Notifications Guide](../administration/notifications.md) for detailed setup.
+See the [Notifications Guide](../administration/notifications) for detailed setup.
 
 ---
 
@@ -356,15 +356,15 @@ Now that the basics are working, explore these areas:
 
 ### Connect Real Monitoring Tools
 Route alerts from your actual infrastructure:
-- [Datadog Integration](../integrations/monitoring/datadog.md)
-- [Prometheus Integration](../integrations/monitoring/prometheus.md)
-- [Generic Webhooks](../integrations/webhooks.md)
+- [Datadog Integration](../integrations/apm-monitoring/datadog)
+- [Prometheus Integration](../integrations/metrics-alerting/prometheus)
+- [Generic Webhooks](../integrations/custom/webhooks)
 
 ### Set Up More Notification Channels
 Reach responders through multiple channels:
 - [SMS via Twilio](../administration/notifications.md#sms)
 - [Push Notifications](../administration/notifications.md#push)
-- [Slack Integration](../integrations/slack.md)
+- [Slack Integration](../integrations/communication/slack)
 
 ### Configure SLAs
 Track response time commitments:
@@ -372,13 +372,13 @@ Track response time commitments:
 
 ### Create a Status Page
 Communicate with customers:
-- [Status Page Setup](../core-concepts/status-page.md)
+- [Status Page Setup](../core-concepts/status-page)
 
 ### Understand Core Concepts
 Deepen your knowledge:
-- [Incident Lifecycle](../core-concepts/incidents.md)
-- [Schedule Deep Dive](../core-concepts/schedules.md)
-- [Escalation Details](../core-concepts/escalation-policies.md)
+- [Incident Lifecycle](../core-concepts/incidents)
+- [Schedule Deep Dive](../core-concepts/schedules)
+- [Escalation Details](../core-concepts/escalation-policies)
 
 ---
 

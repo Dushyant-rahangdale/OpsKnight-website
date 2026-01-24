@@ -94,4 +94,4 @@ Store secrets in your `values.yaml` or use an external secret manager. Ensure `D
 - Review the Kubernetes guide for scaling, secrets, and ingress setup.
 - Add SMTP, notification providers, and integrations via `values.yaml`.
 
-See [Kubernetes Deployment](./kubernetes.md) for production hardening.
+See [Kubernetes Deployment](./kubernetes) for production hardening.

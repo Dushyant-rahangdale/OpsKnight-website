@@ -14,10 +14,10 @@ This section covers production deployment of OpsKnight. Choose the deployment me
 
 | Method | Best For | Complexity | HA Support |
 |--------|----------|------------|------------|
-| [Docker Compose](./docker.md) | Small teams, dev/staging | Low | No |
-| [Kubernetes](./kubernetes.md) | Production, enterprise | Medium | Yes |
-| [Helm](./helm.md) | Templated K8s deployments | Medium | Yes |
-| [Mobile PWA](./mobile-pwa.md) | Mobile access | N/A | N/A |
+| [Docker Compose](./docker) | Small teams, dev/staging | Low | No |
+| [Kubernetes](./kubernetes) | Production, enterprise | Medium | Yes |
+| [Helm](./helm) | Templated K8s deployments | Medium | Yes |
+| [Mobile PWA](./mobile-pwa) | Mobile access | N/A | N/A |
 
 ---
 
@@ -137,7 +137,7 @@ docker compose up -d
 
 Access at `http://localhost:3000` — you'll be directed to `/setup` to create your admin account.
 
-[Full Docker Guide →](./docker.md)
+[Full Docker Guide →](./docker)
 
 ---
 
@@ -166,7 +166,7 @@ kubectl apply -f service.yaml
 kubectl apply -f ingress.yaml
 ```
 
-[Full Kubernetes Guide →](./kubernetes.md)
+[Full Kubernetes Guide →](./kubernetes)
 
 ---
 
@@ -188,7 +188,7 @@ helm install opsknight ./opsknight \
   --values values.yaml
 ```
 
-[Full Helm Guide →](./helm.md)
+[Full Helm Guide →](./helm)
 
 ---
 
@@ -346,6 +346,6 @@ kubectl logs -l app=postgres
 ## Related Topics
 
 - [Getting Started](../getting-started/) — Initial setup
-- [Configuration](../getting-started/configuration.md) — Environment reference
+- [Configuration](../getting-started/configuration) — Environment reference
 - [Architecture](../architecture/) — System design
 - [Security](../security/) — Security configuration

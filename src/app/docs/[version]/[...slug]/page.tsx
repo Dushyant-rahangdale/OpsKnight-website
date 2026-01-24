@@ -1,4 +1,5 @@
-import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { getDocPage, getAllDocSlugs } from "@/lib/docs/content";
 import { DocsToc } from "@/components/docs/DocsToc";
@@ -9,6 +10,82 @@ import { BRAND } from "@/lib/brand";
 export const dynamicParams = false;
 // export const dynamic = "force-static";
 
+const LEGACY_DOC_REDIRECTS: Record<string, string> = {
+  "integrations/datadog": "integrations/apm-monitoring/datadog",
+  "integrations/new-relic": "integrations/apm-monitoring/new-relic",
+  "integrations/dynatrace": "integrations/apm-monitoring/dynatrace",
+  "integrations/appdynamics": "integrations/apm-monitoring/appdynamics",
+  "integrations/grafana": "integrations/apm-monitoring/grafana",
+  "integrations/honeycomb": "integrations/apm-monitoring/honeycomb",
+  "integrations/sentry": "integrations/apm-monitoring/sentry",
+  "integrations/splunk-observability": "integrations/apm-monitoring/splunk-observability",
+  "integrations/elastic-kibana": "integrations/logs-events/elastic-kibana",
+  "integrations/aws-cloudwatch": "integrations/cloud/aws-cloudwatch",
+  "integrations/azure-monitor": "integrations/cloud/azure-monitor",
+  "integrations/google-cloud-monitoring": "integrations/cloud/google-cloud-monitoring",
+  "integrations/prometheus": "integrations/metrics-alerting/prometheus",
+  "integrations/uptimerobot": "integrations/uptime/uptimerobot",
+  "integrations/pingdom": "integrations/uptime/pingdom",
+  "integrations/better-uptime": "integrations/uptime/better-uptime",
+  "integrations/uptime-kuma": "integrations/uptime/uptime-kuma",
+  "integrations/splunk-oncall": "integrations/logs-events/splunk-oncall",
+  "integrations/github": "integrations/ci-cd/github",
+  "integrations/bitbucket": "integrations/ci-cd/bitbucket",
+  "integrations/slack": "integrations/communication/slack",
+  "integrations/slack-oauth-setup": "integrations/communication/slack-oauth-setup",
+  "integrations/webhooks": "integrations/custom/webhooks",
+  "integrations/monitoring/datadog": "integrations/apm-monitoring/datadog",
+  "integrations/monitoring/prometheus": "integrations/metrics-alerting/prometheus",
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ version: string; slug: string[] }>;
+}): Promise<Metadata> {
+  const { version, slug } = await params;
+  const slugKey = slug.join("/");
+  const legacyTarget = LEGACY_DOC_REDIRECTS[slugKey];
+  if (legacyTarget) {
+    return {
+      alternates: {
+        canonical: `/docs/${version}/${legacyTarget}`,
+      },
+    };
+  }
+  const doc = await getDocPage(version, slug);
+  if (!doc) {
+    return {};
+  }
+
+  const canonical =
+    doc.slug.length > 0
+      ? `/docs/${version}/${doc.slug.join("/")}`
+      : `/docs/${version}`;
+  const title = doc.title;
+  const description =
+    doc.description ||
+    `Learn ${doc.title} in the ${BRAND.name} documentation.`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "article",
+    },
+    twitter: {
+      title,
+      description,
+    },
+  };
+}
+
 export async function generateStaticParams() {
   const params = [];
   for (const version of DOC_VERSIONS) {
@@ -17,6 +94,9 @@ export async function generateStaticParams() {
       if (slug.length > 0) {
         params.push({ version: version.id, slug });
       }
+    }
+    for (const legacySlug of Object.keys(LEGACY_DOC_REDIRECTS)) {
+      params.push({ version: version.id, slug: legacySlug.split("/") });
     }
   }
   return params;
@@ -53,6 +133,11 @@ export default async function DocsPage({
   params: Promise<{ version: string; slug: string[] }>;
 }) {
   const { version, slug } = await params;
+  const slugKey = slug.join("/");
+  const legacyTarget = LEGACY_DOC_REDIRECTS[slugKey];
+  if (legacyTarget) {
+    redirect(`/docs/${version}/${legacyTarget}`);
+  }
   const doc = await getDocPage(version, slug);
   if (!doc) notFound();
 

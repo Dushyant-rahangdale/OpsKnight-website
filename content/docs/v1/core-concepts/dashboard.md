@@ -8,7 +8,7 @@ description: Command Center overview with real-time system health, smart insight
 
 The **Command Center** is your operational headquarters — a real-time executive summary of your organization's incident health. While individual incident pages focus on specific issues, the Dashboard reveals the big picture: systemic risks, workload bottlenecks, and patterns that are invisible when looking at single tickets.
 
-![Command Center Dashboard](/dashboard-command-center.png)
+![Command Center Dashboard](/dashboard-command-center-1200.jpg)
 
 ---
 
@@ -499,7 +499,7 @@ The dashboard is responsive and mobile-friendly:
 
 ## Related Topics
 
-- [Incidents](./incidents.md) — Incident management
-- [Services](./services.md) — Service directory
-- [Analytics](./analytics.md) — Detailed metrics
-- [Schedules](./schedules.md) — On-call management
+- [Incidents](./incidents) — Incident management
+- [Services](./services) — Service directory
+- [Analytics](./analytics) — Detailed metrics
+- [Schedules](./schedules) — On-call management

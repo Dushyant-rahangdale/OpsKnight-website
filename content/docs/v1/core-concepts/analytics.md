@@ -492,9 +492,9 @@ Set up alerts when metrics cross thresholds.
 
 ## Related Topics
 
-- [Incidents](./incidents.md) — Incident lifecycle and management
-- [Services](./services.md) — Service configuration
-- [Teams](./teams.md) — Team management
-- [SLA](./sla.md) — SLA configuration
-- [Postmortems](./postmortems.md) — Post-incident analysis
+- [Incidents](./incidents) — Incident lifecycle and management
+- [Services](./services) — Service configuration
+- [Teams](./teams) — Team management
+- [SLA](./sla) — SLA configuration
+- [Postmortems](./postmortems) — Post-incident analysis
 

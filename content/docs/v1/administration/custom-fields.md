@@ -355,7 +355,7 @@ Fields appear in the order defined by their `order` value:
 
 ## Related Topics
 
-- [Incidents](../core-concepts/incidents.md) — Working with incidents
-- [Analytics](../core-concepts/analytics.md) — Filtering reports by custom fields
-- [Status Page](../core-concepts/status-page.md) — Displaying custom fields publicly
+- [Incidents](../core-concepts/incidents) — Working with incidents
+- [Analytics](../core-concepts/analytics) — Filtering reports by custom fields
+- [Status Page](../core-concepts/status-page) — Displaying custom fields publicly
 

@@ -280,7 +280,7 @@ export function NewDocsSidebar({ items, version }: { items: SidebarItem[], versi
                         {/* Glow effect */}
                         <div className="absolute inset-0 bg-emerald-500/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
                         <Image
-                            src="/logo-compressed.png"
+                            src="/logo-mark.png"
                             alt="OpsKnight Logo"
                             width={32}
                             height={32}

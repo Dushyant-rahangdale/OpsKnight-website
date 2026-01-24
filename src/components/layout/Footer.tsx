@@ -50,7 +50,7 @@ export function Footer() {
                                     <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity" />
                                     <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 group-hover:border-emerald-500/30 transition-all">
                                         <Image
-                                            src="/logo-compressed.png"
+                                            src="/logo-mark.png"
                                             alt={BRAND.name}
                                             width={28}
                                             height={28}

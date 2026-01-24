@@ -489,9 +489,9 @@ Content-Type: application/json
 
 ## Related Topics
 
-- [Incidents](./incidents.md) — Incident management
-- [Teams](./teams.md) — Team ownership
-- [Escalation Policies](./escalation-policies.md) — Alert routing
-- [Integrations](./integrations.md) — Connecting monitoring tools
-- [Analytics](./analytics.md) — Service-level metrics
+- [Incidents](./incidents) — Incident management
+- [Teams](./teams) — Team ownership
+- [Escalation Policies](./escalation-policies) — Alert routing
+- [Integrations](./integrations) — Connecting monitoring tools
+- [Analytics](./analytics) — Service-level metrics
 

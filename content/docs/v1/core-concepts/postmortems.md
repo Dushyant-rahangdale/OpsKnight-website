@@ -591,8 +591,8 @@ curl -X POST "https://your-opsknight.com/api/postmortems/pm_xyz/action-items" \
 
 ## Related Topics
 
-- [Incidents](./incidents.md) — Incident lifecycle
-- [Analytics](./analytics.md) — Performance metrics
-- [Teams](./teams.md) — Team management
-- [Status Page](./status-page.md) — Public communication
+- [Incidents](./incidents) — Incident lifecycle
+- [Analytics](./analytics) — Performance metrics
+- [Teams](./teams) — Team management
+- [Status Page](./status-page) — Public communication
 

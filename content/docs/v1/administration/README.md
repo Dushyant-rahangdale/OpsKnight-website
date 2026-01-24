@@ -26,11 +26,11 @@ This section covers the administrative configuration of OpsKnight, including not
 
 | Topic | Description | Why It Matters |
 |-------|-------------|----------------|
-| [Notifications](./notifications.md) | Configure Email, SMS, Push, WhatsApp, Slack | Ensure alerts reach responders |
-| [Authentication](./authentication.md) | Local auth, SSO/OIDC, user management | Secure access control |
-| [Custom Fields](./custom-fields.md) | Add metadata fields to incidents | Track additional information |
-| [Data Retention](./data-retention.md) | Configure cleanup policies | Manage storage and compliance |
-| [Audit Logs](./audit-logs.md) | Track security-relevant events | Compliance and troubleshooting |
+| [Notifications](./notifications) | Configure Email, SMS, Push, WhatsApp, Slack | Ensure alerts reach responders |
+| [Authentication](./authentication) | Local auth, SSO/OIDC, user management | Secure access control |
+| [Custom Fields](./custom-fields) | Add metadata fields to incidents | Track additional information |
+| [Data Retention](./data-retention) | Configure cleanup policies | Manage storage and compliance |
+| [Audit Logs](./audit-logs) | Track security-relevant events | Compliance and troubleshooting |
 
 ---
 
@@ -45,7 +45,7 @@ Without notifications, OpsKnight can't alert responders. Set up at least one cha
 | Priority | Channel | Setup Guide |
 |----------|---------|-------------|
 | **Essential** | Email | [SMTP/SendGrid/Resend setup](./notifications.md#email) |
-| **Recommended** | Slack | [Slack OAuth integration](../integrations/slack.md) |
+| **Recommended** | Slack | [Slack OAuth integration](../integrations/communication/slack-oauth-setup) |
 | **For Critical Alerts** | SMS | [Twilio/AWS SNS setup](./notifications.md#sms) |
 | **For Mobile** | Push | [FCM/OneSignal setup](./notifications.md#push) |
 
@@ -56,9 +56,9 @@ Choose your authentication strategy:
 | Option | Best For | Setup |
 |--------|----------|-------|
 | **Local Auth** | Small teams, quick start | Default, no config needed |
-| **Google SSO** | Google Workspace orgs | [OIDC setup](../security/oidc-setup.md) |
-| **Microsoft Entra** | Microsoft 365 orgs | [OIDC setup](../security/oidc-setup.md) |
-| **Okta/Auth0** | Enterprise with IdP | [OIDC setup](../security/oidc-setup.md) |
+| **Google SSO** | Google Workspace orgs | [OIDC setup](../security/oidc-setup) |
+| **Microsoft Entra** | Microsoft 365 orgs | [OIDC setup](../security/oidc-setup) |
+| **Okta/Auth0** | Enterprise with IdP | [OIDC setup](../security/oidc-setup) |
 
 ### 3. Create Teams and Invite Users
 

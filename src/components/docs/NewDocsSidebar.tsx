@@ -36,6 +36,7 @@ import { DocsVersionSwitcher } from "@/components/docs/DocsVersionSwitcher"
 import { DocsSearch } from "@/components/docs/DocsSearch"
 import { cn } from "@/lib/utils"
 import { BRAND } from "@/lib/brand"
+import type { DocsVersion } from "@/lib/docs/types"
 
 // Section configuration with icons and colors
 const SECTION_CONFIG: Record<string, {
@@ -267,7 +268,15 @@ function renderSidebarItems(items: SidebarItem[], pathname: string, activePath: 
     })
 }
 
-export function NewDocsSidebar({ items, version }: { items: SidebarItem[], version: string }) {
+export function NewDocsSidebar({
+    items,
+    version,
+    versions,
+}: {
+    items: SidebarItem[];
+    version: string;
+    versions: DocsVersion[];
+}) {
     const pathname = usePathname()
     const activePath = pathname?.split("#")[0] ?? ""
 
@@ -295,7 +304,7 @@ export function NewDocsSidebar({ items, version }: { items: SidebarItem[], versi
 
                 {/* Version Switcher */}
                 <div className="mt-4 px-2">
-                    <DocsVersionSwitcher currentVersion={version} />
+                    <DocsVersionSwitcher currentVersion={version} versions={versions} />
                 </div>
 
                 {/* Search - Mobile Only */}

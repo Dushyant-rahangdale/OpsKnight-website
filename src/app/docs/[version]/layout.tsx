@@ -20,7 +20,7 @@ export default async function DocsLayout({
 
   return (
     <SidebarProvider defaultOpen>
-      <NewDocsSidebar items={sidebar} version={version} />
+      <NewDocsSidebar items={sidebar} version={version} versions={DOC_VERSIONS} />
       <SidebarInset className="bg-slate-950 min-h-screen">
         {/* Header */}
         <header className="flex h-14 shrink-0 items-center gap-3 border-b border-white/5 px-4 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-10">

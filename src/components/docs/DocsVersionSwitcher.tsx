@@ -3,9 +3,15 @@
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Check, Tag, Sparkles } from "lucide-react";
-import { DOC_VERSIONS } from "@/lib/docs/versions";
+import type { DocsVersion } from "@/lib/docs/types";
 
-export function DocsVersionSwitcher({ currentVersion }: { currentVersion: string }) {
+export function DocsVersionSwitcher({
+  currentVersion,
+  versions,
+}: {
+  currentVersion: string;
+  versions: DocsVersion[];
+}) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -39,9 +45,8 @@ export function DocsVersionSwitcher({ currentVersion }: { currentVersion: string
     setIsOpen(false);
   };
 
-  const isLatest = (versionId: string) => {
-    return DOC_VERSIONS[0]?.id === versionId;
-  };
+  const latestVersionId = versions[0]?.id;
+  const isLatest = (versionId: string) => latestVersionId === versionId;
 
   return (
     <div ref={dropdownRef} className="relative">
@@ -79,7 +84,7 @@ export function DocsVersionSwitcher({ currentVersion }: { currentVersion: string
           </div>
 
           <div className="border-t border-white/5">
-            {DOC_VERSIONS.map((version, index) => {
+            {versions.map((version, index) => {
               const isSelected = version.id === currentVersion;
               const isLatestVersion = index === 0;
 

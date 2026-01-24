@@ -6,6 +6,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
+import type { Node } from "unist";
 import { visit } from "unist-util-visit";
 
 type RenderOptions = {
@@ -16,7 +17,7 @@ function rehypeDocImagePaths(options: RenderOptions) {
   const basePath = options.imageBasePath?.replace(/\/$/, "");
   if (!basePath) return () => {};
   return (tree: unknown) => {
-    visit(tree as any, "element", (node: { tagName?: string; properties?: Record<string, unknown> }) => {
+    visit(tree as Node, "element", (node: { tagName?: string; properties?: Record<string, unknown> }) => {
       if (node.tagName !== "img") return;
       const src = node.properties?.src;
       if (typeof src !== "string") return;

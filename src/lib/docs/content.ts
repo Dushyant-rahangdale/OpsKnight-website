@@ -76,7 +76,7 @@ export async function getDocPage(version: string, slugParts: string[]) {
   const filePath = getDocFilePath(version, slugParts);
   if (!filePath) return null;
   const { title, description, content } = readMarkdownFile(filePath);
-  const html = await renderMarkdown(content);
+  const html = await renderMarkdown(content, { imageBasePath: `/docs/${version}` });
   const headings = extractHeadings(content);
   return {
     title,

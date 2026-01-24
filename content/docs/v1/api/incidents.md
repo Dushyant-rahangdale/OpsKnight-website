@@ -845,8 +845,8 @@ For large result sets:
 
 ## Related Topics
 
-- [Events API](./events.md) — Alert-driven incident creation
-- [Incidents](../core-concepts/incidents.md) — Incident lifecycle
-- [Services](../core-concepts/services.md) — Service configuration
-- [Escalation Policies](../core-concepts/escalation-policies.md) — Notification routing
+- [Events API](./events) — Alert-driven incident creation
+- [Incidents](../core-concepts/incidents) — Incident lifecycle
+- [Services](../core-concepts/services) — Service configuration
+- [Escalation Policies](../core-concepts/escalation-policies) — Notification routing
 

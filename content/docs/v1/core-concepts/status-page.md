@@ -516,7 +516,7 @@ Use consistent phases in updates:
 
 ## Related Topics
 
-- [Services](./services.md) — Service configuration
-- [Incidents](./incidents.md) — Incident management
-- [Postmortems](./postmortems.md) — Post-incident reviews
-- [Notifications](../administration/notifications.md) — Email configuration
+- [Services](./services) — Service configuration
+- [Incidents](./incidents) — Incident management
+- [Postmortems](./postmortems) — Post-incident reviews
+- [Notifications](../administration/notifications) — Email configuration

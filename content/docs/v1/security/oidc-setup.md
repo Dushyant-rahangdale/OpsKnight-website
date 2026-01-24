@@ -270,7 +270,7 @@ Ensure your IdP is configured to include the `email` claim in tokens. Some provi
 
 ## Related Topics
 
-- [Authentication](../administration/authentication.md) — All authentication methods
-- [Users](../core-concepts/users.md) — User management
-- [Security Overview](./README.md) — Security best practices
+- [Authentication](../administration/authentication) — All authentication methods
+- [Users](../core-concepts/users) — User management
+- [Security Overview](./README) — Security best practices
 

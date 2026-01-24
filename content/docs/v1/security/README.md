@@ -10,10 +10,10 @@ Identity, encryption, and secure operations for OpsKnight.
 
 | Guide                          | Description                         |
 | ------------------------------ | ----------------------------------- |
-| [OIDC SSO Setup](./oidc-setup.md) | Configure single sign-on providers |
-| [Encryption](./encryption.md)  | Secrets handling and key rotation   |
+| [OIDC SSO Setup](./oidc-setup) | Configure single sign-on providers |
+| [Encryption](./encryption)  | Secrets handling and key rotation   |
 
 ## Related Administration Topics
 
-- [Authentication](../administration/authentication.md) - Admin access controls
-- [Audit Logs](../administration/audit-logs.md) - Security event tracking
+- [Authentication](../administration/authentication) - Admin access controls
+- [Audit Logs](../administration/audit-logs) - Security event tracking

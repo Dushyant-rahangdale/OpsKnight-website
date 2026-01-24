@@ -112,7 +112,6 @@ export function getAllDocSlugs(version: string) {
 }
 
 export function getAllDocMeta(version: string): DocMeta[] {
-  const root = getVersionRoot(version);
   const slugs = getAllDocSlugs(version);
   return slugs.map(slugParts => {
     const filePath = getDocFilePath(version, slugParts);

@@ -58,7 +58,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
 
                 {/* Quote */}
                 <blockquote className="text-lg text-slate-300 leading-relaxed mb-8 flex-grow">
-                    "{testimonial.quote}"
+                    &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
 
                 {/* Author */}

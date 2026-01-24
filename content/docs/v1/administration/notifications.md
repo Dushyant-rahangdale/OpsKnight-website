@@ -275,7 +275,7 @@ Slack provides rich, interactive notifications with buttons for quick actions.
 
 ### Setup
 
-Full setup guide: [Slack OAuth Setup](../integrations/slack-oauth-setup)
+Full setup guide: [Slack OAuth Setup](../integrations/communication/slack-oauth-setup)
 
 Quick overview:
 1. Go to **Settings** → **Integrations** → **Slack**
@@ -460,6 +460,6 @@ OpsKnight tracks delivery status for all notifications:
 
 ## Related Topics
 
-- [Slack Integration](../integrations/slack) — Full Slack setup
+- [Slack Integration](../integrations/communication/slack) — Full Slack setup
 - [User Management](../core-concepts/users) — User notification preferences
 - [Escalation Policies](../core-concepts/escalation-policies) — Channel routing

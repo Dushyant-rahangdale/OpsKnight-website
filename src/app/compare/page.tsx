@@ -16,7 +16,7 @@ import {
     X,
 } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { BRAND } from "@/lib/brand";
 
 type CellValue = boolean | string;
@@ -39,10 +39,6 @@ type ComparisonSection = {
     description: string;
     rows: ComparisonRow[];
 };
-
-type ScoreRow = {
-    dimension: string;
-} & Record<VendorKey, number>;
 
 type StatCard = {
     label: string;
@@ -384,10 +380,7 @@ export default function ComparePage() {
 
     const calculateCost = (price: number) => price * teamSize * 12;
 
-    const annualSavings = useMemo(
-        () => calculateCost(vendors.pagerduty.price),
-        [teamSize]
-    );
+    const annualSavings = calculateCost(vendors.pagerduty.price);
 
     const costCards = vendorOrder.map((key) => {
         const vendor = vendors[key];

@@ -50,4 +50,4 @@ Authentication events are recorded in audit logs for compliance and investigatio
 ## Related Docs
 
 - [Security](../security/)
-- [Authentication](../administration/authentication.md)
+- [Authentication](../administration/authentication)

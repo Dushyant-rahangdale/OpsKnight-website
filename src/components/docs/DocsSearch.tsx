@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, Command, FileText, Hash, ArrowRight, CornerDownLeft } from "lucide-react";
+import { Search, FileText, CornerDownLeft } from "lucide-react";
 import Fuse from "fuse.js";
 import { cn } from "@/lib/utils";
 
@@ -265,7 +265,7 @@ export function DocsSearch({ version, className }: { version: string, className?
           ) : query && !isLoading ? (
             <div className="px-4 py-8 text-center text-slate-400">
               <Search className="w-8 h-8 mx-auto mb-3 text-slate-600 opacity-50" />
-              <p className="text-sm">No results found for <span className="text-white">"{query}"</span></p>
+              <p className="text-sm">No results found for <span className="text-white">&quot;{query}&quot;</span></p>
               <p className="text-xs text-slate-500 mt-1">Try searching for something else.</p>
             </div>
           ) : null}

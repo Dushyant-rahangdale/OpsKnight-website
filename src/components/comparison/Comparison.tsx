@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, X, Minus, Sparkles } from "lucide-react";
+import { Check, X, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 

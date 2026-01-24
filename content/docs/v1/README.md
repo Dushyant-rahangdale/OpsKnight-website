@@ -144,7 +144,7 @@ docker compose up -d
 
 Access OpsKnight at **http://localhost:3000** — you'll be directed to the `/setup` page to create your admin account. Enter your name and email, then save the generated password securely (it's shown only once).
 
-**Next**: Follow the [First Steps Guide](./getting-started/first-steps.md) to create your first service and incident.
+**Next**: Follow the [First Steps Guide](./getting-started/first-steps) to create your first service and incident.
 
 ---
 
@@ -204,12 +204,12 @@ OpsKnight is built on modern, battle-tested technologies:
 
 ## What's Next?
 
-1. **[Install OpsKnight](./getting-started/installation.md)** — Get a running instance
-2. **[Complete First Steps](./getting-started/first-steps.md)** — Create your first incident
+1. **[Install OpsKnight](./getting-started/installation)** — Get a running instance
+2. **[Complete First Steps](./getting-started/first-steps)** — Create your first incident
 3. **[Understand Core Concepts](./core-concepts/)** — Learn how everything works
 4. **[Connect Integrations](./integrations/)** — Route alerts from your stack
-5. **[Configure Notifications](./administration/notifications.md)** — Set up alert channels
+5. **[Configure Notifications](./administration/notifications)** — Set up alert channels
 
 ---
 
-**Ready to eliminate alert chaos?** Let's get started with the [Installation Guide](./getting-started/installation.md).
+**Ready to eliminate alert chaos?** Let's get started with the [Installation Guide](./getting-started/installation).

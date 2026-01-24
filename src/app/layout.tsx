@@ -1,9 +1,41 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Manrope, JetBrains_Mono } from "next/font/google"; // [MODIFIED]
 import "./globals.css";
 import { BRAND } from "@/lib/brand";
 import { ConditionalNavbar } from "@/components/layout/ConditionalNavbar";
 import { ConditionalFooter } from "@/components/layout/ConditionalFooter";
+
+const baseUrl = `https://${BRAND.domain}`;
+const mergedKeywords = Array.from(
+  new Set([...(BRAND.keywords || []), ...(BRAND.seo.keywords || [])])
+);
+const twitterHandle =
+  BRAND.links.twitter?.includes("twitter.com/")
+    ? `@${BRAND.links.twitter.split("twitter.com/")[1]?.replace(/\/.*/, "")}`
+    : undefined;
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: BRAND.name,
+    url: baseUrl,
+    logo: `${baseUrl}${BRAND.assets.logo}`,
+    sameAs: [BRAND.links.github, BRAND.links.twitter].filter(Boolean),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: BRAND.name,
+    url: baseUrl,
+    description: BRAND.seo.description,
+    publisher: {
+      "@type": "Organization",
+      name: BRAND.name,
+    },
+  },
+];
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -18,13 +50,25 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   // ... (unchanged)
-  title: 'OpsKnight | Incident Management',
-  description: BRAND.description,
-  keywords: [...BRAND.keywords],
+  title: {
+    default: BRAND.seo.title,
+    template: `%s | ${BRAND.name}`,
+  },
+  description: BRAND.seo.description,
+  keywords: mergedKeywords,
+  applicationName: BRAND.name,
+  creator: BRAND.authors?.[0]?.name,
+  publisher: BRAND.name,
+  authors: BRAND.authors ? BRAND.authors.map(author => ({ ...author })) : undefined,
+  category: "Technology",
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: 'OpsKnight | Incident Management',
-    description: BRAND.description,
-    url: `https://${BRAND.domain}`,
+    title: BRAND.seo.title,
+    description: BRAND.seo.description,
+    url: baseUrl,
     siteName: BRAND.name,
     images: [
       {
@@ -38,9 +82,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: 'OpsKnight | Incident Management',
-    description: BRAND.description,
+    title: BRAND.seo.title,
+    description: BRAND.seo.description,
     images: [BRAND.assets.banner],
+    site: twitterHandle,
+    creator: twitterHandle,
   },
   icons: {
     icon: [
@@ -49,7 +95,7 @@ export const metadata: Metadata = {
     ],
     apple: '/logo.png', // Fallback to logo.png as explicit apple icon might be missing
   },
-  metadataBase: new URL(`https://${BRAND.domain}`),
+  metadataBase: new URL(baseUrl),
 };
 
 export default function RootLayout({
@@ -63,6 +109,11 @@ export default function RootLayout({
         className={`${manrope.variable} ${jetBrainsMono.variable} antialiased bg-background text-foreground`}
         suppressHydrationWarning
       >
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <ConditionalNavbar />
         <main>{children}</main>
         <ConditionalFooter />

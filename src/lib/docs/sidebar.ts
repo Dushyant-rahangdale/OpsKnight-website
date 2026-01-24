@@ -88,7 +88,11 @@ function buildTree(dirPath: string, baseHref: string[], version: string): Sideba
     return a.title.localeCompare(b.title);
   });
 
-  return items.map(({ order, ...item }) => item);
+  return items.map(item => {
+    const { order, ...rest } = item;
+    void order;
+    return rest;
+  });
 }
 
 export function getSidebar(version: string): SidebarItem[] {

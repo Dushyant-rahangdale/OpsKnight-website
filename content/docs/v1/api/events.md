@@ -454,7 +454,7 @@ When a new incident is triggered:
 
 ## Related Topics
 
-- [Incidents API](./incidents.md) — Direct incident management
-- [Integrations](../integrations/README.md) — Integration configuration
-- [Services](../core-concepts/services.md) — Service setup
+- [Incidents API](./incidents) — Direct incident management
+- [Integrations](../integrations/README) — Integration configuration
+- [Services](../core-concepts/services) — Service setup
 

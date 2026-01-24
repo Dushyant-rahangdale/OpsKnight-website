@@ -250,8 +250,8 @@ When investigating an issue:
 
 ## Related Topics
 
-- [Authentication](./authentication.md) — Login and session management
-- [Users](../core-concepts/users.md) — User management
-- [Security Overview](../security/README.md) — Security best practices
-- [Data Retention](./data-retention.md) — Retention policies
+- [Authentication](./authentication) — Login and session management
+- [Users](../core-concepts/users) — User management
+- [Security Overview](../security/README) — Security best practices
+- [Data Retention](./data-retention) — Retention policies
 

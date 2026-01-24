@@ -161,7 +161,7 @@ https://YOUR_OPSKNIGHT_URL/api/auth/callback/oidc
 
 ### Provider-Specific Guides
 
-See [OIDC SSO Setup](../security/oidc-setup.md) for detailed guides on:
+See [OIDC SSO Setup](../security/oidc-setup) for detailed guides on:
 - Google Workspace
 - Microsoft Entra ID (Azure AD)
 - Okta
@@ -494,8 +494,8 @@ Using both local and SSO authentication simultaneously.
 
 ## Related Topics
 
-- [OIDC SSO Setup](../security/oidc-setup.md) — Provider-specific guides
-- [Users](../core-concepts/users.md) — User management
-- [Audit Logs](./audit-logs.md) — Authentication event logging
-- [Security Overview](../security/README.md) — Security best practices
+- [OIDC SSO Setup](../security/oidc-setup) — Provider-specific guides
+- [Users](../core-concepts/users) — User management
+- [Audit Logs](./audit-logs) — Authentication event logging
+- [Security Overview](../security/README) — Security best practices
 

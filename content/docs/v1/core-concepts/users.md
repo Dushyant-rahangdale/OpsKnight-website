@@ -277,15 +277,15 @@ When someone leaves or no longer needs access:
 
 ## Related Topics
 
-- [Teams](./teams.md) — Team membership and roles
-- [Schedules](./schedules.md) — On-call rotation management
-- [Notifications](../administration/notifications.md) — Notification channel configuration
+- [Teams](./teams) — Team membership and roles
+- [Schedules](./schedules) — On-call rotation management
+- [Notifications](../administration/notifications) — Notification channel configuration
 
 ---
 
 ## Related Topics
 
-- [Teams](./teams.md) — Team membership and roles
-- [Schedules](./schedules.md) — On-call rotation management
-- [Notifications](../administration/notifications.md) — Notification channel configuration
-- [Authentication](../administration/authentication.md) — SSO and security settings
+- [Teams](./teams) — Team membership and roles
+- [Schedules](./schedules) — On-call rotation management
+- [Notifications](../administration/notifications) — Notification channel configuration
+- [Authentication](../administration/authentication) — SSO and security settings

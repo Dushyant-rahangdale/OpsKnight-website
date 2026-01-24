@@ -66,17 +66,18 @@ OpsKnight is built around a simple but powerful model: **Alerts become Incidents
 
 | Concept | What It Is | Why It Matters |
 |---------|-----------|----------------|
-| [Dashboard](./dashboard.md) | Command center for real-time visibility | See the forest, not just the trees |
-| [Services](./services.md) | Systems you monitor with ownership | Alerts need context and routing |
-| [Incidents](./incidents.md) | Actionable work items from alerts | Track resolution from trigger to close |
-| [Escalation Policies](./escalation-policies.md) | Who gets notified and when | Ensure issues never fall through cracks |
-| [Schedules](./schedules.md) | On-call rotations and shifts | Fair distribution of on-call duty |
-| [Teams](./teams.md) | User groups with shared responsibility | Organize people and permissions |
-| [Users](./users.md) | Individuals with roles and preferences | Authentication and personalization |
-| [Analytics](./analytics.md) | Metrics, SLAs, and trends | Measure and improve performance |
-| [Postmortems](./postmortems.md) | Incident retrospectives | Learn from failures |
-| [Status Pages](./status-page.md) | Public service health communication | Transparency with customers |
-| [Integrations](./integrations.md) | Connections to monitoring tools | Route alerts from your stack |
+| [Dashboard](./dashboard) | Command center for real-time visibility | See the forest, not just the trees |
+| [Services](./services) | Systems you monitor with ownership | Alerts need context and routing |
+| [Incidents](./incidents) | Actionable work items from alerts | Track resolution from trigger to close |
+| [Escalation Policies](./escalation-policies) | Who gets notified and when | Ensure issues never fall through cracks |
+| [Schedules](./schedules) | On-call rotations and shifts | Fair distribution of on-call duty |
+| [Teams](./teams) | User groups with shared responsibility | Organize people and permissions |
+| [Users](./users) | Individuals with roles and preferences | Authentication and personalization |
+| [Analytics](./analytics) | Metrics, SLAs, and trends | Measure and improve performance |
+| [Postmortems](./postmortems) | Incident retrospectives | Learn from failures |
+| [Status Pages](./status-page) | Public service health communication | Transparency with customers |
+| [Integrations](./integrations) | Connections to monitoring tools | Route alerts from your stack |
+| [Scalability](./scalability) | Capacity targets and tuning | Understand scale limits and optimizations |
 
 ---
 
@@ -133,13 +134,13 @@ Service ──────────────────┐
 
 If you're new to OpsKnight, we recommend reading the concepts in this order:
 
-1. **[Services](./services.md)** — Start here to understand the foundation
-2. **[Incidents](./incidents.md)** — Learn the core workflow
-3. **[Escalation Policies](./escalation-policies.md)** — Understand notification routing
-4. **[Schedules](./schedules.md)** — Configure on-call rotations
-5. **[Teams](./teams.md)** — Organize your responders
-6. **[Dashboard](./dashboard.md)** — Master the command center
-7. **[Analytics](./analytics.md)** — Track and improve performance
+1. **[Services](./services)** — Start here to understand the foundation
+2. **[Incidents](./incidents)** — Learn the core workflow
+3. **[Escalation Policies](./escalation-policies)** — Understand notification routing
+4. **[Schedules](./schedules)** — Configure on-call rotations
+5. **[Teams](./teams)** — Organize your responders
+6. **[Dashboard](./dashboard)** — Master the command center
+7. **[Analytics](./analytics)** — Track and improve performance
 
 ---
 
@@ -157,13 +158,14 @@ If you're new to OpsKnight, we recommend reading the concepts in this order:
 
 ### For Operations Teams
 - [SLA Configuration](./analytics.md#sla-tracking) — Set response time targets
-- [Custom Fields](../administration/custom-fields.md) — Track additional metadata
-- [Integrations](./integrations.md) — Connect your monitoring stack
+- [Custom Fields](../administration/custom-fields) — Track additional metadata
+- [Integrations](./integrations) — Connect your monitoring stack
 
 ### For Leadership
 - [Analytics Dashboard](./analytics.md#dashboard) — Executive metrics
-- [Status Pages](./status-page.md) — Customer communication
-- [Postmortems](./postmortems.md) — Organizational learning
+- [Status Pages](./status-page) — Customer communication
+- [Postmortems](./postmortems) — Organizational learning
+- [Scalability](./scalability) — Capacity planning and growth readiness
 
 ---
 
@@ -206,7 +208,7 @@ For global teams:
 
 Choose your path:
 
-- **New to incident management?** Start with [Services](./services.md)
-- **Setting up on-call?** Jump to [Schedules](./schedules.md)
-- **Connecting tools?** See [Integrations](./integrations.md)
-- **Measuring performance?** Explore [Analytics](./analytics.md)
+- **New to incident management?** Start with [Services](./services)
+- **Setting up on-call?** Jump to [Schedules](./schedules)
+- **Connecting tools?** See [Integrations](./integrations)
+- **Measuring performance?** Explore [Analytics](./analytics)

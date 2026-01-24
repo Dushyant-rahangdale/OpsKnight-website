@@ -321,7 +321,7 @@ Incidents can be assigned to teams (not just individual users):
 
 ## Related Topics
 
-- [Users](./users.md) — User management and roles
-- [Services](./services.md) — Service configuration
-- [Escalation Policies](./escalation-policies.md) — Notification routing
-- [Schedules](./schedules.md) — On-call rotations
+- [Users](./users) — User management and roles
+- [Services](./services) — Service configuration
+- [Escalation Policies](./escalation-policies) — Notification routing
+- [Schedules](./schedules) — On-call rotations

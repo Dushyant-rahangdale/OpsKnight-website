@@ -69,7 +69,7 @@ Configure via **Settings → Notifications** in the UI, or set variables:
 | ---------------- | -------------------------------------------- |
 | `ENCRYPTION_KEY` | Key for encrypting integration secrets       |
 
-See [Encryption](../security/encryption.md) for key rotation guidance.
+See [Encryption](../security/encryption) for key rotation guidance.
 
 ## Example `.env`
 

@@ -444,8 +444,8 @@ Policy: "Global Support"
 
 ## Related Topics
 
-- [Schedules](./schedules.md) — On-call rotation configuration
-- [Teams](./teams.md) — Team management
-- [Services](./services.md) — Service configuration
-- [Notifications](../administration/notifications.md) — Channel setup
-- [Incidents](./incidents.md) — Incident lifecycle
+- [Schedules](./schedules) — On-call rotation configuration
+- [Teams](./teams) — Team management
+- [Services](./services) — Service configuration
+- [Notifications](../administration/notifications) — Channel setup
+- [Incidents](./incidents) — Incident lifecycle

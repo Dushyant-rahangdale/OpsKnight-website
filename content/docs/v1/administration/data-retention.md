@@ -307,6 +307,6 @@ The `realTimeWindowDays` setting affects analytics performance:
 
 ## Related Topics
 
-- [Audit Logs](./audit-logs.md) — Audit log retention
-- [Analytics](../core-concepts/analytics.md) — Historical data analysis
+- [Audit Logs](./audit-logs) — Audit log retention
+- [Analytics](../core-concepts/analytics) — Historical data analysis
 

@@ -706,8 +706,8 @@ Users enable push notifications via:
 
 ## Related Topics
 
-- [Services](./services.md) — Service configuration
-- [Escalation Policies](./escalation-policies.md) — Notification routing
-- [Events API](../api/events.md) — API documentation
-- [Notifications](../administration/notifications.md) — Channel setup
-- [Slack Integration](../integrations/slack.md) — Detailed Slack setup
+- [Services](./services) — Service configuration
+- [Escalation Policies](./escalation-policies) — Notification routing
+- [Events API](../api/events) — API documentation
+- [Notifications](../administration/notifications) — Channel setup
+- [Slack Integration](../integrations/communication/slack) — Detailed Slack setup

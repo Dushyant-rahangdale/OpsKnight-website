@@ -13,11 +13,9 @@ export async function renderMarkdown(markdown: string) {
     .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypeSlug)
-    // @ts-ignore
     .use(rehypeAutolinkHeadings, { behavior: "wrap" })
-    // @ts-ignore
     .use(rehypeHighlight)
-    // @ts-ignore
+    // @ts-expect-error rehype typings don't align with unified's overloaded use signature
     .use(rehypeStringify)
     .process(markdown);
 

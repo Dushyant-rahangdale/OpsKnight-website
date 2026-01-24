@@ -32,10 +32,10 @@ export const BRAND = {
 
     // Assets
     assets: {
-        logo: "/logo-compressed.png",
+        logo: "/logo-mark.png",
         logoSvg: "/logo.svg",
         banner: "/banner.png",
-        dashboard: "/dashboard-command-center.png",
+        dashboard: "/dashboard-command-center-1200.jpg",
     },
 
     // SEO

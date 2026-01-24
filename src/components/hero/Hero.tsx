@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Github, ArrowRight, Activity, Shield, Zap, Bell, Clock, CheckCircle, Star, Users, Code2 } from "lucide-react";
+import { ArrowRight, Activity, Shield, Zap, Clock, Code2 } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
 import { BRAND } from "@/lib/brand";
 
@@ -109,7 +109,7 @@ export function Hero() {
 
                         {/* Main Headline */}
                         <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1, duration: 0.5 }}
                             className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-6 drop-shadow-lg"
@@ -128,7 +128,7 @@ export function Hero() {
 
                         {/* Subtitle */}
                         <motion.p
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.5 }}
                             className="text-base md:text-lg text-slate-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
@@ -261,7 +261,7 @@ export function Hero() {
                                     src={BRAND.assets.dashboard}
                                     alt="OpsKnight Command Center Dashboard"
                                     width={1200}
-                                    height={675}
+                                    height={626}
                                     priority
                                     className="w-full h-auto opacity-95 transition-opacity duration-700 hover:opacity-100"
                                 />

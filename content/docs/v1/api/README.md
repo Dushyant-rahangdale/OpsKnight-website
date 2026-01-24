@@ -14,8 +14,8 @@ The OpsKnight API lets you programmatically manage incidents, integrate monitori
 
 | Endpoint | Description | Common Use Cases |
 |----------|-------------|------------------|
-| [Events API](./events.md) | Trigger, acknowledge, resolve incidents | Monitoring integrations |
-| [Incidents API](./incidents.md) | List, create, update incidents | Custom dashboards, automation |
+| [Events API](./events) | Trigger, acknowledge, resolve incidents | Monitoring integrations |
+| [Incidents API](./incidents) | List, create, update incidents | Custom dashboards, automation |
 | Services API | Manage services | Service catalog automation |
 | Schedules API | Query on-call schedules | Who's on-call integrations |
 | Users API | Manage users | User provisioning |
@@ -362,7 +362,7 @@ curl -X GET "https://opsknight.yourco.com/api/schedules/sch_abc123/on-call" \
 
 ### Official Tools
 
-- **CLI Tool**: [CLI Documentation](./cli.md)
+- **CLI Tool**: [CLI Documentation](./cli)
 
 ### Community Tools
 
@@ -435,7 +435,7 @@ Verify by computing HMAC of the raw request body using your webhook secret.
 
 ## Need Help?
 
-- Check the [CLI Tool](./cli.md) for command-line access
-- See [Events API](./events.md) for alert integration
-- See [Incidents API](./incidents.md) for incident management
+- Check the [CLI Tool](./cli) for command-line access
+- See [Events API](./events) for alert integration
+- See [Incidents API](./incidents) for incident management
 - Report issues on [GitHub](https://github.com/dushyant-rahangdale/opsknight/issues)

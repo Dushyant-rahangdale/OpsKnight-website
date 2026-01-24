@@ -382,6 +382,6 @@ Schedules become useful when connected to escalation policies:
 
 ## Related Topics
 
-- [Escalation Policies](./escalation-policies.md) — Connect schedules to notification routing
-- [Teams](./teams.md) — Organize users who participate in schedules
-- [Notifications](../administration/notifications.md) — Configure how on-call users are alerted
+- [Escalation Policies](./escalation-policies) — Connect schedules to notification routing
+- [Teams](./teams) — Organize users who participate in schedules
+- [Notifications](../administration/notifications) — Configure how on-call users are alerted

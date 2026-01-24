@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Github, Terminal, Copy, ArrowRight } from "lucide-react";
+import { Github, ArrowRight } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
 export function CTA() {

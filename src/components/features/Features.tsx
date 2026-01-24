@@ -13,7 +13,6 @@ import {
     List,
     Plug,
     Package,
-    ChevronRight,
     Zap,
 } from "lucide-react";
 

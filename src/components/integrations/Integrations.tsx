@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { CheckCircle2, Plug, Route, ShieldCheck, Sparkles } from "lucide-react";
 import { integrationIcons, IntegrationKey } from "../icons/IntegrationIcons";
 import { BRAND } from "@/lib/brand";
 
@@ -35,6 +37,45 @@ const destinations: { name: string; key: IntegrationKey; category: string }[] = 
     { name: "SMS", key: "sms", category: "Notification" },
     { name: "Push Notifications", key: "push", category: "Notification" },
     { name: "Webhook", key: "webhook", category: "Custom" },
+];
+
+const integrationPillars = [
+    {
+        title: "Inbound alerts",
+        description: "Normalize signals from monitoring, logs, and APM tools into a single incident stream.",
+        icon: Plug,
+        color: "from-emerald-500/20 to-emerald-500/0",
+    },
+    {
+        title: "Policy-based routing",
+        description: "Route alerts to services, teams, and escalations with dedupe and enrichment.",
+        icon: Route,
+        color: "from-cyan-500/20 to-cyan-500/0",
+    },
+    {
+        title: "Enterprise control",
+        description: "Self-hosted delivery with auditability, rate limits, and secure webhooks.",
+        icon: ShieldCheck,
+        color: "from-amber-500/20 to-amber-500/0",
+    },
+];
+
+const integrationStats = [
+    {
+        label: "Inbound sources",
+        value: sources.length,
+        suffix: "+",
+    },
+    {
+        label: "Routing channels",
+        value: destinations.length,
+        suffix: "",
+    },
+    {
+        label: "Total endpoints",
+        value: sources.length + destinations.length,
+        suffix: "+",
+    },
 ];
 
 function IntegrationItem({
@@ -125,19 +166,58 @@ export function Integrations() {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900/30 via-slate-950 to-slate-950 pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="text-center mb-20">
-                    <h2 className="text-3xl font-bold text-white mb-4">
-                        Connect your stack
+                <div className="text-center mb-16">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold mb-4">
+                        <Sparkles className="w-3 h-3" />
+                        Integration ecosystem
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Integrations built for enterprise reliability
                     </h2>
-                    <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-                        {BRAND.name} acts as the central nervous system for your reliability stack.
+                    <p className="text-slate-400 max-w-3xl mx-auto text-lg">
+                        {BRAND.name} connects monitoring, logging, and on-call channels into one operational command center.
+                        Standardize incoming signals, enforce routing policies, and deliver alerts without data lock-in.
                     </p>
+                </div>
+
+                <div className="grid gap-6 md:grid-cols-3 mb-12">
+                    {integrationPillars.map((pillar) => (
+                        <div key={pillar.title} className="relative rounded-2xl border border-white/10 bg-slate-900/60 p-6">
+                            <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${pillar.color} pointer-events-none`} />
+                            <div className="relative">
+                                <pillar.icon className="w-6 h-6 text-white/80 mb-4" />
+                                <h3 className="text-lg font-semibold text-white mb-2">{pillar.title}</h3>
+                                <p className="text-sm text-slate-300">{pillar.description}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
+                    {integrationStats.map((stat) => (
+                        <div
+                            key={stat.label}
+                            className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-slate-200"
+                        >
+                            <span className="text-emerald-300 font-semibold">
+                                {stat.value.toLocaleString()}{stat.suffix}
+                            </span>
+                            <span className="text-slate-400">{stat.label}</span>
+                        </div>
+                    ))}
                 </div>
 
                 <div className="grid md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-16 items-center">
 
                     {/* Sources (Left) - Compact Grid */}
                     <div className="relative">
+                        <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-2 text-sm text-slate-300">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                                Inbound sources
+                            </div>
+                            <span className="text-xs text-slate-500">{sources.length}+ providers</span>
+                        </div>
                         <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-slate-900/20 border border-white/5 relative z-10 backdrop-blur-sm">
                             {sources.map((item, index) => (
                                 <motion.div
@@ -192,6 +272,13 @@ export function Integrations() {
 
                     {/* Destinations (Right) - Vertical List */}
                     <div className="flex flex-col gap-4 relative">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-sm text-slate-300">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                                Routing channels
+                            </div>
+                            <span className="text-xs text-slate-500">{destinations.length} channels</span>
+                        </div>
                         {destinations.map((item, index) => (
                             <div key={item.key} className="relative">
                                 <IntegrationItem item={item} index={index} align="right" />
@@ -201,15 +288,17 @@ export function Integrations() {
                     </div>
                 </div>
 
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 1 }}
-                    className="text-center text-slate-500 text-sm mt-16"
-                >
-                    ...and we are continuously adding more.
-                </motion.p>
+                <div className="mt-16 flex flex-col items-center gap-4 text-center">
+                    <p className="text-slate-500 text-sm">
+                        More integrations ship every release, and custom webhooks let you connect anything.
+                    </p>
+                    <Link
+                        href="/docs/v1/integrations"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20 transition-colors"
+                    >
+                        View integration docs
+                    </Link>
+                </div>
             </div>
         </section>
     );

@@ -1,9 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDocPage } from "@/lib/docs/content";
 import { getSidebar } from "@/lib/docs/sidebar";
 import { DocsToc } from "@/components/docs/DocsToc";
 import { DOC_VERSIONS } from "@/lib/docs/versions";
+import { BRAND } from "@/lib/brand";
 import {
   Rocket,
   Lightbulb,
@@ -21,6 +23,36 @@ import {
 
 export const dynamicParams = false;
 export const dynamic = "force-static";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ version: string }>;
+}): Promise<Metadata> {
+  const { version } = await params;
+  const doc = await getDocPage(version, []);
+  const title = `Docs (${version})`;
+  const description =
+    doc?.description ||
+    `Documentation for ${BRAND.name} ${version}, including setup guides, integrations, and API references.`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/docs/${version}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/docs/${version}`,
+    },
+    twitter: {
+      title,
+      description,
+    },
+  };
+}
 
 export async function generateStaticParams() {
   return DOC_VERSIONS.map((v) => ({ version: v.id }));

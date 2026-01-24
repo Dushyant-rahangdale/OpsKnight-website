@@ -10,8 +10,6 @@ export function DocsVersionSwitcher({ currentVersion }: { currentVersion: string
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const currentVersionData = DOC_VERSIONS.find(v => v.id === currentVersion);
-
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

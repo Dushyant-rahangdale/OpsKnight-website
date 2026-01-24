@@ -6,8 +6,29 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
+import type { Node } from "unist";
+import { visit } from "unist-util-visit";
 
-export async function renderMarkdown(markdown: string) {
+type RenderOptions = {
+  imageBasePath?: string;
+};
+
+function rehypeDocImagePaths(options: RenderOptions) {
+  const basePath = options.imageBasePath?.replace(/\/$/, "");
+  if (!basePath) return () => {};
+  return (tree: unknown) => {
+    visit(tree as Node, "element", (node: { tagName?: string; properties?: Record<string, unknown> }) => {
+      if (node.tagName !== "img") return;
+      const src = node.properties?.src;
+      if (typeof src !== "string") return;
+      if (!src.startsWith("./assets/") && !src.startsWith("../assets/")) return;
+      const normalized = src.replace(/^\.{1,2}\//, "");
+      node.properties = { ...node.properties, src: `${basePath}/${normalized}` };
+    });
+  };
+}
+
+export async function renderMarkdown(markdown: string, options: RenderOptions = {}) {
   const file = await unified()
     .use(remarkParse)
     .use(remarkGfm)
@@ -15,6 +36,7 @@ export async function renderMarkdown(markdown: string) {
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings, { behavior: "wrap" })
     .use(rehypeHighlight)
+    .use(rehypeDocImagePaths, options)
     // @ts-expect-error rehype typings don't align with unified's overloaded use signature
     .use(rehypeStringify)
     .process(markdown);

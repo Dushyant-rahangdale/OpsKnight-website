@@ -32,7 +32,7 @@ kubectl apply -f .
 
 | File              | Purpose                   |
 | ----------------- | ------------------------- |
-| `namespace.yaml`  | OpsKnight namespace     |
+| `namespace.yaml`  | OpsKnight namespace       |
 | `secret.yaml`     | Sensitive configuration   |
 | `configmap.yaml`  | Non-sensitive config      |
 | `deployment.yaml` | Application deployment    |
@@ -69,7 +69,6 @@ metadata:
   name: opsknight-config
   namespace: opsknight
 data:
-
 ```
 
 > **Note:** Store secrets in `Secret` objects and keep the ConfigMap non-sensitive.

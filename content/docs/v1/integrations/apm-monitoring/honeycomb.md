@@ -35,8 +35,8 @@ POST /api/integrations/honeycomb?integrationId=YOUR_INTEGRATION_ID
 4. URL: Paste the OpsKnight Webhook URL.
 5. Add this webhook as a recipient to your Triggers.
 
-
 ## Payload Format
+
 Honeycomb sends:
 
 ```json
@@ -48,15 +48,15 @@ Honeycomb sends:
 }
 ```
 
-
 ## Event Mapping
-| Status | OpsKnight Action |
-| ------ | ---------------- |
+
+| Status      | OpsKnight Action |
+| ----------- | ---------------- |
 | `triggered` | Trigger incident |
 | `resolved`  | Resolve incident |
 
-
 ## Testing
+
 ### Using cURL
 
 ```bash
@@ -69,8 +69,8 @@ curl -X POST "https://YOUR_OPSKNIGHT_URL/api/integrations/honeycomb?integrationI
   }'
 ```
 
-
 ## Trigger Logic
+
 OpsKnight maps Honeycomb triggers to incidents.
 
 - **Summary**: Derived from `alert_name` or `trigger_reason`.

@@ -73,4 +73,3 @@ Additional dashboard helpers:
 
 - Global styles: `src/styles/*`
 - Dashboard-specific layout overrides: `src/app/(app)/page.module.css`
-

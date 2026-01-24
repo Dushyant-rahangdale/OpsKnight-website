@@ -23,6 +23,7 @@ Your infrastructure is monitored by many tools — APM, uptime monitoring, error
 - Response times suffer
 
 OpsKnight integrations solve this by:
+
 - **Centralizing all alerts** in one place
 - **Normalizing formats** so every alert looks consistent
 - **Routing intelligently** based on service and urgency
@@ -36,30 +37,30 @@ OpsKnight integrations solve this by:
 
 These tools send alerts TO OpsKnight:
 
-| Category | Tools |
-|----------|-------|
-| **APM & Monitoring** | Datadog, New Relic, Dynatrace, AppDynamics |
-| **Infrastructure** | AWS CloudWatch, Azure Monitor, Google Cloud Monitoring |
-| **Metrics & Alerting** | Prometheus/Alertmanager, Grafana |
-| **Error Tracking** | Sentry |
-| **Uptime Monitoring** | UptimeRobot, Pingdom, Better Uptime, Uptime Kuma |
-| **Log Analysis** | Splunk, Elastic |
-| **Observability** | Honeycomb, Splunk Observability |
-| **CI/CD** | GitHub Actions, Bitbucket Pipelines |
-| **Custom** | Generic Webhooks, Events API |
+| Category               | Tools                                                  |
+| ---------------------- | ------------------------------------------------------ |
+| **APM & Monitoring**   | Datadog, New Relic, Dynatrace, AppDynamics             |
+| **Infrastructure**     | AWS CloudWatch, Azure Monitor, Google Cloud Monitoring |
+| **Metrics & Alerting** | Prometheus/Alertmanager, Grafana                       |
+| **Error Tracking**     | Sentry                                                 |
+| **Uptime Monitoring**  | UptimeRobot, Pingdom, Better Uptime, Uptime Kuma       |
+| **Log Analysis**       | Splunk, Elastic                                        |
+| **Observability**      | Honeycomb, Splunk Observability                        |
+| **CI/CD**              | GitHub Actions, Bitbucket Pipelines                    |
+| **Custom**             | Generic Webhooks, Events API                           |
 
 ### Notification Channels (Outbound)
 
 These tools receive notifications FROM OpsKnight:
 
-| Channel | Purpose |
-|---------|---------|
-| **Slack** | Team channels with interactive buttons |
-| **Email** | Direct inbox notifications |
-| **SMS** | Urgent alerts via text message |
-| **Push** | Mobile app notifications |
-| **WhatsApp** | Messaging alerts |
-| **Webhooks** | Custom HTTP integrations |
+| Channel      | Purpose                                |
+| ------------ | -------------------------------------- |
+| **Slack**    | Team channels with interactive buttons |
+| **Email**    | Direct inbox notifications             |
+| **SMS**      | Urgent alerts via text message         |
+| **Push**     | Mobile app notifications               |
+| **WhatsApp** | Messaging alerts                       |
+| **Webhooks** | Custom HTTP integrations               |
 
 ---
 
@@ -94,6 +95,7 @@ Trigger a test alert to verify the integration is working.
 ### APM & Application Monitoring
 
 #### [Datadog](./apm-monitoring/datadog)
+
 Full-stack monitoring with APM, infrastructure metrics, and logs.
 
 ```
@@ -102,6 +104,7 @@ Supports: Monitors, Synthetics, APM alerts
 ```
 
 #### [New Relic](./apm-monitoring/new-relic)
+
 Application performance monitoring and infrastructure.
 
 ```
@@ -110,6 +113,7 @@ Supports: Alert policies, incidents, synthetics
 ```
 
 #### [Dynatrace](./apm-monitoring/dynatrace)
+
 AI-powered full-stack observability.
 
 ```
@@ -118,6 +122,7 @@ Supports: Problems, anomaly detection
 ```
 
 #### [AppDynamics](./apm-monitoring/appdynamics)
+
 Business-aware application performance management.
 
 ```
@@ -126,6 +131,7 @@ Supports: Health rules, policy violations
 ```
 
 #### [Grafana](./apm-monitoring/grafana)
+
 Visualization and alerting platform.
 
 ```
@@ -134,6 +140,7 @@ Supports: Alert notifications
 ```
 
 #### [Honeycomb](./apm-monitoring/honeycomb)
+
 Observability for distributed systems.
 
 ```
@@ -142,6 +149,7 @@ Supports: Triggers
 ```
 
 #### [Sentry](./apm-monitoring/sentry)
+
 Error tracking and performance monitoring.
 
 ```
@@ -150,6 +158,7 @@ Supports: Issues, errors, performance alerts
 ```
 
 #### [Splunk Observability](./apm-monitoring/splunk-observability)
+
 Splunk's observability platform.
 
 ```
@@ -158,6 +167,7 @@ Supports: Detectors, alerts
 ```
 
 #### [Elastic / Kibana](./logs-events/elastic-kibana)
+
 Elasticsearch and Kibana alerting.
 
 ```
@@ -170,6 +180,7 @@ Supports: Watcher alerts, Kibana alerting
 ### Infrastructure & Cloud
 
 #### [AWS CloudWatch](./cloud/aws-cloudwatch)
+
 Native AWS monitoring and alerting.
 
 ```
@@ -178,6 +189,7 @@ Supports: CloudWatch Alarms via SNS
 ```
 
 #### [Azure Monitor](./cloud/azure-monitor)
+
 Microsoft Azure monitoring service.
 
 ```
@@ -186,6 +198,7 @@ Supports: Alerts, action groups
 ```
 
 #### [Google Cloud Monitoring](./cloud/google-cloud-monitoring)
+
 GCP native monitoring (formerly Stackdriver).
 
 ```
@@ -198,6 +211,7 @@ Supports: Alerting policies
 ### Metrics & Alerting
 
 #### [Prometheus/Alertmanager](./metrics-alerting/prometheus)
+
 Open-source metrics and alerting.
 
 ```
@@ -210,6 +224,7 @@ Supports: Alertmanager webhooks
 ### Uptime Monitoring
 
 #### [UptimeRobot](./uptime/uptimerobot)
+
 Website and API uptime monitoring.
 
 ```
@@ -218,6 +233,7 @@ Supports: Monitor alerts (down/up)
 ```
 
 #### [Pingdom](./uptime/pingdom)
+
 Website uptime and performance monitoring.
 
 ```
@@ -226,6 +242,7 @@ Supports: Uptime checks, transaction checks
 ```
 
 #### [Better Uptime](./uptime/better-uptime)
+
 Modern uptime monitoring with status pages.
 
 ```
@@ -234,6 +251,7 @@ Supports: Monitor incidents
 ```
 
 #### [Uptime Kuma](./uptime/uptime-kuma)
+
 Self-hosted uptime monitoring.
 
 ```
@@ -246,6 +264,7 @@ Supports: Monitor notifications
 ### Log & Event Analysis
 
 #### [Splunk On-Call](./logs-events/splunk-oncall)
+
 Incident management from Splunk.
 
 ```
@@ -258,6 +277,7 @@ Supports: Alerts, incidents
 ### CI/CD & DevOps
 
 #### [GitHub](./ci-cd/github)
+
 GitHub Actions and repository events.
 
 ```
@@ -266,6 +286,7 @@ Supports: Workflow failures, security alerts
 ```
 
 #### [Bitbucket](./ci-cd/bitbucket)
+
 Bitbucket Pipelines and repository events.
 
 ```
@@ -278,6 +299,7 @@ Supports: Pipeline failures
 ### Communication
 
 #### [Slack](./communication/slack)
+
 Team communication with interactive incident management.
 
 - Rich message formatting with incident details
@@ -292,6 +314,7 @@ Team communication with interactive incident management.
 ### Custom Integrations
 
 #### [Generic Webhooks](./custom/webhooks)
+
 Connect any tool that can send HTTP webhooks.
 
 ```
@@ -300,6 +323,7 @@ Supports: Any JSON payload
 ```
 
 #### Events API
+
 Programmatically create and manage incidents.
 
 ```
@@ -347,6 +371,7 @@ Supports: trigger, acknowledge, resolve actions
 Each integration has a custom parser that normalizes tool-specific formats:
 
 **Datadog Alert**:
+
 ```json
 {
   "title": "[Triggered] CPU High on web-01",
@@ -356,6 +381,7 @@ Each integration has a custom parser that normalizes tool-specific formats:
 ```
 
 **Normalized to OpsKnight**:
+
 ```json
 {
   "title": "CPU High on web-01",

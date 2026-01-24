@@ -24,15 +24,15 @@ Custom fields are organization-wide and appear on all incidents. Each field has:
 
 ## Field Types
 
-| Type | Description | Example Use |
-| ---- | ----------- | ----------- |
-| `TEXT` | Free-form text input | Ticket ID, Customer name |
-| `NUMBER` | Numeric value | Impact score, User count |
-| `DATE` | Date picker | Deadline, SLA date |
-| `SELECT` | Single selection from predefined options | Environment, Priority tier |
-| `BOOLEAN` | True/false toggle | Customer-facing, Requires postmortem |
-| `URL` | Validated URL input | Ticket link, Dashboard URL |
-| `EMAIL` | Validated email input | Reporter email |
+| Type      | Description                              | Example Use                          |
+| --------- | ---------------------------------------- | ------------------------------------ |
+| `TEXT`    | Free-form text input                     | Ticket ID, Customer name             |
+| `NUMBER`  | Numeric value                            | Impact score, User count             |
+| `DATE`    | Date picker                              | Deadline, SLA date                   |
+| `SELECT`  | Single selection from predefined options | Environment, Priority tier           |
+| `BOOLEAN` | True/false toggle                        | Customer-facing, Requires postmortem |
+| `URL`     | Validated URL input                      | Ticket link, Dashboard URL           |
+| `EMAIL`   | Validated email input                    | Reporter email                       |
 
 ---
 
@@ -46,21 +46,22 @@ Custom fields are organization-wide and appear on all incidents. Each field has:
 2. Click **Add Field**
 3. Configure field properties:
 
-| Setting | Description | Constraints |
-| ------- | ----------- | ----------- |
-| **Name** | Display label | 1-200 characters |
-| **Key** | Unique identifier | 1-100 characters, alphanumeric and underscore only |
-| **Type** | Field data type | TEXT, NUMBER, DATE, SELECT, BOOLEAN, URL, EMAIL |
-| **Required** | Must be filled on incidents | Default: false |
-| **Default Value** | Pre-filled value | Optional |
-| **Show in List** | Display in incident tables | Default: false |
-| **Options** | Choices for SELECT type | JSON array |
+| Setting           | Description                 | Constraints                                        |
+| ----------------- | --------------------------- | -------------------------------------------------- |
+| **Name**          | Display label               | 1-200 characters                                   |
+| **Key**           | Unique identifier           | 1-100 characters, alphanumeric and underscore only |
+| **Type**          | Field data type             | TEXT, NUMBER, DATE, SELECT, BOOLEAN, URL, EMAIL    |
+| **Required**      | Must be filled on incidents | Default: false                                     |
+| **Default Value** | Pre-filled value            | Optional                                           |
+| **Show in List**  | Display in incident tables  | Default: false                                     |
+| **Options**       | Choices for SELECT type     | JSON array                                         |
 
 4. Click **Save**
 
 ### Key Format
 
 Keys must follow this pattern:
+
 - Only letters, numbers, and underscores
 - No spaces or special characters
 - Case-sensitive
@@ -213,6 +214,7 @@ Authorization: Bearer YOUR_API_KEY
 ```
 
 **Response**:
+
 ```json
 {
   "fields": [
@@ -271,47 +273,47 @@ Content-Type: application/json
 
 ### Environment Field
 
-| Setting | Value |
-| ------- | ----- |
-| Name | Environment |
-| Key | `environment` |
-| Type | SELECT |
-| Options | production, staging, development |
-| Required | Yes |
-| Default | production |
-| Show in List | Yes |
+| Setting      | Value                            |
+| ------------ | -------------------------------- |
+| Name         | Environment                      |
+| Key          | `environment`                    |
+| Type         | SELECT                           |
+| Options      | production, staging, development |
+| Required     | Yes                              |
+| Default      | production                       |
+| Show in List | Yes                              |
 
 ### Customer Tier Field
 
-| Setting | Value |
-| ------- | ----- |
-| Name | Customer Tier |
-| Key | `customer_tier` |
-| Type | SELECT |
-| Options | enterprise, business, free |
-| Required | No |
-| Show in List | Yes |
+| Setting      | Value                      |
+| ------------ | -------------------------- |
+| Name         | Customer Tier              |
+| Key          | `customer_tier`            |
+| Type         | SELECT                     |
+| Options      | enterprise, business, free |
+| Required     | No                         |
+| Show in List | Yes                        |
 
 ### Affected Users Count
 
-| Setting | Value |
-| ------- | ----- |
-| Name | Affected Users |
-| Key | `affected_users` |
-| Type | NUMBER |
-| Required | No |
-| Default | 0 |
-| Show in List | Yes |
+| Setting      | Value            |
+| ------------ | ---------------- |
+| Name         | Affected Users   |
+| Key          | `affected_users` |
+| Type         | NUMBER           |
+| Required     | No               |
+| Default      | 0                |
+| Show in List | Yes              |
 
 ### External Ticket Link
 
-| Setting | Value |
-| ------- | ----- |
-| Name | Jira Ticket |
-| Key | `jira_ticket` |
-| Type | URL |
-| Required | No |
-| Show in List | No |
+| Setting      | Value         |
+| ------------ | ------------- |
+| Name         | Jira Ticket   |
+| Key          | `jira_ticket` |
+| Type         | URL           |
+| Required     | No            |
+| Show in List | No            |
 
 ---
 
@@ -335,21 +337,21 @@ Fields appear in the order defined by their `order` value:
 
 ### Naming Conventions
 
-| Good | Bad |
-| ---- | --- |
-| `customer_tier` | `tier` (too vague) |
-| `affected_region` | `region` (ambiguous) |
-| `external_ticket_id` | `ticket` (unclear) |
+| Good                 | Bad                  |
+| -------------------- | -------------------- |
+| `customer_tier`      | `tier` (too vague)   |
+| `affected_region`    | `region` (ambiguous) |
+| `external_ticket_id` | `ticket` (unclear)   |
 
 ### When to Use Custom Fields
 
-| Scenario | Recommendation |
-| -------- | -------------- |
-| Categorizing incidents | Use SELECT type |
-| Linking to external systems | Use URL type |
-| Tracking numeric metrics | Use NUMBER type |
-| Yes/no questions | Use BOOLEAN type |
-| Free-form notes | Use TEXT type |
+| Scenario                    | Recommendation   |
+| --------------------------- | ---------------- |
+| Categorizing incidents      | Use SELECT type  |
+| Linking to external systems | Use URL type     |
+| Tracking numeric metrics    | Use NUMBER type  |
+| Yes/no questions            | Use BOOLEAN type |
+| Free-form notes             | Use TEXT type    |
 
 ---
 
@@ -358,4 +360,3 @@ Fields appear in the order defined by their `order` value:
 - [Incidents](../core-concepts/incidents) — Working with incidents
 - [Analytics](../core-concepts/analytics) — Filtering reports by custom fields
 - [Status Page](../core-concepts/status-page) — Displaying custom fields publicly
-

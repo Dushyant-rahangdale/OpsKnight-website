@@ -39,9 +39,9 @@ POST /api/integrations/pingdom?integrationId=YOUR_INTEGRATION_ID
 
 ## Event Mapping
 
-| Pingdom State | OpsKnight Action | Urgency |
-| ------------- | ---------------- | ------- |
-| `Down`        | Trigger          | `critical`|
-| `Up` / `Resolved` | Resolve      | -       |
+| Pingdom State     | OpsKnight Action | Urgency    |
+| ----------------- | ---------------- | ---------- |
+| `Down`            | Trigger          | `critical` |
+| `Up` / `Resolved` | Resolve          | -          |
 
 The integration handles both legacy and new Pingdom webhook formats.

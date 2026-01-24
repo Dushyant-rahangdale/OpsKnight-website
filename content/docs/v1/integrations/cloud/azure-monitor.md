@@ -35,8 +35,8 @@ POST /api/integrations/azure?integrationId=YOUR_INTEGRATION_ID
 4. Paste the OpsKnight Webhook URL.
 5. Enable the Common Alert Schema if available (optional, OpsKnight handles both).
 
-
 ## Payload Format
+
 OpsKnight supports the Azure Monitor Common Alert Schema:
 
 ```json
@@ -58,15 +58,15 @@ OpsKnight supports the Azure Monitor Common Alert Schema:
 }
 ```
 
-
 ## Event Mapping
+
 | Monitor Condition | OpsKnight Action |
 | ----------------- | ---------------- |
 | `Fired`           | Trigger incident |
 | `Resolved`        | Resolve incident |
 
-
 ## Severity Mapping
+
 | Azure Severity | OpsKnight Severity |
 | -------------- | ------------------ |
 | `Sev0`         | critical           |
@@ -74,16 +74,16 @@ OpsKnight supports the Azure Monitor Common Alert Schema:
 | `Sev2`         | warning            |
 | `Sev3`, `Sev4` | info               |
 
-
 ## Incident Title
+
 The incident title is taken from `data.essentials.alertRule`.
 
-
 ## Deduplication
+
 Dedup key is generated from `data.essentials.alertId`.
 
-
 ## Testing
+
 ### Using Azure Portal
 
 1. Go to your **Action Group**
@@ -108,25 +108,28 @@ curl -X POST "https://YOUR_OPSKNIGHT_URL/api/integrations/azure?integrationId=YO
   }'
 ```
 
-
 ## Troubleshooting
+
 ### Monitor Condition "Resolved" Not Working
+
 Ensure your Azure Alert Rule is configured to "Automatically resolve alerts" (stateless alerts do not send resolved events).
 
 ### Wrong Severity
+
 Check if you are using the Common Alert Schema. If using the legacy schema, severity mapping might default to "warning".
 
-
 ## Alert Logic
+
 OpsKnight maps Azure Severity to Urgency:
 
-| Azure Severity | OpsKnight Urgency |
-| -------------- | ----------------- |
-| Sev0 / Critical| `critical`        |
-| Sev1 / Error   | `error`           |
-| Sev2 / Warning | `warning`         |
-| Other          | `warning`         |
+| Azure Severity  | OpsKnight Urgency |
+| --------------- | ----------------- |
+| Sev0 / Critical | `critical`        |
+| Sev1 / Error    | `error`           |
+| Sev2 / Warning  | `warning`         |
+| Other           | `warning`         |
 
 **State Handling**:
+
 - Monitor Condition `Fired` / `Activated` -> **Trigger Incident**
 - Monitor Condition `Resolved` -> **Resolve Incident**

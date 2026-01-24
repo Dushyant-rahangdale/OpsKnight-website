@@ -7,6 +7,7 @@ order: 3
 The OpsKnight CLI is a **recovery and automation tool** for user management.
 
 > **Important**: For normal operations, use the web interface:
+>
 > - **First admin**: Use the `/setup` page when OpsKnight first starts
 > - **Additional users**: Use **Settings → Users → Invite User**
 >
@@ -20,13 +21,13 @@ npm run opsknight -- [options]
 
 ## When to Use the CLI
 
-| Scenario | Recommended Method |
-| -------- | ------------------ |
-| First-time setup | `/setup` page in browser |
-| Adding team members | Invite via UI |
-| Locked out of admin | **CLI** |
-| CI/CD user provisioning | **CLI** |
-| Password reset (no email) | **CLI** with `--update` |
+| Scenario                  | Recommended Method       |
+| ------------------------- | ------------------------ |
+| First-time setup          | `/setup` page in browser |
+| Adding team members       | Invite via UI            |
+| Locked out of admin       | **CLI**                  |
+| CI/CD user provisioning   | **CLI**                  |
+| Password reset (no email) | **CLI** with `--update`  |
 
 ## Create a User
 

@@ -37,8 +37,8 @@ POST /api/integrations/uptime-kuma?integrationId=YOUR_INTEGRATION_ID
 6. Content Type: `application/json`.
 7. Test and Save.
 
-
 ## Payload Format
+
 Uptime Kuma sends:
 
 ```json
@@ -55,19 +55,19 @@ Uptime Kuma sends:
 }
 ```
 
-
 ## Event Mapping
+
 | Status Code | Meaning | OpsKnight Action |
 | ----------- | ------- | ---------------- |
 | `1`         | Up      | Resolve incident |
 | `0`         | Down    | Trigger incident |
 
-
 ## Deduplication
+
 Dedup key is generated from `uptime-kuma-{monitorID}`.
 
-
 ## Testing
+
 ### Using Uptime Kuma UI
 
 1. Go to **Settings** -> **Notifications**
@@ -84,13 +84,13 @@ curl -X POST "https://YOUR_OPSKNIGHT_URL/api/integrations/uptime-kuma?integratio
   }'
 ```
 
-
 ## Status Logic
+
 OpsKnight translates status codes:
 
-| Status Code | Meaning | Action |
-| ----------- | ------- | ------ |
-| `1`         | UP      | Resolve |
-| `0` (or others) | DOWN | Trigger (Critical) |
+| Status Code     | Meaning | Action             |
+| --------------- | ------- | ------------------ |
+| `1`             | UP      | Resolve            |
+| `0` (or others) | DOWN    | Trigger (Critical) |
 
 This supports both numeric status codes and string values like "Up" or "Resolved".

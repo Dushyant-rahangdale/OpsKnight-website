@@ -30,15 +30,15 @@ Create a `values.yaml` to override defaults:
 
 ```yaml
 image:
-  tag: "latest"
+  tag: 'latest'
 
 ingress:
   enabled: true
   host: opsknight.example.com
 
 env:
-  NEXTAUTH_URL: "https://opsknight.example.com"
-  DATABASE_URL: "postgresql://user:pass@db:5432/opsknight"
+  NEXTAUTH_URL: 'https://opsknight.example.com'
+  DATABASE_URL: 'postgresql://user:pass@db:5432/opsknight'
 ```
 
 Apply updates with:
@@ -57,11 +57,11 @@ helm upgrade --install opsknight ./helm/opsknight \
 ```yaml
 resources:
   requests:
-    cpu: "200m"
-    memory: "512Mi"
+    cpu: '200m'
+    memory: '512Mi'
   limits:
-    cpu: "1"
-    memory: "1Gi"
+    cpu: '1'
+    memory: '1Gi'
 ```
 
 ### Autoscaling

@@ -39,6 +39,7 @@ POST /api/integrations/splunk-observability?integrationId=YOUR_INTEGRATION_ID
 ## Event Mapping
 
 The integration automatically parses the webhook payload:
+
 - **Title**: Uses detector name or alert title.
 - **Link**: Extracts deep link to the Splunk chart (`link`).
 - **Deduplication**: Uses `incidentId` or `detectorId`.

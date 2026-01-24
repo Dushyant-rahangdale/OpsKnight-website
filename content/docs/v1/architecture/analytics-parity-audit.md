@@ -23,21 +23,25 @@ All analytics calculations come from `calculateSLAMetrics` in `src/lib/sla-serve
 ## Filters & Scope
 
 ### Desktop analytics (/analytics)
+
 - Filters: team, service, assignee, status, urgency, window
 - Uses: `calculateSLAMetrics` with the full filter set
 - Export: builds URL with all active filters via `buildAnalyticsExportUrl`
 
 ### Mobile analytics (/m/analytics)
+
 - Filters: none (fixed window)
 - Uses: `calculateSLAMetrics({ windowDays: 7 })`
 - Export: none
 
 ### Executive report (/reports/executive)
+
 - Filters: team, service, window (via query params)
 - Uses: `calculateSLAMetrics({ windowDays, teamId, serviceId })`
 - Export: none
 
 ### Export API (/api/analytics/export)
+
 - Accepts: team, service, assignee, status, urgency, window
 - Uses: `calculateSLAMetrics` + incident queries to build CSV
 
@@ -75,4 +79,3 @@ All surfaces share the same SLA engine but expose different subsets in UI:
 1. Decide whether analytics pages should enforce responder/admin role like export.
 2. Decide if mobile analytics should add filters or remain a quick summary view.
 3. Decide if executive report should offer export (CSV/PDF) based on report templates.
-

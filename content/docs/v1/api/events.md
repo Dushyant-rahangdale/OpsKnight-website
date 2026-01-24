@@ -73,30 +73,30 @@ Content-Type: application/json
 
 ## Fields Reference
 
-| Field | Type | Required | Description |
-| ----- | ---- | :------: | ----------- |
-| `event_action` | string | Yes | `trigger`, `acknowledge`, or `resolve` |
-| `dedup_key` | string | Yes | Unique identifier for deduplication (max 200 chars) |
-| `service_id` | string | Conditional | Required when using API key authentication |
-| `payload` | object | Yes | Event details |
+| Field          | Type   |  Required   | Description                                         |
+| -------------- | ------ | :---------: | --------------------------------------------------- |
+| `event_action` | string |     Yes     | `trigger`, `acknowledge`, or `resolve`              |
+| `dedup_key`    | string |     Yes     | Unique identifier for deduplication (max 200 chars) |
+| `service_id`   | string | Conditional | Required when using API key authentication          |
+| `payload`      | object |     Yes     | Event details                                       |
 
 ### Payload Fields
 
-| Field | Type | Required | Description |
-| ----- | ---- | :------: | ----------- |
-| `summary` | string | Yes | Brief description (max 500 chars) |
-| `source` | string | Yes | Source system identifier (max 200 chars) |
-| `severity` | string | Yes | `critical`, `error`, `warning`, or `info` |
-| `custom_details` | object | No | Arbitrary key-value pairs for additional context |
+| Field            | Type   | Required | Description                                      |
+| ---------------- | ------ | :------: | ------------------------------------------------ |
+| `summary`        | string |   Yes    | Brief description (max 500 chars)                |
+| `source`         | string |   Yes    | Source system identifier (max 200 chars)         |
+| `severity`       | string |   Yes    | `critical`, `error`, `warning`, or `info`        |
+| `custom_details` | object |    No    | Arbitrary key-value pairs for additional context |
 
 ### Severity to Urgency Mapping
 
-| Severity | OpsKnight Urgency |
-| -------- | ----------------- |
-| `critical` | HIGH |
-| `error` | MEDIUM |
-| `warning` | LOW |
-| `info` | LOW |
+| Severity   | OpsKnight Urgency |
+| ---------- | ----------------- |
+| `critical` | HIGH              |
+| `error`    | MEDIUM            |
+| `warning`  | LOW               |
+| `info`     | LOW               |
 
 ---
 
@@ -107,6 +107,7 @@ Content-Type: application/json
 Creates a new incident or updates an existing one based on the dedup_key.
 
 **Behavior**:
+
 - If no open incident exists with the dedup_key: creates new incident
 - If an open/acknowledged/snoozed/suppressed incident exists: adds alert to existing incident (deduplicated)
 - Incident title is set from `payload.summary`
@@ -133,6 +134,7 @@ Creates a new incident or updates an existing one based on the dedup_key.
 Marks an existing incident as acknowledged.
 
 **Behavior**:
+
 - Finds open incident with matching dedup_key and service
 - Updates status to ACKNOWLEDGED
 - Stops escalation (sets escalationStatus to COMPLETED)
@@ -156,6 +158,7 @@ Marks an existing incident as acknowledged.
 Marks an incident as resolved.
 
 **Behavior**:
+
 - Finds open/acknowledged incident with matching dedup_key and service
 - Updates status to RESOLVED
 - Stops escalation
@@ -200,36 +203,36 @@ Marks an incident as resolved.
 
 ### Result Actions
 
-| Action | Description |
-| ------ | ----------- |
-| `triggered` | New incident created |
-| `deduplicated` | Alert added to existing incident |
-| `acknowledged` | Incident acknowledged |
-| `resolved` | Incident resolved |
-| `ignored` | No matching incident found for acknowledge/resolve |
+| Action         | Description                                        |
+| -------------- | -------------------------------------------------- |
+| `triggered`    | New incident created                               |
+| `deduplicated` | Alert added to existing incident                   |
+| `acknowledged` | Incident acknowledged                              |
+| `resolved`     | Incident resolved                                  |
+| `ignored`      | No matching incident found for acknowledge/resolve |
 
 ### Error Responses
 
-| HTTP Status | Error | Description |
-| ----------- | ----- | ----------- |
-| 400 | Invalid JSON | Request body is not valid JSON |
-| 400 | Invalid request body | Validation failed (missing/invalid fields) |
-| 401 | Unauthorized | Missing or invalid API key |
-| 403 | Invalid Integration Key | Integration key not found |
-| 403 | API key missing scope | API key lacks `events:write` scope |
-| 403 | Service access denied | User doesn't have access to the service |
-| 404 | Service not found | service_id doesn't exist |
-| 429 | Rate limit exceeded | Too many requests |
-| 500 | Internal Server Error | Server error |
+| HTTP Status | Error                   | Description                                |
+| ----------- | ----------------------- | ------------------------------------------ |
+| 400         | Invalid JSON            | Request body is not valid JSON             |
+| 400         | Invalid request body    | Validation failed (missing/invalid fields) |
+| 401         | Unauthorized            | Missing or invalid API key                 |
+| 403         | Invalid Integration Key | Integration key not found                  |
+| 403         | API key missing scope   | API key lacks `events:write` scope         |
+| 403         | Service access denied   | User doesn't have access to the service    |
+| 404         | Service not found       | service_id doesn't exist                   |
+| 429         | Rate limit exceeded     | Too many requests                          |
+| 500         | Internal Server Error   | Server error                               |
 
 ---
 
 ## Rate Limiting
 
-| Limit | Value |
-| ----- | ----- |
-| Requests per minute | 120 |
-| Window | 60 seconds |
+| Limit               | Value      |
+| ------------------- | ---------- |
+| Requests per minute | 120        |
+| Window              | 60 seconds |
 
 Rate limits apply per integration key or API key.
 
@@ -271,6 +274,7 @@ Event 4: dedup_key="disk-full" → New incident created
 ### Dedup Key Best Practices
 
 **Good dedup keys**:
+
 ```
 server-cpu-high-web01           # host + metric + server
 database-connection-error-prod  # service + issue + environment
@@ -278,6 +282,7 @@ api-latency-p99-exceeded        # service + specific metric
 ```
 
 **Bad dedup keys**:
+
 ```
 alert-123456                    # Random, not meaningful
 cpu-high                        # Too generic
@@ -400,24 +405,31 @@ async function sendEvent(action, dedupKey, summary, source, severity, customDeta
         summary,
         source,
         severity,
-        ...(customDetails && { custom_details: customDetails })
-      }
+        ...(customDetails && { custom_details: customDetails }),
+      },
     },
     {
       headers: {
-        'Authorization': `Token token=${INTEGRATION_KEY}`,
-        'Content-Type': 'application/json'
-      }
+        Authorization: `Token token=${INTEGRATION_KEY}`,
+        'Content-Type': 'application/json',
+      },
     }
   );
   return response.data;
 }
 
 // Trigger incident
-sendEvent('trigger', 'memory-usage-critical', 'Memory usage above 95%', 'node-exporter', 'critical', {
-  memory_percent: 97.5,
-  host: 'app-server-01'
-}).then(console.log);
+sendEvent(
+  'trigger',
+  'memory-usage-critical',
+  'Memory usage above 95%',
+  'node-exporter',
+  'critical',
+  {
+    memory_percent: 97.5,
+    host: 'app-server-01',
+  }
+).then(console.log);
 ```
 
 ---
@@ -457,4 +469,3 @@ When a new incident is triggered:
 - [Incidents API](./incidents) — Direct incident management
 - [Integrations](../integrations/README) — Integration configuration
 - [Services](../core-concepts/services) — Service setup
-

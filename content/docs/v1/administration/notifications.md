@@ -17,14 +17,14 @@ Notifications are the lifeblood of incident management. Without reliable notific
 
 Different situations call for different notification methods:
 
-| Scenario | Best Channel | Why |
-|----------|--------------|-----|
-| Normal alerts | Email, Slack | Non-intrusive, async |
-| Critical incidents | SMS, Push | Immediate attention |
-| On-call escalation | SMS + Push | Can't be missed |
-| Team coordination | Slack | Interactive, threaded |
-| International teams | WhatsApp | Global reach |
-| Automated systems | Webhooks | Integration with other tools |
+| Scenario            | Best Channel | Why                          |
+| ------------------- | ------------ | ---------------------------- |
+| Normal alerts       | Email, Slack | Non-intrusive, async         |
+| Critical incidents  | SMS, Push    | Immediate attention          |
+| On-call escalation  | SMS + Push   | Can't be missed              |
+| Team coordination   | Slack        | Interactive, threaded        |
+| International teams | WhatsApp     | Global reach                 |
+| Automated systems   | Webhooks     | Integration with other tools |
 
 **Recommendation**: Configure at least **Email + Slack** for basic coverage, add **SMS** for critical alerts.
 
@@ -32,14 +32,14 @@ Different situations call for different notification methods:
 
 ## Notification Channels Overview
 
-| Channel | Provider Options | Best For |
-|---------|------------------|----------|
-| **Email** | SMTP, SendGrid, AWS SES, Resend | All users, reliable delivery |
-| **SMS** | Twilio, AWS SNS | Critical alerts, on-call |
-| **Push** | Web Push (PWA) | Mobile/PWA users |
-| **Slack** | Slack OAuth | Team collaboration |
-| **WhatsApp** | Twilio | International teams |
-| **Webhooks** | Any HTTP endpoint | Custom integrations |
+| Channel      | Provider Options                | Best For                     |
+| ------------ | ------------------------------- | ---------------------------- |
+| **Email**    | SMTP, SendGrid, AWS SES, Resend | All users, reliable delivery |
+| **SMS**      | Twilio, AWS SNS                 | Critical alerts, on-call     |
+| **Push**     | Web Push (PWA)                  | Mobile/PWA users             |
+| **Slack**    | Slack OAuth                     | Team collaboration           |
+| **WhatsApp** | Twilio                          | International teams          |
+| **Webhooks** | Any HTTP endpoint               | Custom integrations          |
 
 ---
 
@@ -49,12 +49,12 @@ Email is the most universal notification channel — every user has an email add
 
 ### Provider Options
 
-| Provider | Pros | Cons |
-|----------|------|------|
-| **SMTP** | Universal, self-hosted | May hit spam filters |
-| **SendGrid** | High deliverability | Cost at scale |
-| **AWS SES** | Low cost, scalable | AWS account required |
-| **Resend** | Developer-friendly | Newer service |
+| Provider     | Pros                   | Cons                 |
+| ------------ | ---------------------- | -------------------- |
+| **SMTP**     | Universal, self-hosted | May hit spam filters |
+| **SendGrid** | High deliverability    | Cost at scale        |
+| **AWS SES**  | Low cost, scalable     | AWS account required |
+| **Resend**   | Developer-friendly     | Newer service        |
 
 ### SMTP Configuration
 
@@ -64,14 +64,14 @@ For Gmail, Microsoft 365, or any SMTP server:
 2. Select **SMTP** provider
 3. Enter credentials:
 
-| Field | Example | Notes |
-|-------|---------|-------|
-| **SMTP Host** | `smtp.gmail.com` | Your mail server |
-| **SMTP Port** | `587` | Usually 587 (TLS) or 465 (SSL) |
-| **Username** | `alerts@yourco.com` | Email account |
-| **Password** | `••••••••` | App password recommended |
-| **From Address** | `noreply@yourco.com` | Sender address |
-| **From Name** | `OpsKnight Alerts` | Display name |
+| Field            | Example              | Notes                          |
+| ---------------- | -------------------- | ------------------------------ |
+| **SMTP Host**    | `smtp.gmail.com`     | Your mail server               |
+| **SMTP Port**    | `587`                | Usually 587 (TLS) or 465 (SSL) |
+| **Username**     | `alerts@yourco.com`  | Email account                  |
+| **Password**     | `••••••••`           | App password recommended       |
+| **From Address** | `noreply@yourco.com` | Sender address                 |
+| **From Name**    | `OpsKnight Alerts`   | Display name                   |
 
 4. Click **Test Connection** to verify
 5. Click **Save**
@@ -82,6 +82,7 @@ For Gmail, Microsoft 365, or any SMTP server:
 #### Gmail Setup Notes
 
 For Gmail/Google Workspace:
+
 1. Enable "Less secure app access" OR
 2. Create an **App Password** (recommended):
    - Go to Google Account → Security → App Passwords
@@ -142,10 +143,10 @@ Twilio is the most popular option for SMS:
    - Select **Twilio** provider
    - Enter credentials:
 
-| Field | Description |
-|-------|-------------|
-| **Account SID** | From Twilio Console |
-| **Auth Token** | From Twilio Console |
+| Field            | Description                |
+| ---------------- | -------------------------- |
+| **Account SID**  | From Twilio Console        |
+| **Auth Token**   | From Twilio Console        |
 | **Phone Number** | Your Twilio number (+1...) |
 
 4. **Test** by sending a test SMS
@@ -166,10 +167,10 @@ For high-volume SMS or if you're already on AWS:
    - Select **AWS SNS** provider
    - Enter credentials:
 
-| Field | Description |
-|-------|-------------|
-| **AWS Region** | e.g., `us-east-1` |
-| **Access Key ID** | IAM user access key |
+| Field                 | Description         |
+| --------------------- | ------------------- |
+| **AWS Region**        | e.g., `us-east-1`   |
+| **Access Key ID**     | IAM user access key |
 | **Secret Access Key** | IAM user secret key |
 
 3. **Test** and **Save**
@@ -204,11 +205,11 @@ OpsKnight uses standard Web Push with VAPID keys, independent of third-party ser
    - Go to **Settings** → **Notification Provider** → **Web Push (PWA)**
    - Enter your VAPID details:
 
-| Field | Description |
-|-------|-------------|
-| **VAPID Public Key** | The public key string |
-| **VAPID Private Key** | The private key string |
-| **Contact Email** | `mailto:admin@yourcompany.com` |
+| Field                 | Description                    |
+| --------------------- | ------------------------------ |
+| **VAPID Public Key**  | The public key string          |
+| **VAPID Private Key** | The private key string         |
+| **Contact Email**     | `mailto:admin@yourcompany.com` |
 
 3. **Save** configuration
 
@@ -256,6 +257,7 @@ WhatsApp uses Twilio's WhatsApp Business API:
 ### WhatsApp User Setup
 
 Users must:
+
 1. Add their WhatsApp number to their profile
 2. Opt-in by sending a message to the OpsKnight WhatsApp number
 3. Receive confirmation
@@ -278,6 +280,7 @@ Slack provides rich, interactive notifications with buttons for quick actions.
 Full setup guide: [Slack OAuth Setup](../integrations/communication/slack-oauth-setup)
 
 Quick overview:
+
 1. Go to **Settings** → **Integrations** → **Slack**
 2. Click **Connect to Slack**
 3. Authorize OpsKnight in your workspace
@@ -308,11 +311,11 @@ Webhooks are configured per-service, allowing specific routing for different ser
 4. In the **Webhook Integrations** card that appears, click **Add Webhook**
 5. Configure:
 
-| Field | Description |
-|-------|-------------|
+| Field    | Description                                   |
+| -------- | --------------------------------------------- |
 | **Name** | Display name (e.g., "Internal Ops Dashboard") |
-| **URL** | Your webhook endpoint |
-| **Type** | Generic, Google Chat, Microsoft Teams, etc. |
+| **URL**  | Your webhook endpoint                         |
+| **Type** | Generic, Google Chat, Microsoft Teams, etc.   |
 
 ### Webhook Payload
 
@@ -351,24 +354,24 @@ Each user controls their notification preferences:
 
 **Settings** → **Profile** → **Notifications**
 
-| Setting | Description |
-|---------|-------------|
-| **Email notifications** | Enable/disable email |
-| **SMS notifications** | Enable/disable SMS |
-| **Push notifications** | Enable/disable push |
+| Setting                    | Description             |
+| -------------------------- | ----------------------- |
+| **Email notifications**    | Enable/disable email    |
+| **SMS notifications**      | Enable/disable SMS      |
+| **Push notifications**     | Enable/disable push     |
 | **WhatsApp notifications** | Enable/disable WhatsApp |
-| **Digest level** | ALL, HIGH only, or NONE |
+| **Digest level**           | ALL, HIGH only, or NONE |
 
 ### Service-Level Settings
 
 Per-service notification settings:
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| **Notify on trigger** | Yes | When incident created |
-| **Notify on acknowledge** | Yes | When someone acks |
-| **Notify on resolve** | Yes | When incident resolved |
-| **Notify on SLA breach** | Yes | When SLA exceeded |
+| Setting                   | Default | Description            |
+| ------------------------- | ------- | ---------------------- |
+| **Notify on trigger**     | Yes     | When incident created  |
+| **Notify on acknowledge** | Yes     | When someone acks      |
+| **Notify on resolve**     | Yes     | When incident resolved |
+| **Notify on SLA breach**  | Yes     | When SLA exceeded      |
 
 ---
 
@@ -376,12 +379,12 @@ Per-service notification settings:
 
 OpsKnight tracks delivery status for all notifications:
 
-| Status | Meaning |
-|--------|---------|
-| **PENDING** | Queued for delivery |
-| **SENT** | Sent to provider |
+| Status        | Meaning                              |
+| ------------- | ------------------------------------ |
+| **PENDING**   | Queued for delivery                  |
+| **SENT**      | Sent to provider                     |
 | **DELIVERED** | Confirmed delivery (where supported) |
-| **FAILED** | Delivery failed |
+| **FAILED**    | Delivery failed                      |
 
 ### Viewing Delivery Status
 

@@ -11,6 +11,7 @@ Turn uptime and synthetic check failures into actionable incidents.
 ## Available integrations
 
 <!-- integrations-list:start -->
+
 - [UptimeRobot](./uptimerobot) — Integrate UptimeRobot alerts with OpsKnight.
 - [Pingdom](./pingdom) — Integrate Pingdom alerts with OpsKnight.
 - [Better Uptime](./better-uptime) — Integrate Better Uptime with OpsKnight.

@@ -27,13 +27,13 @@ Retention policies help:
 
 **Requirements**: Admin role
 
-| Data Type | Setting | Default | Description |
-| --------- | ------- | ------- | ----------- |
-| **Incidents** | `incidentRetentionDays` | 730 (2 years) | Resolved incident records |
-| **Alerts** | `alertRetentionDays` | 365 (1 year) | Raw alert events |
-| **Logs** | `logRetentionDays` | 90 days | Application log entries |
-| **Metrics** | `metricsRetentionDays` | 365 (1 year) | Pre-aggregated metric rollups |
-| **Real-time Window** | `realTimeWindowDays` | 90 days | Period for real-time analytics queries |
+| Data Type            | Setting                 | Default       | Description                            |
+| -------------------- | ----------------------- | ------------- | -------------------------------------- |
+| **Incidents**        | `incidentRetentionDays` | 730 (2 years) | Resolved incident records              |
+| **Alerts**           | `alertRetentionDays`    | 365 (1 year)  | Raw alert events                       |
+| **Logs**             | `logRetentionDays`      | 90 days       | Application log entries                |
+| **Metrics**          | `metricsRetentionDays`  | 365 (1 year)  | Pre-aggregated metric rollups          |
+| **Real-time Window** | `realTimeWindowDays`    | 90 days       | Period for real-time analytics queries |
 
 ---
 
@@ -43,61 +43,61 @@ OpsKnight provides preconfigured presets for common use cases:
 
 ### Minimal (90 days)
 
-| Setting | Value |
-| ------- | ----- |
-| Incidents | 90 days |
-| Alerts | 30 days |
-| Logs | 14 days |
-| Metrics | 90 days |
+| Setting          | Value   |
+| ---------------- | ------- |
+| Incidents        | 90 days |
+| Alerts           | 30 days |
+| Logs             | 14 days |
+| Metrics          | 90 days |
 | Real-time Window | 30 days |
 
 **Best for**: Development environments, cost-sensitive deployments
 
 ### Standard (1 year)
 
-| Setting | Value |
-| ------- | ----- |
-| Incidents | 365 days |
-| Alerts | 180 days |
-| Logs | 30 days |
-| Metrics | 365 days |
-| Real-time Window | 60 days |
+| Setting          | Value    |
+| ---------------- | -------- |
+| Incidents        | 365 days |
+| Alerts           | 180 days |
+| Logs             | 30 days  |
+| Metrics          | 365 days |
+| Real-time Window | 60 days  |
 
 **Best for**: Most production environments
 
 ### Extended (2 years)
 
-| Setting | Value |
-| ------- | ----- |
-| Incidents | 730 days |
-| Alerts | 365 days |
-| Logs | 90 days |
-| Metrics | 730 days |
-| Real-time Window | 90 days |
+| Setting          | Value    |
+| ---------------- | -------- |
+| Incidents        | 730 days |
+| Alerts           | 365 days |
+| Logs             | 90 days  |
+| Metrics          | 730 days |
+| Real-time Window | 90 days  |
 
 **Best for**: Teams needing longer historical data
 
 ### Enterprise (5 years)
 
-| Setting | Value |
-| ------- | ----- |
-| Incidents | 1825 days |
-| Alerts | 730 days |
-| Logs | 180 days |
-| Metrics | 1825 days |
-| Real-time Window | 90 days |
+| Setting          | Value     |
+| ---------------- | --------- |
+| Incidents        | 1825 days |
+| Alerts           | 730 days  |
+| Logs             | 180 days  |
+| Metrics          | 1825 days |
+| Real-time Window | 90 days   |
 
 **Best for**: Enterprise with extended retention needs
 
 ### Compliance (7 years)
 
-| Setting | Value |
-| ------- | ----- |
-| Incidents | 2555 days |
-| Alerts | 1825 days |
-| Logs | 365 days |
-| Metrics | 2555 days |
-| Real-time Window | 90 days |
+| Setting          | Value     |
+| ---------------- | --------- |
+| Incidents        | 2555 days |
+| Alerts           | 1825 days |
+| Logs             | 365 days  |
+| Metrics          | 2555 days |
+| Real-time Window | 90 days   |
 
 **Best for**: Organizations with regulatory requirements (SOX, HIPAA)
 
@@ -121,6 +121,7 @@ Authorization: Bearer YOUR_API_KEY
 ```
 
 **Response**:
+
 ```json
 {
   "policy": {
@@ -196,6 +197,7 @@ Content-Type: application/json
 ```
 
 **Response**:
+
 ```json
 {
   "success": true,
@@ -215,6 +217,7 @@ Content-Type: application/json
 ### Incident Data
 
 When incidents exceed retention:
+
 - Incident record
 - Associated alerts
 - Timeline events
@@ -224,18 +227,21 @@ When incidents exceed retention:
 ### Alert Data
 
 When alerts exceed retention:
+
 - Raw alert payload
 - Deduplication records
 
 ### Log Data
 
 When logs exceed retention:
+
 - Application log entries
 - Debug information
 
 ### Metric Rollups
 
 When metrics exceed retention:
+
 - Daily/weekly/monthly aggregations
 - Historical SLA snapshots
 
@@ -249,6 +255,7 @@ View current storage usage:
 2. See **Storage Statistics** section
 
 Statistics include:
+
 - Total incident count
 - Total alert count
 - Total log count
@@ -282,12 +289,12 @@ Statistics include:
 
 ### Setting Retention
 
-| Consideration | Recommendation |
-| ------------- | -------------- |
-| Compliance requirements | Check regulatory minimums first |
-| Storage costs | Balance cost vs. historical data needs |
-| Analytics needs | Keep enough for trend analysis |
-| Debugging | Short retention for logs is usually fine |
+| Consideration           | Recommendation                           |
+| ----------------------- | ---------------------------------------- |
+| Compliance requirements | Check regulatory minimums first          |
+| Storage costs           | Balance cost vs. historical data needs   |
+| Analytics needs         | Keep enough for trend analysis           |
+| Debugging               | Short retention for logs is usually fine |
 
 ### Before Reducing Retention
 
@@ -298,6 +305,7 @@ Statistics include:
 ### Real-time Window
 
 The `realTimeWindowDays` setting affects analytics performance:
+
 - Queries within this window use live data
 - Queries beyond use pre-aggregated rollups
 - Larger windows = slower queries but more accuracy
@@ -309,4 +317,3 @@ The `realTimeWindowDays` setting affects analytics performance:
 
 - [Audit Logs](./audit-logs) — Audit log retention
 - [Analytics](../core-concepts/analytics) — Historical data analysis
-

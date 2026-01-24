@@ -35,8 +35,8 @@ POST /api/integrations/uptimerobot?integrationId=YOUR_INTEGRATION_ID
 4. URL: Paste the OpsKnight Webhook URL.
 5. Enable it for your monitors.
 
-
 ## Payload Format
+
 UptimeRobot sends parameters as query strings or JSON. OpsKnight supports JSON:
 
 ```json
@@ -48,21 +48,21 @@ UptimeRobot sends parameters as query strings or JSON. OpsKnight supports JSON:
 }
 ```
 
-
 ## Event Mapping
-| Alert Type | Status | OpsKnight Action |
-| ---------- | ------ | ---------------- |
-| `1`        | Down   | Trigger (Critical)|
-| `2`        | Up     | Resolve          |
-| `98`       | Started| Info             |
-| `99`       | Paused | Info             |
 
+| Alert Type | Status  | OpsKnight Action   |
+| ---------- | ------- | ------------------ |
+| `1`        | Down    | Trigger (Critical) |
+| `2`        | Up      | Resolve            |
+| `98`       | Started | Info               |
+| `99`       | Paused  | Info               |
 
 ## Deduplication
+
 Dedup key is generated from `uptimerobot-{monitorID}`. This guarantees that a single monitor only ever has one active incident at a time.
 
-
 ## Testing
+
 ### Using cURL
 
 ```bash
@@ -76,18 +76,19 @@ curl -X POST "https://YOUR_OPSKNIGHT_URL/api/integrations/uptimerobot?integratio
   }'
 ```
 
-
 ## Troubleshooting
+
 ### Parameters Missing
+
 Ensure you configured the UptimeRobot webhook data to send JSON, or at least confirmed the POST parameters are included. OpsKnight prefers JSON.
 
-
 ## Monitor Status Logic
+
 OpsKnight translates UptimeRobot alert types:
 
-| Alert Type | Meaning | OpsKnight Action |
-| ---------- | ------- | ---------------- |
-| `1`        | Down    | Trigger (Critical)|
-| `2`        | Up      | Resolve          |
+| Alert Type | Meaning | OpsKnight Action   |
+| ---------- | ------- | ------------------ |
+| `1`        | Down    | Trigger (Critical) |
+| `2`        | Up      | Resolve            |
 
 The integration automatically uses the `monitorID` for deduplication, ensuring that a single flapping monitor updates the same incident rather than creating duplicates.

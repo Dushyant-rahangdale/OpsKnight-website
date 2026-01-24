@@ -61,47 +61,53 @@ Outbound Channels
 
 ## Technology Stack (from `OpsKnight/package.json`)
 
-| Layer | Technology |
-| --- | --- |
-| Web framework | Next.js 16.x (App Router) |
-| UI | React 19, Tailwind CSS, Radix UI |
-| Auth | NextAuth (Credentials + optional OIDC) |
-| DB/ORM | PostgreSQL + Prisma |
-| Charts | Recharts |
-| Forms/Validation | React Hook Form + Zod |
-| PWA | `@ducanh2912/next-pwa` (disabled by default) |
+| Layer            | Technology                                   |
+| ---------------- | -------------------------------------------- |
+| Web framework    | Next.js 16.x (App Router)                    |
+| UI               | React 19, Tailwind CSS, Radix UI             |
+| Auth             | NextAuth (Credentials + optional OIDC)       |
+| DB/ORM           | PostgreSQL + Prisma                          |
+| Charts           | Recharts                                     |
+| Forms/Validation | React Hook Form + Zod                        |
+| PWA              | `@ducanh2912/next-pwa` (disabled by default) |
 
 ---
 
 ## Core Subsystems (code-driven)
 
 ### Incident Intake & Deduplication
+
 - **Events API**: `src/app/api/events/route.ts`
 - **Processor**: `src/lib/events.ts`
 - **Behavior**: writes `Alert`, deduplicates by `dedupKey`, creates/updates `Incident`, logs
   `IncidentEvent`, and triggers follow-up actions.
 
 ### Integrations
+
 - **Inbound webhooks**: `src/app/api/integrations/*`
 - **Normalization**: `src/lib/integrations/*` + `src/lib/integrations/handler.ts`
 
 ### Escalations & On-call
+
 - **Engine**: `src/lib/escalation.ts`, `src/lib/oncall.ts`
 - **Persistence**: `Incident.nextEscalationAt`, `EscalationPolicy`, `OnCallSchedule`
 - **Queueing**: `src/lib/jobs/queue.ts` (Postgres-backed jobs)
 
 ### Notifications
+
 - **Core**: `src/lib/notifications.ts`, `src/lib/notification-providers.ts`
 - **Channels**: `src/lib/email.ts`, `src/lib/sms.ts`, `src/lib/whatsapp.ts`, `src/lib/push.ts`,
   `src/lib/slack.ts`, `src/lib/status-page-notifications.ts`
 
 ### Analytics & SLA
+
 - **Metrics engine**: `src/lib/sla-server.ts`, `src/lib/analytics-metrics.ts`
 - **Rollups**: `src/lib/metric-rollup.ts`, `IncidentMetricRollup` model
 - **Retention**: `src/lib/retention-policy.ts`, `SystemSettings` model
 - **Breach checks**: `src/lib/sla-breach-monitor.ts`
 
 ### Status Page
+
 - **UI**: `src/app/status/*`
 - **API**: `src/app/api/status-page/*` and related helpers in `src/lib/status-page-*`
 
@@ -152,4 +158,3 @@ Server-Sent Events endpoints used by the UI:
 - **Business logic**: `src/lib`
 - **UI components**: `src/components`
 - **Database schema**: `prisma/schema.prisma`
-

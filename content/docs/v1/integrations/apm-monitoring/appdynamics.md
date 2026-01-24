@@ -36,8 +36,8 @@ POST /api/integrations/appdynamics?integrationId=YOUR_INTEGRATION_ID
 5. Payload MIME Type: `application/json`.
 6. Add this template to your **policies**.
 
-
 ## Payload Format
+
 Template your AppDynamics HTTP Request with JSON:
 
 ```json
@@ -51,20 +51,20 @@ Template your AppDynamics HTTP Request with JSON:
 }
 ```
 
-
 ## Event Mapping
+
 | AppDynamics Event | OpsKnight Action |
 | ----------------- | ---------------- |
 | `POLICY_OPEN`     | Trigger incident |
 | `POLICY_CLOSE`    | Resolve incident |
 | `POLICY_UPGRADED` | Trigger (Update) |
 
-
 ## Deduplication
+
 Dedup key is generated from `appdynamics-{incidentId}`.
 
-
 ## Testing
+
 ### Using cURL
 
 ```bash
@@ -79,13 +79,14 @@ curl -X POST "https://YOUR_OPSKNIGHT_URL/api/integrations/appdynamics?integratio
   }'
 ```
 
-
 ## Troubleshooting
+
 ### Variable Substitution Not Working
+
 Ensure you are using the correct `${variable}` syntax in the AppDynamics HTTP Template editor. Check AppDynamics documentation for the exact variable names available in your version.
 
-
 ## Event Logic
+
 - **Summary**: Derived from `summary`, `eventMessage`, or `eventType`.
 - **Urgency**: Maps `severity` or `eventSeverity` to OpsKnight urgency (automatically normalized).
 - **Deduplication**: Uses `incidentId` or `eventId` to group updates.

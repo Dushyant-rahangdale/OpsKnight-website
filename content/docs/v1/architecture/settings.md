@@ -77,4 +77,3 @@ Most settings pages use server actions defined in:
 - `src/app/(app)/settings/security/actions.ts`
 
 Access control is enforced via RBAC helpers in `src/lib/rbac.ts`.
-

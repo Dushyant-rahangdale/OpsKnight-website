@@ -14,12 +14,12 @@ This guide covers the recommended ways to install OpsKnight and get a working in
 
 ## Deployment Options
 
-| Method                                    | Best For                          |
-| ----------------------------------------- | --------------------------------- |
-| [Docker Compose](#docker-compose)         | Development and small deployments |
-| [Kubernetes](../deployment/kubernetes) | Production and scaling            |
-| [Helm](../deployment/helm)             | Templated Kubernetes installs     |
-| [Local Development](#local-development)   | Contributing and testing          |
+| Method                                  | Best For                          |
+| --------------------------------------- | --------------------------------- |
+| [Docker Compose](#docker-compose)       | Development and small deployments |
+| [Kubernetes](../deployment/kubernetes)  | Production and scaling            |
+| [Helm](../deployment/helm)              | Templated Kubernetes installs     |
+| [Local Development](#local-development) | Contributing and testing          |
 
 ---
 

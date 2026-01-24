@@ -7,13 +7,14 @@ description: OAuth setup steps for the Slack integration
 # Slack OAuth Integration Setup
 
 ## Overview
+
 The Slack integration supports two methods:
 
 1. **OAuth Integration (Recommended)**: Connect Slack workspace via OAuth for full API access
 2. **Webhook (Legacy)**: Use incoming webhooks (limited functionality)
 
-
 ## OAuth Setup Steps
+
 ### 1. Create Slack App
 
 1. Go to https://api.slack.com/apps
@@ -86,8 +87,8 @@ openssl rand -hex 32
 
 Add this to your `ENCRYPTION_KEY` environment variable.
 
-
 ## Usage
+
 ### Connect Slack to Service
 
 1. Go to Service Settings → Notifications
@@ -103,23 +104,23 @@ Add this to your `ENCRYPTION_KEY` environment variable.
 3. Authorize the app
 4. This becomes the default Slack integration
 
-
 ## How It Works
+
 1. **OAuth Flow**: User clicks "Connect Slack" → Redirected to Slack → Authorizes → Callback stores encrypted token
 2. **Token Storage**: Bot tokens are encrypted and stored in `SlackIntegration` table
 3. **Service-Specific**: Each service can have its own Slack workspace connection
 4. **Global Fallback**: If no service-specific integration, uses global integration
 5. **Env Fallback**: If no OAuth integration, falls back to `SLACK_BOT_TOKEN` env var
 
-
 ## Security
+
 - Bot tokens are encrypted using AES-256-CBC before storage
 - Encryption key should be stored securely (env var, secret manager)
 - Tokens are decrypted only when needed for API calls
 - Never log or expose decrypted tokens
 
-
 ## Troubleshooting
+
 ### "Slack bot token not configured"
 
 - Ensure OAuth integration is connected
@@ -138,8 +139,8 @@ Add this to your `ENCRYPTION_KEY` environment variable.
 - Try connecting again
 - Clear cookies if issue persists
 
-
 ## Endpoints
+
 - `GET /api/slack/oauth` - Initiate OAuth flow
 - `GET /api/slack/oauth/callback` - OAuth callback handler
 - `GET /api/slack/channels` - List available channels

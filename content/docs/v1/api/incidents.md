@@ -13,6 +13,7 @@ The Incidents API provides full control over incidents in OpsKnight. Use it to l
 ## Overview
 
 The Incidents API supports:
+
 - Listing and filtering incidents
 - Creating manual incidents
 - Updating incident status, urgency, and assignee
@@ -32,11 +33,11 @@ Authorization: Bearer YOUR_API_KEY
 
 ### Required Scopes
 
-| Endpoint | Scope |
-| -------- | ----- |
-| List/Get incidents | `incidents:read` |
-| Create/Update incidents | `incidents:write` |
-| Delete incidents | `incidents:delete` |
+| Endpoint                | Scope              |
+| ----------------------- | ------------------ |
+| List/Get incidents      | `incidents:read`   |
+| Create/Update incidents | `incidents:write`  |
+| Delete incidents        | `incidents:delete` |
 
 ---
 
@@ -52,19 +53,19 @@ GET /api/incidents
 
 ### Query Parameters
 
-| Parameter | Type | Default | Description |
-| --------- | ---- | ------- | ----------- |
-| `limit` | number | 50 | Results per page (max 200) |
-| `offset` | number | 0 | Pagination offset |
-| `status` | string | - | Filter: `OPEN`, `ACKNOWLEDGED`, `RESOLVED`, `SNOOZED`, `SUPPRESSED` |
-| `urgency` | string | - | Filter: `HIGH`, `MEDIUM`, `LOW` |
-| `serviceId` | string | - | Filter by service |
-| `teamId` | string | - | Filter by team |
-| `assigneeId` | string | - | Filter by assignee |
-| `createdAfter` | string | - | ISO 8601 datetime |
-| `createdBefore` | string | - | ISO 8601 datetime |
-| `sort` | string | `createdAt` | Sort field |
-| `order` | string | `desc` | `asc` or `desc` |
+| Parameter       | Type   | Default     | Description                                                         |
+| --------------- | ------ | ----------- | ------------------------------------------------------------------- |
+| `limit`         | number | 50          | Results per page (max 200)                                          |
+| `offset`        | number | 0           | Pagination offset                                                   |
+| `status`        | string | -           | Filter: `OPEN`, `ACKNOWLEDGED`, `RESOLVED`, `SNOOZED`, `SUPPRESSED` |
+| `urgency`       | string | -           | Filter: `HIGH`, `MEDIUM`, `LOW`                                     |
+| `serviceId`     | string | -           | Filter by service                                                   |
+| `teamId`        | string | -           | Filter by team                                                      |
+| `assigneeId`    | string | -           | Filter by assignee                                                  |
+| `createdAfter`  | string | -           | ISO 8601 datetime                                                   |
+| `createdBefore` | string | -           | ISO 8601 datetime                                                   |
+| `sort`          | string | `createdAt` | Sort field                                                          |
+| `order`         | string | `desc`      | `asc` or `desc`                                                     |
 
 ### Example Request
 
@@ -124,13 +125,13 @@ curl -X GET "https://your-opsknight.com/api/incidents?status=OPEN&urgency=HIGH&l
 
 ### Response Fields
 
-| Field | Type | Description |
-| ----- | ---- | ----------- |
-| `incidents` | array | List of incident objects |
-| `total` | number | Total matching incidents |
-| `limit` | number | Results per page |
-| `offset` | number | Current offset |
-| `hasMore` | boolean | More results available |
+| Field       | Type    | Description              |
+| ----------- | ------- | ------------------------ |
+| `incidents` | array   | List of incident objects |
+| `total`     | number  | Total matching incidents |
+| `limit`     | number  | Results per page         |
+| `offset`    | number  | Current offset           |
+| `hasMore`   | boolean | More results available   |
 
 ---
 
@@ -254,19 +255,19 @@ POST /api/incidents
 
 ### Request Fields
 
-| Field | Type | Required | Description |
-| ----- | ---- | :------: | ----------- |
-| `title` | string | Yes | Incident title (max 255 chars) |
-| `description` | string | No | Detailed description |
-| `serviceId` | string | Yes | Service ID |
-| `urgency` | string | No | `HIGH`, `MEDIUM`, `LOW` (default: `LOW`) |
-| `priority` | string | No | `P1`, `P2`, `P3`, `P4`, `P5` |
-| `assigneeId` | string | No | User ID to assign |
-| `assignedTeamId` | string | No | Team ID to assign |
-| `dedupKey` | string | No | Custom deduplication key |
-| `customDetails` | object | No | Arbitrary key-value pairs |
-| `links` | array | No | Related links |
-| `suppressNotifications` | boolean | No | Skip initial notifications |
+| Field                   | Type    | Required | Description                              |
+| ----------------------- | ------- | :------: | ---------------------------------------- |
+| `title`                 | string  |   Yes    | Incident title (max 255 chars)           |
+| `description`           | string  |    No    | Detailed description                     |
+| `serviceId`             | string  |   Yes    | Service ID                               |
+| `urgency`               | string  |    No    | `HIGH`, `MEDIUM`, `LOW` (default: `LOW`) |
+| `priority`              | string  |    No    | `P1`, `P2`, `P3`, `P4`, `P5`             |
+| `assigneeId`            | string  |    No    | User ID to assign                        |
+| `assignedTeamId`        | string  |    No    | Team ID to assign                        |
+| `dedupKey`              | string  |    No    | Custom deduplication key                 |
+| `customDetails`         | object  |    No    | Arbitrary key-value pairs                |
+| `links`                 | array   |    No    | Related links                            |
+| `suppressNotifications` | boolean |    No    | Skip initial notifications               |
 
 ### Example Request
 
@@ -323,26 +324,26 @@ PATCH /api/incidents/:id
 
 ### Updatable Fields
 
-| Field | Type | Description |
-| ----- | ---- | ----------- |
-| `status` | string | `OPEN`, `ACKNOWLEDGED`, `RESOLVED`, `SNOOZED` |
-| `urgency` | string | `HIGH`, `MEDIUM`, `LOW` |
-| `priority` | string | `P1` through `P5` |
-| `assigneeId` | string | User ID or `null` to unassign |
-| `assignedTeamId` | string | Team ID or `null` to unassign |
-| `title` | string | Update title |
-| `description` | string | Update description |
-| `customDetails` | object | Merge with existing custom details |
-| `snoozeDuration` | number | Minutes to snooze (when status=SNOOZED) |
+| Field            | Type   | Description                                   |
+| ---------------- | ------ | --------------------------------------------- |
+| `status`         | string | `OPEN`, `ACKNOWLEDGED`, `RESOLVED`, `SNOOZED` |
+| `urgency`        | string | `HIGH`, `MEDIUM`, `LOW`                       |
+| `priority`       | string | `P1` through `P5`                             |
+| `assigneeId`     | string | User ID or `null` to unassign                 |
+| `assignedTeamId` | string | Team ID or `null` to unassign                 |
+| `title`          | string | Update title                                  |
+| `description`    | string | Update description                            |
+| `customDetails`  | object | Merge with existing custom details            |
+| `snoozeDuration` | number | Minutes to snooze (when status=SNOOZED)       |
 
 ### Status Transitions
 
-| From | Valid To |
-| ---- | -------- |
-| OPEN | ACKNOWLEDGED, RESOLVED, SNOOZED, SUPPRESSED |
-| ACKNOWLEDGED | OPEN, RESOLVED, SNOOZED |
-| SNOOZED | OPEN, ACKNOWLEDGED, RESOLVED |
-| RESOLVED | OPEN (reopen) |
+| From         | Valid To                                    |
+| ------------ | ------------------------------------------- |
+| OPEN         | ACKNOWLEDGED, RESOLVED, SNOOZED, SUPPRESSED |
+| ACKNOWLEDGED | OPEN, RESOLVED, SNOOZED                     |
+| SNOOZED      | OPEN, ACKNOWLEDGED, RESOLVED                |
+| RESOLVED     | OPEN (reopen)                               |
 
 ### Example: Acknowledge
 
@@ -427,10 +428,10 @@ POST /api/incidents/:id/notes
 
 ### Request Fields
 
-| Field | Type | Required | Description |
-| ----- | ---- | :------: | ----------- |
-| `content` | string | Yes | Note content (max 10000 chars) |
-| `isInternal` | boolean | No | Internal note (not shown on status page) |
+| Field        | Type    | Required | Description                              |
+| ------------ | ------- | :------: | ---------------------------------------- |
+| `content`    | string  |   Yes    | Note content (max 10000 chars)           |
+| `isInternal` | boolean |    No    | Internal note (not shown on status page) |
 
 ### Example Request
 
@@ -553,24 +554,24 @@ curl -X GET "https://your-opsknight.com/api/incidents/inc_abc123/timeline" \
 
 ### Timeline Event Types
 
-| Type | Description |
-| ---- | ----------- |
-| `created` | Incident created |
-| `acknowledged` | Incident acknowledged |
-| `resolved` | Incident resolved |
-| `snoozed` | Incident snoozed |
-| `unsnoozed` | Snooze expired |
-| `suppressed` | Incident suppressed |
-| `escalation` | Escalated to next step |
-| `notification_sent` | Notification dispatched |
-| `notification_delivered` | Notification confirmed delivered |
-| `notification_failed` | Notification delivery failed |
-| `assigned` | Assignee changed |
-| `reassigned` | Reassigned to different user/team |
-| `urgency_changed` | Urgency level changed |
-| `note_added` | Note added |
-| `merged` | Merged with another incident |
-| `linked` | Linked to related incident |
+| Type                     | Description                       |
+| ------------------------ | --------------------------------- |
+| `created`                | Incident created                  |
+| `acknowledged`           | Incident acknowledged             |
+| `resolved`               | Incident resolved                 |
+| `snoozed`                | Incident snoozed                  |
+| `unsnoozed`              | Snooze expired                    |
+| `suppressed`             | Incident suppressed               |
+| `escalation`             | Escalated to next step            |
+| `notification_sent`      | Notification dispatched           |
+| `notification_delivered` | Notification confirmed delivered  |
+| `notification_failed`    | Notification delivery failed      |
+| `assigned`               | Assignee changed                  |
+| `reassigned`             | Reassigned to different user/team |
+| `urgency_changed`        | Urgency level changed             |
+| `note_added`             | Note added                        |
+| `merged`                 | Merged with another incident      |
+| `linked`                 | Linked to related incident        |
 
 ---
 
@@ -645,12 +646,12 @@ POST /api/incidents/bulk
 
 ### Supported Bulk Updates
 
-| Field | Description |
-| ----- | ----------- |
-| `status` | Change status |
-| `assigneeId` | Assign to user |
+| Field            | Description    |
+| ---------------- | -------------- |
+| `status`         | Change status  |
+| `assigneeId`     | Assign to user |
 | `assignedTeamId` | Assign to team |
-| `urgency` | Change urgency |
+| `urgency`        | Change urgency |
 
 ### Example: Bulk Acknowledge
 
@@ -768,17 +769,17 @@ curl -X DELETE "https://your-opsknight.com/api/incidents/inc_abc123" \
 
 ### Common Errors
 
-| HTTP Status | Code | Description |
-| ----------- | ---- | ----------- |
-| 400 | `INVALID_REQUEST` | Malformed request body |
-| 400 | `INVALID_STATUS` | Invalid status transition |
-| 401 | `UNAUTHORIZED` | Missing or invalid API key |
-| 403 | `FORBIDDEN` | Insufficient permissions |
-| 404 | `NOT_FOUND` | Incident not found |
-| 409 | `CONFLICT` | Concurrent modification |
-| 422 | `VALIDATION_ERROR` | Field validation failed |
-| 429 | `RATE_LIMITED` | Too many requests |
-| 500 | `INTERNAL_ERROR` | Server error |
+| HTTP Status | Code               | Description                |
+| ----------- | ------------------ | -------------------------- |
+| 400         | `INVALID_REQUEST`  | Malformed request body     |
+| 400         | `INVALID_STATUS`   | Invalid status transition  |
+| 401         | `UNAUTHORIZED`     | Missing or invalid API key |
+| 403         | `FORBIDDEN`        | Insufficient permissions   |
+| 404         | `NOT_FOUND`        | Incident not found         |
+| 409         | `CONFLICT`         | Concurrent modification    |
+| 422         | `VALIDATION_ERROR` | Field validation failed    |
+| 429         | `RATE_LIMITED`     | Too many requests          |
+| 500         | `INTERNAL_ERROR`   | Server error               |
 
 ### Error Response Format
 
@@ -800,13 +801,13 @@ curl -X DELETE "https://your-opsknight.com/api/incidents/inc_abc123" \
 
 ## Rate Limits
 
-| Endpoint | Limit |
-| -------- | ----- |
-| GET /api/incidents | 100/minute |
-| GET /api/incidents/:id | 200/minute |
-| POST /api/incidents | 50/minute |
+| Endpoint                 | Limit      |
+| ------------------------ | ---------- |
+| GET /api/incidents       | 100/minute |
+| GET /api/incidents/:id   | 200/minute |
+| POST /api/incidents      | 50/minute  |
 | PATCH /api/incidents/:id | 100/minute |
-| POST /api/incidents/bulk | 10/minute |
+| POST /api/incidents/bulk | 10/minute  |
 
 ---
 
@@ -814,17 +815,18 @@ curl -X DELETE "https://your-opsknight.com/api/incidents/inc_abc123" \
 
 ### When to Use Incidents API vs Events API
 
-| Use Case | API |
-| -------- | --- |
-| Automated alerts from monitoring | Events API |
-| Manual incident creation | Incidents API |
-| Custom workflow automation | Incidents API |
-| Programmatic status updates | Incidents API |
-| Auto-resolve from monitoring | Events API |
+| Use Case                         | API           |
+| -------------------------------- | ------------- |
+| Automated alerts from monitoring | Events API    |
+| Manual incident creation         | Incidents API |
+| Custom workflow automation       | Incidents API |
+| Programmatic status updates      | Incidents API |
+| Auto-resolve from monitoring     | Events API    |
 
 ### Pagination
 
 For large result sets:
+
 - Use `limit` and `offset` for pagination
 - Process results in batches
 - Use filters to reduce result sets
@@ -849,4 +851,3 @@ For large result sets:
 - [Incidents](../core-concepts/incidents) — Incident lifecycle
 - [Services](../core-concepts/services) — Service configuration
 - [Escalation Policies](../core-concepts/escalation-policies) — Notification routing
-

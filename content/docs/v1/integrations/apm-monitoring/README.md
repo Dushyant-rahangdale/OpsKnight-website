@@ -11,6 +11,7 @@ Connect OpsKnight to your APM and observability stack to turn signals into incid
 ## Available integrations
 
 <!-- integrations-list:start -->
+
 - [Datadog](./datadog) — Receive Datadog monitor alerts in OpsKnight
 - [New Relic](./new-relic) — Receive New Relic alerts and incidents in OpsKnight
 - [Dynatrace](./dynatrace) — Integrate Dynatrace problems with OpsKnight.

@@ -12,8 +12,8 @@ export const BRAND = {
     domain: "opsknight.com",
 
     // Status
-    status: "In Development",
-    statusMessage: "Launching Soon",
+    status: "Accepting Contributions",
+    statusMessage: "v1.0.0 Released",
 
     links: {
         github: "https://github.com/Dushyant-rahangdale/OpsKnight",

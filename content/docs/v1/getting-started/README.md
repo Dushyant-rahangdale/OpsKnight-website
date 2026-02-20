@@ -6,10 +6,9 @@ description: Everything you need to install, configure, and start using OpsKnigh
 
 # Getting Started
 
-This section will take you from zero to a fully operational incident management system. By the end, you'll have OpsKnight running, your first service configured, and understand how to create and manage incidents.
+This section takes you from zero to a fully operational incident management system. By the end, you'll have OpsKnight running, your first service configured, and your first incident created.
 
-<!-- placeholder:getting-started-overview -->
-<!-- Add: Screenshot showing the OpsKnight login page or initial dashboard -->
+![OpsKnight Command Center dashboard](../assets/dashboard-command-center-1200.jpg)
 
 ---
 
@@ -20,6 +19,21 @@ This section will take you from zero to a fully operational incident management 
 | [Installation](./installation)   | Get OpsKnight running with Docker, Kubernetes, or locally |
 | [Configuration](./configuration) | Understand environment variables and system settings      |
 | [First Steps](./first-steps)     | Create your first service, incident, and on-call schedule |
+
+---
+
+## Mobile PWA + Push Notifications
+
+OpsKnight is desktop-first for command-center work, and also ships as a mobile PWA so responders can act instantly when away from the laptop.
+
+![OpsKnight mobile dashboard](../assets/mobile-dashboard.png)
+
+**Why enable it early**
+- Install to iOS/Android home screen with a single tap (no app store wait)
+- Push notifications include incident context and deep links
+- Acknowledge or escalate without opening a laptop
+
+See the [Mobile Setup](../mobile/setup) guide to enable push and add the PWA to your device.
 
 ---
 

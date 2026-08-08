@@ -33,6 +33,7 @@ const sources: { name: string; key: IntegrationKey; category: string }[] = [
 // Destinations: Alerting & Routing
 const destinations: { name: string; key: IntegrationKey; category: string }[] = [
     { name: "Slack", key: "slack", category: "Chat" },
+    { name: "Jira Cloud", key: "jira", category: "Issue Tracking" },
     { name: "Email", key: "email", category: "Notification" },
     { name: "SMS", key: "sms", category: "Notification" },
     { name: "Push Notifications", key: "push", category: "Notification" },

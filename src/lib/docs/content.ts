@@ -95,7 +95,7 @@ export function getAllDocSlugs(version: string) {
   function walk(dir: string) {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
     for (const entry of entries) {
-      if (entry.name.startsWith(".")) continue;
+      if (entry.name.startsWith(".") || entry.name === "assets") continue;
       const fullPath = path.join(dir, entry.name);
       if (entry.isDirectory()) {
         walk(fullPath);

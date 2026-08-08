@@ -31,7 +31,7 @@ const stats = [
 ];
 
 const tools = [
-    "Kubernetes", "Docker", "Prometheus", "Grafana", "OpenTelemetry", "Slack", "Jira Cloud", "PagerDuty", "AWS", "GitHub", "GitLab", "Terraform", "Argocd"
+    "Datadog", "Prometheus", "Grafana", "Slack", "Jira Cloud", "AWS CloudWatch", "New Relic", "Sentry", "Splunk", "Azure Monitor", "Google Cloud", "GitHub", "Bitbucket", "UptimeRobot"
 ];
 
 function TechTicker() {

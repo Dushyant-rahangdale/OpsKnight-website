@@ -7,10 +7,13 @@ import { DOC_VERSIONS } from "@/lib/docs/versions";
 import { ChevronRight, Clock, BookOpen } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 // export const dynamic = "force-static";
 
 const LEGACY_DOC_REDIRECTS: Record<string, string> = {
+  "issue-tracking/jira": "integrations/issue-tracking/jira",
+  "jira": "integrations/issue-tracking/jira",
+  "integrations/jira": "integrations/issue-tracking/jira",
   "integrations/datadog": "integrations/apm-monitoring/datadog",
   "integrations/new-relic": "integrations/apm-monitoring/new-relic",
   "integrations/dynatrace": "integrations/apm-monitoring/dynatrace",

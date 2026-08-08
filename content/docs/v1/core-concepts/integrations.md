@@ -17,10 +17,10 @@ OpsKnight integrations connect your monitoring stack to incident management. Thi
 
 OpsKnight has two categories of integrations:
 
-| Type | Purpose | Direction |
-| ---- | ------- | --------- |
-| **Alert Ingestion** | Receive alerts from monitoring tools | Inbound |
-| **Notification Channels** | Send alerts to responders | Outbound |
+| Type                      | Purpose                              | Direction |
+| ------------------------- | ------------------------------------ | --------- |
+| **Alert Ingestion**       | Receive alerts from monitoring tools | Inbound   |
+| **Notification Channels** | Send alerts to responders            | Outbound  |
 
 ```
 Alert Sources (Datadog, Prometheus, etc.)
@@ -92,46 +92,51 @@ POST /api/events (with routing key)
 ## Supported Alert Sources (23+)
 
 ### Monitoring & APM
-| Integration | Description |
-| ----------- | ----------- |
-| **Datadog** | Full Datadog monitor alerts |
-| **Prometheus Alertmanager** | Prometheus/Alertmanager alerts |
-| **Grafana** | Grafana alerting (unified & legacy) |
-| **New Relic** | New Relic alert policies |
-| **Dynatrace** | Dynatrace problem notifications |
-| **AppDynamics** | AppDynamics health violations |
-| **Elastic/Kibana** | Elasticsearch Watcher alerts |
-| **Honeycomb** | Honeycomb triggers |
-| **Splunk Observability** | Splunk detector alerts |
-| **Sentry** | Sentry issue alerts |
+
+| Integration                 | Description                         |
+| --------------------------- | ----------------------------------- |
+| **Datadog**                 | Full Datadog monitor alerts         |
+| **Prometheus Alertmanager** | Prometheus/Alertmanager alerts      |
+| **Grafana**                 | Grafana alerting (unified & legacy) |
+| **New Relic**               | New Relic alert policies            |
+| **Dynatrace**               | Dynatrace problem notifications     |
+| **AppDynamics**             | AppDynamics health violations       |
+| **Elastic/Kibana**          | Elasticsearch Watcher alerts        |
+| **Honeycomb**               | Honeycomb triggers                  |
+| **Splunk Observability**    | Splunk detector alerts              |
+| **Sentry**                  | Sentry issue alerts                 |
 
 ### Cloud Providers
-| Integration | Description |
-| ----------- | ----------- |
-| **AWS CloudWatch** | CloudWatch alarms via SNS |
-| **Azure Monitor** | Azure Monitor alerts |
-| **Google Cloud Monitoring** | GCP alerts via Pub/Sub |
+
+| Integration                 | Description               |
+| --------------------------- | ------------------------- |
+| **AWS CloudWatch**          | CloudWatch alarms via SNS |
+| **Azure Monitor**           | Azure Monitor alerts      |
+| **Google Cloud Monitoring** | GCP alerts via Pub/Sub    |
 
 ### CI/CD & DevOps
-| Integration | Description |
-| ----------- | ----------- |
-| **GitHub** | Workflow failures, security alerts |
-| **GitLab** | Pipeline failures, alerts |
-| **Bitbucket** | Pipeline notifications |
+
+| Integration   | Description                        |
+| ------------- | ---------------------------------- |
+| **GitHub**    | Workflow failures, security alerts |
+| **GitLab**    | Pipeline failures, alerts          |
+| **Bitbucket** | Pipeline notifications             |
 
 ### Uptime Monitoring
-| Integration | Description |
-| ----------- | ----------- |
-| **UptimeRobot** | Uptime monitor alerts |
-| **Pingdom** | Pingdom check alerts |
-| **Better Uptime** | Better Uptime monitors |
-| **Uptime Kuma** | Self-hosted uptime alerts |
+
+| Integration       | Description               |
+| ----------------- | ------------------------- |
+| **UptimeRobot**   | Uptime monitor alerts     |
+| **Pingdom**       | Pingdom check alerts      |
+| **Better Uptime** | Better Uptime monitors    |
+| **Uptime Kuma**   | Self-hosted uptime alerts |
 
 ### Other
-| Integration | Description |
-| ----------- | ----------- |
-| **Events API V2** | Generic API (PagerDuty-compatible) |
-| **Generic Webhook** | Flexible custom webhook |
+
+| Integration         | Description                        |
+| ------------------- | ---------------------------------- |
+| **Events API V2**   | Generic API (PagerDuty-compatible) |
+| **Generic Webhook** | Flexible custom webhook            |
 
 ---
 
@@ -156,6 +161,7 @@ POST /api/events (with routing key)
 ### Step 3: Copy Integration Details
 
 After creation, you'll see:
+
 - **Webhook URL**: The endpoint to configure in your monitoring tool
 - **Integration Key**: Unique routing key for this integration
 
@@ -172,19 +178,20 @@ Use the webhook URL and integration key to configure alerts in your monitoring s
 
 When you create an integration, OpsKnight generates and stores:
 
-| Field | Description | Generated? | Required? |
-| ----- | ----------- | ---------- | --------- |
-| **id** | Unique integration identifier | Auto | - |
-| **name** | Display name (e.g., "Prod Datadog") | User input | Yes |
-| **type** | Integration type (DATADOG, PROMETHEUS, etc.) | User select | Yes |
-| **key** | 32-character hex routing key | Auto | - |
-| **signatureSecret** | HMAC secret for webhook verification | User input | **No (Optional)** |
-| **enabled** | Toggle to enable/disable | Default: true | - |
-| **serviceId** | Which service receives alerts | User select | Yes |
+| Field               | Description                                  | Generated?    | Required?         |
+| ------------------- | -------------------------------------------- | ------------- | ----------------- |
+| **id**              | Unique integration identifier                | Auto          | -                 |
+| **name**            | Display name (e.g., "Prod Datadog")          | User input    | Yes               |
+| **type**            | Integration type (DATADOG, PROMETHEUS, etc.) | User select   | Yes               |
+| **key**             | 32-character hex routing key                 | Auto          | -                 |
+| **signatureSecret** | HMAC secret for webhook verification         | User input    | **No (Optional)** |
+| **enabled**         | Toggle to enable/disable                     | Default: true | -                 |
+| **serviceId**       | Which service receives alerts                | User select   | Yes               |
 
 ### About the Integration Key (Routing Key)
 
 The **integration key** (also called routing key) is:
+
 - **Auto-generated**: 32-character hexadecimal string
 - **Unique per integration**: Each integration has its own key
 - **Used for authentication**: External systems send this key to identify the integration
@@ -195,12 +202,14 @@ Example key: `a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6`
 ### About the Signature Secret (Optional)
 
 The **signature secret** is:
+
 - **Optional**: Not required, but recommended for security
 - **User-configured**: You set this after creation
 - **Used for verification**: Validates webhook requests are genuine
 - **HMAC-SHA256**: Standard cryptographic verification
 
 **When to use a signature secret**:
+
 - Your monitoring tool supports webhook signing (most do)
 - You want to verify requests are from your monitoring tool
 - You're in a production environment
@@ -262,6 +271,7 @@ Requires `events:write` scope.
 ### Why Use Signature Verification?
 
 Signature verification ensures:
+
 - Webhooks are from your monitoring tool, not attackers
 - Payloads haven't been tampered with
 - Replay attacks are prevented
@@ -291,14 +301,14 @@ Signature verification ensures:
 
 Different tools use different signature headers:
 
-| Provider | Header |
-| -------- | ------ |
-| GitHub | `X-Hub-Signature-256` |
-| GitLab | `X-Gitlab-Token` |
-| Sentry | `Sentry-Hook-Signature` |
-| Slack | `X-Slack-Signature` |
-| Grafana | `X-Grafana-Signature` |
-| Generic | `X-Signature` or `X-Webhook-Signature` |
+| Provider | Header                                 |
+| -------- | -------------------------------------- |
+| GitHub   | `X-Hub-Signature-256`                  |
+| GitLab   | `X-Gitlab-Token`                       |
+| Sentry   | `Sentry-Hook-Signature`                |
+| Slack    | `X-Slack-Signature`                    |
+| Grafana  | `X-Grafana-Signature`                  |
+| Generic  | `X-Signature` or `X-Webhook-Signature` |
 
 ---
 
@@ -345,18 +355,19 @@ The Events API uses a PagerDuty-compatible format that works with any tool:
 
 ### Event Fields
 
-| Field | Required | Description |
-| ----- | -------- | ----------- |
-| `event_action` | Yes | `trigger`, `acknowledge`, or `resolve` |
-| `dedup_key` | Yes | Unique identifier for deduplication |
-| `payload.summary` | Yes (trigger) | Alert title/summary |
-| `payload.source` | Yes (trigger) | Origin system name |
-| `payload.severity` | No | `critical`, `error`, `warning`, `info` |
-| `payload.custom_details` | No | Additional metadata (any JSON) |
+| Field                    | Required      | Description                            |
+| ------------------------ | ------------- | -------------------------------------- |
+| `event_action`           | Yes           | `trigger`, `acknowledge`, or `resolve` |
+| `dedup_key`              | Yes           | Unique identifier for deduplication    |
+| `payload.summary`        | Yes (trigger) | Alert title/summary                    |
+| `payload.source`         | Yes (trigger) | Origin system name                     |
+| `payload.severity`       | No            | `critical`, `error`, `warning`, `info` |
+| `payload.custom_details` | No            | Additional metadata (any JSON)         |
 
 ### Deduplication
 
 The `dedup_key` is crucial for deduplication:
+
 - Same `dedup_key` = same incident
 - New triggers update existing open incident
 - Resolve events close the matching incident
@@ -375,6 +386,7 @@ The `dedup_key` is crucial for deduplication:
 3. In your monitors, add the `@webhook-OpsKnight` notification
 
 **Payload transformation**:
+
 - `alert_type` → `severity` (error → critical, warning → warning)
 - `aggregation_key` → `dedup_key`
 - `title` → `summary`
@@ -392,6 +404,7 @@ receivers:
 ```
 
 **Payload transformation**:
+
 - `status: firing` → trigger event
 - `status: resolved` → resolve event
 - `labels.alertname` → summary
@@ -407,6 +420,7 @@ receivers:
 3. Create notification policy using this contact point
 
 **Supports both formats**:
+
 - Grafana unified alerting (new)
 - Prometheus Alertmanager format
 
@@ -419,6 +433,7 @@ URL: https://your-opsknight.com/api/integrations/webhook?integrationId=<id>
 ```
 
 Configure field mapping in OpsKnight:
+
 - `summaryField`: Path to alert title (e.g., `alert.title`)
 - `severityField`: Path to severity (e.g., `level`)
 - `dedupKeyField`: Path to unique ID (e.g., `alert_id`)
@@ -432,12 +447,13 @@ Configure field mapping in OpsKnight:
 
 Integration webhooks are rate-limited to prevent abuse:
 
-| Limit | Value |
-| ----- | ----- |
-| Per integration | 120 requests/minute |
+| Limit             | Value                              |
+| ----------------- | ---------------------------------- |
+| Per integration   | 120 requests/minute                |
 | Response on limit | HTTP 429 with `Retry-After` header |
 
 If rate-limited:
+
 1. Queue alerts in your monitoring tool
 2. Retry with exponential backoff
 3. Respect the `Retry-After` header
@@ -453,6 +469,7 @@ Toggle integrations without deleting them:
 3. Click the **Enable/Disable** toggle
 
 When disabled:
+
 - Webhooks return 403 Forbidden
 - No incidents are created
 - Easy to re-enable later
@@ -465,14 +482,14 @@ Notification integrations send alerts to responders through various channels.
 
 ## Notification Channels
 
-| Channel | Description |
-| ------- | ----------- |
-| **Email** | SMTP, SendGrid, Resend |
-| **SMS** | Twilio, AWS SNS |
-| **Push** | Browser/mobile push via OneSignal |
-| **Slack** | Slack workspace integration |
-| **Webhook** | Google Chat, Teams, Discord, Telegram |
-| **WhatsApp** | WhatsApp Business API |
+| Channel      | Description                           |
+| ------------ | ------------------------------------- |
+| **Email**    | SMTP, SendGrid, Resend                |
+| **SMS**      | Twilio, AWS SNS                       |
+| **Push**     | Browser/mobile push via OneSignal     |
+| **Slack**    | Slack workspace integration           |
+| **Webhook**  | Google Chat, Teams, Discord, Telegram |
+| **WhatsApp** | WhatsApp Business API                 |
 
 ---
 
@@ -486,17 +503,18 @@ Each service can have its own notification preferences.
 2. Go to **Settings**
 3. Configure notification options:
 
-| Setting | Description |
-| ------- | ----------- |
-| **Notification Channels** | Which channels to use |
-| **Notify on Triggered** | Send notification when incident opens |
-| **Notify on Acknowledged** | Send notification when acknowledged |
-| **Notify on Resolved** | Send notification when resolved |
-| **Notify on SLA Breach** | Send notification on SLA breach |
+| Setting                    | Description                           |
+| -------------------------- | ------------------------------------- |
+| **Notification Channels**  | Which channels to use                 |
+| **Notify on Triggered**    | Send notification when incident opens |
+| **Notify on Acknowledged** | Send notification when acknowledged   |
+| **Notify on Resolved**     | Send notification when resolved       |
+| **Notify on SLA Breach**   | Send notification on SLA breach       |
 
 ### Channel Priority
 
 Channels are tried in order based on user preferences:
+
 1. Push notification (fastest)
 2. Slack (if workspace connected)
 3. SMS (for high urgency)
@@ -537,13 +555,13 @@ Send notifications to external systems via webhooks.
 
 ### Supported Destinations
 
-| Type | Description |
-| ---- | ----------- |
-| **Google Chat** | Google Workspace chat |
+| Type                | Description                  |
+| ------------------- | ---------------------------- |
+| **Google Chat**     | Google Workspace chat        |
 | **Microsoft Teams** | Teams channels via connector |
-| **Discord** | Discord server webhooks |
-| **Telegram** | Telegram bot notifications |
-| **Generic** | Any HTTP endpoint |
+| **Discord**         | Discord server webhooks      |
+| **Telegram**        | Telegram bot notifications   |
+| **Generic**         | Any HTTP endpoint            |
 
 ### Creating a Webhook Integration
 
@@ -588,11 +606,11 @@ Send notifications to external systems via webhooks.
 
 ### Email Providers
 
-| Provider | Configuration |
-| -------- | ------------- |
-| **Resend** | API key |
-| **SendGrid** | API key |
-| **SMTP** | Host, port, username, password |
+| Provider     | Configuration                  |
+| ------------ | ------------------------------ |
+| **Resend**   | API key                        |
+| **SendGrid** | API key                        |
+| **SMTP**     | Host, port, username, password |
 
 ### Configure via Settings
 
@@ -655,6 +673,7 @@ ONESIGNAL_API_KEY=xxx
 ### User Opt-In
 
 Users enable push notifications via:
+
 1. Installing the PWA
 2. Allowing notification permissions
 3. Device registered automatically

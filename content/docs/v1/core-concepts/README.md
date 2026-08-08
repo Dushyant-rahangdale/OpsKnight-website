@@ -64,20 +64,20 @@ OpsKnight is built around a simple but powerful model: **Alerts become Incidents
 
 ## Concepts at a Glance
 
-| Concept | What It Is | Why It Matters |
-|---------|-----------|----------------|
-| [Dashboard](./dashboard) | Command center for real-time visibility | See the forest, not just the trees |
-| [Services](./services) | Systems you monitor with ownership | Alerts need context and routing |
-| [Incidents](./incidents) | Actionable work items from alerts | Track resolution from trigger to close |
-| [Escalation Policies](./escalation-policies) | Who gets notified and when | Ensure issues never fall through cracks |
-| [Schedules](./schedules) | On-call rotations and shifts | Fair distribution of on-call duty |
-| [Teams](./teams) | User groups with shared responsibility | Organize people and permissions |
-| [Users](./users) | Individuals with roles and preferences | Authentication and personalization |
-| [Analytics](./analytics) | Metrics, SLAs, and trends | Measure and improve performance |
-| [Postmortems](./postmortems) | Incident retrospectives | Learn from failures |
-| [Status Pages](./status-page) | Public service health communication | Transparency with customers |
-| [Integrations](./integrations) | Connections to monitoring tools | Route alerts from your stack |
-| [Scalability](./scalability) | Capacity targets and tuning | Understand scale limits and optimizations |
+| Concept                                      | What It Is                              | Why It Matters                            |
+| -------------------------------------------- | --------------------------------------- | ----------------------------------------- |
+| [Dashboard](./dashboard)                     | Command center for real-time visibility | See the forest, not just the trees        |
+| [Services](./services)                       | Systems you monitor with ownership      | Alerts need context and routing           |
+| [Incidents](./incidents)                     | Actionable work items from alerts       | Track resolution from trigger to close    |
+| [Escalation Policies](./escalation-policies) | Who gets notified and when              | Ensure issues never fall through cracks   |
+| [Schedules](./schedules)                     | On-call rotations and shifts            | Fair distribution of on-call duty         |
+| [Teams](./teams)                             | User groups with shared responsibility  | Organize people and permissions           |
+| [Users](./users)                             | Individuals with roles and preferences  | Authentication and personalization        |
+| [Analytics](./analytics)                     | Metrics, SLAs, and trends               | Measure and improve performance           |
+| [Postmortems](./postmortems)                 | Incident retrospectives                 | Learn from failures                       |
+| [Status Pages](./status-page)                | Public service health communication     | Transparency with customers               |
+| [Integrations](./integrations)               | Connections to monitoring tools         | Route alerts from your stack              |
+| [Scalability](./scalability)                 | Capacity targets and tuning             | Understand scale limits and optimizations |
 
 ---
 
@@ -112,21 +112,21 @@ Service ──────────────────┐
 
 ## Terminology Quick Reference
 
-| Term | Definition |
-|------|------------|
-| **Alert** | Raw event from a monitoring tool (webhook payload) |
-| **Incident** | Actionable work item created from one or more alerts |
-| **Dedup Key** | Identifier to group related alerts into one incident |
-| **Urgency** | Impact level: HIGH, MEDIUM, or LOW |
-| **Priority** | Business priority: P1-P5 (most to least critical) |
-| **Escalation** | Process of notifying additional people over time |
-| **On-Call** | The person currently responsible for responding |
-| **Shift** | A time period when someone is on-call |
-| **Layer** | A rotation pattern within a schedule |
-| **Override** | Temporary change to normal on-call assignment |
-| **MTTA** | Mean Time To Acknowledge |
-| **MTTR** | Mean Time To Resolve |
-| **SLA** | Service Level Agreement (target response times) |
+| Term           | Definition                                           |
+| -------------- | ---------------------------------------------------- |
+| **Alert**      | Raw event from a monitoring tool (webhook payload)   |
+| **Incident**   | Actionable work item created from one or more alerts |
+| **Dedup Key**  | Identifier to group related alerts into one incident |
+| **Urgency**    | Impact level: HIGH, MEDIUM, or LOW                   |
+| **Priority**   | Business priority: P1-P5 (most to least critical)    |
+| **Escalation** | Process of notifying additional people over time     |
+| **On-Call**    | The person currently responsible for responding      |
+| **Shift**      | A time period when someone is on-call                |
+| **Layer**      | A rotation pattern within a schedule                 |
+| **Override**   | Temporary change to normal on-call assignment        |
+| **MTTA**       | Mean Time To Acknowledge                             |
+| **MTTR**       | Mean Time To Resolve                                 |
+| **SLA**        | Service Level Agreement (target response times)      |
 
 ---
 
@@ -147,21 +147,25 @@ If you're new to OpsKnight, we recommend reading the concepts in this order:
 ## Deep Dives
 
 ### For Incident Responders
+
 - [Incident Lifecycle](./incidents.md#incident-lifecycle) — Understand statuses and actions
 - [Bulk Actions](./incidents.md#bulk-actions) — Manage alert storms efficiently
 - [Mobile Access](../mobile/) — Respond from anywhere
 
 ### For On-Call Managers
+
 - [Schedule Layers](./schedules.md#layers) — Build complex coverage patterns
 - [Overrides](./schedules.md#overrides) — Handle vacations and swaps
 - [Fair Rotation](./schedules.md#fair-rotation) — Balance on-call burden
 
 ### For Operations Teams
+
 - [SLA Configuration](./analytics.md#sla-tracking) — Set response time targets
 - [Custom Fields](../administration/custom-fields) — Track additional metadata
 - [Integrations](./integrations) — Connect your monitoring stack
 
 ### For Leadership
+
 - [Analytics Dashboard](./analytics.md#dashboard) — Executive metrics
 - [Status Pages](./status-page) — Customer communication
 - [Postmortems](./postmortems) — Organizational learning

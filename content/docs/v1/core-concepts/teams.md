@@ -15,12 +15,12 @@ Teams are the organizational unit for grouping users by responsibility. They pro
 
 ## Why Teams Matter
 
-| Without Teams | With Teams |
-| ------------- | ---------- |
-| Unclear service ownership | Every service has an accountable team |
-| Manual incident routing | Escalation policies target entire teams |
-| Individual permissions | Role-based access at team level |
-| No workload visibility | Team dashboards show incident load |
+| Without Teams             | With Teams                              |
+| ------------------------- | --------------------------------------- |
+| Unclear service ownership | Every service has an accountable team   |
+| Manual incident routing   | Escalation policies target entire teams |
+| Individual permissions    | Role-based access at team level         |
+| No workload visibility    | Team dashboards show incident load      |
 
 ---
 
@@ -28,13 +28,13 @@ Teams are the organizational unit for grouping users by responsibility. They pro
 
 ### Team Model
 
-| Field | Description |
-| ----- | ----------- |
-| **Name** | Unique team identifier (e.g., "Platform Engineering") |
-| **Description** | Brief description of team responsibilities |
-| **Team Lead** | Optional designated lead for escalation purposes |
-| **Members** | Users assigned to the team with roles |
-| **Services** | Services owned by this team |
+| Field           | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| **Name**        | Unique team identifier (e.g., "Platform Engineering") |
+| **Description** | Brief description of team responsibilities            |
+| **Team Lead**   | Optional designated lead for escalation purposes      |
+| **Members**     | Users assigned to the team with roles                 |
+| **Services**    | Services owned by this team                           |
 
 ---
 
@@ -42,10 +42,10 @@ Teams are the organizational unit for grouping users by responsibility. They pro
 
 Each team member has one of three roles determining their permissions:
 
-| Role | Permissions |
-| ---- | ----------- |
-| **OWNER** | Full control — can manage all settings, assign roles, delete team |
-| **ADMIN** | Can add/remove members, but cannot assign OWNER/ADMIN roles |
+| Role       | Permissions                                                       |
+| ---------- | ----------------------------------------------------------------- |
+| **OWNER**  | Full control — can manage all settings, assign roles, delete team |
+| **ADMIN**  | Can add/remove members, but cannot assign OWNER/ADMIN roles       |
 | **MEMBER** | Standard access — receives team notifications, can view team info |
 
 ### Role Hierarchy
@@ -73,6 +73,7 @@ Each team member has one of three roles determining their permissions:
 ### Initial Setup
 
 After creating a team:
+
 1. Add members (you're automatically added as OWNER)
 2. Assign a team lead (optional)
 3. Link services to the team
@@ -134,13 +135,14 @@ Each team member can control whether they receive team-level notifications:
 
 ### Per-Member Settings
 
-| Setting | Default | Description |
-| ------- | ------- | ----------- |
-| **Receive Team Notifications** | `true` | Whether to receive notifications when team is targeted |
+| Setting                        | Default | Description                                            |
+| ------------------------------ | ------- | ------------------------------------------------------ |
+| **Receive Team Notifications** | `true`  | Whether to receive notifications when team is targeted |
 
 ### How It Works
 
 When an escalation policy targets a team:
+
 1. System fetches all team members
 2. Filters to members with notifications enabled
 3. Sends notifications to filtered list
@@ -148,6 +150,7 @@ When an escalation policy targets a team:
 ### Opting Out
 
 Members can disable team notifications:
+
 1. Go to **Profile** → **Teams**
 2. Toggle **Receive Notifications** for each team
 3. Changes take effect immediately
@@ -157,6 +160,7 @@ Members can disable team notifications:
 ## Assigning Services to Teams
 
 Teams provide ownership for services, enabling:
+
 - Clear accountability
 - Team-based incident filtering
 - Automatic incident routing
@@ -170,6 +174,7 @@ Teams provide ownership for services, enabling:
 ### Viewing Team Services
 
 On the team detail page:
+
 - See all services owned by the team
 - View service health status
 - Quick link to service configuration
@@ -180,20 +185,20 @@ On the team detail page:
 
 Teams are one of three target types for escalation steps:
 
-| Target Type | Behavior |
-| ----------- | -------- |
-| **User** | Notify a specific individual |
-| **Team** | Notify team members with notifications enabled |
-| **Schedule** | Notify current on-call from schedule |
+| Target Type  | Behavior                                       |
+| ------------ | ---------------------------------------------- |
+| **User**     | Notify a specific individual                   |
+| **Team**     | Notify team members with notifications enabled |
+| **Schedule** | Notify current on-call from schedule           |
 
 ### Team Targeting Options
 
 When targeting a team in an escalation policy:
 
-| Option | Behavior |
-| ------ | -------- |
-| **Notify All Members** | All members with notifications enabled are notified |
-| **Notify Team Lead Only** | Only the designated team lead is notified |
+| Option                    | Behavior                                            |
+| ------------------------- | --------------------------------------------------- |
+| **Notify All Members**    | All members with notifications enabled are notified |
+| **Notify Team Lead Only** | Only the designated team lead is notified           |
 
 ### Example Policy
 
@@ -209,20 +214,20 @@ Step 3: Backend Services Team (All Members) → wait 15 min
 
 ### Filters Available
 
-| Filter | Description |
-| ------ | ----------- |
-| **Search** | Filter by team name or description |
-| **Min Members** | Teams with at least N members |
-| **Min Services** | Teams with at least N services |
+| Filter           | Description                        |
+| ---------------- | ---------------------------------- |
+| **Search**       | Filter by team name or description |
+| **Min Members**  | Teams with at least N members      |
+| **Min Services** | Teams with at least N services     |
 
 ### Sorting Options
 
-| Sort | Description |
-| ---- | ----------- |
-| **Name (A-Z)** | Alphabetical by team name |
-| **Created Date** | Newest or oldest first |
-| **Member Count** | Most or fewest members |
-| **Service Count** | Most or fewest services |
+| Sort              | Description               |
+| ----------------- | ------------------------- |
+| **Name (A-Z)**    | Alphabetical by team name |
+| **Created Date**  | Newest or oldest first    |
+| **Member Count**  | Most or fewest members    |
+| **Service Count** | Most or fewest services   |
 
 ---
 
@@ -230,14 +235,14 @@ Step 3: Backend Services Team (All Members) → wait 15 min
 
 All team operations are logged for audit purposes:
 
-| Action | Logged Details |
-| ------ | -------------- |
-| **Team Created** | Creator, team name |
-| **Team Updated** | Updater, changed fields |
-| **Team Deleted** | Deleter, team name |
-| **Member Added** | Adder, new member, role |
-| **Member Removed** | Remover, removed member |
-| **Role Changed** | Changer, member, old role, new role |
+| Action             | Logged Details                      |
+| ------------------ | ----------------------------------- |
+| **Team Created**   | Creator, team name                  |
+| **Team Updated**   | Updater, changed fields             |
+| **Team Deleted**   | Deleter, team name                  |
+| **Member Added**   | Adder, new member, role             |
+| **Member Removed** | Remover, removed member             |
+| **Role Changed**   | Changer, member, old role, new role |
 
 ### Viewing Activity
 
@@ -254,6 +259,7 @@ Teams appear in several dashboard contexts:
 ### Team Filter
 
 Filter incidents and metrics by team:
+
 - Incident list can filter by team
 - Analytics can filter by team
 - On-call schedules show team context
@@ -261,6 +267,7 @@ Filter incidents and metrics by team:
 ### My Teams
 
 Quick access to teams you belong to:
+
 - Profile shows your team memberships
 - Incident filters include "My Teams" option
 
@@ -288,11 +295,11 @@ Quick access to teams you belong to:
 
 ### Naming Conventions
 
-| Good | Bad |
-| ---- | --- |
-| "Platform Engineering" | "Team 1" |
-| "Payment Services" | "Bob's Team" |
-| "Customer Success" | "CS" |
+| Good                   | Bad          |
+| ---------------------- | ------------ |
+| "Platform Engineering" | "Team 1"     |
+| "Payment Services"     | "Bob's Team" |
+| "Customer Success"     | "CS"         |
 
 ---
 

@@ -8,72 +8,74 @@ OpsKnight normalizes alerts into a standard Severity and Urgency model so notifi
 
 ## Severity (Event Level)
 
-| Severity  | Meaning                                | Maps to Urgency |
-| --------- | -------------------------------------- | --------------- |
-| Critical  | System down or unusable                | HIGH            |
-| Error     | Significant degradation                | MEDIUM          |
-| Warning   | Minor issue or approaching limits      | LOW             |
-| Info      | Informational / recovery / normal ops  | LOW             |
+| Severity | Meaning                               | Maps to Urgency |
+| -------- | ------------------------------------- | --------------- |
+| Critical | System down or unusable               | HIGH            |
+| Error    | Significant degradation               | MEDIUM          |
+| Warning  | Minor issue or approaching limits     | MEDIUM          |
+| Info     | Informational / recovery / normal ops | LOW             |
+
+> **Note**: Warning maps to MEDIUM (not LOW) to ensure important alerts are not missed. This aligns with industry best practices where warnings often indicate issues that need attention before they become critical.
 
 ## Urgency (Notification Level)
 
-| Urgency | Behavior                                                              |
-| ------- | --------------------------------------------------------------------- |
-| HIGH    | Pages on-call immediately (SMS, Push, Phone)                          |
-| MEDIUM  | Standard notification (Slack, Email)                                  |
-| LOW     | Logged for visibility, optional low-priority notification             |
+| Urgency | Behavior                                                  |
+| ------- | --------------------------------------------------------- |
+| HIGH    | Pages on-call immediately (SMS, Push, Phone)              |
+| MEDIUM  | Standard notification (Slack, Email)                      |
+| LOW     | Logged for visibility, optional low-priority notification |
 
 ## Provider Mappings
 
 ### AWS CloudWatch
 
-| State                | Severity  | Urgency |
-| -------------------- | --------- | ------- |
-| ALARM                | Critical  | HIGH    |
-| OK                   | Info      | LOW     |
-| INSUFFICIENT_DATA    | Warning   | LOW     |
+| State             | Severity | Urgency |
+| ----------------- | -------- | ------- |
+| ALARM             | Critical | HIGH    |
+| OK                | Info     | LOW     |
+| INSUFFICIENT_DATA | Warning  | LOW     |
 
 ### Azure Monitor
 
-| Azure Severity | Severity  | Urgency |
-| -------------- | --------- | ------- |
-| Sev0           | Critical  | HIGH    |
-| Sev1           | Error     | MEDIUM  |
-| Sev2           | Warning   | LOW     |
-| Sev3+          | Info      | LOW     |
+| Azure Severity | Severity | Urgency |
+| -------------- | -------- | ------- |
+| Sev0           | Critical | HIGH    |
+| Sev1           | Error    | MEDIUM  |
+| Sev2           | Warning  | LOW     |
+| Sev3+          | Info     | LOW     |
 
 ### Datadog
 
-| Status  | Severity  | Urgency |
-| ------- | --------- | ------- |
-| error   | Critical  | HIGH    |
-| warning | Warning   | LOW     |
-| info    | Info      | LOW     |
+| Status  | Severity | Urgency |
+| ------- | -------- | ------- |
+| error   | Critical | HIGH    |
+| warning | Warning  | LOW     |
+| info    | Info     | LOW     |
 
 ### Prometheus / Alertmanager
 
-| Label (`severity`) | Severity  | Urgency |
-| ------------------ | --------- | ------- |
-| critical / page    | Critical  | HIGH    |
-| error              | Error     | MEDIUM  |
-| warning            | Warning   | LOW     |
-| other              | Warning   | LOW     |
+| Label (`severity`) | Severity | Urgency |
+| ------------------ | -------- | ------- |
+| critical / page    | Critical | HIGH    |
+| error              | Error    | MEDIUM  |
+| warning            | Warning  | LOW     |
+| other              | Warning  | LOW     |
 
 ### Sentry
 
-| Level   | Severity  | Urgency |
-| ------- | --------- | ------- |
-| fatal   | Critical  | HIGH    |
-| error   | Error     | MEDIUM  |
-| warning | Warning   | LOW     |
-| info    | Info      | LOW     |
+| Level   | Severity | Urgency |
+| ------- | -------- | ------- |
+| fatal   | Critical | HIGH    |
+| error   | Error    | MEDIUM  |
+| warning | Warning  | LOW     |
+| info    | Info     | LOW     |
 
 ### Uptime Tools
 
-| Status            | Severity  | Urgency |
-| ----------------- | --------- | ------- |
-| down / open       | Critical  | HIGH    |
-| up / resolved     | Info      | LOW     |
+| Status        | Severity | Urgency |
+| ------------- | -------- | ------- |
+| down / open   | Critical | HIGH    |
+| up / resolved | Info     | LOW     |
 
 ## Custom Webhooks
 

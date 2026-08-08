@@ -14,46 +14,46 @@ This guide summarizes OpsKnight's capacity targets, real-world load scenarios, a
 
 ### User Capacity
 
-| Metric | Capacity | Notes |
-| ------ | -------- | ----- |
-| **Total Registered Users** | 10,000+ | Database can handle this easily |
-| **Concurrent Active Users** | 200-300 | With SSE streams open |
-| **Peak Concurrent Users** | 400-500 | With proper DB pool config |
+| Metric                      | Capacity | Notes                           |
+| --------------------------- | -------- | ------------------------------- |
+| **Total Registered Users**  | 10,000+  | Database can handle this easily |
+| **Concurrent Active Users** | 200-300  | With SSE streams open           |
+| **Peak Concurrent Users**   | 400-500  | With proper DB pool config      |
 
 ### Incident Handling
 
-| Metric | Per Minute | Per Hour | Notes |
-| ------ | ---------- | -------- | ----- |
-| **New Incidents Created** | 200-300 | 12,000+ | Via API or integrations |
-| **Incidents Processed (Escalations)** | 150-200 | 9,000+ | Parallel processing (5 concurrent) |
-| **Incident Updates** | 500+ | 30,000+ | Status changes, notes, etc. |
+| Metric                                | Per Minute | Per Hour | Notes                              |
+| ------------------------------------- | ---------- | -------- | ---------------------------------- |
+| **New Incidents Created**             | 200-300    | 12,000+  | Via API or integrations            |
+| **Incidents Processed (Escalations)** | 150-200    | 9,000+   | Parallel processing (5 concurrent) |
+| **Incident Updates**                  | 500+       | 30,000+  | Status changes, notes, etc.        |
 
 ### Notification Capacity
 
-| Channel | Per Minute | Per Hour | Notes |
-| ------- | ---------- | -------- | ----- |
-| **Email** | 100 | 6,000 | Rate limited to avoid spam flags |
-| **SMS** | 50 | 3,000 | Twilio rate limits |
-| **Push** | 200 | 12,000 | Web push is fast |
-| **Slack** | 100 | 6,000 | Slack API limits |
-| **Webhooks** | 100 | 6,000 | Per destination |
-| **Total Combined** | 500-600 | 30,000+ | Across all channels |
+| Channel            | Per Minute | Per Hour | Notes                            |
+| ------------------ | ---------- | -------- | -------------------------------- |
+| **Email**          | 100        | 6,000    | Rate limited to avoid spam flags |
+| **SMS**            | 50         | 3,000    | Twilio rate limits               |
+| **Push**           | 200        | 12,000   | Web push is fast                 |
+| **Slack**          | 100        | 6,000    | Slack API limits                 |
+| **Webhooks**       | 100        | 6,000    | Per destination                  |
+| **Total Combined** | 500-600    | 30,000+  | Across all channels              |
 
 ### Real-Time Streams (SSE)
 
-| Metric | Capacity |
-| ------ | -------- |
-| **Concurrent SSE Connections** | 400-500 |
-| **DB Queries (with caching)** | 20-30/sec (was 200-300) |
-| **Data Freshness** | 3-5 seconds |
+| Metric                         | Capacity                |
+| ------------------------------ | ----------------------- |
+| **Concurrent SSE Connections** | 400-500                 |
+| **DB Queries (with caching)**  | 20-30/sec (was 200-300) |
+| **Data Freshness**             | 3-5 seconds             |
 
 ### Background Job Processing
 
-| Job Type | Per Minute | Notes |
-| -------- | ---------- | ----- |
-| **Escalation Jobs** | 200+ | Parallel batches of 5 |
-| **Notification Jobs** | 300+ | Parallel batches of 10 |
-| **Total Jobs** | 500+ | With 100 job limit per cycle |
+| Job Type              | Per Minute | Notes                        |
+| --------------------- | ---------- | ---------------------------- |
+| **Escalation Jobs**   | 200+       | Parallel batches of 5        |
+| **Notification Jobs** | 300+       | Parallel batches of 10       |
+| **Total Jobs**        | 500+       | With 100 job limit per cycle |
 
 ---
 
@@ -139,10 +139,10 @@ DATABASE_URL="postgresql://user:pass@host:5432/db?connection_limit=40&pool_timeo
 DATABASE_URL="postgresql://user:pass@host:5432/db?connection_limit=80&pool_timeout=30"
 ```
 
-| Parameter | Value | Description |
-| --------- | ----- | ----------- |
-| `connection_limit` | 40 | Max connections per app instance |
-| `pool_timeout` | 30 | Seconds to wait for available connection |
+| Parameter          | Value | Description                              |
+| ------------------ | ----- | ---------------------------------------- |
+| `connection_limit` | 40    | Max connections per app instance         |
+| `pool_timeout`     | 30    | Seconds to wait for available connection |
 
 ### PostgreSQL Server Tuning
 

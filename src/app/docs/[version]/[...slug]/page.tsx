@@ -4,42 +4,13 @@ import Link from "next/link";
 import { getDocPage, getAllDocSlugs } from "@/lib/docs/content";
 import { DocsToc } from "@/components/docs/DocsToc";
 import { DOC_VERSIONS } from "@/lib/docs/versions";
+import { getDocAliases } from "@/lib/docs/aliases";
 import { ChevronRight, Clock, BookOpen } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
 export const dynamicParams = false;
 // export const dynamic = "force-static";
 
-const LEGACY_DOC_REDIRECTS: Record<string, string> = {
-  "issue-tracking/jira": "integrations/issue-tracking/jira",
-  "jira": "integrations/issue-tracking/jira",
-  "integrations/jira": "integrations/issue-tracking/jira",
-  "integrations/datadog": "integrations/apm-monitoring/datadog",
-  "integrations/new-relic": "integrations/apm-monitoring/new-relic",
-  "integrations/dynatrace": "integrations/apm-monitoring/dynatrace",
-  "integrations/appdynamics": "integrations/apm-monitoring/appdynamics",
-  "integrations/grafana": "integrations/apm-monitoring/grafana",
-  "integrations/honeycomb": "integrations/apm-monitoring/honeycomb",
-  "integrations/sentry": "integrations/apm-monitoring/sentry",
-  "integrations/splunk-observability": "integrations/apm-monitoring/splunk-observability",
-  "integrations/elastic-kibana": "integrations/logs-events/elastic-kibana",
-  "integrations/aws-cloudwatch": "integrations/cloud/aws-cloudwatch",
-  "integrations/azure-monitor": "integrations/cloud/azure-monitor",
-  "integrations/google-cloud-monitoring": "integrations/cloud/google-cloud-monitoring",
-  "integrations/prometheus": "integrations/metrics-alerting/prometheus",
-  "integrations/uptimerobot": "integrations/uptime/uptimerobot",
-  "integrations/pingdom": "integrations/uptime/pingdom",
-  "integrations/better-uptime": "integrations/uptime/better-uptime",
-  "integrations/uptime-kuma": "integrations/uptime/uptime-kuma",
-  "integrations/splunk-oncall": "integrations/logs-events/splunk-oncall",
-  "integrations/github": "integrations/ci-cd/github",
-  "integrations/bitbucket": "integrations/ci-cd/bitbucket",
-  "integrations/slack": "integrations/communication/slack",
-  "integrations/slack-oauth-setup": "integrations/communication/slack-oauth-setup",
-  "integrations/webhooks": "integrations/custom/webhooks",
-  "integrations/monitoring/datadog": "integrations/apm-monitoring/datadog",
-  "integrations/monitoring/prometheus": "integrations/metrics-alerting/prometheus",
-};
 
 export async function generateMetadata({
   params,
@@ -48,7 +19,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { version, slug } = await params;
   const slugKey = slug.join("/");
-  const legacyTarget = LEGACY_DOC_REDIRECTS[slugKey];
+  const legacyTarget = getDocAliases(version)[slugKey];
   if (legacyTarget) {
     return {
       alternates: {
@@ -98,7 +69,7 @@ export async function generateStaticParams() {
         params.push({ version: version.id, slug });
       }
     }
-    for (const legacySlug of Object.keys(LEGACY_DOC_REDIRECTS)) {
+    for (const legacySlug of Object.keys(getDocAliases(version.id))) {
       params.push({ version: version.id, slug: legacySlug.split("/") });
     }
   }
@@ -137,7 +108,7 @@ export default async function DocsPage({
 }) {
   const { version, slug } = await params;
   const slugKey = slug.join("/");
-  const legacyTarget = LEGACY_DOC_REDIRECTS[slugKey];
+  const legacyTarget = getDocAliases(version)[slugKey];
   if (legacyTarget) {
     redirect(`/docs/${version}/${legacyTarget}`);
   }

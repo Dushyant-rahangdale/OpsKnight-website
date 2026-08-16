@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getDocPage, getAllDocSlugs } from "@/lib/docs/content";
 import { DocsToc } from "@/components/docs/DocsToc";
 import { DOC_VERSIONS } from "@/lib/docs/versions";
-import { getDocAliases } from "@/lib/docs/aliases";
 import { ChevronRight, Clock, BookOpen } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
@@ -18,15 +17,6 @@ export async function generateMetadata({
   params: Promise<{ version: string; slug: string[] }>;
 }): Promise<Metadata> {
   const { version, slug } = await params;
-  const slugKey = slug.join("/");
-  const legacyTarget = getDocAliases(version)[slugKey];
-  if (legacyTarget) {
-    return {
-      alternates: {
-        canonical: `/docs/${version}/${legacyTarget}`,
-      },
-    };
-  }
   const doc = await getDocPage(version, slug);
   if (!doc) {
     return {};
@@ -69,9 +59,6 @@ export async function generateStaticParams() {
         params.push({ version: version.id, slug });
       }
     }
-    for (const legacySlug of Object.keys(getDocAliases(version.id))) {
-      params.push({ version: version.id, slug: legacySlug.split("/") });
-    }
   }
   return params;
 }
@@ -107,11 +94,6 @@ export default async function DocsPage({
   params: Promise<{ version: string; slug: string[] }>;
 }) {
   const { version, slug } = await params;
-  const slugKey = slug.join("/");
-  const legacyTarget = getDocAliases(version)[slugKey];
-  if (legacyTarget) {
-    redirect(`/docs/${version}/${legacyTarget}`);
-  }
   const doc = await getDocPage(version, slug);
   if (!doc) notFound();
 

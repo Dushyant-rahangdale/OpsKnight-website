@@ -13,12 +13,12 @@ export const BRAND = {
 
     // Status
     status: "Accepting Contributions",
-    statusMessage: "v1.1.0 Released",
+    statusMessage: "v1.2.0 Released",
 
     links: {
         github: "https://github.com/Dushyant-rahangdale/OpsKnight",
         sponsor: "https://github.com/sponsors/Dushyant-rahangdale",
-        docs: "/docs/v1.1",
+        docs: "/docs/v1.2",
         twitter: "https://twitter.com/opsknight",
         email: "help@opsknight.com",
         status: "https://status.opsknight.com",

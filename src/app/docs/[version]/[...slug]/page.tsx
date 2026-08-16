@@ -36,6 +36,8 @@ const LEGACY_DOC_REDIRECTS: Record<string, string> = {
   "integrations/bitbucket": "integrations/ci-cd/bitbucket",
   "integrations/slack": "integrations/communication/slack",
   "integrations/slack-oauth-setup": "integrations/communication/slack-oauth-setup",
+  "integrations/slack-chatops": "integrations/communication/slack-chatops",
+  "slack-chatops": "integrations/communication/slack-chatops",
   "integrations/webhooks": "integrations/custom/webhooks",
   "integrations/monitoring/datadog": "integrations/apm-monitoring/datadog",
   "integrations/monitoring/prometheus": "integrations/metrics-alerting/prometheus",

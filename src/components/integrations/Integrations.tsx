@@ -294,7 +294,7 @@ export function Integrations() {
                         More integrations ship every release, and custom webhooks let you connect anything.
                     </p>
                     <Link
-                        href="/docs/v1.1/integrations"
+                        href="/docs/v1.2/integrations"
                         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20 transition-colors"
                     >
                         View integration docs

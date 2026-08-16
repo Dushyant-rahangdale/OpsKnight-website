@@ -15,7 +15,7 @@ const footerLinks = {
     ],
     resources: [
         { label: "Documentation", href: "/docs" },
-        { label: "API Reference", href: "/docs/v1.1/api" },
+        { label: "API Reference", href: "/docs/latest/api" },
         { label: "Status Page", href: BRAND.links.status, external: true },
         { label: "Changelog", href: BRAND.links.releases, external: true },
         { label: "Roadmap", href: `${BRAND.links.github}/projects`, external: true },

@@ -9,11 +9,9 @@ import { BRAND } from "@/lib/brand";
 export function CTA() {
     return (
         <section className="relative py-32 bg-slate-950 overflow-hidden">
-            {/* Background Grid */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
-            {/* Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
+
+
 
 
             <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -23,10 +21,10 @@ export function CTA() {
                     viewport={{ once: true }}
                 >
                     <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6">
-                        Ready to take control?
+                        Deploy in under 5 minutes.
                     </h2>
                     <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
-                        Join the community of SREs building the future of open source incident response.
+                        Two commands. One container. Full incident management.
                     </p>
 
                     {/* Quick Start Terminal */}

@@ -50,39 +50,10 @@ function Aurora() {
     );
 }
 
-function Stars() {
-    // Generate static stars to avoid hydration mismatch, or use simple distinct positions
-    // Using a few manual stars for stability + performance
-    return (
-        <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full opacity-20 animate-pulse" />
-            <div className="absolute top-1/3 left-2/3 w-0.5 h-0.5 bg-white rounded-full opacity-40 animate-pulse" style={{ animationDelay: "1s" }} />
-            <div className="absolute top-1/2 left-1/3 w-1 h-1 bg-sky-200 rounded-full opacity-20 animate-pulse" style={{ animationDelay: "2s" }} />
-            <div className="absolute bottom-1/4 right-1/4 w-0.5 h-0.5 bg-white rounded-full opacity-30 animate-pulse" style={{ animationDelay: "3s" }} />
-            <div className="absolute top-10 right-20 w-1 h-1 bg-emerald-200 rounded-full opacity-20 animate-pulse" style={{ animationDelay: "4s" }} />
-        </div>
-    )
-}
-
-function Grid() {
-    return (
-        <div
-            className="absolute inset-0 opacity-[0.15]"
-            style={{
-                backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-                backgroundSize: '4rem 4rem',
-                maskImage: 'radial-gradient(ellipse at center, black, transparent 80%)'
-            }}
-        />
-    )
-}
-
 export function AnimatedBackground() {
     return (
         <div className="absolute inset-0 bg-slate-950">
             <Aurora />
-            <Grid />
-            <Stars />
             {/* Vignette */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#020617_100%)] opacity-80" />
         </div>

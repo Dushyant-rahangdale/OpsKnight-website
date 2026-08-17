@@ -9,10 +9,10 @@ import { BRAND } from "@/lib/brand";
 
 const navItems = [
     { label: "Features", href: "/#features" },
-    { label: "Integrations", href: "/#integrations" },
-    { label: "Docs", href: "/docs" },
+    { label: "Integrations", href: "/integrations" },
+    { label: "Changelog", href: "/changelog" },
     { label: "Compare", href: "/compare" },
-    { label: "Contact", href: "/contact" },
+    { label: "Docs", href: "/docs" },
 ];
 
 export function Navbar() {

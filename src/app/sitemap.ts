@@ -28,6 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    ...["/changelog", "/integrations", "/about", "/privacy", "/terms", "/compare/pagerduty", "/compare/opsgenie", "/compare/squadcast", "/compare/incident-io", "/compare/grafana-oncall"].map((route) => ({
+      url: `${baseUrl}${route}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
   ];
 
   for (const version of DOC_VERSIONS) {

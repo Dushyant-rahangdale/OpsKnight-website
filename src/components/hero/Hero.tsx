@@ -3,67 +3,9 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Activity, Shield, Zap, Clock, Code2 } from "lucide-react";
+import { ArrowRight, Shield, Zap, Code2 } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
 import { BRAND } from "@/lib/brand";
-
-// Floating metric cards data
-const floatingCards = [
-    {
-        icon: Activity,
-        label: "Event Capacity",
-        value: "Unlimited",
-        color: "from-rose-500 to-pink-500",
-        position: "top-[15%] -left-[5%]",
-        delay: 0.6,
-    },
-    {
-        icon: Clock,
-        label: "Setup Time",
-        value: "~5m",
-        color: "from-amber-500 to-orange-500",
-        position: "top-[60%] -left-[8%]",
-        delay: 0.8,
-    },
-    {
-        icon: Shield,
-        label: "Data Privacy",
-        value: "100%",
-        color: "from-emerald-500 to-cyan-500",
-        position: "top-[35%] -right-[5%]",
-        delay: 1.0,
-    },
-];
-
-function FloatingCard({ card, index }: { card: typeof floatingCards[0]; index: number }) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ delay: card.delay, duration: 0.5, ease: "easeOut" }}
-            className={`absolute ${card.position} z-20 hidden lg:block`}
-        >
-            <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 }}
-                className="relative group"
-            >
-                {/* Glow */}
-                <div className={`absolute -inset-1 bg-gradient-to-r ${card.color} rounded-xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity`} />
-
-                <div className="relative flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 backdrop-blur-xl shadow-2xl">
-                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${card.color} flex items-center justify-center shadow-lg`}>
-                        <card.icon className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                        <p className="text-[10px] text-slate-400 uppercase tracking-wider font-medium">{card.label}</p>
-                        <p className="text-lg font-bold text-white">{card.value}</p>
-                    </div>
-                </div>
-            </motion.div>
-        </motion.div>
-    );
-}
 
 export function Hero() {
     return (
@@ -98,13 +40,6 @@ export function Hero() {
                                     {BRAND.name}
                                 </span>
                             </div>
-                            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/5 text-amber-300 text-xs font-medium">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                                </span>
-                                {BRAND.status}
-                            </div>
                         </motion.div>
 
                         {/* Main Headline */}
@@ -116,13 +51,13 @@ export function Hero() {
                         >
                             The future of{" "}
                             <span className="relative inline-block">
-                                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 animate-shimmer bg-[length:200%_auto]">
+                                <span className="relative z-10 text-emerald-400">
                                     open source
                                 </span>
                             </span>
                             <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-white">
-                                incident response.
+                            <span className="text-white">
+                                incident command center.
                             </span>
                         </motion.h1>
 
@@ -133,7 +68,7 @@ export function Hero() {
                             transition={{ delay: 0.2, duration: 0.5 }}
                             className="text-base md:text-lg text-slate-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
                         >
-                            {BRAND.fullDescription}
+                            On-call scheduling, 24+ integrations, Slack war rooms, and branded status pages. Self-hosted. Free forever.
                         </motion.p>
 
                         {/* CTA Buttons */}
@@ -187,17 +122,6 @@ export function Hero() {
                                 <Zap className="w-4 h-4 text-amber-400" />
                                 High Performance
                             </div>
-                            <Link
-                                href={BRAND.links.status}
-                                target="_blank"
-                                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-medium text-emerald-200 hover:bg-emerald-500/20 transition-colors"
-                            >
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                                </span>
-                                Live Status
-                            </Link>
                         </motion.div>
 
                         {/* Open Source Badge */}
@@ -218,13 +142,8 @@ export function Hero() {
                         </motion.div>
                     </div>
 
-                    {/* Right Content - Dashboard Preview with Floating Cards */}
+                    {/* Right Content - Dashboard Preview */}
                     <div className="relative mt-8 lg:mt-0">
-                        {/* Floating Metric Cards */}
-                        {floatingCards.map((card, index) => (
-                            <FloatingCard key={card.label} card={card} index={index} />
-                        ))}
-
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}

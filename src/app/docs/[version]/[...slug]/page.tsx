@@ -5,6 +5,8 @@ import { getDocPage, getAllDocSlugs } from "@/lib/docs/content";
 import { DocsToc } from "@/components/docs/DocsToc";
 import { DOC_VERSIONS } from "@/lib/docs/versions";
 import { ChevronRight, Clock, BookOpen } from "lucide-react";
+import { CopyCodeButton } from "@/components/docs/CopyCodeButton";
+import { DocsPrevNext } from "@/components/docs/DocsPrevNext";
 import { BRAND } from "@/lib/brand";
 
 export const dynamicParams = false;
@@ -165,6 +167,7 @@ export default async function DocsPage({
 
         {/* Article Content */}
         <div className="rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-sm p-8">
+          <CopyCodeButton />
           <div
             className="docs-content prose prose-invert prose-slate max-w-none
               prose-headings:text-white prose-headings:font-semibold prose-headings:tracking-tight
@@ -186,6 +189,7 @@ export default async function DocsPage({
             "
             dangerouslySetInnerHTML={{ __html: doc.html }}
           />
+          <DocsPrevNext version={version} currentPath={`/docs/${version}${slug.length > 0 ? `/${slug.join("/")}` : ""}`} />
         </div>
 
         {/* Footer Navigation */}

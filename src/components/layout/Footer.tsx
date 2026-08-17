@@ -8,16 +8,17 @@ import { BRAND } from "@/lib/brand";
 const footerLinks = {
     product: [
         { label: "Features", href: "/#features" },
-        { label: "Integrations", href: "/#integrations" },
+        { label: "Integrations", href: "/integrations" },
         { label: "Pricing", href: "/#pricing" },
         { label: "Compare", href: "/compare" },
+        { label: "About", href: "/about" },
         { label: "Contact", href: "/contact" },
     ],
     resources: [
         { label: "Documentation", href: "/docs" },
         { label: "API Reference", href: "/docs/latest/api" },
+        { label: "Changelog", href: "/changelog" },
         { label: "Status Page", href: BRAND.links.status, external: true },
-        { label: "Changelog", href: BRAND.links.releases, external: true },
         { label: "Roadmap", href: `${BRAND.links.github}/projects`, external: true },
     ],
     community: [
@@ -27,6 +28,8 @@ const footerLinks = {
         { label: "Contributing", href: BRAND.links.contributing, external: true },
     ],
     legal: [
+        { label: "Privacy Policy", href: "/privacy" },
+        { label: "Terms of Service", href: "/terms" },
         { label: "License (AGPL-3.0)", href: BRAND.links.license, external: true },
         { label: "Security", href: BRAND.links.security, external: true },
     ],

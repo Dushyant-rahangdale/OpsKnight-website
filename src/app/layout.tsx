@@ -35,6 +35,17 @@ const structuredData = [
       name: BRAND.name,
     },
   },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "OpsKnight",
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Docker, Kubernetes, Linux",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    license: "https://opensource.org/licenses/AGPL-3.0",
+    url: baseUrl,
+    description: BRAND.seo.description,
+  },
 ];
 
 const manrope = Manrope({

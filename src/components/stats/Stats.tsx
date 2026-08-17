@@ -80,12 +80,10 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
             transition={{ delay: index * 0.1, duration: 0.5 }}
             className="group relative"
         >
-            {/* Glow effect */}
-            <div className={`absolute -inset-1 bg-gradient-to-r ${stat.color} rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`} />
 
             <div className="relative p-8 rounded-2xl bg-slate-900/50 border border-white/5 hover:border-white/10 transition-all duration-300 h-full">
                 {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} mb-6`}>
                     <stat.icon className="w-6 h-6 text-white" />
                 </div>
 
@@ -109,14 +107,9 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
 export function Stats() {
     return (
         <section className="relative py-24 bg-slate-950 overflow-hidden">
-            {/* Background effects */}
-            <div className="absolute inset-0">
-                <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-[100px]" />
-                <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[100px]" />
-            </div>
 
-            {/* Grid pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+
+
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
@@ -126,16 +119,12 @@ export function Stats() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-4">
-                        <TrendingUp className="w-3 h-3" />
-                        By the Numbers
-                    </span>
+
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Built for performance at scale
+                        Tested at production scale.
                     </h2>
                     <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-                        OpsKnight is designed to handle enterprise-grade incident management
-                        while maintaining blazing-fast response times.
+                        Benchmarked throughput on a single container deployment.
                     </p>
                 </motion.div>
 

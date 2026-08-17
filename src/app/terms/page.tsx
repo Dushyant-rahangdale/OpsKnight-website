@@ -26,7 +26,7 @@ export default function TermsPage() {
 
         <h2 className="text-2xl font-semibold mt-12 mb-4 text-white">No Warranty</h2>
         <p className="text-slate-300 leading-relaxed mb-6">
-          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
+          THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
           TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
           AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
           TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
@@ -36,7 +36,7 @@ export default function TermsPage() {
         <h2 className="text-2xl font-semibold mt-12 mb-4 text-white">Changes to Terms</h2>
         <p className="text-slate-300 leading-relaxed mb-6">
           We reserve the right, at our sole discretion, to modify or replace these Terms at any time. We will try to provide 
-          at least 30 days' notice prior to any new terms taking effect.
+          at least 30 days&apos; notice prior to any new terms taking effect.
         </p>
       </div>
     </main>

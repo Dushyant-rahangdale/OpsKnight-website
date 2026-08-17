@@ -29,7 +29,7 @@ export default function AboutPage() {
         <h2 className="text-2xl font-semibold mt-12 mb-4 text-white">The Open Source Philosophy</h2>
         <p className="text-slate-300 leading-relaxed mb-6">
           OpsKnight is licensed under AGPL-3.0 and is proudly open-source. We are a community-driven project 
-          that adopts a "self-hosted first" approach. You maintain full ownership of your data, complete 
+          that adopts a &ldquo;self-hosted first&rdquo; approach. You maintain full ownership of your data, complete 
           control over your infrastructure, and avoid vendor lock-in.
         </p>
 

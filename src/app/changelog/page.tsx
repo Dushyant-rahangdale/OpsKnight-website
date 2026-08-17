@@ -65,7 +65,7 @@ export default function ChangelogPage() {
         </header>
 
         <div className="relative border-l border-slate-800 ml-4 md:ml-0">
-          {releases.map((release, index) => (
+          {releases.map((release) => (
             <div key={release.version} className="mb-16 ml-8 md:ml-12 relative">
               {/* Timeline marker */}
               <div className="absolute -left-[41px] md:-left-[57px] top-1 h-4 w-4 rounded-full border-2 border-emerald-500 bg-slate-950" />

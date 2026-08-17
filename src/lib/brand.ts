@@ -13,7 +13,7 @@ export const BRAND = {
 
     // Status
     status: "Accepting Contributions",
-    statusMessage: "v1.2.0 Released",
+    statusMessage: "v1.3.0 Released",
 
     links: {
         github: "https://github.com/opsknight-labs/OpsKnight",

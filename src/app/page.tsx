@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/hero/Hero";
+import { IncidentSimulator } from "@/components/simulator/IncidentSimulator";
 import { HowItWorks } from "@/components/how-it-works/HowItWorks";
 import { Features } from "@/components/features/Features";
+import { SlackChatOps } from "@/components/chatops/SlackChatOps";
 import { DeveloperExperience } from "@/components/developer/DeveloperExperience";
+import { PagerDutyMigration } from "@/components/migration/PagerDutyMigration";
+import { SavingsCalculator } from "@/components/calculator/SavingsCalculator";
 import { Stats } from "@/components/stats/Stats";
 import { Integrations } from "@/components/integrations/Integrations";
 import { Comparison } from "@/components/comparison/Comparison";
@@ -28,9 +32,13 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <IncidentSimulator />
       <HowItWorks />
       <Features />
+      <SlackChatOps />
       <DeveloperExperience />
+      <PagerDutyMigration />
+      <SavingsCalculator />
       <Stats />
       <Integrations />
       <Comparison />

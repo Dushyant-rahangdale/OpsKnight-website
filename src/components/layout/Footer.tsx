@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Github, Twitter, Mail, BookOpen, Heart } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
@@ -43,7 +44,13 @@ export function Footer() {
                     <div className="lg:col-span-2">
                         <Link href="/" className="flex items-center gap-2.5 mb-6 inline-flex group">
                             <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-slate-900 to-slate-950 border border-red-500/20 group-hover:border-red-500/50 transition-all shadow-md shadow-red-500/5">
-                                <span className="text-sm font-black text-red-500">⚔</span>
+                                <Image
+                                    src="/logo-mark.png"
+                                    alt="OpsKnight"
+                                    width={22}
+                                    height={22}
+                                    className="w-5 h-5 object-contain"
+                                />
                             </div>
                             <div className="flex flex-col">
                                 <span className="font-extrabold text-lg text-white group-hover:text-red-400 transition-colors leading-tight">

@@ -7,7 +7,7 @@ import {
     Repeat,
     Calendar,
     MessageSquare,
-    FileCode,
+    FileText,
     CheckCircle2,
     ArrowRight
 } from "lucide-react";
@@ -57,21 +57,21 @@ const bentoFeatures = [
     {
         icon: MessageSquare,
         tag: "Bi-Directional ChatOps",
-        title: "Native Slack War Rooms",
-        description: "Auto-provision dedicated war room channels for P1/P2 incidents. Responders can acknowledge, reassign, add timeline notes, and resolve crises directly from Slack.",
+        title: "Native Slack War Rooms & Video",
+        description: "Auto-provision dedicated war room channels for critical incidents with built-in Jitsi WebRTC, Google Meet, or Zoom bridges and interactive triage buttons.",
         metric: "Bi-Directional",
         metricLabel: "Live ChatOps Sync",
-        highlights: ["Auto-join incident commander", "Interactive Slack action buttons", "Live channel archive into postmortems"],
+        highlights: ["Auto-join incident commander", "Jitsi / Meet / Zoom bridges", "Live channel archive into postmortems"],
         colSpan: "lg:col-span-2"
     },
     {
-        icon: FileCode,
-        tag: "DevOps & IaC",
-        title: "Infrastructure as Code & Open API",
-        description: "Declare services, escalation policies, and on-call rotations declaratively using Terraform or automate operations via our open RESTful API.",
-        metric: "100%",
-        metricLabel: "Programmable Platform",
-        highlights: ["OpenAPI v3 schema", "Terraform & Pulumi support", "Audit-ready change log"],
+        icon: FileText,
+        tag: "Continuous Learning",
+        title: "Automated Postmortems & Retrospectives",
+        description: "Turn every outage into actionable prevention. OpsKnight automatically compiles incident timelines, Slack war room discussions, and telemetry into structured retrospective reports.",
+        metric: "Auto-Draft",
+        metricLabel: "Retrospective Reports",
+        highlights: ["Chronological audit timeline", "Root cause & contributing factors", "Action item tracking & export"],
         colSpan: "lg:col-span-1"
     }
 ];

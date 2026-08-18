@@ -7,14 +7,13 @@ import { Github, Copy, Check, Terminal } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
 
 export function Hero() {
-    const [deployMethod, setDeployMethod] = useState<"docker" | "compose" | "helm" | "terraform">("docker");
+    const [deployMethod, setDeployMethod] = useState<"docker" | "compose" | "helm">("docker");
     const [copied, setCopied] = useState(false);
 
     const deployCommands: Record<string, string> = {
         docker: "docker run -d -p 3000:3000 ghcr.io/opsknight-labs/opsknight:latest",
         compose: "curl -sSL https://opsknight.com/docker-compose.yml | docker compose up -d",
-        helm: "helm repo add opsknight https://charts.opsknight.com && helm install opsknight opsknight/opsknight",
-        terraform: 'resource "opsknight_service" "api" { name = "API Gateway" }'
+        helm: "helm repo add opsknight https://charts.opsknight.com && helm install opsknight opsknight/opsknight"
     };
 
     const handleCopy = () => {
@@ -135,7 +134,7 @@ export function Hero() {
                     >
                         <div className="flex items-center justify-between px-3 py-1.5 bg-[#0a0f18] border-t border-x border-white/10 rounded-t-xl text-xs font-mono">
                             <div className="flex items-center gap-1.5">
-                                {(["docker", "compose", "helm", "terraform"] as const).map((method) => (
+                                {(["docker", "compose", "helm"] as const).map((method) => (
                                     <button
                                         key={method}
                                         onClick={() => setDeployMethod(method)}
@@ -145,7 +144,7 @@ export function Hero() {
                                                 : "text-slate-400 hover:text-white"
                                         }`}
                                     >
-                                        {method === "docker" ? "Docker" : method === "compose" ? "Compose" : method === "helm" ? "Helm" : "Terraform"}
+                                        {method === "docker" ? "Docker" : method === "compose" ? "Compose" : "Helm / K8s"}
                                     </button>
                                 ))}
                             </div>

@@ -80,7 +80,7 @@ const TOUR_TABS: TourTab[] = [
     shortTitle: "Rotations & Shifts",
     badge: "Timezone-Aware",
     icon: Calendar,
-    image: "/schedule-main.png",
+    image: "/schedule-detail.png",
     url: "https://app.opsknight.com/schedules",
     heading: "Multi-layer rotation schedules that prevent alert fatigue",
     description: "Build flexible daily, weekly, or custom on-call rotations with automated timezone conversion. Schedule temporary shift overrides and swaps in seconds with calendar sync.",

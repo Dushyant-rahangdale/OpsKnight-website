@@ -7,10 +7,18 @@ import { Github, Copy, Check, Terminal } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
 
 export function Hero() {
+    const [deployMethod, setDeployMethod] = useState<"docker" | "compose" | "helm" | "terraform">("docker");
     const [copied, setCopied] = useState(false);
 
+    const deployCommands: Record<string, string> = {
+        docker: "docker run -d -p 3000:3000 ghcr.io/opsknight-labs/opsknight:latest",
+        compose: "curl -sSL https://opsknight.com/docker-compose.yml | docker compose up -d",
+        helm: "helm repo add opsknight https://charts.opsknight.com && helm install opsknight opsknight/opsknight",
+        terraform: 'resource "opsknight_service" "api" { name = "API Gateway" }'
+    };
+
     const handleCopy = () => {
-        navigator.clipboard.writeText("docker run -d -p 3000:3000 ghcr.io/opsknight-labs/opsknight:latest");
+        navigator.clipboard.writeText(deployCommands[deployMethod]);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -118,18 +126,37 @@ export function Hero() {
                         </Link>
                     </motion.div>
 
-                    {/* Terminal Copy */}
+                    {/* Interactive Deployment Command Switcher */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4, duration: 0.5 }}
                         className="mt-12 w-full max-w-2xl mx-auto"
                     >
-                        <div className="flex items-center justify-between p-1 pl-4 rounded-xl bg-[#0d1117] border border-white/10 shadow-2xl overflow-hidden group">
+                        <div className="flex items-center justify-between px-3 py-1.5 bg-[#0a0f18] border-t border-x border-white/10 rounded-t-xl text-xs font-mono">
+                            <div className="flex items-center gap-1.5">
+                                {(["docker", "compose", "helm", "terraform"] as const).map((method) => (
+                                    <button
+                                        key={method}
+                                        onClick={() => setDeployMethod(method)}
+                                        className={`px-3 py-1 rounded-md transition-all ${
+                                            deployMethod === method
+                                                ? "bg-white/10 text-sky-400 font-bold border border-sky-400/30"
+                                                : "text-slate-400 hover:text-white"
+                                        }`}
+                                    >
+                                        {method === "docker" ? "Docker" : method === "compose" ? "Compose" : method === "helm" ? "Helm" : "Terraform"}
+                                    </button>
+                                ))}
+                            </div>
+                            <span className="text-[10px] text-slate-500 font-sans hidden sm:inline">1-Line Quickstart</span>
+                        </div>
+
+                        <div className="flex items-center justify-between p-1 pl-4 rounded-b-xl bg-[#0d1117] border border-white/10 shadow-2xl overflow-hidden group">
                             <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-3">
                                 <Terminal className="w-4 h-4 text-slate-500 flex-shrink-0" />
-                                <code className="text-sm text-sky-400 font-mono whitespace-nowrap">
-                                    docker run -d -p 3000:3000 ghcr.io/opsknight-labs/opsknight:latest
+                                <code className="text-xs sm:text-sm text-sky-400 font-mono whitespace-nowrap">
+                                    {deployCommands[deployMethod]}
                                 </code>
                             </div>
                             <button
@@ -139,8 +166,8 @@ export function Hero() {
                             >
                                 {copied ? (
                                     <>
-                                        <Check className="w-4 h-4 text-blue-400" />
-                                        <span className="text-xs font-medium text-blue-400">Copied!</span>
+                                        <Check className="w-4 h-4 text-emerald-400" />
+                                        <span className="text-xs font-medium text-emerald-400">Copied!</span>
                                     </>
                                 ) : (
                                     <Copy className="w-4 h-4" />

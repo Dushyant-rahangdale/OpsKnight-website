@@ -12,67 +12,140 @@ import {
   Play, 
   RotateCcw, 
   CheckCircle2, 
-  Users
+  Users,
+  Code2,
+  Cpu,
+  Layers,
+  ArrowRight,
+  Copy,
+  Check,
+  Zap,
+  Activity,
+  ShieldAlert
 } from "lucide-react";
 
-interface PipelineStep {
-  time: string;
-  type: "INGEST" | "ROUTE" | "PAGE" | "WARROOM" | "ACK" | "RESOLVE";
-  label: string;
-  detail: string;
-  status: "pending" | "running" | "completed";
-  badgeColor: string;
+interface Scenario {
+  id: string;
+  name: string;
+  severity: "CRITICAL" | "HIGH" | "MEDIUM";
+  source: string;
+  service: string;
+  summary: string;
+  rawPayload: Record<string, unknown>;
+  matchedPolicy: {
+    name: string;
+    tier: number;
+    responder: string;
+    escalationTimeout: string;
+  };
 }
 
-const INITIAL_PIPELINE: PipelineStep[] = [
+interface StepLog {
+  id: string;
+  timeOffset: string;
+  latencyMs: number;
+  stage: "INGEST" | "CORRELATE" | "ESCALATE" | "PAGE" | "WARROOM" | "SLA_MONITOR";
+  title: string;
+  description: string;
+  meta: string;
+  status: "pending" | "running" | "completed";
+}
+
+const SCENARIOS: Scenario[] = [
   {
-    time: "00:00.042",
-    type: "INGEST",
-    label: "Webhook Alert Ingestion",
-    detail: "HighLatencyAPI: 5xx error rate spiking on /api/v1/checkout via GitHub Webhook",
-    status: "completed",
-    badgeColor: "bg-red-500/20 text-red-400 border-red-500/30"
+    id: "k8s-502",
+    name: "Kubernetes Ingress 502 Spike",
+    severity: "CRITICAL",
+    source: "Prometheus AlertManager",
+    service: "ingress-gateway",
+    summary: "HTTP 502 Bad Gateway rate > 8.4% on edge ingress router cluster",
+    rawPayload: {
+      receiver: "opsknight-webhook",
+      status: "firing",
+      alerts: [
+        {
+          status: "firing",
+          labels: {
+            alertname: "IngressHigh5xxRate",
+            severity: "critical",
+            service: "ingress-gateway",
+            cluster: "prod-us-east-1",
+            namespace: "networking"
+          },
+          annotations: {
+            summary: "HTTP 502 rate > 8.4% on edge ingress router cluster",
+            runbook_url: "https://wiki.internal.io/runbooks/ingress-502"
+          },
+          startsAt: new Date().toISOString()
+        }
+      ],
+      groupLabels: { service: "ingress-gateway" },
+      commonLabels: { urgency: "HIGH" }
+    },
+    matchedPolicy: {
+      name: "Production Ingress Critical Policy",
+      tier: 1,
+      responder: "Alex Vance (Primary On-Call)",
+      escalationTimeout: "5 minutes"
+    }
   },
   {
-    time: "00:00.089",
-    type: "ROUTE",
-    label: "Escalation Policy Evaluation",
-    detail: "Matched 'Tier-1 Critical Services' → Assigned on-call primary Alex Vance",
-    status: "completed",
-    badgeColor: "bg-blue-500/20 text-blue-400 border-blue-500/30"
+    id: "db-pool",
+    name: "PostgreSQL Pool Exhaustion",
+    severity: "CRITICAL",
+    source: "Datadog Metric Monitor",
+    service: "postgres-primary",
+    summary: "Active client connections 98/100. Connection pool wait latency > 2,400ms",
+    rawPayload: {
+      event_type: "metric_alert",
+      alert_id: "DD-9481024",
+      check: "postgresql.connections.active",
+      value: 98,
+      threshold: 90,
+      tags: ["env:prod", "service:postgres-primary", "tier:data-layer"],
+      message: "Active client connections 98/100 on primary cluster"
+    },
+    matchedPolicy: {
+      name: "Data Infra Tier-1 Escalation",
+      tier: 1,
+      responder: "Sarah Chen (Database Lead)",
+      escalationTimeout: "3 minutes"
+    }
   },
   {
-    time: "00:00.124",
-    type: "PAGE",
-    label: "Multi-Channel Alert Dispatch",
-    detail: "High-Priority SMS & Mobile Override Push dispatched to Alex Vance (+1 555-019-2834)",
-    status: "completed",
-    badgeColor: "bg-amber-500/20 text-amber-400 border-amber-500/30"
-  },
-  {
-    time: "00:00.180",
-    type: "WARROOM",
-    label: "Slack War Room & Jitsi Bridge",
-    detail: "Provisioned #inc-384-api-gateway + WebRTC bridge https://meet.jit.si/opsknight-384",
-    status: "completed",
-    badgeColor: "bg-purple-500/20 text-purple-400 border-purple-500/30"
-  },
-  {
-    time: "00:01.420",
-    type: "ACK",
-    label: "Commander Acknowledged",
-    detail: "Alex Vance acknowledged via 1-click Slack button. P1 Ack SLA met in 1.4s.",
-    status: "completed",
-    badgeColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+    id: "stripe-timeout",
+    name: "Stripe Webhook Delivery Timeout",
+    severity: "HIGH",
+    source: "Stripe Webhook Ingestion",
+    service: "billing-worker",
+    summary: "Webhook timeout on subscription.payment_succeeded. Dead-letter queue spiking.",
+    rawPayload: {
+      type: "webhook.delivery_failed",
+      event: "invoice.payment_action_required",
+      failure_reason: "504_GATEWAY_TIMEOUT",
+      attempts: 4,
+      service: "billing-worker"
+    },
+    matchedPolicy: {
+      name: "Payments & Revenue Escalation",
+      tier: 1,
+      responder: "Alex Vance (Primary On-Call)",
+      escalationTimeout: "10 minutes"
+    }
   }
 ];
 
 export function IncidentSimulator() {
   const [activeTab, setActiveTab] = useState<"console" | "command-center" | "slack">("console");
-  const [pipelineSteps, setPipelineSteps] = useState<PipelineStep[]>(INITIAL_PIPELINE);
+  const [selectedScenario, setSelectedScenario] = useState<Scenario>(SCENARIOS[0]);
   const [isSimulating, setIsSimulating] = useState<boolean>(false);
   const [simProgress, setSimProgress] = useState<number>(100);
+  const [currentStepIndex, setCurrentStepIndex] = useState<number>(5);
+  const [logs, setLogs] = useState<StepLog[]>([]);
+  const [inspectTab, setInspectTab] = useState<"json" | "policy" | "dispatch" | "timeline">("json");
+  const [incidentState, setIncidentState] = useState<"IDLE" | "OPEN" | "ACKNOWLEDGED" | "RESOLVED">("OPEN");
   const [liveClock, setLiveClock] = useState<string>("21:10:39");
+  const [copied, setCopied] = useState<boolean>(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -82,100 +155,176 @@ export function IncidentSimulator() {
     return () => clearInterval(timer);
   }, []);
 
-  const runSimulation = () => {
+  const generateStepLogs = (sc: Scenario): StepLog[] => [
+    {
+      id: "s1",
+      timeOffset: "00:00.012",
+      latencyMs: 12,
+      stage: "INGEST",
+      title: "Webhook Ingestion & HMAC Verification",
+      description: `Ingested payload from ${sc.source} with valid HMAC-SHA256 signature. Zero parse drop.`,
+      meta: "200 OK · Payload size: 1.4KB",
+      status: "completed"
+    },
+    {
+      id: "s2",
+      timeOffset: "00:00.045",
+      latencyMs: 33,
+      stage: "CORRELATE",
+      title: "De-duplication & Signal Correlation",
+      description: `Correlated against active incidents for [${sc.service}]. Grouped 4 alert signals into a single incident entity.`,
+      meta: "De-dupe Window: 300s · Hash: 9f8a2c1e",
+      status: "completed"
+    },
+    {
+      id: "s3",
+      timeOffset: "00:00.089",
+      latencyMs: 44,
+      stage: "ESCALATE",
+      title: "Escalation Policy Matching",
+      description: `Rule matched: '${sc.matchedPolicy.name}'. Designated responder: ${sc.matchedPolicy.responder}.`,
+      meta: `Tier ${sc.matchedPolicy.tier} · Timeout: ${sc.matchedPolicy.escalationTimeout}`,
+      status: "completed"
+    },
+    {
+      id: "s4",
+      timeOffset: "00:00.124",
+      latencyMs: 35,
+      stage: "PAGE",
+      title: "Urgent Paging Dispatch (SMS + Push)",
+      description: "Dispatched High-Priority SMS & Mobile Override Push to primary responder device.",
+      meta: "AWS SNS / Twilio SMS · Carrier Delivery: 99.98%",
+      status: "completed"
+    },
+    {
+      id: "s5",
+      timeOffset: "00:00.180",
+      latencyMs: 56,
+      stage: "WARROOM",
+      title: "Slack Incident War Room Auto-Provisioned",
+      description: `Spun up dedicated channel #inc-${sc.service}-outage. Attached WebRTC Jitsi video conference bridge.`,
+      meta: "Slack App Bot · Webhook Sync SSE Live",
+      status: "completed"
+    },
+    {
+      id: "s6",
+      timeOffset: "00:00.220",
+      latencyMs: 40,
+      stage: "SLA_MONITOR",
+      title: "SLA Monitor & Postmortem Ingestion",
+      description: "Initialized 15-minute P1 Acknowledge SLA countdown. Real-time telemetry feed connected to Command Center.",
+      meta: "Target MTTA: < 3m · Live Tracking Active",
+      status: "completed"
+    }
+  ];
+
+  useEffect(() => {
+    setLogs(generateStepLogs(selectedScenario));
+    setIncidentState("OPEN");
+    setCurrentStepIndex(5);
+    setSimProgress(100);
+  }, [selectedScenario]);
+
+  const triggerLiveSimulation = () => {
     if (isSimulating) return;
     setIsSimulating(true);
     setSimProgress(0);
-    setPipelineSteps([]);
+    setLogs([]);
+    setCurrentStepIndex(0);
+    setIncidentState("OPEN");
 
-    const steps = [
-      {
-        time: "00:00.038",
-        type: "INGEST" as const,
-        label: "Webhook Alert Ingestion",
-        detail: "PostgresConnectionPoolExhausted: DB latency > 1,400ms via Datadog Alert",
-        status: "completed" as const,
-        badgeColor: "bg-red-500/20 text-red-400 border-red-500/30"
-      },
-      {
-        time: "00:00.075",
-        type: "ROUTE" as const,
-        label: "Escalation Policy Evaluation",
-        detail: "Policy 'Database Infra Tier-1' → Primary On-Call: Alex Vance",
-        status: "completed" as const,
-        badgeColor: "bg-blue-500/20 text-blue-400 border-blue-500/30"
-      },
-      {
-        time: "00:00.110",
-        type: "PAGE" as const,
-        label: "Urgent SMS & Push Dispatch",
-        detail: "High-priority SMS & mobile critical alert push notification delivered",
-        status: "completed" as const,
-        badgeColor: "bg-amber-500/20 text-amber-400 border-amber-500/30"
-      },
-      {
-        time: "00:00.165",
-        type: "WARROOM" as const,
-        label: "Slack War Room Auto-Provisioned",
-        detail: "Channel #inc-postgres-pool spun up with SRE team & Jitsi WebRTC video bridge",
-        status: "completed" as const,
-        badgeColor: "bg-purple-500/20 text-purple-400 border-purple-500/30"
-      },
-      {
-        time: "00:01.120",
-        type: "ACK" as const,
-        label: "Alert Acknowledged & Triage Underway",
-        detail: "Responder Alex Vance claimed commander. Escalation halted, status page updated.",
-        status: "completed" as const,
-        badgeColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
-      }
-    ];
+    const fullSteps = generateStepLogs(selectedScenario);
 
-    steps.forEach((step, idx) => {
+    fullSteps.forEach((step, idx) => {
       setTimeout(() => {
-        setPipelineSteps(prev => [...prev, step]);
-        setSimProgress(((idx + 1) / steps.length) * 100);
-        if (idx === steps.length - 1) {
+        setLogs(prev => [...prev, step]);
+        setCurrentStepIndex(idx);
+        setSimProgress(((idx + 1) / fullSteps.length) * 100);
+        if (idx === fullSteps.length - 1) {
           setIsSimulating(false);
         }
-      }, (idx + 1) * 600);
+      }, (idx + 1) * 350);
     });
+  };
+
+  const handleAcknowledge = () => {
+    setIncidentState("ACKNOWLEDGED");
+    const ackStep: StepLog = {
+      id: "ack",
+      timeOffset: "00:01.240",
+      latencyMs: 25,
+      stage: "SLA_MONITOR",
+      title: "Incident Acknowledged by Commander",
+      description: `${selectedScenario.matchedPolicy.responder} claimed incident commander. Escalation halted, status page updated.`,
+      meta: "P1 Ack SLA Met in 1.2s · Target: 15m",
+      status: "completed"
+    };
+    setLogs(prev => [...prev, ackStep]);
+  };
+
+  const handleResolve = () => {
+    setIncidentState("RESOLVED");
+    const resolveStep: StepLog = {
+      id: "res",
+      timeOffset: "00:03.110",
+      latencyMs: 30,
+      stage: "SLA_MONITOR",
+      title: "Incident Resolved & Retrospective Created",
+      description: "All services healthy. Automated AI Postmortem drafted, incident timeline archived, Slack war room closed.",
+      meta: "MTTR: 3.1m · Status Page: All Systems Operational",
+      status: "completed"
+    };
+    setLogs(prev => [...prev, resolveStep]);
+  };
+
+  const handleCopyCurl = () => {
+    const curlCommand = `curl -X POST https://app.opsknight.com/api/v1/webhooks/incoming \\
+  -H "Content-Type: application/json" \\
+  -H "X-OpsKnight-Key: pk_live_9481024" \\
+  -d '${JSON.stringify(selectedScenario.rawPayload)}'`;
+    navigator.clipboard.writeText(curlCommand);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
   };
 
   return (
     <section id="interactive-demo" className="py-24 bg-slate-950 text-slate-200 border-t border-white/5 relative overflow-hidden font-sans">
+      
+      {/* Background Ambient Glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-red-600/10 blur-[140px] rounded-full pointer-events-none" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold tracking-wide uppercase mb-4">
             <Radio className="w-3.5 h-3.5 text-red-500 animate-pulse" />
-            Interactive Incident Engine & Command Center
+            Interactive Incident Orchestration Studio
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Sub-second triage. From alert to war room.
+            Sub-second triage. From alert to war room in &lt; 250ms.
           </h2>
           <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            See how OpsKnight orchestrates multi-tier escalations, automatic Slack channels, and live command center metrics with zero lag.
+            Test the entire distributed incident pipeline in real time: webhook ingestion, policy routing, urgent paging, Slack war room creation, and AI postmortem drafting.
           </p>
 
           {/* Mode Switcher Tabs */}
           <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
             <button
               onClick={() => setActiveTab("console")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 border ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 border cursor-pointer ${
                 activeTab === "console"
                   ? "bg-red-600 text-white border-red-500 shadow-lg shadow-red-500/25"
                   : "bg-slate-900 text-slate-400 hover:text-white border-white/10 hover:bg-slate-800"
               }`}
             >
               <Terminal className="w-4 h-4" />
-              <span>⚡ Live Incident Pipeline (Sub-Second Engine)</span>
+              <span>⚡ Live Pipeline Engine (Interactive Orchestrator)</span>
             </button>
 
             <button
               onClick={() => setActiveTab("command-center")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 border ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 border cursor-pointer ${
                 activeTab === "command-center"
                   ? "bg-red-600 text-white border-red-500 shadow-lg shadow-red-500/25"
                   : "bg-slate-900 text-slate-400 hover:text-white border-white/10 hover:bg-slate-800"
@@ -187,7 +336,7 @@ export function IncidentSimulator() {
 
             <button
               onClick={() => setActiveTab("slack")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 border ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 border cursor-pointer ${
                 activeTab === "slack"
                   ? "bg-red-600 text-white border-red-500 shadow-lg shadow-red-500/25"
                   : "bg-slate-900 text-slate-400 hover:text-white border-white/10 hover:bg-slate-800"
@@ -201,116 +350,302 @@ export function IncidentSimulator() {
 
         {/* TAB 1: Live SRE Incident Pipeline Engine */}
         {activeTab === "console" && (
-          <div className="w-full max-w-5xl mx-auto rounded-2xl bg-[#0b0f19] border border-white/10 shadow-2xl overflow-hidden font-mono text-xs">
-            {/* Console Window Header */}
-            <div className="h-11 bg-[#111726] px-4 flex items-center justify-between border-b border-white/10 select-none">
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
-                  <span className="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
-                  <span className="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
-                </div>
-                <span className="text-slate-400 font-bold font-sans text-xs">
-                  OpsKnight High-Velocity Incident Orchestrator v1.3
+          <div className="w-full max-w-6xl mx-auto rounded-3xl bg-[#090d16] border border-white/10 shadow-2xl overflow-hidden flex flex-col font-sans">
+            
+            {/* Top Toolbar: Scenario Selectors + Live Actions */}
+            <div className="p-4 bg-[#0d1322] border-b border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              
+              {/* Scenario Switcher Pills */}
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1.5">
+                  <Activity className="w-3.5 h-3.5 text-red-500" />
+                  <span>Scenario:</span>
                 </span>
+                {SCENARIOS.map((sc) => (
+                  <button
+                    key={sc.id}
+                    onClick={() => {
+                      setSelectedScenario(sc);
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border cursor-pointer flex items-center gap-1.5 ${
+                      selectedScenario.id === sc.id
+                        ? "bg-red-600 text-white border-red-500 shadow-sm"
+                        : "bg-slate-900 text-slate-400 hover:text-white border-white/10 hover:bg-slate-800"
+                    }`}
+                  >
+                    <Flame className={`w-3.5 h-3.5 ${selectedScenario.id === sc.id ? "text-white" : "text-slate-500"}`} />
+                    <span>{sc.name}</span>
+                  </button>
+                ))}
               </div>
 
-              <div className="flex items-center gap-3 font-sans">
-                <div className="flex items-center gap-1.5 text-emerald-400 font-mono text-[11px]">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span>{liveClock} UTC</span>
-                </div>
-
+              {/* Action Buttons: Simulate, Acknowledge, Resolve */}
+              <div className="flex flex-wrap items-center gap-2">
                 <button
-                  onClick={runSimulation}
+                  onClick={triggerLiveSimulation}
                   disabled={isSimulating}
-                  className="px-3 py-1 bg-red-600 hover:bg-red-500 text-white font-bold rounded-lg text-xs flex items-center gap-1.5 transition-all shadow-md shadow-red-500/25 disabled:opacity-50 cursor-pointer"
+                  className="px-3.5 py-1.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-lg text-xs flex items-center gap-1.5 transition-all shadow-md shadow-red-500/25 disabled:opacity-50 cursor-pointer"
                 >
                   {isSimulating ? (
                     <>
                       <RotateCcw className="w-3.5 h-3.5 animate-spin" />
-                      <span>Simulating...</span>
+                      <span>Running Pipeline...</span>
                     </>
                   ) : (
                     <>
                       <Play className="w-3.5 h-3.5" />
-                      <span>🚨 Simulate Sev-1 Outage</span>
+                      <span>🚨 Fire Sev-1 Simulation</span>
                     </>
                   )}
                 </button>
-              </div>
-            </div>
 
-            {/* Pipeline Telemetry Bar */}
-            <div className="px-6 py-3 bg-[#0d1424] border-b border-white/5 flex flex-wrap items-center justify-between gap-4 font-sans text-xs">
-              <div className="flex items-center gap-6">
-                <div>
-                  <span className="text-slate-500 block text-[10px] uppercase font-bold">Latency Overhead</span>
-                  <span className="text-emerald-400 font-mono font-bold text-sm">&lt; 120ms</span>
-                </div>
-                <div>
-                  <span className="text-slate-500 block text-[10px] uppercase font-bold">Paging Engine</span>
-                  <span className="text-white font-mono font-bold text-sm">SMS + Mobile Push</span>
-                </div>
-                <div>
-                  <span className="text-slate-500 block text-[10px] uppercase font-bold">ChatOps Sync</span>
-                  <span className="text-purple-400 font-mono font-bold text-sm">Bi-Directional SSE</span>
-                </div>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="w-48 bg-slate-800 rounded-full h-2 overflow-hidden border border-white/5">
-                <div 
-                  className="bg-emerald-500 h-full transition-all duration-300 rounded-full"
-                  style={{ width: `${simProgress}%` }}
-                ></div>
-              </div>
-            </div>
-
-            {/* Event Timeline List */}
-            <div className="p-6 space-y-3 min-h-[360px] bg-[#070a12]">
-              {pipelineSteps.length === 0 && isSimulating && (
-                <div className="py-12 text-center text-slate-500">
-                  <Flame className="w-8 h-8 text-red-500 animate-bounce mx-auto mb-2" />
-                  <span>Ingesting webhook payload from monitoring cluster...</span>
-                </div>
-              )}
-
-              <AnimatePresence>
-                {pipelineSteps.map((step, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="p-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-white/20 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3"
+                {incidentState === "OPEN" && (
+                  <button
+                    onClick={handleAcknowledge}
+                    className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-lg text-xs border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
-                    <div className="flex items-start md:items-center gap-3">
-                      <span className="text-slate-500 font-mono text-[11px] bg-slate-950 px-2 py-1 rounded border border-white/5">
-                        +{step.time}
-                      </span>
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase border ${step.badgeColor}`}>
-                        {step.type}
-                      </span>
-                      <div>
-                        <div className="font-bold text-white font-sans text-xs flex items-center gap-2">
-                          <span>{step.label}</span>
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                    <span>1-Click Acknowledge</span>
+                  </button>
+                )}
+
+                {incidentState !== "RESOLVED" && (
+                  <button
+                    onClick={handleResolve}
+                    className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-xs transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer"
+                  >
+                    <Check className="w-3.5 h-3.5" />
+                    <span>Resolve Incident</span>
+                  </button>
+                )}
+
+                {incidentState === "RESOLVED" && (
+                  <span className="px-3 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-bold flex items-center gap-1">
+                    <Check className="w-3.5 h-3.5" />
+                    <span>Resolved</span>
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Performance Telemetry Strip */}
+            <div className="px-6 py-3 bg-[#0a0f1d] border-b border-white/5 flex flex-wrap items-center justify-between gap-4 text-xs">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                <div>
+                  <span className="text-slate-500 block text-[10px] uppercase font-bold tracking-wide">Ingest Latency</span>
+                  <span className="text-emerald-400 font-mono font-bold text-sm">12ms</span>
+                </div>
+                <div>
+                  <span className="text-slate-500 block text-[10px] uppercase font-bold tracking-wide">Paging Trigger</span>
+                  <span className="text-white font-mono font-bold text-sm">SMS + Push (35ms)</span>
+                </div>
+                <div>
+                  <span className="text-slate-500 block text-[10px] uppercase font-bold tracking-wide">War Room Sync</span>
+                  <span className="text-purple-400 font-mono font-bold text-sm">180ms</span>
+                </div>
+                <div>
+                  <span className="text-slate-500 block text-[10px] uppercase font-bold tracking-wide">Total Orchestration</span>
+                  <span className="text-sky-400 font-mono font-bold text-sm">&lt; 220ms</span>
+                </div>
+              </div>
+
+              {/* Simulation Progress Bar */}
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono text-slate-400">Pipeline: {Math.round(simProgress)}%</span>
+                <div className="w-28 bg-slate-800 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div 
+                    className="bg-emerald-500 h-full transition-all duration-300 rounded-full"
+                    style={{ width: `${simProgress}%` }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Main Studio Body: Execution Pipeline (Left) + Telemetry Inspector (Right) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[480px]">
+              
+              {/* Left Column: Live Execution Steps Flow (7 Cols) */}
+              <div className="lg:col-span-7 p-6 border-b lg:border-b-0 lg:border-r border-white/10 bg-[#070b14] space-y-3 overflow-y-auto max-h-[580px]">
+                <div className="flex items-center justify-between text-xs font-bold text-slate-400 pb-1 uppercase tracking-wider">
+                  <span>Distributed Execution Pipeline</span>
+                  <span className="font-mono text-slate-500">{liveClock} UTC</span>
+                </div>
+
+                <div className="space-y-2.5">
+                  <AnimatePresence>
+                    {logs.map((step, idx) => (
+                      <motion.div
+                        key={step.id}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className={`p-3.5 rounded-xl border transition-all ${
+                          idx === currentStepIndex
+                            ? "bg-slate-900/95 border-red-500/40 shadow-lg shadow-red-500/5"
+                            : "bg-slate-900/60 border-white/10 hover:border-white/20"
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex items-start gap-3 min-w-0">
+                            <div className="mt-0.5">
+                              {step.stage === "INGEST" && <Cpu className="w-4 h-4 text-red-400" />}
+                              {step.stage === "CORRELATE" && <Layers className="w-4 h-4 text-blue-400" />}
+                              {step.stage === "ESCALATE" && <Users className="w-4 h-4 text-amber-400" />}
+                              {step.stage === "PAGE" && <Zap className="w-4 h-4 text-amber-400" />}
+                              {step.stage === "WARROOM" && <MessageSquare className="w-4 h-4 text-purple-400" />}
+                              {step.stage === "SLA_MONITOR" && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
+                            </div>
+
+                            <div className="space-y-1 min-w-0">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <span className="font-bold text-white text-xs font-sans">{step.title}</span>
+                                <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-400 border border-white/5">
+                                  +{step.latencyMs}ms
+                                </span>
+                              </div>
+                              <p className="text-xs text-slate-300 font-sans leading-relaxed">{step.description}</p>
+                              <div className="text-[11px] font-mono text-slate-400 flex items-center gap-1.5 pt-0.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                <span>{step.meta}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <span className="font-mono text-[10px] text-slate-500 shrink-0 bg-slate-950 px-2 py-0.5 rounded border border-white/5">
+                            {step.timeOffset}
+                          </span>
                         </div>
-                        <div className="text-slate-400 font-mono text-[11px] mt-0.5">
-                          {step.detail}
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Right Column: Deep Telemetry & Payload Inspector (5 Cols) */}
+              <div className="lg:col-span-5 bg-[#0b0f1a] flex flex-col justify-between">
+                
+                {/* Inspector Header Tabs */}
+                <div>
+                  <div className="h-10 border-b border-white/10 px-4 flex items-center justify-between text-xs bg-[#0e1424]">
+                    <div className="flex items-center gap-4 font-semibold">
+                      <button
+                        onClick={() => setInspectTab("json")}
+                        className={`py-2.5 transition-colors border-b-2 cursor-pointer ${
+                          inspectTab === "json" ? "border-red-500 text-white" : "border-transparent text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        Webhook JSON
+                      </button>
+                      <button
+                        onClick={() => setInspectTab("policy")}
+                        className={`py-2.5 transition-colors border-b-2 cursor-pointer ${
+                          inspectTab === "policy" ? "border-red-500 text-white" : "border-transparent text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        Escalation Policy
+                      </button>
+                      <button
+                        onClick={() => setInspectTab("dispatch")}
+                        className={`py-2.5 transition-colors border-b-2 cursor-pointer ${
+                          inspectTab === "dispatch" ? "border-red-500 text-white" : "border-transparent text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        Dispatch Payloads
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={handleCopyCurl}
+                      className="text-slate-400 hover:text-white transition-colors flex items-center gap-1 text-[11px] font-mono cursor-pointer"
+                      title="Copy raw curl command"
+                    >
+                      {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      <span>{copied ? "Copied curl" : "Copy cURL"}</span>
+                    </button>
+                  </div>
+
+                  {/* Inspector Content Panel */}
+                  <div className="p-4 font-mono text-xs overflow-y-auto max-h-[440px]">
+                    {inspectTab === "json" && (
+                      <div className="space-y-2">
+                        <div className="text-[11px] text-slate-500 font-sans flex items-center justify-between">
+                          <span>Payload Format: CloudEvents / Prometheus v2</span>
+                          <span className="text-emerald-400 font-bold">HMAC Verified ✓</span>
+                        </div>
+                        <pre className="p-3 bg-slate-950 rounded-xl border border-white/10 text-slate-300 text-[11px] leading-relaxed overflow-x-auto">
+                          {JSON.stringify(selectedScenario.rawPayload, null, 2)}
+                        </pre>
+                      </div>
+                    )}
+
+                    {inspectTab === "policy" && (
+                      <div className="space-y-3 font-sans">
+                        <div className="p-3 bg-slate-950 rounded-xl border border-white/10 space-y-2">
+                          <div className="text-xs font-bold text-white flex items-center gap-2">
+                            <ShieldAlert className="w-4 h-4 text-blue-400" />
+                            <span>{selectedScenario.matchedPolicy.name}</span>
+                          </div>
+                          <div className="text-xs text-slate-400 space-y-1">
+                            <div>• Routing Key: <code>service == &quot;{selectedScenario.service}&quot;</code></div>
+                            <div>• Target Tier: <strong>Tier {selectedScenario.matchedPolicy.tier} (Primary)</strong></div>
+                            <div>• Assigned Responder: <strong className="text-white">{selectedScenario.matchedPolicy.responder}</strong></div>
+                            <div>• Escalation Timeout: <strong>{selectedScenario.matchedPolicy.escalationTimeout}</strong></div>
+                          </div>
+                        </div>
+
+                        <div className="p-3 bg-slate-900/60 rounded-xl border border-white/5 text-xs text-slate-400">
+                          <div className="font-bold text-slate-300 mb-1">Fallback Escalation Step 2:</div>
+                          <div>If unacknowledged in {selectedScenario.matchedPolicy.escalationTimeout} → Auto-escalate to Secondary On-Call (Sarah Chen) + Page VP Engineering.</div>
                         </div>
                       </div>
-                    </div>
+                    )}
 
-                    <div className="flex items-center gap-2 text-slate-500 text-[10px] font-mono self-end md:self-center">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                      <span>SUCCESS (200 OK)</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+                    {inspectTab === "dispatch" && (
+                      <div className="space-y-3 font-sans">
+                        {/* SMS Dispatch */}
+                        <div className="p-3 bg-slate-950 rounded-xl border border-white/10 space-y-1.5">
+                          <div className="flex items-center justify-between text-xs font-bold text-amber-400">
+                            <span>📱 High-Priority SMS Payload</span>
+                            <span className="text-slate-500 font-mono text-[10px]">Twilio / AWS SNS</span>
+                          </div>
+                          <div className="text-xs text-slate-300 font-mono bg-slate-900 p-2 rounded border border-white/5">
+                            [OpsKnight ALERT] CRITICAL on {selectedScenario.service}: {selectedScenario.summary}. Reply 1 to Ack, 2 to Resolve.
+                          </div>
+                        </div>
+
+                        {/* Slack Dispatch */}
+                        <div className="p-3 bg-slate-950 rounded-xl border border-white/10 space-y-1.5">
+                          <div className="flex items-center justify-between text-xs font-bold text-purple-400">
+                            <span>💬 Slack War Room Block Kit</span>
+                            <span className="text-slate-500 font-mono text-[10px]">#inc-{selectedScenario.service}-outage</span>
+                          </div>
+                          <div className="text-xs text-slate-300 font-mono bg-slate-900 p-2 rounded border border-white/5">
+                            Provisioned channel + WebRTC Bridge https://meet.jit.si/opsknight-{selectedScenario.service}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Bottom CLI Trigger Help */}
+                <div className="p-3.5 bg-[#0a0e19] border-t border-white/10 flex items-center justify-between text-xs text-slate-400 font-sans">
+                  <div className="flex items-center gap-2">
+                    <Code2 className="w-4 h-4 text-slate-500" />
+                    <span>Run test alert via terminal:</span>
+                  </div>
+                  <button
+                    onClick={handleCopyCurl}
+                    className="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/10 rounded-md text-[11px] font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <span>curl -X POST /webhooks/incoming</span>
+                    <ArrowRight className="w-3 h-3 text-slate-400" />
+                  </button>
+                </div>
+
+              </div>
             </div>
+
           </div>
         )}
 

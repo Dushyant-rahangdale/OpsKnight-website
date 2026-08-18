@@ -3,80 +3,65 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Github, ArrowRight } from "lucide-react";
+import { Github, Terminal, Copy, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
 import { BRAND } from "@/lib/brand";
 
 export function CTA() {
+    const [copied, setCopied] = useState(false);
+    const dockerCommand = "curl -sL https://raw.githubusercontent.com/opsknight-labs/OpsKnight/main/docker-compose.yml > docker-compose.yml && docker-compose up -d";
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(dockerCommand);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
     return (
         <section className="relative py-32 bg-slate-950 overflow-hidden border-t border-white/5">
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-500/5 rounded-full blur-[100px]" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-500/10 rounded-full blur-[100px]" />
             </div>
-
-
-
-
 
             <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <motion.div
-                    initial={false}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
+                    className="space-y-8"
                 >
-                    <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6">
-                        Deploy in under 5 minutes.
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+                        Take control of your incident infrastructure today.
                     </h2>
-                    <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
-                        Two commands. One container. Full incident management.
+                    
+                    <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+                        Deploy {BRAND.name} in under 2 minutes. Free forever, self-hosted, and production-ready.
                     </p>
 
-                    {/* Quick Start Terminal */}
-                    <div className="relative max-w-lg mx-auto mb-10 text-left">
-                        <div className="relative rounded-xl border border-white/10 bg-slate-900 shadow-2xl overflow-hidden">
-                            <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-slate-800/50">
-                                <div className="flex gap-1.5">
-                                    <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
-                                    <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
-                                    <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
-                                </div>
-                                <span className="text-xs text-slate-500 font-mono">bash</span>
+                    <div className="max-w-2xl mx-auto mt-10">
+                        <div className="bg-slate-900 rounded-lg p-4 border border-white/10 flex items-center justify-between text-left group hover:border-emerald-500/30 transition-colors">
+                            <div className="flex items-center gap-3 overflow-hidden text-emerald-400 font-mono text-sm sm:text-base">
+                                <Terminal className="w-5 h-5 text-slate-500 flex-shrink-0" />
+                                <span className="truncate">{dockerCommand}</span>
                             </div>
-                            <div className="p-4 font-mono text-sm">
-                                <div className="flex items-center mb-2">
-                                    <span className="text-emerald-500 mr-2">$</span>
-                                    <span className="text-slate-300">git clone {BRAND.links.github}</span>
-                                </div>
-                                <div className="flex items-center">
-                                    <span className="text-emerald-500 mr-2">$</span>
-                                    <span className="text-slate-300">docker compose up -d</span>
-                                </div>
-                            </div>
+                            <button 
+                                onClick={copyToClipboard}
+                                className="ml-4 p-2 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors focus:outline-none"
+                                aria-label="Copy to clipboard"
+                            >
+                                {copied ? <CheckCircle2 className="w-5 h-5 text-emerald-400" /> : <Copy className="w-5 h-5" />}
+                            </button>
                         </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Button
-                            asChild
-                            size="lg"
-                            className="h-12 px-8 bg-white text-slate-950 hover:bg-slate-200 border-none shadow-lg shadow-white/5 transition-all w-full sm:w-auto"
-                        >
-                            <Link
-                                href={BRAND.links.github}
-                                target="_blank"
-                            >
+                    <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-8">
+                        <Button asChild size="lg" className="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white px-8 h-12 text-lg">
+                            <Link href="/docs">Deploy Now</Link>
+                        </Button>
+                        <Button asChild size="lg" variant="outline" className="w-full sm:w-auto h-12 px-8 text-lg bg-white/5 border-white/10 hover:bg-white/10 text-white">
+                            <Link href="https://github.com/opsknight-labs/OpsKnight" target="_blank" rel="noopener noreferrer">
                                 <Github className="w-5 h-5 mr-2" />
                                 Star on GitHub
-                            </Link>
-                        </Button>
-                        <Button
-                            asChild
-                            variant="outline"
-                            size="lg"
-                            className="h-12 px-8 bg-transparent border-white/10 text-white hover:bg-white/5 w-full sm:w-auto hover:text-white"
-                        >
-                            <Link href="/docs">
-                                Read the Docs
-                                <ArrowRight className="w-4 h-4 ml-2 opacity-50" />
                             </Link>
                         </Button>
                     </div>

@@ -2,40 +2,36 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Users, AlertTriangle, Bell, Activity, TrendingUp } from "lucide-react";
+import { ArrowRight, Zap, Database, Repeat, Clock } from "lucide-react";
 
 const stats = [
     {
-        label: "Concurrent Users",
-        value: 500,
-        suffix: "+",
-        description: "200-500 active users with SSE streams open.",
-        icon: Users,
-        color: "from-emerald-500 to-cyan-500",
+        label: "Concurrent SSE Streams",
+        value: "500+",
+        description: "Live real-time dashboard listeners with zero Redis overhead",
+        icon: Zap,
+        color: "from-emerald-500 to-emerald-700",
     },
     {
-        label: "Incidents",
-        value: 300,
-        suffix: "/min",
-        description: "New incidents created via API or integrations.",
-        icon: AlertTriangle,
-        color: "from-blue-500 to-indigo-500",
+        label: "Incident Ingestion Throughput",
+        value: "300 / min",
+        description: "Deduplicated, fingerprinted, and stored with sub-millisecond hashing",
+        icon: Database,
+        color: "from-blue-500 to-blue-700",
     },
     {
-        label: "Notifications",
-        value: 600,
-        suffix: "/min",
-        description: "Email, SMS, Slack, push, and webhooks combined.",
-        icon: Bell,
-        color: "from-amber-500 to-orange-500",
+        label: "Multi-Channel Dispatches",
+        value: "600 / min",
+        description: "High-throughput Slack, SMS, Push, and Webhook dispatching",
+        icon: Repeat,
+        color: "from-purple-500 to-purple-700",
     },
     {
-        label: "SSE Streams",
-        value: 500,
-        suffix: "+",
-        description: "Live dashboards with cached reads every few seconds.",
-        icon: Activity,
-        color: "from-rose-500 to-pink-500",
+        label: "Ingestion-to-Page Latency",
+        value: "< 15ms",
+        description: "From incoming HTTP webhook payload to escalation trigger",
+        icon: Clock,
+        color: "from-orange-500 to-orange-700",
     },
 ];
 
@@ -46,28 +42,18 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
-            className="group relative"
+            className="relative p-6 rounded-2xl bg-slate-900/50 border border-white/5 hover:border-white/10 transition-all duration-300 h-full flex flex-col"
         >
-
-            <div className="relative p-8 rounded-2xl bg-slate-900/50 border border-white/5 hover:border-white/10 transition-all duration-300 h-full">
-                {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} mb-6`}>
-                    <stat.icon className="w-6 h-6 text-white" />
-                </div>
-
-                {/* Value */}
-                <div className="text-4xl md:text-5xl font-bold text-white mb-2">
-                    {stat.value.toLocaleString()}{stat.suffix}
-                </div>
-
-                {/* Label */}
-                <h3 className="text-lg font-semibold text-white mb-2">{stat.label}</h3>
-
-                {/* Description */}
-                <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
-                    {stat.description}
-                </p>
+            <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} mb-6`}>
+                <stat.icon className="w-6 h-6 text-white" />
             </div>
+            <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                {stat.value}
+            </div>
+            <h3 className="text-lg font-semibold text-slate-200 mb-2">{stat.label}</h3>
+            <p className="text-sm text-slate-400 mt-auto">
+                {stat.description}
+            </p>
         </motion.div>
     );
 }
@@ -75,10 +61,6 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
 export function Stats() {
     return (
         <section className="relative py-24 bg-slate-950 overflow-hidden border-t border-white/5">
-
-
-
-
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <motion.div
@@ -87,12 +69,14 @@ export function Stats() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-4">
+                        Performance Benchmarks
+                    </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Built for scale.
+                        Engineered for enterprise scale.
                     </h2>
                     <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-                        Benchmarked throughput on a single container deployment.
+                        Tested and benchmarked under high-volume alert storm conditions.
                     </p>
                 </motion.div>
 
@@ -103,13 +87,13 @@ export function Stats() {
                     ))}
                 </div>
 
-                <div className="mt-10 text-center">
+                <div className="mt-12 text-center">
                     <Link
-                        href="/docs/latest/core-concepts/scalability"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 bg-white/5 text-sm font-semibold text-white hover:bg-white/10 transition"
+                        href="/docs/v1.3/core-concepts/scalability"
+                        className="inline-flex items-center gap-2 text-emerald-400 font-medium hover:text-emerald-300 transition-colors group"
                     >
-                        <TrendingUp className="w-4 h-4 text-emerald-400" />
-                        Read the scalability guide
+                        View scalability documentation
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
             </div>

@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Menu, X, Github, Heart, ArrowRight } from "lucide-react";
-import { BRAND } from "@/lib/brand";
+import { Menu, X, Github, ArrowRight } from "lucide-react";
 
 const navItems = [
     { label: "Features", href: "/#features" },
+    { label: "How It Works", href: "/#how-it-works" },
     { label: "Integrations", href: "/integrations" },
     { label: "Changelog", href: "/changelog" },
     { label: "Compare", href: "/compare" },
@@ -23,22 +23,22 @@ export function Navbar() {
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/70"
+            className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/70"
         >
-            {/* Announcement Bar */}
-            <div className="hidden sm:block border-b border-white/5 bg-gradient-to-r from-emerald-500/10 via-transparent to-cyan-500/10">
+            {/* Announcement Banner */}
+            <div className="hidden sm:block border-b border-white/5 bg-slate-900/60">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-center gap-2 py-1.5 text-xs">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                        <span className="text-slate-400">
-                            {BRAND.name} is in active development.
+                    <div className="flex items-center justify-center gap-2 py-2 text-xs">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                        <span className="text-slate-300">
+                            OpsKnight v1.3.0 is live — 24+ native integrations, drop-in PagerDuty emulation & self-hosted status pages
                         </span>
                         <Link
-                            href={BRAND.links.github}
+                            href="https://github.com/opsknight-labs/OpsKnight/releases"
                             target="_blank"
-                            className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
+                            className="inline-flex items-center gap-1 text-white hover:text-emerald-400 font-medium transition-colors ml-2"
                         >
-                            Star on GitHub
+                            Read Release Notes
                             <ArrowRight className="w-3 h-3" />
                         </Link>
                     </div>
@@ -49,91 +49,70 @@ export function Navbar() {
                 <div className="flex items-center justify-between h-14">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-3 group">
-                        <div className="relative">
-                            {/* Glow effect */}
-                            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 group-hover:border-emerald-500/30 transition-all shadow-lg">
-                                <Image
-                                    src="/logo-mark.png"
-                                    alt={BRAND.name}
-                                    width={24}
-                                    height={24}
-                                    className="w-6 h-6 object-contain"
-                                />
-                            </div>
+                        <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 group-hover:border-emerald-500/50 transition-all shadow-sm">
+                            <Image
+                                src="/logo-mark.png"
+                                alt="OpsKnight"
+                                width={20}
+                                height={20}
+                                className="w-5 h-5 object-contain"
+                            />
                         </div>
-                        <div className="flex flex-col">
-                            <span className="text-lg font-extrabold tracking-tight text-white group-hover:text-emerald-50 transition-colors">
-                                {BRAND.name}
-                            </span>
-                            <span className="text-[9px] text-emerald-500/70 font-medium uppercase tracking-wider hidden sm:block">
-                                Incident Response
-                            </span>
-                        </div>
+                        <span className="text-base font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+                            OpsKnight
+                        </span>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center">
-                        <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-white/5 border border-white/5">
-                            {navItems.map((item) => (
-                                <Link
-                                    key={item.label}
-                                    href={item.href}
-                                    className="px-3 py-1.5 text-xs font-medium text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200"
-                                >
-                                    {item.label}
-                                </Link>
-                            ))}
-                        </div>
+                    <div className="hidden md:flex items-center gap-1">
+                        {navItems.map((item) => (
+                            <Link
+                                key={item.label}
+                                href={item.href}
+                                className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-colors"
+                            >
+                                {item.label}
+                            </Link>
+                        ))}
                     </div>
 
-                    {/* Desktop CTAs */}
-                    <div className="hidden md:flex items-center gap-2">
+                    {/* Right-side actions */}
+                    <div className="hidden md:flex items-center gap-4">
                         <Link
-                            href={BRAND.links.sponsor}
+                            href="https://status.opsknight.com"
                             target="_blank"
-                            className="group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-pink-400 hover:text-pink-300 rounded-full transition-colors"
-                        >
-                            <Heart className="w-3.5 h-3.5 fill-current group-hover:scale-110 transition-transform" />
-                            <span>Sponsor</span>
-                        </Link>
-                        <Link
-                            href={BRAND.links.status}
-                            target="_blank"
-                            className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-emerald-300 hover:text-emerald-200 transition-colors"
+                            className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-full bg-slate-900/50 border border-white/5 transition-colors"
                         >
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                             </span>
-                            <span>Status</span>
+                            All Systems Operational
                         </Link>
+                        
+                        <div className="w-px h-4 bg-white/10"></div>
+
                         <Link
-                            href={BRAND.links.github}
+                            href="https://github.com/opsknight-labs/OpsKnight"
                             target="_blank"
-                            className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-400 hover:text-white transition-colors"
+                            className="flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition-colors"
                         >
-                            <Github className="w-3.5 h-3.5" />
-                            <span>GitHub</span>
+                            <Github className="w-4 h-4" />
+                            <span>Star</span>
                         </Link>
+                        
                         <Link
                             href="/docs"
-                            className="group relative inline-flex h-9 items-center justify-center overflow-hidden rounded-full px-5 text-xs font-semibold text-slate-950"
+                            className="inline-flex h-8 items-center justify-center rounded-md bg-white px-4 text-sm font-medium text-black hover:bg-slate-200 transition-colors"
                         >
-                            {/* Button gradient background */}
-                            <span className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-cyan-400" />
-                            <span className="absolute inset-0 bg-gradient-to-r from-emerald-300 to-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <span className="relative flex items-center gap-1.5">
-                                Get Started
-                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                            </span>
+                            Get Started
                         </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                        className="md:hidden p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-colors"
                     >
                         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                     </button>
@@ -152,50 +131,40 @@ export function Navbar() {
                                 <Link
                                     key={item.label}
                                     href={item.href}
-                                    className="px-4 py-2.5 text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+                                    className="px-4 py-2.5 text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-colors"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     {item.label}
                                 </Link>
                             ))}
-                            <div className="flex flex-col gap-3 p-4 mt-3 border-t border-white/10">
+                            <div className="flex flex-col gap-3 p-4 mt-2 border-t border-white/10">
                                 <Link
-                                    href={BRAND.links.sponsor}
+                                    href="https://status.opsknight.com"
                                     target="_blank"
-                                    className="flex items-center gap-2 text-pink-400 hover:text-pink-300 text-sm font-medium"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    <Heart className="w-4 h-4 fill-current" />
-                                    <span>Sponsor Project</span>
-                                </Link>
-                                <Link
-                                    href={BRAND.links.github}
-                                    target="_blank"
-                                    className="flex items-center gap-2 text-slate-400 hover:text-white text-sm font-medium"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    <Github className="w-4 h-4" />
-                                    <span>View on GitHub</span>
-                                </Link>
-                                <Link
-                                    href={BRAND.links.status}
-                                    target="_blank"
-                                    className="flex items-center gap-2 text-emerald-300 hover:text-emerald-200 text-sm font-medium"
+                                    className="flex items-center gap-2 text-slate-300 hover:text-white text-sm font-medium"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     <span className="relative flex h-2 w-2">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                                     </span>
-                                    <span>Status Page</span>
+                                    <span>Live Status</span>
+                                </Link>
+                                <Link
+                                    href="https://github.com/opsknight-labs/OpsKnight"
+                                    target="_blank"
+                                    className="flex items-center gap-2 text-slate-300 hover:text-white text-sm font-medium"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    <Github className="w-4 h-4" />
+                                    <span>Star on GitHub</span>
                                 </Link>
                                 <Link
                                     href="/docs"
-                                    className="flex items-center justify-center gap-2 h-10 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white text-sm font-semibold hover:from-emerald-400 hover:to-cyan-400 transition-all"
+                                    className="flex items-center justify-center h-10 mt-2 rounded-md bg-white text-black text-sm font-medium hover:bg-slate-200 transition-colors"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     Get Started
-                                    <ArrowRight className="w-4 h-4" />
                                 </Link>
                             </div>
                         </div>

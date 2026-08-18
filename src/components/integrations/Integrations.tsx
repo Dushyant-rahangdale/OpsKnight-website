@@ -1,112 +1,86 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { CheckCircle2, Plug, Route, ShieldCheck } from "lucide-react";
-import { integrationIcons, IntegrationKey } from "../icons/IntegrationIcons";
+import { ArrowRight } from "lucide-react";
+import { integrationIcons } from "../icons/IntegrationIcons";
 import { BRAND } from "@/lib/brand";
 
-// Sources: Monitoring & Ingestion
-const sources: { name: string; key: IntegrationKey; category: string }[] = [
-    { name: "CloudWatch", key: "cloudwatch", category: "AWS" },
-    { name: "Azure Monitor", key: "azure", category: "Cloud" },
-    { name: "Google Cloud", key: "googlecloud", category: "Cloud" },
-    { name: "Datadog", key: "datadog", category: "Monitoring" },
-    { name: "New Relic", key: "newrelic", category: "Monitoring" },
-    { name: "Prometheus", key: "prometheus", category: "Monitoring" },
-    { name: "Grafana", key: "grafana", category: "Monitoring" },
-    { name: "Sentry", key: "sentry", category: "Errors" },
-    { name: "GitHub", key: "github", category: "DevOps" },
-    { name: "Splunk", key: "splunk", category: "Logs" },
-    { name: "Dynatrace", key: "dynatrace", category: "APM" },
-    { name: "AppDynamics", key: "appdynamics", category: "APM" },
-    { name: "Elastic", key: "elastic", category: "Logs" },
-    { name: "Honeycomb", key: "honeycomb", category: "Observability" },
-    { name: "Bitbucket", key: "bitbucket", category: "DevOps" },
-    { name: "UptimeRobot", key: "uptimerobot", category: "Uptime" },
-    { name: "Pingdom", key: "pingdom", category: "Uptime" },
-    { name: "BetterStack", key: "betterstack", category: "Uptime" },
-    { name: "UptimeKuma", key: "uptimekuma", category: "Uptime" },
-];
+// Fallback icon component
+const FallbackIcon = ({ letter, color }: { letter: string; color: string }) => (
+    <div className={`w-full h-full rounded-md flex items-center justify-center text-white font-bold text-xl`} style={{ backgroundColor: color }}>
+        {letter}
+    </div>
+);
 
-// Destinations: Alerting & Routing
-const destinations: { name: string; key: IntegrationKey; category: string }[] = [
-    { name: "Slack", key: "slack", category: "Chat" },
-    { name: "Jira Cloud", key: "jira", category: "Issue Tracking" },
-    { name: "Email", key: "email", category: "Notification" },
-    { name: "SMS", key: "sms", category: "Notification" },
-    { name: "Push Notifications", key: "push", category: "Notification" },
-    { name: "Webhook", key: "webhook", category: "Custom" },
-];
+type Category = "All (24)" | "APM & Monitoring" | "Cloud Infrastructure" | "Metrics & Daemons" | "CI/CD & DevOps" | "Uptime & Synthetics" | "Chat & Notifications";
 
-const integrationPillars = [
-    {
-        title: "Inbound alerts",
-        description: "Normalize signals from monitoring, logs, and APM tools into a single incident stream.",
-        icon: Plug,
-        color: "from-emerald-500/20 to-emerald-500/0",
-    },
-    {
-        title: "Policy-based routing",
-        description: "Route alerts to services, teams, and escalations with dedupe and enrichment.",
-        icon: Route,
-        color: "from-cyan-500/20 to-cyan-500/0",
-    },
-    {
-        title: "Enterprise control",
-        description: "Self-hosted delivery with auditability, rate limits, and secure webhooks.",
-        icon: ShieldCheck,
-        color: "from-amber-500/20 to-amber-500/0",
-    },
-];
-
-const integrationStats = [
-    {
-        label: "Inbound sources",
-        value: sources.length,
-        suffix: "+",
-    },
-    {
-        label: "Routing channels",
-        value: destinations.length,
-        suffix: "",
-    },
-    {
-        label: "Total endpoints",
-        value: sources.length + destinations.length,
-        suffix: "+",
-    },
-];
-
-function IntegrationItem({
-    item,
-    align = "left",
-    index
-}: {
-    item: { name: string; key: IntegrationKey };
-    align?: "left" | "right";
-    index: number;
-}) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, x: align === "left" ? -20 : 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            className={`flex items-center gap-3 p-3 rounded-xl bg-slate-900/50 border border-white/5 backdrop-blur-sm hover:bg-slate-800 hover:border-emerald-500/50 hover:scale-105 transition-all duration-300 group w-full cursor-pointer ${align === "right" ? "flex-row-reverse text-right" : ""}`}
-        >
-            <div className="w-10 h-10 shrink-0 rounded-lg bg-slate-950 flex items-center justify-center border border-white/5 group-hover:border-emerald-500/50 transition-transform duration-300 shadow-inner">
-                <div className="w-6 h-6 text-slate-400 group-hover:text-emerald-400 transition-colors duration-300">
-                    {integrationIcons[item.key]}
-                </div>
-            </div>
-            <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">{item.name}</span>
-        </motion.div>
-    );
+interface Integration {
+    name: string;
+    category: Category;
+    icon: React.ReactNode;
+    description: string;
+    href: string;
 }
 
+const integrations: Integration[] = [
+    // APM & Monitoring
+    { name: "Datadog", category: "APM & Monitoring", icon: integrationIcons.datadog, description: "Full-stack observability and security.", href: "/docs/integrations/datadog" },
+    { name: "New Relic", category: "APM & Monitoring", icon: integrationIcons.newrelic, description: "Application performance monitoring.", href: "/docs/integrations/newrelic" },
+    { name: "Dynatrace", category: "APM & Monitoring", icon: integrationIcons.dynatrace, description: "AI-powered observability.", href: "/docs/integrations/dynatrace" },
+    { name: "AppDynamics", category: "APM & Monitoring", icon: integrationIcons.appdynamics, description: "Business observability platform.", href: "/docs/integrations/appdynamics" },
+    { name: "Honeycomb", category: "APM & Monitoring", icon: integrationIcons.honeycomb, description: "Fast analysis for distributed systems.", href: "/docs/integrations/honeycomb" },
+    { name: "Sentry", category: "APM & Monitoring", icon: integrationIcons.sentry, description: "Developer-first error tracking.", href: "/docs/integrations/sentry" },
+    { name: "Splunk Observability", category: "APM & Monitoring", icon: integrationIcons.splunk, description: "Real-time enterprise monitoring.", href: "/docs/integrations/splunk" },
+
+    // Cloud Infrastructure
+    { name: "AWS CloudWatch", category: "Cloud Infrastructure", icon: integrationIcons.cloudwatch, description: "Monitoring for AWS resources.", href: "/docs/integrations/cloudwatch" },
+    { name: "Azure Monitor", category: "Cloud Infrastructure", icon: integrationIcons.azure, description: "Full observability into Azure apps.", href: "/docs/integrations/azure" },
+    { name: "Google Cloud Monitoring", category: "Cloud Infrastructure", icon: integrationIcons.googlecloud, description: "Metrics for Google Cloud.", href: "/docs/integrations/gcp" },
+
+    // Metrics & Daemons
+    { name: "Prometheus / Alertmanager", category: "Metrics & Daemons", icon: integrationIcons.prometheus, description: "Open-source systems monitoring.", href: "/docs/integrations/prometheus" },
+    { name: "Grafana", category: "Metrics & Daemons", icon: integrationIcons.grafana, description: "Operational dashboards and alerting.", href: "/docs/integrations/grafana" },
+    { name: "Zabbix", category: "Metrics & Daemons", icon: <FallbackIcon letter="Z" color="#D32F2F" />, description: "Enterprise-class monitoring solution.", href: "/docs/integrations/zabbix" },
+    { name: "Nagios", category: "Metrics & Daemons", icon: <FallbackIcon letter="N" color="#005A9C" />, description: "IT infrastructure monitoring.", href: "/docs/integrations/nagios" },
+    { name: "Icinga 2", category: "Metrics & Daemons", icon: <FallbackIcon letter="I" color="#00A2D3" />, description: "Open source monitoring system.", href: "/docs/integrations/icinga" },
+
+    // CI/CD & DevOps
+    { name: "GitHub Actions", category: "CI/CD & DevOps", icon: integrationIcons.github, description: "Automate your software workflows.", href: "/docs/integrations/github" },
+    { name: "GitLab CI/CD", category: "CI/CD & DevOps", icon: <FallbackIcon letter="G" color="#E24329" />, description: "Continuous integration and deployment.", href: "/docs/integrations/gitlab" },
+    { name: "Bitbucket Pipelines", category: "CI/CD & DevOps", icon: integrationIcons.bitbucket, description: "Integrated CI/CD for Bitbucket.", href: "/docs/integrations/bitbucket" },
+    { name: "Vercel", category: "CI/CD & DevOps", icon: <FallbackIcon letter="V" color="#000000" />, description: "Develop, preview, and ship.", href: "/docs/integrations/vercel" },
+
+    // Uptime & Synthetics
+    { name: "UptimeRobot", category: "Uptime & Synthetics", icon: integrationIcons.uptimerobot, description: "Free website uptime monitor.", href: "/docs/integrations/uptimerobot" },
+    { name: "Pingdom", category: "Uptime & Synthetics", icon: integrationIcons.pingdom, description: "Website performance and availability.", href: "/docs/integrations/pingdom" },
+    { name: "Better Uptime", category: "Uptime & Synthetics", icon: integrationIcons.betterstack, description: "Uptime monitoring and status pages.", href: "/docs/integrations/betteruptime" },
+    { name: "Uptime Kuma", category: "Uptime & Synthetics", icon: integrationIcons.uptimekuma, description: "Self-hosted monitoring tool.", href: "/docs/integrations/uptimekuma" },
+
+    // Chat & Notifications
+    { name: "Slack (ChatOps)", category: "Chat & Notifications", icon: integrationIcons.slack, description: "Incident response right in Slack.", href: "/docs/integrations/slack" },
+    { name: "Jira Cloud", category: "Chat & Notifications", icon: integrationIcons.jira, description: "Create tickets automatically.", href: "/docs/integrations/jira" },
+    { name: "Email", category: "Chat & Notifications", icon: integrationIcons.email, description: "Standard email notifications.", href: "/docs/integrations/email" },
+    { name: "SMS", category: "Chat & Notifications", icon: integrationIcons.sms, description: "Text message alerts.", href: "/docs/integrations/sms" },
+    { name: "Webhooks", category: "Chat & Notifications", icon: integrationIcons.webhook, description: "Custom HTTP callback routing.", href: "/docs/integrations/webhooks" },
+];
+
+const categories: Category[] = [
+    "All (24)",
+    "APM & Monitoring",
+    "Cloud Infrastructure",
+    "Metrics & Daemons",
+    "CI/CD & DevOps",
+    "Uptime & Synthetics",
+    "Chat & Notifications"
+];
+
 export function Integrations() {
+    const [activeFilter, setActiveFilter] = useState<Category>("All (24)");
+
+    const filtered = integrations.filter(it => activeFilter === "All (24)" || it.category === activeFilter);
+
     return (
         <section id="integrations" className="relative py-32 bg-slate-950 overflow-hidden">
             {/* Background Effects */}
@@ -115,136 +89,85 @@ export function Integrations() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16">
                     <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold mb-4">
-                        Integration ecosystem
+                        Ecosystem & Interoperability
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Integrations built for enterprise reliability
+                        24+ native integrations. Zero plugins needed.
                     </h2>
                     <p className="text-slate-400 max-w-3xl mx-auto text-lg">
-                        {BRAND.name} connects monitoring, logging, and on-call channels into one operational command center.
-                        Standardize incoming signals, enforce routing policies, and deliver alerts without data lock-in.
+                        Connect your existing observability, APM, cloud, and alert channels without writing custom adapters.
                     </p>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-3 mb-12">
-                    {integrationPillars.map((pillar) => (
-                        <div key={pillar.title} className="relative rounded-2xl border border-white/10 bg-slate-900/60 p-6">
-                            <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${pillar.color} pointer-events-none`} />
-                            <div className="relative">
-                                <pillar.icon className="w-6 h-6 text-white/80 mb-4" />
-                                <h3 className="text-lg font-semibold text-white mb-2">{pillar.title}</h3>
-                                <p className="text-sm text-slate-300">{pillar.description}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
-                    {integrationStats.map((stat) => (
-                        <div
-                            key={stat.label}
-                            className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-slate-200"
+                {/* Filter Categories */}
+                <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+                    {categories.map((cat) => (
+                        <button
+                            key={cat}
+                            onClick={() => setActiveFilter(cat)}
+                            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
+                                activeFilter === cat
+                                    ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-300"
+                                    : "bg-slate-900/50 border-white/5 text-slate-400 hover:text-white hover:bg-slate-800"
+                            }`}
                         >
-                            <span className="text-emerald-300 font-semibold">
-                                {stat.value.toLocaleString()}{stat.suffix}
-                            </span>
-                            <span className="text-slate-400">{stat.label}</span>
-                        </div>
+                            {cat}
+                        </button>
                     ))}
                 </div>
 
-                <div className="grid md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-16 items-center">
-
-                    {/* Sources (Left) - Compact Grid */}
-                    <div className="relative">
-                        <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-2 text-sm text-slate-300">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                                Inbound sources
-                            </div>
-                            <span className="text-xs text-slate-500">{sources.length}+ providers</span>
-                        </div>
-                        <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-slate-900/20 border border-white/5 relative z-10 backdrop-blur-sm">
-                            {sources.map((item, index) => (
-                                <motion.div
-                                    key={item.key}
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.05 }}
-                                    className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-slate-900/50 border border-white/5 hover:bg-slate-800 hover:border-emerald-500 hover:scale-110 hover:shadow-[0_0_20px_-5px_rgba(16,185,129,0.4)] transition-all duration-300 group relative z-10 hover:z-50 cursor-pointer"
-                                    title={item.name}
-                                >
-                                    <div className="w-8 h-8 text-slate-400 group-hover:text-emerald-400 transition-colors duration-300 group-hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]">
-                                        {integrationIcons[item.key]}
-                                    </div>
-                                    <span className="text-[10px] font-medium text-slate-400 group-hover:text-white text-center leading-tight transition-colors">
-                                        {item.name}
-                                    </span>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        {/* Abstract Connection Beam from Grid to Hub */}
-                        <div className="hidden md:block absolute top-1/2 -right-12 w-12 h-[2px] bg-gradient-to-r from-emerald-500/0 via-emerald-500/50 to-emerald-500/0 opacity-30" />
+                {/* Special Highlight */}
+                <div className="mb-12 max-w-3xl mx-auto bg-emerald-950/30 border border-emerald-500/20 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6">
+                    <div className="w-16 h-16 shrink-0 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center p-3 text-emerald-400">
+                        {integrationIcons.pagerduty}
                     </div>
-
-                    {/* Central Hub */}
-                    <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        viewport={{ once: true }}
-                        className="relative w-32 h-32 md:w-48 md:h-48 mx-auto z-20"
-                    >
-                        {/* Spinning Rings */}
-                        <div className="absolute -inset-8 border border-dashed border-white/5 rounded-full animate-[spin_10s_linear_infinite]" />
-                        <div className="absolute -inset-8 border border-dashed border-emerald-500/10 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
-
-                        {/* Glows */}
-                        <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-3xl animate-pulse" />
-
-                        {/* Core Container */}
-                        <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-xl rounded-full border border-white/10 shadow-2xl shadow-emerald-500/20 flex items-center justify-center p-8 z-10 transition-transform hover:scale-105 duration-500">
-                            <div className="relative w-full h-full">
-                                <Image
-                                    src="/logo.svg"
-                                    alt={BRAND.name}
-                                    fill
-                                    className="object-contain drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-                                />
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Destinations (Right) - Vertical List */}
-                    <div className="flex flex-col gap-4 relative">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2 text-sm text-slate-300">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                                Routing channels
-                            </div>
-                            <span className="text-xs text-slate-500">{destinations.length} channels</span>
-                        </div>
-                        {destinations.map((item, index) => (
-                            <div key={item.key} className="relative">
-                                <IntegrationItem item={item} index={index} align="right" />
-                            </div>
-                        ))}
+                    <div>
+                        <h3 className="text-emerald-300 font-semibold text-lg mb-1">PagerDuty Events API v2 Emulation</h3>
+                        <p className="text-slate-300 text-sm">Drop-in endpoint - change URL to {BRAND.name} and everything works instantly. No need to update existing integrations or scripts.</p>
                     </div>
                 </div>
 
-                <div className="mt-16 flex flex-col items-center gap-4 text-center">
-                    <p className="text-slate-500 text-sm">
-                        More integrations ship every release, and custom webhooks let you connect anything.
-                    </p>
+                {/* Grid */}
+                <motion.div 
+                    layout
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-16"
+                >
+                    <AnimatePresence>
+                        {filtered.map((item) => (
+                            <motion.div
+                                key={item.name}
+                                layout
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <Link href={item.href} className="flex items-start gap-4 p-5 rounded-2xl bg-slate-900/40 border border-white/5 hover:border-emerald-500/30 hover:bg-slate-900/80 transition-all group h-full">
+                                    <div className="w-10 h-10 shrink-0 text-slate-300 group-hover:text-emerald-400 transition-colors">
+                                        {item.icon}
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-medium text-sm mb-1 group-hover:text-emerald-300 transition-colors">{item.name}</h4>
+                                        <p className="text-slate-400 text-xs leading-relaxed line-clamp-2">{item.description}</p>
+                                    </div>
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
+
+                {/* CTA */}
+                <div className="text-center">
                     <Link
-                        href="/docs/latest/integrations"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20 transition-colors"
+                        href="/integrations"
+                        className="inline-flex items-center gap-2 text-emerald-400 font-medium hover:text-emerald-300 transition-colors group"
                     >
-                        View integration docs
+                        View all 24+ integrations directory 
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
             </div>
         </section>
     );
 }
+

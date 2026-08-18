@@ -3,124 +3,91 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Check, Github, ArrowRight } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
 const features = [
-    "Unlimited users",
-    "Unlimited services & incidents",
-    "On-call scheduling",
-    "Escalation policies",
-    "Status page",
-    "All integrations",
-    "Multi-channel alerts",
-    "Analytics & SLA tracking",
-    "Full source code access",
+    "Unlimited Users & Responders",
+    "Unlimited Incidents & Services",
+    "Multi-Layer On-Call Scheduling",
+    "Automated Escalation Policies",
+    "Built-in Public & Private Status Pages",
+    "24+ Native Monitoring Integrations",
+    "Drop-in PagerDuty Events API v2",
+    "Slack War Rooms & ChatOps",
+    "MTTA, MTTR & SLA Analytics",
+    "Full AGPL-3.0 Source Code Access",
 ];
 
 export function Pricing() {
     return (
-        <section id="pricing" className="relative py-24 section-alt">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Section Header */}
-                <motion.div
-                    initial={false}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <span className="text-emerald-400 text-sm font-medium uppercase tracking-wide">
+        <section id="pricing" className="py-24 bg-slate-950 border-t border-white/5 relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-500/5 rounded-full blur-[120px]" />
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-6">
                         Community Edition
                     </span>
-                    <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">
-                        Free and <span className="text-emerald-400">open-source</span>
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                        Simple, transparent, and 100% free.
                     </h2>
-                    <p className="text-foreground-secondary max-w-2xl mx-auto mb-6">
-                        {BRAND.name} is free to self-host with all features included.
-                        No subscriptions, no limits.
+                    <p className="text-lg text-slate-400">
+                        {BRAND.name} Community Edition has no artificial feature gates, no per-seat billing, and no credit card required.
                     </p>
+                </div>
 
-                    <Link href="/compare" className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors font-medium">
-                        See how much you save vs PagerDuty <ArrowRight className="w-4 h-4" />
-                    </Link>
-                </motion.div>
-
-                {/* Main Pricing Card */}
-                <motion.div
-                    initial={false}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="max-w-2xl mx-auto relative"
-                >
-                    {/* Animated glow border */}
-
-                    <div className="relative rounded-2xl p-8 bg-slate-900/80 border border-emerald-500/20">
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                            <span className="flex items-center gap-1.5 px-4 py-1.5 bg-emerald-500 text-white text-xs font-semibold rounded-full">
-                                <Github className="w-3.5 h-3.5" />
-                                Open Source
-                            </span>
+                <div className="max-w-4xl mx-auto">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="bg-slate-900 rounded-3xl border border-emerald-500/20 p-8 md:p-12 relative overflow-hidden shadow-2xl shadow-emerald-500/10"
+                    >
+                        <div className="absolute top-0 right-0 p-8">
+                            <div className="text-right hidden sm:block">
+                                <span className="text-5xl font-bold text-white">$0</span>
+                            </div>
                         </div>
 
-                        <div className="text-center mb-8 mt-4">
-                            <div className="text-6xl font-bold text-white mb-2">$0</div>
-                            <p className="text-foreground-muted">Self-hosted • All features • Forever free</p>
+                        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8">
+                            <div>
+                                <h3 className="text-2xl font-bold text-white mb-2">Community Edition</h3>
+                                <p className="text-emerald-400 font-medium">Free forever • Self-hosted • Full source access</p>
+                            </div>
+                            <div className="text-left mt-4 sm:hidden">
+                                <span className="text-5xl font-bold text-white">$0</span>
+                            </div>
                         </div>
 
-                        <div className="grid sm:grid-cols-2 gap-3 mb-8">
-                            {features.map((feature, index) => (
-                                <motion.div
-                                    key={feature}
-                                    initial={false}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.05 }}
-                                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors"
-                                >
-                                    <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                        <div className="grid md:grid-cols-2 gap-4 mb-10">
+                            {features.map((feature, i) => (
+                                <div key={i} className="flex items-center gap-3">
+                                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
                                         <Check className="w-3 h-3 text-emerald-400" />
                                     </div>
-                                    <span className="text-foreground-secondary text-sm">{feature}</span>
-                                </motion.div>
+                                    <span className="text-slate-300">{feature}</span>
+                                </div>
                             ))}
                         </div>
 
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Button
-                                asChild
-                                size="lg"
-                                className="text-base px-8 py-6 bg-emerald-500 hover:bg-emerald-400 border-0 text-white shadow-lg shadow-emerald-500/20 transition-all"
-                            >
-                                <Link
-                                    href={BRAND.links.github}
-                                    target="_blank"
-                                >
-                                    <Github className="w-4 h-4 mr-2" />
-                                    Get Started
+                        <div className="flex flex-col sm:flex-row items-center gap-6">
+                            <Button asChild size="lg" className="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/25">
+                                <Link href="/docs">
+                                    Deploy Community Edition
+                                    <ArrowRight className="w-4 h-4 ml-2" />
                                 </Link>
                             </Button>
+                            
+                            <Link href="/compare" className="text-slate-400 hover:text-white transition-colors inline-flex items-center text-sm font-medium group">
+                                Calculate your savings vs PagerDuty
+                                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                            </Link>
                         </div>
-                    </div>
-                </motion.div>
-
-                {/* License Note */}
-                <motion.div
-                    initial={false}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="text-center mt-12"
-                >
-                    <p className="text-foreground-muted text-sm">
-                        Licensed under{" "}
-                        <a
-                            href={BRAND.links.license}
-                            target="_blank"
-                            className="text-accent-blue hover:underline"
-                        >
-                            AGPL-3.0
-                        </a>
-                    </p>
-                </motion.div>
+                    </motion.div>
+                </div>
             </div>
         </section>
     );

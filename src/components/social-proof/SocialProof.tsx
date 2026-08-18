@@ -1,156 +1,90 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Shield, Layers, Plug, Heart } from "lucide-react";
+import { Github, Shield, Layers, Users, Heart, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { BRAND } from "@/lib/brand";
 
-const pillars = [
-    {
-        icon: Shield,
-        title: "Own your reliability stack",
-        description: `Run ${BRAND.name} in your cloud with full control and privacy.`,
-    },
-    {
-        icon: Layers,
-        title: "Built for platform teams",
-        description: "Incident response, on-call, and analytics in one command center.",
-    },
-    {
-        icon: Plug,
-        title: "Integrations first",
-        description: "Connect monitoring, APM, and uptime signals without rewiring workflows.",
-    },
-];
-
-const stats = [
-    { label: "Self-hosted", value: "100%" },
-    { label: "Integrations", value: "20+" },
-    { label: "License", value: BRAND.license },
-];
-
-const tools = [
-    "Datadog", "Prometheus", "Grafana", "Slack", "Jira Cloud", "AWS CloudWatch", "New Relic", "Sentry", "Splunk", "Azure Monitor", "Google Cloud", "GitHub", "Bitbucket", "UptimeRobot"
-];
-
-function TechTicker() {
-    return (
-        <div className="mt-24 border-t border-white/5 pt-12">
-            <p className="text-center text-slate-500 text-sm font-bold mb-10 uppercase tracking-widest">
-                Works seamlessly with
-            </p>
-            <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
-                <motion.div
-                    className="flex gap-16 whitespace-nowrap pr-16"
-                    animate={{ x: "-50%" }}
-                    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                >
-                    {[...tools, ...tools].map((tool, i) => (
-                        <div key={i} className="flex items-center gap-2 group cursor-default">
-                            <div className="w-2 h-2 rounded-full bg-slate-800 group-hover:bg-emerald-500 transition-colors" />
-                            <span className="text-2xl font-bold text-slate-700 group-hover:text-slate-300 transition-colors">
-                                {tool}
-                            </span>
-                        </div>
-                    ))}
-                </motion.div>
-            </div>
-        </div>
-    )
-}
-
 export function SocialProof() {
     return (
-        <section className="relative py-24 bg-slate-950 border-t border-white/5">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Open Source Banner */}
-                <motion.div
-                    initial={false}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="relative rounded-3xl p-8 md:p-12 overflow-hidden border border-white/10 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-950 shadow-2xl"
-                >
-                    {/* Background Pattern */}
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 blur-[100px] rounded-full pointer-events-none" />
+        <section className="relative py-24 bg-slate-900 border-t border-white/5 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-6">
+                        <Heart className="w-4 h-4" />
+                        Open Source & Transparent
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                        Built in the open. Owned by you.
+                    </h2>
+                    <p className="text-lg text-slate-400">
+                        No hidden telemetry. No vendor lock-in. Audit every line of code on GitHub.
+                    </p>
+                </div>
 
-                    {/* Grid Pattern Overlay */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="bg-slate-800/50 rounded-2xl p-8 border border-white/5"
+                    >
+                        <Shield className="w-10 h-10 text-emerald-400 mb-6" />
+                        <h3 className="text-xl font-semibold text-white mb-3">Data Sovereignty</h3>
+                        <p className="text-slate-400">
+                            Keep sensitive infrastructure logs, incident details, and postmortems entirely inside your VPC/network.
+                        </p>
+                    </motion.div>
 
-                    <div className="relative z-10 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
-                        <div>
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-6">
-                                <Heart className="w-3 h-3 fill-emerald-500/50" />
-                                Open Source & Community Driven
-                            </div>
-                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                                Transparent by design. <br />
-                                <span className="text-slate-500">Trust isn&apos;t bought, it&apos;s built.</span>
-                            </h2>
-                            <p className="text-slate-400 max-w-xl mb-8 leading-relaxed text-lg">
-                                {BRAND.name} is built in the open. You can audit every line of code, contribute features,
-                                and host it entirely within your own infrastructure without vendor lock-in.
-                            </p>
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="bg-slate-800/50 rounded-2xl p-8 border border-white/5"
+                    >
+                        <Layers className="w-10 h-10 text-emerald-400 mb-6" />
+                        <h3 className="text-xl font-semibold text-white mb-3">Extensibility</h3>
+                        <p className="text-slate-400">
+                            Modify, extend, and integrate with any internal tooling using modern TypeScript, Prisma, and Next.js.
+                        </p>
+                    </motion.div>
 
-                            <div className="flex flex-wrap gap-4 items-center">
-                                <Button
-                                    asChild
-                                    size="lg"
-                                    className="bg-white text-slate-950 hover:bg-slate-200 border-none h-12 px-6 shadow-xl shadow-white/5"
-                                >
-                                    <Link
-                                        href={BRAND.links.github}
-                                        target="_blank"
-                                    >
-                                        <Github className="w-5 h-5 mr-2" />
-                                        View Source Code
-                                    </Link>
-                                </Button>
-                                <Button
-                                    asChild
-                                    variant="outline"
-                                    size="lg"
-                                    className="px-6 h-12 rounded-xl border-pink-500/20 bg-pink-500/5 text-pink-400 hover:bg-pink-500/10 hover:border-pink-500/40 hover:text-pink-300 hover:scale-105 transition-all shadow-[0_0_15px_-5px_rgba(236,72,153,0.3)]"
-                                >
-                                    <Link
-                                        href={BRAND.links.sponsor}
-                                        target="_blank"
-                                    >
-                                        <Heart className="w-4 h-4 mr-2 fill-current" />
-                                        Sponsor Us
-                                    </Link>
-                                </Button>
-                                <div className="hidden sm:flex items-center gap-8 pl-8 border-l border-white/10">
-                                    {stats.map((stat) => (
-                                        <div key={stat.label} className="text-center group cursor-default">
-                                            <p className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">{stat.value}</p>
-                                            <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">{stat.label}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        className="bg-slate-800/50 rounded-2xl p-8 border border-white/5"
+                    >
+                        <Users className="w-10 h-10 text-emerald-400 mb-6" />
+                        <h3 className="text-xl font-semibold text-white mb-3">Community Powered</h3>
+                        <p className="text-slate-400">
+                            Active open-source development with community contributions, PRs, and transparent roadmap.
+                        </p>
+                    </motion.div>
+                </div>
 
-                        {/* Pillars List */}
-                        <div className="grid gap-4">
-                            {pillars.map((pillar) => (
-                                <div key={pillar.title} className="group p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-emerald-500/30 hover:scale-[1.02] transition-all duration-300">
-                                    <div className="flex gap-4">
-                                        <div className="shrink-0 w-12 h-12 rounded-xl bg-slate-900 border border-white/10 flex items-center justify-center group-hover:bg-emerald-500/10 group-hover:border-emerald-500/20 transition-all">
-                                            <pillar.icon className="w-6 h-6 text-emerald-500 transition-all" />
-                                        </div>
-                                        <div>
-                                            <h3 className="font-bold text-white mb-1 group-hover:text-emerald-400 transition-colors text-lg">{pillar.title}</h3>
-                                            <p className="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300">{pillar.description}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* Tech Scroller */}
-                <TechTicker />
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <Button asChild size="lg" className="bg-white text-slate-900 hover:bg-slate-200">
+                        <Link href={BRAND.links.github} target="_blank" rel="noopener noreferrer">
+                            <Github className="w-5 h-5 mr-2" />
+                            Star on GitHub
+                        </Link>
+                    </Button>
+                    <Button asChild size="lg" variant="outline" className="border-emerald-500/20 hover:bg-emerald-500/10 text-emerald-400">
+                        <Link href="https://github.com/sponsors/opsknight-labs" target="_blank" rel="noopener noreferrer">
+                            <Heart className="w-5 h-5 mr-2" />
+                            Sponsor Project
+                        </Link>
+                    </Button>
+                    <Link href={`${BRAND.links.github}/blob/main/LICENSE`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors ml-4">
+                        <BookOpen className="w-4 h-4" />
+                        AGPL-3.0 License
+                    </Link>
+                </div>
             </div>
         </section>
     );

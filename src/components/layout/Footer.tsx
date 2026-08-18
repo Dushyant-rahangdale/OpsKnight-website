@@ -1,223 +1,147 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { Github, Heart, Twitter, Mail, ExternalLink, ArrowUpRight } from "lucide-react";
+import { Github, Twitter, Mail, BookOpen, Heart } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
 const footerLinks = {
     product: [
         { label: "Features", href: "/#features" },
         { label: "Integrations", href: "/integrations" },
-        { label: "Pricing", href: "/#pricing" },
-        { label: "Compare", href: "/compare" },
-        { label: "About", href: "/about" },
-        { label: "Contact", href: "/contact" },
+        { label: "Changelog", href: "/changelog" },
+        { label: "Compare PagerDuty", href: "/compare" },
+        { label: "Compare Opsgenie", href: "/compare/opsgenie" },
+        { label: "Status Page", href: "https://status.opsknight.com" },
     ],
     resources: [
         { label: "Documentation", href: "/docs" },
-        { label: "API Reference", href: "/docs/latest/api" },
-        { label: "Changelog", href: "/changelog" },
-        { label: "Status Page", href: BRAND.links.status, external: true },
-        { label: "Roadmap", href: `${BRAND.links.github}/projects`, external: true },
+        { label: "API Reference", href: "/docs/api" },
+        { label: "Quickstart Guide", href: "/docs/quickstart" },
+        { label: "Helm Charts", href: "https://github.com/opsknight-labs/helm-charts" },
+        { label: "Docker Hub", href: "https://hub.docker.com/u/opsknight" },
     ],
     community: [
-        { label: "GitHub", href: BRAND.links.github, external: true },
-        { label: "Discussions", href: BRAND.links.discussions, external: true },
-        { label: "Issues", href: BRAND.links.issues, external: true },
-        { label: "Contributing", href: BRAND.links.contributing, external: true },
+        { label: "GitHub Discussions", href: `${BRAND.links.github}/discussions` },
+        { label: "Issues Tracker", href: `${BRAND.links.github}/issues` },
+        { label: "Contributing Guide", href: `${BRAND.links.github}/blob/main/CONTRIBUTING.md` },
+        { label: "Sponsor", href: "https://github.com/sponsors/opsknight-labs" },
+        { label: "Roadmap", href: `${BRAND.links.github}/projects` },
     ],
     legal: [
         { label: "Privacy Policy", href: "/privacy" },
         { label: "Terms of Service", href: "/terms" },
-        { label: "License (AGPL-3.0)", href: BRAND.links.license, external: true },
-        { label: "Security", href: BRAND.links.security, external: true },
+        { label: "Security Policy", href: "/security" },
+        { label: "AGPL-3.0 License", href: `${BRAND.links.github}/blob/main/LICENSE` },
     ],
 };
 
 export function Footer() {
     return (
-        <footer className="relative border-t border-white/5 bg-slate-950">
-            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Main Footer Content */}
-                <div className="py-12 lg:py-16">
-                    <div className="grid grid-cols-2 md:grid-cols-6 gap-8 lg:gap-12">
-                        {/* Brand Column */}
-                        <div className="col-span-2">
-                            <Link href="/" className="flex items-center gap-3 group">
-                                <div className="relative">
-                                    <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 group-hover:border-emerald-500/30 transition-all">
-                                        <Image
-                                            src="/logo-mark.png"
-                                            alt={BRAND.name}
-                                            width={28}
-                                            height={28}
-                                            className="w-7 h-7 object-contain"
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <span className="text-lg font-bold text-white">{BRAND.name}</span>
-                                    <p className="text-[10px] text-emerald-500/70 font-medium uppercase tracking-wider">
-                                        Open Source Incident Response
-                                    </p>
-                                </div>
-                            </Link>
-
-                            <p className="mt-4 text-sm text-slate-400 leading-relaxed max-w-xs">
-                                The complete open-source platform for on-call management, incident response, and status pages.
-                            </p>
-
-                            {/* Social Links */}
-                            <div className="mt-6 flex items-center gap-3">
-                                <Link
-                                    href={BRAND.links.github}
-                                    target="_blank"
-                                    className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
-                                    aria-label="GitHub"
-                                >
-                                    <Github className="w-4 h-4" />
-                                </Link>
-                                <Link
-                                    href={BRAND.links.twitter}
-                                    target="_blank"
-                                    className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
-                                    aria-label="Twitter"
-                                >
-                                    <Twitter className="w-4 h-4" />
-                                </Link>
-                                <Link
-                                    href={`mailto:${BRAND.links.email}`}
-                                    className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
-                                    aria-label="Email"
-                                >
-                                    <Mail className="w-4 h-4" />
-                                </Link>
-                            </div>
-
-                            {/* Sponsor CTA */}
-                            <Link
-                                href={BRAND.links.sponsor}
-                                target="_blank"
-                                className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-pink-500/10 to-rose-500/10 border border-pink-500/20 text-pink-400 text-sm font-medium hover:from-pink-500/20 hover:to-rose-500/20 transition-all group"
-                            >
-                                <Heart className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" />
-                                Sponsor this project
-                            </Link>
+        <footer className="bg-slate-950 border-t border-white/5 pt-20 pb-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8 mb-16">
+                    <div className="lg:col-span-2">
+                        <Link href="/" className="flex items-center gap-2 mb-6 inline-block">
+                            <span className="font-bold text-xl text-white">
+                                Ops<span className="text-emerald-400">Knight</span>
+                            </span>
+                        </Link>
+                        <p className="text-slate-400 mb-6 max-w-sm">
+                            The open-source incident response platform built for modern engineering teams.
+                        </p>
+                        
+                        <div className="flex items-center gap-3 mb-8">
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-900 border border-white/10 text-xs font-medium text-slate-300">
+                                <BookOpen className="w-3 h-3 text-emerald-400" />
+                                AGPL-3.0
+                            </span>
                         </div>
 
-                        {/* Product Links */}
-                        <div>
-                            <h3 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
-                                Product
-                            </h3>
-                            <ul className="space-y-3">
-                                {footerLinks.product.map((link) => (
-                                    <li key={link.label}>
-                                        <Link
-                                            href={link.href}
-                                            className="text-sm text-slate-400 hover:text-white transition-colors"
-                                        >
-                                            {link.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
+                        <div className="flex items-center gap-4 text-slate-400">
+                            <a href={BRAND.links.github} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="GitHub">
+                                <Github className="w-5 h-5" />
+                            </a>
+                            <a href={BRAND.links.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Twitter">
+                                <Twitter className="w-5 h-5" />
+                            </a>
+                            <a href={`mailto:${BRAND.links.email}`} className="hover:text-white transition-colors" aria-label="Email">
+                                <Mail className="w-5 h-5" />
+                            </a>
+                            <a href="https://github.com/sponsors/opsknight-labs" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors" aria-label="Sponsor">
+                                <Heart className="w-5 h-5" />
+                            </a>
                         </div>
+                    </div>
 
-                        {/* Resources Links */}
-                        <div>
-                            <h3 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
-                                Resources
-                            </h3>
-                            <ul className="space-y-3">
-                                {footerLinks.resources.map((link) => (
-                                    <li key={link.label}>
-                                        <Link
-                                            href={link.href}
-                                            target={link.external ? "_blank" : undefined}
-                                            className="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors"
-                                        >
-                                            {link.label}
-                                            {link.external && <ArrowUpRight className="w-3 h-3 opacity-50" />}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                    <div>
+                        <h3 className="font-semibold text-white mb-4">Product</h3>
+                        <ul className="space-y-3">
+                            {footerLinks.product.map((link) => (
+                                <li key={link.label}>
+                                    <Link href={link.href} className="text-slate-400 hover:text-white text-sm transition-colors">
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-                        {/* Community Links */}
-                        <div>
-                            <h3 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
-                                Community
-                            </h3>
-                            <ul className="space-y-3">
-                                {footerLinks.community.map((link) => (
-                                    <li key={link.label}>
-                                        <Link
-                                            href={link.href}
-                                            target={link.external ? "_blank" : undefined}
-                                            className="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors"
-                                        >
-                                            {link.label}
-                                            {link.external && <ArrowUpRight className="w-3 h-3 opacity-50" />}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                    <div>
+                        <h3 className="font-semibold text-white mb-4">Resources</h3>
+                        <ul className="space-y-3">
+                            {footerLinks.resources.map((link) => (
+                                <li key={link.label}>
+                                    <Link href={link.href} className="text-slate-400 hover:text-white text-sm transition-colors">
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-                        {/* Legal Links */}
-                        <div>
-                            <h3 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
-                                Legal
-                            </h3>
-                            <ul className="space-y-3">
-                                {footerLinks.legal.map((link) => (
-                                    <li key={link.label}>
-                                        <Link
-                                            href={link.href}
-                                            target={link.external ? "_blank" : undefined}
-                                            className="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors"
-                                        >
-                                            {link.label}
-                                            {link.external && <ArrowUpRight className="w-3 h-3 opacity-50" />}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                    <div>
+                        <h3 className="font-semibold text-white mb-4">Community</h3>
+                        <ul className="space-y-3">
+                            {footerLinks.community.map((link) => (
+                                <li key={link.label}>
+                                    <Link href={link.href} className="text-slate-400 hover:text-white text-sm transition-colors">
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 className="font-semibold text-white mb-4">Legal</h3>
+                        <ul className="space-y-3">
+                            {footerLinks.legal.map((link) => (
+                                <li key={link.label}>
+                                    <Link href={link.href} className="text-slate-400 hover:text-white text-sm transition-colors">
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="py-6 border-t border-white/5">
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div className="flex items-center gap-2 text-sm text-slate-500">
-                            <span>© {new Date().getFullYear()} {BRAND.name}.</span>
-                            <span className="hidden sm:inline">Open source under AGPL-3.0</span>
-                        </div>
-
-                        <div className="flex items-center gap-4">
-                            <span className="flex items-center gap-2 text-xs text-slate-500">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                                </span>
-                                In active development
-                            </span>
-                            <Link
-                                href={BRAND.links.github}
-                                target="_blank"
-                                className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-emerald-400 transition-colors"
-                            >
-                                <Github className="w-3.5 h-3.5" />
-                                Star on GitHub
-                                <ExternalLink className="w-3 h-3 opacity-50" />
-                            </Link>
-                        </div>
-                    </div>
+                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p className="text-sm text-slate-500">
+                        &copy; {new Date().getFullYear()} {BRAND.name}. Built for DevOps & SREs.
+                    </p>
+                    <a 
+                        href="https://status.opsknight.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
+                    >
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        All systems operational
+                    </a>
                 </div>
             </div>
         </footer>

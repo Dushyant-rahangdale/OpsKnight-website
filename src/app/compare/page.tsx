@@ -168,7 +168,7 @@ const comparisonSections: ComparisonSection[] = [
             },
             {
                 feature: "Multi-channel alerting",
-                opsknight: "Email, SMS, Voice, Slack, Webhook",
+                opsknight: "Email, SMS, Push, Slack, Webhook",
                 pagerduty: "Email, SMS, Voice, Mobile",
                 incidentio: "Slack, Email",
                 opsgenie: "Email, SMS, Voice, Mobile",

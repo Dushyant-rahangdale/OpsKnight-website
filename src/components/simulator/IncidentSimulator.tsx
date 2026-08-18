@@ -45,7 +45,7 @@ const INITIAL_PIPELINE: PipelineStep[] = [
     time: "00:00.124",
     type: "PAGE",
     label: "Multi-Channel Alert Dispatch",
-    detail: "Twilio High-Priority Voice call & SMS dispatched to +1 (555) 019-2834",
+    detail: "High-Priority SMS & Mobile Override Push dispatched to Alex Vance (+1 555-019-2834)",
     status: "completed",
     badgeColor: "bg-amber-500/20 text-amber-400 border-amber-500/30"
   },
@@ -108,8 +108,8 @@ export function IncidentSimulator() {
       {
         time: "00:00.110",
         type: "PAGE" as const,
-        label: "Urgent Voice & Push Dispatch",
-        detail: "Automated phone call connected & mobile override push notification delivered",
+        label: "Urgent SMS & Push Dispatch",
+        detail: "High-priority SMS & mobile critical alert push notification delivered",
         status: "completed" as const,
         badgeColor: "bg-amber-500/20 text-amber-400 border-amber-500/30"
       },
@@ -250,7 +250,7 @@ export function IncidentSimulator() {
                 </div>
                 <div>
                   <span className="text-slate-500 block text-[10px] uppercase font-bold">Paging Engine</span>
-                  <span className="text-white font-mono font-bold text-sm">Twilio Voice + Push</span>
+                  <span className="text-white font-mono font-bold text-sm">SMS + Mobile Push</span>
                 </div>
                 <div>
                   <span className="text-slate-500 block text-[10px] uppercase font-bold">ChatOps Sync</span>

@@ -42,3 +42,8 @@ next-env.d.ts
 
 # generated at build time
 public/_redirects
+
+# media and videos (stored locally in project folder)
+public/videos/
+*.webm
+*.mp4

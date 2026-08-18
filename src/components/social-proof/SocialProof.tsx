@@ -11,7 +11,7 @@ export function SocialProof() {
         <section className="relative py-24 bg-slate-900 border-t border-white/5 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-6">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium mb-6">
                         <Heart className="w-4 h-4" />
                         Open Source & Transparent
                     </span>
@@ -31,7 +31,7 @@ export function SocialProof() {
                         transition={{ duration: 0.5, delay: 0.1 }}
                         className="bg-slate-800/50 rounded-2xl p-8 border border-white/5"
                     >
-                        <Shield className="w-10 h-10 text-emerald-400 mb-6" />
+                        <Shield className="w-10 h-10 text-blue-400 mb-6" />
                         <h3 className="text-xl font-semibold text-white mb-3">Data Sovereignty</h3>
                         <p className="text-slate-400">
                             Keep sensitive infrastructure logs, incident details, and postmortems entirely inside your VPC/network.
@@ -45,7 +45,7 @@ export function SocialProof() {
                         transition={{ duration: 0.5, delay: 0.2 }}
                         className="bg-slate-800/50 rounded-2xl p-8 border border-white/5"
                     >
-                        <Layers className="w-10 h-10 text-emerald-400 mb-6" />
+                        <Layers className="w-10 h-10 text-blue-400 mb-6" />
                         <h3 className="text-xl font-semibold text-white mb-3">Extensibility</h3>
                         <p className="text-slate-400">
                             Modify, extend, and integrate with any internal tooling using modern TypeScript, Prisma, and Next.js.
@@ -59,7 +59,7 @@ export function SocialProof() {
                         transition={{ duration: 0.5, delay: 0.3 }}
                         className="bg-slate-800/50 rounded-2xl p-8 border border-white/5"
                     >
-                        <Users className="w-10 h-10 text-emerald-400 mb-6" />
+                        <Users className="w-10 h-10 text-blue-400 mb-6" />
                         <h3 className="text-xl font-semibold text-white mb-3">Community Powered</h3>
                         <p className="text-slate-400">
                             Active open-source development with community contributions, PRs, and transparent roadmap.
@@ -74,7 +74,7 @@ export function SocialProof() {
                             Star on GitHub
                         </Link>
                     </Button>
-                    <Button asChild size="lg" variant="outline" className="border-emerald-500/20 hover:bg-emerald-500/10 text-emerald-400">
+                    <Button asChild size="lg" variant="outline" className="border-blue-500/20 hover:bg-blue-500/10 text-blue-400">
                         <Link href="https://github.com/sponsors/opsknight-labs" target="_blank" rel="noopener noreferrer">
                             <Heart className="w-5 h-5 mr-2" />
                             Sponsor Project

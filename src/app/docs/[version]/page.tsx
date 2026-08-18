@@ -79,8 +79,8 @@ const SECTION_CONFIG: Record<string, {
   },
   administration: {
     icon: Settings,
-    color: "text-emerald-400",
-    gradient: "from-emerald-500 to-teal-500",
+    color: "text-blue-400",
+    gradient: "from-blue-500 to-teal-500",
     description: "Configuration and management",
   },
   integrations: {
@@ -145,7 +145,7 @@ export default async function DocsIndexPage({
       <section className="relative rounded-3xl overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-slate-900/70 to-slate-900/90" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none" />
 
         {/* Border */}
@@ -153,7 +153,7 @@ export default async function DocsIndexPage({
 
         <div className="relative px-8 py-12 md:px-12 md:py-16">
           <div className="flex items-center gap-3 mb-6">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold">
               <Sparkles className="w-3.5 h-3.5" />
               v{version} Documentation
             </span>
@@ -172,7 +172,7 @@ export default async function DocsIndexPage({
           <div className="flex flex-wrap items-center gap-3 mt-8">
             <Link
               href={`/docs/${version}/getting-started/installation`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 text-white font-medium text-sm hover:bg-emerald-400 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-500 text-white font-medium text-sm hover:bg-blue-400 transition-colors"
             >
               <Rocket className="w-4 h-4" />
               Quick Start
@@ -192,7 +192,7 @@ export default async function DocsIndexPage({
       <section>
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold text-white flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-emerald-400" />
+            <BookOpen className="w-5 h-5 text-blue-400" />
             Browse Documentation
           </h2>
         </div>
@@ -209,17 +209,17 @@ export default async function DocsIndexPage({
                 className="group relative rounded-2xl overflow-hidden"
               >
                 {/* Hover glow */}
-                <div className={`absolute -inset-0.5 bg-gradient-to-r ${config?.gradient || "from-emerald-500 to-cyan-500"} rounded-2xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
+                <div className={`absolute -inset-0.5 bg-gradient-to-r ${config?.gradient || "from-blue-500 to-cyan-500"} rounded-2xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
 
                 {/* Card */}
                 <div className="relative p-5 bg-slate-900/80 border border-white/10 rounded-2xl hover:border-white/20 transition-all h-full">
                   {/* Icon */}
-                  <div className={`inline-flex p-2.5 rounded-xl bg-gradient-to-br ${config?.gradient || "from-emerald-500 to-cyan-500"} mb-4`}>
+                  <div className={`inline-flex p-2.5 rounded-xl bg-gradient-to-br ${config?.gradient || "from-blue-500 to-cyan-500"} mb-4`}>
                     <Icon className="w-5 h-5 text-white" />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-semibold text-white group-hover:text-emerald-50 transition-colors">
+                  <h3 className="text-lg font-semibold text-white group-hover:text-blue-50 transition-colors">
                     {section.title}
                   </h3>
 
@@ -234,7 +234,7 @@ export default async function DocsIndexPage({
                   {(section.href || section.children?.[0]?.href) && (
                     <Link
                       href={section.href || section.children?.[0]?.href || "#"}
-                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
+                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
                     >
                       Explore
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -251,7 +251,7 @@ export default async function DocsIndexPage({
       <div className="grid lg:grid-cols-[1fr_260px] gap-8">
         <article className="rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-sm p-8">
           <h2 className="text-2xl font-semibold text-white mb-6 pb-4 border-b border-white/10 flex items-center gap-2">
-            <span className="w-1 h-6 bg-emerald-500 rounded-full" />
+            <span className="w-1 h-6 bg-blue-500 rounded-full" />
             Overview
           </h2>
           <div
@@ -260,13 +260,13 @@ export default async function DocsIndexPage({
               prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-4
               prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-3
               prose-p:text-slate-300 prose-p:leading-relaxed
-              prose-a:text-emerald-400 prose-a:no-underline hover:prose-a:text-emerald-300
+              prose-a:text-blue-400 prose-a:no-underline hover:prose-a:text-blue-300
               prose-strong:text-white
-              prose-code:text-emerald-300 prose-code:bg-slate-800/80 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
+              prose-code:text-blue-300 prose-code:bg-slate-800/80 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
               prose-pre:bg-slate-800/80 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl
               prose-ul:text-slate-300 prose-ol:text-slate-300
-              prose-li:marker:text-emerald-500
-              prose-blockquote:border-l-emerald-500 prose-blockquote:bg-emerald-500/5 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-slate-300
+              prose-li:marker:text-blue-500
+              prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-500/5 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-slate-300
             "
             dangerouslySetInnerHTML={{ __html: doc.html }}
           />

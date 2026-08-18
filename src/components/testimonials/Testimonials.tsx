@@ -41,36 +41,25 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
             className="group relative"
         >
             {/* Subtle glow on hover */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-            <div className="relative p-8 rounded-2xl bg-slate-900/50 border border-white/5 hover:border-emerald-500/20 transition-all duration-300 h-full flex flex-col">
-                {/* Quote icon */}
-                <div className="mb-6">
-                    <Quote className="w-10 h-10 text-emerald-500/30" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/10 to-sky-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative p-8 rounded-2xl bg-slate-900/50 border border-white/5 hover:border-blue-500/20 transition-all duration-300 h-full flex flex-col">
+                <div className="flex items-center gap-1 mb-6">
+                    <Quote className="w-10 h-10 text-blue-500/30" />
                 </div>
-
-                {/* Rating */}
-                <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
-                    ))}
-                </div>
-
-                {/* Quote */}
-                <blockquote className="text-lg text-slate-300 leading-relaxed mb-8 flex-grow">
+                
+                <p className="text-slate-300 text-lg leading-relaxed mb-8 flex-grow">
                     &ldquo;{testimonial.quote}&rdquo;
-                </blockquote>
+                </p>
 
-                {/* Author */}
                 <div className="flex items-center gap-4 pt-6 border-t border-white/5">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-sky-500 flex items-center justify-center text-white font-bold text-sm">
                         {testimonial.avatar}
                     </div>
                     <div>
-                        <p className="font-semibold text-white">{testimonial.author}</p>
-                        <p className="text-sm text-slate-400">
-                            {testimonial.role} at {testimonial.company}
-                        </p>
+                        <div className="font-semibold text-white">{testimonial.author}</div>
+                        <div className="text-sm text-slate-400">
+                            {testimonial.role} at <span className="text-slate-200">{testimonial.company}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,10 +69,10 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
 
 export function Testimonials() {
     return (
-        <section className="relative py-24 bg-slate-950 overflow-hidden border-t border-white/5">
-            {/* Background */}
-            <div className="absolute inset-0">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[150px]" />
+        <section className="relative py-24 bg-slate-950 overflow-hidden">
+            {/* Background elements */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[150px]" />
             </div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,7 +83,7 @@ export function Testimonials() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-4">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">
                         <Star className="w-3 h-3 fill-current" />
                         Trusted by Teams
                     </span>

@@ -51,10 +51,10 @@ export default function IntegrationsGrid() {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
               activeCategory === cat
-                ? 'bg-white text-slate-950'
-                : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-white/5'
+                ? 'bg-blue-600 text-white border-blue-500'
+                : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border-white/5'
             }`}
           >
             {cat}
@@ -67,14 +67,14 @@ export default function IntegrationsGrid() {
           <Link 
             href={integration.path} 
             key={integration.name}
-            className="group block p-6 rounded-xl bg-slate-900 border border-white/5 hover:border-white/15 transition-colors"
+            className="group block p-6 rounded-xl bg-slate-900 border border-white/5 hover:border-blue-500/30 transition-colors"
           >
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-xl font-bold text-slate-300 group-hover:text-white transition-colors border border-white/5">
                 {integration.name.charAt(0)}
               </div>
               <div>
-                <h3 className="font-semibold text-white group-hover:text-emerald-400 transition-colors">
+                <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors">
                   {integration.name}
                 </h3>
                 <span className="text-xs font-medium text-slate-500">

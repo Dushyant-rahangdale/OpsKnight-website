@@ -10,7 +10,7 @@ const stats = [
         value: "500+",
         description: "Live real-time dashboard listeners with zero Redis overhead",
         icon: Zap,
-        color: "from-emerald-500 to-emerald-700",
+        color: "from-blue-600 to-blue-800",
     },
     {
         label: "Incident Ingestion Throughput",
@@ -69,7 +69,7 @@ export function Stats() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-4">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">
                         Performance Benchmarks
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -90,7 +90,7 @@ export function Stats() {
                 <div className="mt-12 text-center">
                     <Link
                         href="/docs/v1.3/core-concepts/scalability"
-                        className="inline-flex items-center gap-2 text-emerald-400 font-medium hover:text-emerald-300 transition-colors group"
+                        className="inline-flex items-center gap-2 text-blue-400 font-medium hover:text-blue-300 transition-colors group"
                     >
                         View scalability documentation
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

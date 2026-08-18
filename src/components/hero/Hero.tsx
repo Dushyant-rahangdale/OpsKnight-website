@@ -33,7 +33,7 @@ export function Hero() {
                             Open-Source Incident Command Center
                         </span>
                         <div className="w-px h-3 bg-white/20"></div>
-                        <span className="text-xs text-emerald-400 font-mono">AGPL-3.0</span>
+                        <span className="text-xs text-blue-400 font-mono">AGPL-3.0</span>
                         <div className="w-px h-3 bg-white/20"></div>
                         <Link href="https://github.com/opsknight-labs/OpsKnight" target="_blank" className="flex items-center gap-1 text-xs text-slate-300 hover:text-white transition-colors">
                             <Github className="w-3 h-3" />
@@ -49,7 +49,7 @@ export function Hero() {
                         className="w-full"
                     >
                         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] max-w-4xl mx-auto text-center">
-                            The open source command center for <span className="text-emerald-400">on-call & incident response</span>.
+                            The open source command center for <span className="text-sky-400">on-call & incident response</span>.
                         </h1>
                     </motion.div>
 
@@ -74,7 +74,7 @@ export function Hero() {
                     >
                         <Link
                             href="/docs"
-                            className="inline-flex h-11 items-center justify-center rounded-md bg-emerald-500 px-8 text-sm font-medium text-white hover:bg-emerald-600 transition-colors shadow-[0_0_20px_rgba(16,185,129,0.3)]"
+                            className="inline-flex h-11 items-center justify-center rounded-md bg-blue-600 px-8 text-sm font-medium text-white hover:bg-blue-500 transition-colors shadow-lg shadow-blue-500/25"
                         >
                             Get Started Free
                         </Link>
@@ -106,7 +106,7 @@ export function Hero() {
                         <div className="flex items-center justify-between p-1 pl-4 rounded-xl bg-[#0d1117] border border-white/10 shadow-2xl overflow-hidden group">
                             <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-3">
                                 <Terminal className="w-4 h-4 text-slate-500 flex-shrink-0" />
-                                <code className="text-sm text-emerald-400 font-mono whitespace-nowrap">
+                                <code className="text-sm text-sky-400 font-mono whitespace-nowrap">
                                     docker run -d -p 3000:3000 ghcr.io/opsknight-labs/opsknight:latest
                                 </code>
                             </div>
@@ -117,8 +117,8 @@ export function Hero() {
                             >
                                 {copied ? (
                                     <>
-                                        <Check className="w-4 h-4 text-emerald-400" />
-                                        <span className="text-xs font-medium text-emerald-400">Copied!</span>
+                                        <Check className="w-4 h-4 text-blue-400" />
+                                        <span className="text-xs font-medium text-blue-400">Copied!</span>
                                     </>
                                 ) : (
                                     <Copy className="w-4 h-4" />
@@ -174,22 +174,22 @@ export function Hero() {
                         {/* Value Props Row */}
                         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
                             <div className="flex flex-col gap-2 p-6 rounded-xl bg-white/[0.02] border border-white/5">
-                                <Shield className="w-6 h-6 text-emerald-400 mb-2" />
+                                <Shield className="w-6 h-6 text-blue-400 mb-2" />
                                 <h3 className="text-sm font-semibold text-white">100% Self-Hosted & AGPL-3.0</h3>
                                 <p className="text-sm text-slate-400">Keep your data entirely within your own infrastructure.</p>
                             </div>
                             <div className="flex flex-col gap-2 p-6 rounded-xl bg-white/[0.02] border border-white/5">
-                                <Box className="w-6 h-6 text-emerald-400 mb-2" />
+                                <Box className="w-6 h-6 text-blue-400 mb-2" />
                                 <h3 className="text-sm font-semibold text-white">24+ Built-in Integrations</h3>
                                 <p className="text-sm text-slate-400">Native monitoring connections out of the box.</p>
                             </div>
                             <div className="flex flex-col gap-2 p-6 rounded-xl bg-white/[0.02] border border-white/5">
-                                <Server className="w-6 h-6 text-emerald-400 mb-2" />
+                                <Server className="w-6 h-6 text-blue-400 mb-2" />
                                 <h3 className="text-sm font-semibold text-white">Drop-in PagerDuty API</h3>
                                 <p className="text-sm text-slate-400">Migrate instantly using existing PagerDuty webhooks.</p>
                             </div>
                             <div className="flex flex-col gap-2 p-6 rounded-xl bg-white/[0.02] border border-white/5">
-                                <Users className="w-6 h-6 text-emerald-400 mb-2" />
+                                <Users className="w-6 h-6 text-blue-400 mb-2" />
                                 <h3 className="text-sm font-semibold text-white">Unlimited Usage</h3>
                                 <p className="text-sm text-slate-400">No arbitrary limits on users, services, or incidents.</p>
                             </div>

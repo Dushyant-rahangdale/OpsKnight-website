@@ -86,8 +86,8 @@ export function DocsToc({ headings }: { headings: TocItem[] }) {
       <div className="px-4 py-3 border-b border-white/5 bg-slate-900/80">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="p-1 rounded-md bg-emerald-500/10">
-              <List className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="p-1 rounded-md bg-blue-500/10">
+              <List className="w-3.5 h-3.5 text-blue-400" />
             </div>
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-300">
               On this page
@@ -101,7 +101,7 @@ export function DocsToc({ headings }: { headings: TocItem[] }) {
         {/* Progress bar */}
         <div className="mt-2 h-0.5 bg-slate-800 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 transition-all duration-150 ease-out"
+            className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-150 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -122,7 +122,7 @@ export function DocsToc({ headings }: { headings: TocItem[] }) {
                   onClick={(e) => handleClick(e, item.id)}
                   className={`group flex items-center gap-2 px-2 py-1.5 rounded-lg text-sm transition-all duration-200 ${
                     isActive
-                      ? "bg-emerald-500/10 text-emerald-400 font-medium"
+                      ? "bg-blue-500/10 text-blue-400 font-medium"
                       : isPassed
                       ? "text-slate-500 hover:text-slate-300 hover:bg-white/5"
                       : "text-slate-400 hover:text-white hover:bg-white/5"
@@ -132,7 +132,7 @@ export function DocsToc({ headings }: { headings: TocItem[] }) {
                   <span
                     className={`w-1 h-1 rounded-full transition-all ${
                       isActive
-                        ? "bg-emerald-400 scale-150"
+                        ? "bg-blue-400 scale-150"
                         : isPassed
                         ? "bg-slate-600"
                         : "bg-slate-700 group-hover:bg-slate-500"
@@ -146,7 +146,7 @@ export function DocsToc({ headings }: { headings: TocItem[] }) {
                   <ChevronRight
                     className={`w-3 h-3 ml-auto flex-shrink-0 transition-all ${
                       isActive
-                        ? "text-emerald-400 opacity-100 translate-x-0"
+                        ? "text-blue-400 opacity-100 translate-x-0"
                         : "opacity-0 -translate-x-2"
                     }`}
                   />

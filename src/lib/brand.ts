@@ -81,8 +81,8 @@ export const BRAND = {
 // Brand Colors (matching Tailwind config)
 export const BRAND_COLORS = {
     primary: {
-        emerald: "#10b981",
-        cyan: "#06b6d4",
+        blue: "#2563eb",
+        sky: "#38bdf8",
     },
     accent: {
         amber: "#f59e0b",
@@ -136,7 +136,7 @@ export const FEATURES = [
 export const STATS = [
     { label: "Event Capacity", value: "Unlimited", color: "rose" },
     { label: "Setup Time", value: "~5m", color: "amber" },
-    { label: "Data Privacy", value: "100%", color: "emerald" },
+    { label: "Data Privacy", value: "100%", color: "blue" },
 ] as const;
 
 // Comparison competitors

@@ -69,7 +69,7 @@ export async function generateStaticParams() {
 const SECTION_COLORS: Record<string, { badge: string; border: string }> = {
   "getting-started": { badge: "bg-amber-500/10 text-amber-400 border-amber-500/20", border: "border-l-amber-500" },
   "core-concepts": { badge: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20", border: "border-l-cyan-500" },
-  "administration": { badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20", border: "border-l-emerald-500" },
+  "administration": { badge: "bg-blue-500/10 text-blue-400 border-blue-500/20", border: "border-l-blue-500" },
   "integrations": { badge: "bg-blue-500/10 text-blue-400 border-blue-500/20", border: "border-l-blue-500" },
   "api": { badge: "bg-rose-500/10 text-rose-400 border-rose-500/20", border: "border-l-rose-500" },
   "deployment": { badge: "bg-lime-500/10 text-lime-400 border-lime-500/20", border: "border-l-lime-500" },
@@ -174,13 +174,13 @@ export default async function DocsPage({
               prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-white/10
               prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
               prose-p:text-slate-300 prose-p:leading-relaxed
-              prose-a:text-emerald-400 prose-a:no-underline hover:prose-a:text-emerald-300 prose-a:transition-colors
+              prose-a:text-blue-400 prose-a:no-underline hover:prose-a:text-blue-300 prose-a:transition-colors
               prose-strong:text-white prose-strong:font-semibold
-              prose-code:text-emerald-300 prose-code:bg-slate-800/80 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:font-normal prose-code:before:content-none prose-code:after:content-none
+              prose-code:text-blue-300 prose-code:bg-slate-800/80 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:font-normal prose-code:before:content-none prose-code:after:content-none
               prose-pre:bg-slate-800/80 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl
               prose-ul:text-slate-300 prose-ol:text-slate-300
-              prose-li:marker:text-emerald-500
-              prose-blockquote:border-l-emerald-500 prose-blockquote:bg-emerald-500/5 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-slate-300 prose-blockquote:not-italic
+              prose-li:marker:text-blue-500
+              prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-500/5 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-slate-300 prose-blockquote:not-italic
               prose-table:border-collapse
               prose-th:bg-slate-800/80 prose-th:text-slate-200 prose-th:font-semibold prose-th:px-4 prose-th:py-2
               prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-white/10
@@ -200,7 +200,7 @@ export default async function DocsPage({
           <Link
             href={BRAND.links.github}
             target="_blank"
-            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-emerald-400 transition-colors"
+            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-blue-400 transition-colors"
           >
             Edit this page on GitHub
             <ChevronRight className="w-3 h-3" />

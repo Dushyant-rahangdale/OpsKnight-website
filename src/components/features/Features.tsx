@@ -108,7 +108,7 @@ export function Features() {
                     viewport={{ once: true }}
                     className="text-center mb-20"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6">
                         <Activity className="w-4 h-4" />
                         Complete Reliability Suite
                     </div>
@@ -137,7 +137,7 @@ export function Features() {
                                             : "hover:bg-slate-900/50 border border-transparent opacity-70 hover:opacity-100"
                                     }`}
                                 >
-                                    <div className={`mt-1 p-2 rounded-lg transition-colors ${isActive ? "bg-emerald-500/20 text-emerald-400" : "bg-slate-800 text-slate-400"}`}>
+                                    <div className={`mt-1 p-2 rounded-lg transition-colors ${isActive ? "bg-blue-500/20 text-blue-400" : "bg-slate-800 text-slate-400"}`}>
                                         <spotlight.icon className="w-5 h-5" />
                                     </div>
                                     <div>
@@ -187,7 +187,7 @@ export function Features() {
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-auto">
                                             {spotlights[activeTab].highlights.map((highlight, i) => (
                                                 <div key={i} className="flex items-start gap-3">
-                                                    <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                                                    <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
                                                     <span className="text-slate-300 font-medium">{highlight}</span>
                                                 </div>
                                             ))}
@@ -212,7 +212,7 @@ export function Features() {
                             className="p-8 rounded-2xl bg-slate-900/40 border border-white/5 hover:bg-slate-900/80 hover:border-white/10 transition-all duration-300"
                         >
                             <div className="w-12 h-12 rounded-xl bg-slate-800/50 flex items-center justify-center mb-6 border border-white/5">
-                                <feature.icon className="w-6 h-6 text-emerald-400" />
+                                <feature.icon className="w-6 h-6 text-blue-400" />
                             </div>
                             <h4 className="text-lg font-bold text-white mb-3">{feature.title}</h4>
                             <p className="text-slate-400 leading-relaxed">

@@ -20,7 +20,7 @@ export function CTA() {
     return (
         <section className="relative py-32 bg-slate-950 overflow-hidden border-t border-white/5">
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-500/10 rounded-full blur-[100px]" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-500/10 rounded-full blur-[100px]" />
             </div>
 
             <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -39,8 +39,8 @@ export function CTA() {
                     </p>
 
                     <div className="max-w-2xl mx-auto mt-10">
-                        <div className="bg-slate-900 rounded-lg p-4 border border-white/10 flex items-center justify-between text-left group hover:border-emerald-500/30 transition-colors">
-                            <div className="flex items-center gap-3 overflow-hidden text-emerald-400 font-mono text-sm sm:text-base">
+                        <div className="bg-slate-900 rounded-lg p-4 border border-white/10 flex items-center justify-between text-left group hover:border-blue-500/30 transition-colors">
+                            <div className="flex items-center gap-3 overflow-hidden text-blue-400 font-mono text-sm sm:text-base">
                                 <Terminal className="w-5 h-5 text-slate-500 flex-shrink-0" />
                                 <span className="truncate">{dockerCommand}</span>
                             </div>
@@ -49,13 +49,13 @@ export function CTA() {
                                 className="ml-4 p-2 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors focus:outline-none"
                                 aria-label="Copy to clipboard"
                             >
-                                {copied ? <CheckCircle2 className="w-5 h-5 text-emerald-400" /> : <Copy className="w-5 h-5" />}
+                                {copied ? <CheckCircle2 className="w-5 h-5 text-blue-400" /> : <Copy className="w-5 h-5" />}
                             </button>
                         </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-8">
-                        <Button asChild size="lg" className="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white px-8 h-12 text-lg">
+                        <Button asChild size="lg" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 text-lg shadow-lg shadow-blue-500/25">
                             <Link href="/docs">Deploy Now</Link>
                         </Button>
                         <Button asChild size="lg" variant="outline" className="w-full sm:w-auto h-12 px-8 text-lg bg-white/5 border-white/10 hover:bg-white/10 text-white">

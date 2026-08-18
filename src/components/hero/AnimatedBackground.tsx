@@ -19,7 +19,7 @@ function Aurora() {
                 }}
             />
             <motion.div
-                className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-emerald-500/10 blur-[100px] mix-blend-screen"
+                className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-sky-500/10 blur-[100px] mix-blend-screen"
                 animate={{
                     x: ["0%", "-10%", "0%"],
                     y: ["0%", "15%", "0%"],

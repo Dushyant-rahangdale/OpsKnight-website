@@ -40,7 +40,7 @@ export function HowItWorks() {
     <section className="bg-slate-950 py-24 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-6">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-6">
             Architecture & Lifecycle
           </span>
           <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6">
@@ -65,9 +65,9 @@ export function HowItWorks() {
                 transition={{ duration: 0.5, delay: index * 0.15 }}
                 className="relative z-10 flex flex-col md:flex-row items-start gap-8 group"
               >
-                <div className="flex-shrink-0 w-20 h-20 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col items-center justify-center ring-4 ring-slate-950 group-hover:border-emerald-500/50 transition-colors">
+                <div className="flex-shrink-0 w-20 h-20 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col items-center justify-center ring-4 ring-slate-950 group-hover:border-blue-500/50 transition-colors">
                   <span className="text-slate-500 text-xs font-mono mb-1">Step {step.number}</span>
-                  <span className="text-emerald-400 font-semibold text-sm">{step.time}</span>
+                  <span className="text-blue-400 font-semibold text-sm">{step.time}</span>
                 </div>
                 <div className="flex-1 bg-slate-900/50 border border-slate-800 rounded-2xl p-6 hover:bg-slate-900 transition-colors">
                   <h3 className="text-xl font-medium text-white mb-3">

@@ -30,7 +30,7 @@ export function Comparison() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-4">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">
                         Transparent Comparison
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -52,7 +52,7 @@ export function Comparison() {
                         <thead>
                             <tr className="border-b border-white/10 bg-slate-900/80">
                                 <th className="py-5 px-6 text-slate-300 font-semibold w-1/4">Feature</th>
-                                <th className="py-5 px-6 text-emerald-400 font-bold text-lg w-1/4">{BRAND.name}</th>
+                                <th className="py-5 px-6 text-blue-400 font-bold text-lg w-1/4">{BRAND.name}</th>
                                 <th className="py-5 px-6 text-slate-400 font-medium w-1/4">PagerDuty</th>
                                 <th className="py-5 px-6 text-slate-400 font-medium w-1/4">OpsGenie</th>
                             </tr>
@@ -61,7 +61,7 @@ export function Comparison() {
                             {comparisonData.map((row) => (
                                 <tr key={row.name} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
                                     <td className="py-4 px-6 text-slate-300 text-sm font-medium">{row.name}</td>
-                                    <td className="py-4 px-6 text-emerald-300 text-sm font-semibold bg-emerald-500/5">{row.opsknight}</td>
+                                    <td className="py-4 px-6 text-blue-300 text-sm font-semibold bg-blue-500/5">{row.opsknight}</td>
                                     <td className="py-4 px-6 text-slate-400 text-sm">{row.pagerduty}</td>
                                     <td className="py-4 px-6 text-slate-400 text-sm">{row.opsgenie}</td>
                                 </tr>
@@ -75,7 +75,7 @@ export function Comparison() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-emerald-950/40 to-slate-900 border border-emerald-500/20 flex flex-col md:flex-row items-center justify-between gap-6"
+                    className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-blue-950/40 to-slate-900 border border-blue-500/20 flex flex-col md:flex-row items-center justify-between gap-6"
                 >
                     <div>
                         <h3 className="text-xl font-bold text-white mb-2">A team of 25 engineers saves over $6,300 every year with {BRAND.name}.</h3>
@@ -83,7 +83,7 @@ export function Comparison() {
                     </div>
                     <Link
                         href="/compare"
-                        className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition-all hover:scale-105 group"
+                        className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all hover:scale-105 group"
                     >
                         Explore detailed comparison pages
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

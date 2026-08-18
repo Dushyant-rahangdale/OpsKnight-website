@@ -88,7 +88,7 @@ export function Integrations() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16">
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold mb-4">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-semibold mb-4">
                         Ecosystem & Interoperability
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -107,7 +107,7 @@ export function Integrations() {
                             onClick={() => setActiveFilter(cat)}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
                                 activeFilter === cat
-                                    ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-300"
+                                    ? "bg-blue-600/20 border-blue-500/50 text-blue-300"
                                     : "bg-slate-900/50 border-white/5 text-slate-400 hover:text-white hover:bg-slate-800"
                             }`}
                         >
@@ -117,12 +117,12 @@ export function Integrations() {
                 </div>
 
                 {/* Special Highlight */}
-                <div className="mb-12 max-w-3xl mx-auto bg-emerald-950/30 border border-emerald-500/20 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6">
-                    <div className="w-16 h-16 shrink-0 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center p-3 text-emerald-400">
+                <div className="mb-12 max-w-3xl mx-auto bg-blue-950/30 border border-blue-500/20 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6">
+                    <div className="w-16 h-16 shrink-0 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center p-3 text-blue-400">
                         {integrationIcons.pagerduty}
                     </div>
                     <div>
-                        <h3 className="text-emerald-300 font-semibold text-lg mb-1">PagerDuty Events API v2 Emulation</h3>
+                        <h3 className="text-blue-400 font-semibold text-lg mb-1">PagerDuty Events API v2 Emulation</h3>
                         <p className="text-slate-300 text-sm">Drop-in endpoint - change URL to {BRAND.name} and everything works instantly. No need to update existing integrations or scripts.</p>
                     </div>
                 </div>
@@ -142,12 +142,12 @@ export function Integrations() {
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                <Link href={item.href} className="flex items-start gap-4 p-5 rounded-2xl bg-slate-900/40 border border-white/5 hover:border-emerald-500/30 hover:bg-slate-900/80 transition-all group h-full">
-                                    <div className="w-10 h-10 shrink-0 text-slate-300 group-hover:text-emerald-400 transition-colors">
+                                <Link href={item.href} className="flex items-start gap-4 p-5 rounded-2xl bg-slate-900/40 border border-white/5 hover:border-blue-500/30 hover:bg-slate-900/80 transition-all group h-full">
+                                    <div className="w-10 h-10 shrink-0 text-slate-300 group-hover:text-blue-400 transition-colors">
                                         {item.icon}
                                     </div>
                                     <div>
-                                        <h4 className="text-white font-medium text-sm mb-1 group-hover:text-emerald-300 transition-colors">{item.name}</h4>
+                                        <h4 className="text-white font-medium text-sm mb-1 group-hover:text-blue-400 transition-colors">{item.name}</h4>
                                         <p className="text-slate-400 text-xs leading-relaxed line-clamp-2">{item.description}</p>
                                     </div>
                                 </Link>
@@ -160,7 +160,7 @@ export function Integrations() {
                 <div className="text-center">
                     <Link
                         href="/integrations"
-                        className="inline-flex items-center gap-2 text-emerald-400 font-medium hover:text-emerald-300 transition-colors group"
+                        className="inline-flex items-center gap-2 text-blue-400 font-medium hover:text-blue-300 transition-colors group"
                     >
                         View all 24+ integrations directory 
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

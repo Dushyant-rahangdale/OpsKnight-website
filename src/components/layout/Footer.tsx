@@ -43,7 +43,7 @@ export function Footer() {
                     <div className="lg:col-span-2">
                         <Link href="/" className="flex items-center gap-2 mb-6 inline-block">
                             <span className="font-bold text-xl text-white">
-                                Ops<span className="text-emerald-400">Knight</span>
+                                Ops<span className="text-blue-400">Knight</span>
                             </span>
                         </Link>
                         <p className="text-slate-400 mb-6 max-w-sm">
@@ -52,7 +52,7 @@ export function Footer() {
                         
                         <div className="flex items-center gap-3 mb-8">
                             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-900 border border-white/10 text-xs font-medium text-slate-300">
-                                <BookOpen className="w-3 h-3 text-emerald-400" />
+                                <BookOpen className="w-3 h-3 text-blue-400" />
                                 AGPL-3.0
                             </span>
                         </div>
@@ -67,7 +67,7 @@ export function Footer() {
                             <a href={`mailto:${BRAND.links.email}`} className="hover:text-white transition-colors" aria-label="Email">
                                 <Mail className="w-5 h-5" />
                             </a>
-                            <a href="https://github.com/sponsors/opsknight-labs" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors" aria-label="Sponsor">
+                            <a href="https://github.com/sponsors/opsknight-labs" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors" aria-label="Sponsor">
                                 <Heart className="w-5 h-5" />
                             </a>
                         </div>

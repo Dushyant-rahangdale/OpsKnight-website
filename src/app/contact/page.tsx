@@ -13,7 +13,7 @@ const contactCards = [
         href: BRAND.links.issues,
         cta: "Create issue",
         icon: MessageSquare,
-        tone: "from-emerald-500/30 to-emerald-500/0",
+        tone: "from-blue-500/30 to-blue-500/0",
     },
     {
         title: "Email support",
@@ -43,7 +43,7 @@ export default function ContactPage() {
     return (
         <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
-            <div className="absolute top-1/3 left-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]" />
+            <div className="absolute top-1/3 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
             <div className="absolute top-16 right-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-[120px]" />
 
             <main className="relative z-10 pt-28 pb-24">
@@ -57,7 +57,7 @@ export default function ContactPage() {
                         <div>
                             <motion.span
                                 variants={itemMotion}
-                                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold mb-4"
+                                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-semibold mb-4"
                             >
                                 <Shield className="w-3 h-3" />
                                 Contact OpsKnight
@@ -109,7 +109,7 @@ export default function ContactPage() {
                                     <Link
                                         href={card.href}
                                         target="_blank"
-                                        className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold transition-all"
+                                        className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition-all"
                                     >
                                         {card.cta}
                                         <ArrowRight className="w-4 h-4" />

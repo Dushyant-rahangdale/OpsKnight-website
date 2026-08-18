@@ -82,7 +82,7 @@ const statCards: StatCard[] = [
         label: "Cost",
         value: "$0/user",
         description: `${BRAND.name} has no per-seat pricing or add-ons.`,
-        tone: "from-emerald-500/30 to-emerald-500/0",
+        tone: "from-blue-500/30 to-blue-500/0",
         icon: Gauge,
     },
     {
@@ -116,7 +116,7 @@ const decisionGuides = [
             "You want to self-host, customize workflows, or ship new integrations",
             "Data residency or audit requirements require full control",
         ],
-        accent: "border-emerald-500/30 bg-emerald-500/5 text-emerald-300",
+        accent: "border-blue-500/30 bg-blue-500/5 text-blue-300",
     },
     {
         title: "Choose PagerDuty if...",
@@ -351,8 +351,8 @@ function FeatureValue({ value }: { value: CellValue }) {
     if (value === true) {
         return (
             <div className="flex items-center justify-center">
-                <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <Check className="w-4 h-4 text-emerald-300" />
+                <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center">
+                    <Check className="w-4 h-4 text-blue-300" />
                 </div>
             </div>
         );
@@ -395,7 +395,7 @@ export default function ComparePage() {
     return (
         <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
-            <div className="absolute top-1/3 left-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]" />
+            <div className="absolute top-1/3 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
             <div className="absolute top-16 right-10 w-72 h-72 bg-sky-500/10 rounded-full blur-[120px]" />
 
             <main className="relative z-10 pt-24 pb-24">
@@ -410,7 +410,7 @@ export default function ComparePage() {
                         <div>
                             <motion.span
                                 variants={itemMotion}
-                                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold mb-4"
+                                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-semibold mb-4"
                             >
                                 <Sparkles className="w-3 h-3" />
                                 Detailed comparison
@@ -434,24 +434,24 @@ export default function ComparePage() {
                             className="rounded-2xl border border-white/10 bg-slate-900/60 p-6"
                         >
                             <div className="flex items-center gap-2 mb-4">
-                                <Users className="w-5 h-5 text-emerald-300" />
+                                <Users className="w-5 h-5 text-blue-300" />
                                 <h2 className="text-lg font-semibold">What this page covers</h2>
                             </div>
                             <ul className="space-y-3 text-sm text-slate-300">
                                 <li className="flex items-start gap-2">
-                                    <Check className="w-4 h-4 text-emerald-300 mt-0.5" />
+                                    <Check className="w-4 h-4 text-blue-300 mt-0.5" />
                                     Full pricing comparison with annual totals.
                                 </li>
                                 <li className="flex items-start gap-2">
-                                    <Check className="w-4 h-4 text-emerald-300 mt-0.5" />
+                                    <Check className="w-4 h-4 text-blue-300 mt-0.5" />
                                     Feature-by-feature breakdown across tools.
                                 </li>
                                 <li className="flex items-start gap-2">
-                                    <Check className="w-4 h-4 text-emerald-300 mt-0.5" />
+                                    <Check className="w-4 h-4 text-blue-300 mt-0.5" />
                                     Scorecard to highlight strengths per platform.
                                 </li>
                                 <li className="flex items-start gap-2">
-                                    <Check className="w-4 h-4 text-emerald-300 mt-0.5" />
+                                    <Check className="w-4 h-4 text-blue-300 mt-0.5" />
                                     Migration guide to switch with confidence.
                                 </li>
                             </ul>
@@ -487,7 +487,7 @@ export default function ComparePage() {
                         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-10">
                             <div>
                                 <h2 className="text-2xl font-bold flex items-center gap-2">
-                                    <Calculator className="w-6 h-6 text-emerald-300" />
+                                    <Calculator className="w-6 h-6 text-blue-300" />
                                     Savings calculator
                                 </h2>
                                 <p className="text-slate-300 mt-2">
@@ -503,9 +503,9 @@ export default function ComparePage() {
                                     step="5"
                                     value={teamSize}
                                     onChange={(e) => setTeamSize(parseInt(e.target.value))}
-                                    className="w-40 accent-emerald-400"
+                                    className="w-40 accent-blue-400"
                                 />
-                                <span className="text-xl font-bold text-emerald-300 min-w-[3ch]">
+                                <span className="text-xl font-bold text-blue-300 min-w-[3ch]">
                                     {teamSize}
                                 </span>
                             </div>
@@ -516,19 +516,19 @@ export default function ComparePage() {
                                 <div
                                     key={vendor.name}
                                     className={`rounded-2xl p-6 border ${key === "opsknight"
-                                        ? "border-emerald-400/40 bg-emerald-500/5"
+                                        ? "border-blue-400/40 bg-blue-500/5"
                                         : "border-white/10 bg-slate-950/60"
                                         }`}
                                 >
                                     <div className="flex items-start justify-between">
                                         <h3 className="font-bold text-lg mb-1">{vendor.name}</h3>
                                         {key === "opsknight" ? (
-                                            <span className="text-xs font-semibold text-emerald-300 bg-emerald-500/10 px-2 py-1 rounded-full">
+                                            <span className="text-xs font-semibold text-blue-300 bg-blue-500/10 px-2 py-1 rounded-full">
                                                 Recommended
                                             </span>
                                         ) : null}
                                     </div>
-                                    <div className={`text-3xl font-bold mb-4 ${key === "opsknight" ? "text-emerald-300" : "text-white"}`}>
+                                    <div className={`text-3xl font-bold mb-4 ${key === "opsknight" ? "text-blue-300" : "text-white"}`}>
                                         ${vendor.price}
                                         <span className="text-sm font-normal text-slate-400">{vendor.unit}</span>
                                     </div>
@@ -541,8 +541,8 @@ export default function ComparePage() {
                         </div>
 
                         <div className="mt-8 grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
-                            <div className="bg-emerald-500/10 rounded-xl p-4">
-                                <p className="text-lg font-medium text-emerald-300">
+                            <div className="bg-blue-500/10 rounded-xl p-4">
+                                <p className="text-lg font-medium text-blue-300">
                                     You could save <span className="font-bold">${annualSavings.toLocaleString()} per year</span> by switching to {BRAND.name}.
                                 </p>
                             </div>
@@ -566,7 +566,7 @@ export default function ComparePage() {
                                 <ul className="space-y-2 text-sm text-slate-300">
                                     {guide.bullets.map((bullet) => (
                                         <li key={bullet} className="flex gap-2">
-                                            <Check className="w-4 h-4 text-emerald-300 mt-0.5" />
+                                            <Check className="w-4 h-4 text-blue-300 mt-0.5" />
                                             <span>{bullet}</span>
                                         </li>
                                     ))}
@@ -599,7 +599,7 @@ export default function ComparePage() {
                                         <thead>
                                             <tr className="border-b border-white/10">
                                                 <th className="py-3 px-4 text-slate-400 font-medium w-1/3">Feature</th>
-                                                <th className="py-3 px-4 text-emerald-300 font-semibold bg-emerald-500/5 rounded-t-xl">
+                                                <th className="py-3 px-4 text-blue-300 font-semibold bg-blue-500/5 rounded-t-xl">
                                                     OpsKnight
                                                 </th>
                                                 <th className="py-3 px-4 text-slate-400 font-medium">PagerDuty</th>
@@ -618,7 +618,7 @@ export default function ComparePage() {
                                                     className="border-b border-white/5 hover:bg-white/[0.02] transition-colors"
                                                 >
                                                     <td className="py-3 px-4 text-sm text-slate-200 font-medium">{row.feature}</td>
-                                                    <td className="py-3 px-4 bg-emerald-500/5">
+                                                    <td className="py-3 px-4 bg-blue-500/5">
                                                         <FeatureValue value={row.opsknight} />
                                                     </td>
                                                     <td className="py-3 px-4 text-slate-300">
@@ -643,9 +643,9 @@ export default function ComparePage() {
                 {/* Platform deep dive */}
                 <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                     <div className="grid gap-6 lg:grid-cols-3">
-                        <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-6">
+                        <div className="rounded-2xl border border-blue-500/20 bg-blue-500/5 p-6">
                             <div className="flex items-center gap-2 mb-4">
-                                <BookOpen className="w-5 h-5 text-emerald-300" />
+                                <BookOpen className="w-5 h-5 text-blue-300" />
                                 <h3 className="font-semibold">{BRAND.name} deep dive</h3>
                             </div>
                             <ul className="space-y-3 text-sm text-slate-200">
@@ -683,13 +683,13 @@ export default function ComparePage() {
                 <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                     <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-8 md:p-10">
                         <div className="flex items-center gap-3 mb-6">
-                            <Server className="w-6 h-6 text-emerald-300" />
+                            <Server className="w-6 h-6 text-blue-300" />
                             <h2 className="text-2xl font-bold">Migration plan</h2>
                         </div>
                         <div className="grid gap-6 md:grid-cols-2">
                             {migrationSteps.map((step, index) => (
                                 <div key={step.title} className="flex gap-4">
-                                    <div className="h-9 w-9 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-semibold">
+                                    <div className="h-9 w-9 rounded-full bg-blue-500/20 text-blue-300 flex items-center justify-center font-semibold">
                                         {index + 1}
                                     </div>
                                     <div>
@@ -722,7 +722,7 @@ export default function ComparePage() {
                     <Link
                         href={BRAND.links.github}
                         target="_blank"
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-semibold transition-all hover:scale-105"
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-semibold transition-all hover:scale-105"
                     >
                         Explore the repo
                         <ArrowRight className="w-5 h-5" />

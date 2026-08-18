@@ -68,10 +68,10 @@ export default function ChangelogPage() {
           {releases.map((release) => (
             <div key={release.version} className="mb-16 ml-8 md:ml-12 relative">
               {/* Timeline marker */}
-              <div className="absolute -left-[41px] md:-left-[57px] top-1 h-4 w-4 rounded-full border-2 border-emerald-500 bg-slate-950" />
+              <div className="absolute -left-[41px] md:-left-[57px] top-1 h-4 w-4 rounded-full border-2 border-blue-500 bg-slate-950" />
               
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-6">
-                <span className="inline-flex items-center rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20 w-fit">
+                <span className="inline-flex items-center rounded-full bg-blue-500/10 px-3 py-1 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-500/20 w-fit">
                   {release.version}
                 </span>
                 <time className="text-sm text-slate-500 font-medium">

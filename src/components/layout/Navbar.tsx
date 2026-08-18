@@ -29,14 +29,14 @@ export function Navbar() {
             <div className="hidden sm:block border-b border-white/5 bg-slate-900/60">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-center gap-2 py-2 text-xs">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                        <span className="w-2 h-2 rounded-full bg-blue-500 inline-block animate-pulse" />
                         <span className="text-slate-300">
                             OpsKnight v1.3.0 is live — 24+ native integrations, drop-in PagerDuty emulation & self-hosted status pages
                         </span>
                         <Link
                             href="https://github.com/opsknight-labs/OpsKnight/releases"
                             target="_blank"
-                            className="inline-flex items-center gap-1 text-white hover:text-emerald-400 font-medium transition-colors ml-2"
+                            className="inline-flex items-center gap-1 text-white hover:text-blue-400 font-medium transition-colors ml-2"
                         >
                             Read Release Notes
                             <ArrowRight className="w-3 h-3" />
@@ -49,7 +49,7 @@ export function Navbar() {
                 <div className="flex items-center justify-between h-14">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-3 group">
-                        <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 group-hover:border-emerald-500/50 transition-all shadow-sm">
+                        <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 group-hover:border-blue-500/50 transition-all shadow-sm">
                             <Image
                                 src="/logo-mark.png"
                                 alt="OpsKnight"
@@ -58,7 +58,7 @@ export function Navbar() {
                                 className="w-5 h-5 object-contain"
                             />
                         </div>
-                        <span className="text-base font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+                        <span className="text-base font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
                             OpsKnight
                         </span>
                     </Link>

@@ -29,7 +29,7 @@ export function DocsPrevNext({ version, currentPath }: { version: string, curren
         {prev && (
           <Link href={prev.href} className="group flex flex-col gap-1 text-slate-400 w-fit">
             <span>Previous</span>
-            <span className="text-white group-hover:text-emerald-400 transition-colors">← {prev.title}</span>
+            <span className="text-white group-hover:text-blue-400 transition-colors">← {prev.title}</span>
           </Link>
         )}
       </div>
@@ -37,7 +37,7 @@ export function DocsPrevNext({ version, currentPath }: { version: string, curren
         {next && (
           <Link href={next.href} className="group flex flex-col gap-1 text-slate-400 items-end w-fit">
             <span>Next</span>
-            <span className="text-white group-hover:text-emerald-400 transition-colors">{next.title} →</span>
+            <span className="text-white group-hover:text-blue-400 transition-colors">{next.title} →</span>
           </Link>
         )}
       </div>

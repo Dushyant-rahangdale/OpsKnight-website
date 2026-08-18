@@ -158,7 +158,7 @@ export function DocsSearch({ version, className }: { version: string, className?
       <>
         {parts.map((part, i) =>
           part.toLowerCase() === highlight.toLowerCase() ? (
-            <span key={i} className="text-emerald-400 font-medium">{part}</span>
+            <span key={i} className="text-blue-400 font-medium">{part}</span>
           ) : (
             part
           )
@@ -172,14 +172,14 @@ export function DocsSearch({ version, className }: { version: string, className?
       {/* Search Input */}
       <div className="relative group">
         <div className="relative flex items-center">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-emerald-400 transition-colors" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-blue-400 transition-colors" />
           <input
             ref={inputRef}
             value={query}
             onChange={event => setQuery(event.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Search docs..."
-            className="w-full rounded-xl pl-10 pr-20 py-2 text-sm bg-slate-900/50 border border-white/5 text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-emerald-500/50 focus:bg-slate-900 focus:text-white transition-all shadow-sm"
+            className="w-full rounded-xl pl-10 pr-20 py-2 text-sm bg-slate-900/50 border border-white/5 text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-blue-500/50 focus:bg-slate-900 focus:text-white transition-all shadow-sm"
             onFocus={() => query && setIsOpen(true)}
             onBlur={() => setTimeout(() => setIsOpen(false), 200)}
             autoComplete="off"
@@ -221,7 +221,7 @@ export function DocsSearch({ version, className }: { version: string, className?
                   className={cn(
                     "relative flex flex-col gap-1 px-4 py-3 mx-2 rounded-lg transition-all group",
                     index === selectedIndex
-                      ? "bg-emerald-500/10"
+                      ? "bg-blue-500/10"
                       : "hover:bg-white/5"
                   )}
                 >
@@ -229,11 +229,11 @@ export function DocsSearch({ version, className }: { version: string, className?
                     <div className="flex items-center gap-2 min-w-0">
                       <FileText className={cn(
                         "w-4 h-4 shrink-0 transition-colors",
-                        index === selectedIndex ? "text-emerald-400" : "text-slate-500"
+                        index === selectedIndex ? "text-blue-400" : "text-slate-500"
                       )} />
                       <span className={cn(
                         "text-sm font-medium truncate transition-colors",
-                        index === selectedIndex ? "text-emerald-100" : "text-slate-300"
+                        index === selectedIndex ? "text-blue-100" : "text-slate-300"
                       )}>
                         <Highlight text={result.title} highlight={query} />
                       </span>
@@ -255,7 +255,7 @@ export function DocsSearch({ version, className }: { version: string, className?
                   )}
 
                   {index === selectedIndex && (
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-500/50">
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-500/50">
                       <CornerDownLeft className="w-4 h-4" />
                     </div>
                   )}

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BRAND } from "@/lib/brand";
+import { SavingsCalculator } from "@/components/calculator/SavingsCalculator";
 
 const comparisonData = [
     { name: "Annual Cost for 20 Engineers", opsknight: "$0", pagerduty: "$5,040 / yr", opsgenie: "$2,160 / yr" },
@@ -70,25 +71,25 @@ export function Comparison() {
                     </table>
                 </motion.div>
 
-                {/* Savings Callout CTA */}
+                {/* Compact Interactive Savings Calculator */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-red-500/25 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-red-500/5"
                 >
-                    <div>
-                        <h3 className="text-xl font-bold text-white mb-2">A team of 25 engineers saves over $6,300 every year with {BRAND.name}.</h3>
-                        <p className="text-slate-400 text-sm">Stop paying a per-seat tax just so developers can be paged at 3 AM.</p>
-                    </div>
+                    <SavingsCalculator />
+                </motion.div>
+
+                {/* Bottom Comparison Link */}
+                <div className="text-center mt-6">
                     <Link
                         href="/compare"
-                        className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold transition-all hover:scale-105 group shadow-lg shadow-red-500/25"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors group"
                     >
-                        Explore detailed comparison pages
+                        Explore detailed side-by-side breakdowns vs PagerDuty, Opsgenie, and Squadcast
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

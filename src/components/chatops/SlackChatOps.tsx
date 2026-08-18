@@ -75,7 +75,7 @@ export function SlackChatOps() {
               </div>
               <div className="text-[11px] text-slate-400 truncate flex items-center gap-1.5 mt-0.5">
                 <span>🚨 High-EC2-CPUUtilization | HIGH |</span>
-                <span className="text-sky-400 hover:underline cursor-pointer">https://opssentinal.com/incidents/...</span>
+                <span className="text-sky-400 hover:underline cursor-pointer">https://opsknight.com/incidents/...</span>
               </div>
             </div>
 
@@ -119,7 +119,7 @@ export function SlackChatOps() {
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-white text-[13px]">OpsSentinal</span>
+                  <span className="font-bold text-white text-[13px]">OpsKnight</span>
                   <span className="px-1 py-0.2 bg-[#2c3136] text-[9px] text-slate-400 font-bold rounded">APP</span>
                   <span className="text-slate-500 text-[11px]">14:30</span>
                 </div>
@@ -138,12 +138,12 @@ export function SlackChatOps() {
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-white text-[13px]">OpsSentinal</span>
+                  <span className="font-bold text-white text-[13px]">OpsKnight</span>
                   <span className="px-1 py-0.2 bg-[#2c3136] text-[9px] text-slate-400 font-bold rounded">APP</span>
                   <span className="text-slate-500 text-[11px]">14:30</span>
                 </div>
                 <div className="text-slate-300 text-xs mt-0.5">
-                  set the channel topic: 🚨 High-EC2-CPUUtilization | HIGH | <span className="text-sky-400 hover:underline">https://opssentinal.com/incidents/cmsx07k9q00w4cq1iu5y5hh7q</span>
+                  set the channel topic: 🚨 High-EC2-CPUUtilization | HIGH | <span className="text-sky-400 hover:underline">https://opsknight.com/incidents/cmsx07k9q00w4cq1iu5y5hh7q</span>
                 </div>
               </div>
             </div>
@@ -166,7 +166,7 @@ export function SlackChatOps() {
                   <span className="text-slate-500 text-[11px]">14:30</span>
                 </div>
                 <div className="text-slate-300 text-xs mt-0.5">
-                  has been added to #inc-y5hh7q-opsknight by OpsSentinal.
+                  has been added to #inc-y5hh7q-opsknight by OpsKnight.
                 </div>
               </div>
             </div>
@@ -180,7 +180,7 @@ export function SlackChatOps() {
               </div>
               <div className="flex-1 space-y-3">
                 <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-white text-[13px]">OpsSentinal</span>
+                  <span className="font-bold text-white text-[13px]">OpsKnight</span>
                   <span className="px-1 py-0.2 bg-[#2c3136] text-[9px] text-slate-400 font-bold rounded">APP</span>
                   <span className="text-slate-500 text-[11px]">14:30</span>
                 </div>

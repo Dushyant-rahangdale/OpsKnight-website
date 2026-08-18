@@ -112,13 +112,13 @@ const TOUR_TABS: TourTab[] = [
     icon: MessageSquare,
     image: "/dashboard-command-center.png",
     url: "https://app.opsknight.com/integrations/slack",
-    heading: "Automated Slack channels & Jitsi WebRTC video bridges",
-    description: "Every critical incident automatically provisions a dedicated Slack channel with the on-call team, attaches a WebRTC video meeting bridge, and enables full 1-click triage via interactive buttons.",
+    heading: "Automated Slack war rooms with Jitsi, Google Meet & Zoom bridges",
+    description: "Every critical incident automatically provisions a dedicated Slack channel with the on-call responders, attaches an instant WebRTC, Google Meet, or Zoom bridge, and enables full 1-click triage via interactive buttons.",
     highlights: [
       "Auto-provisions dedicated incident channels (#inc-<service>-<id>)",
       "Interactive 1-click Acknowledge, Assign to Me, and Resolve buttons",
-      "Built-in WebRTC video conference bridge for instant triage sync",
-      "Bi-directional timeline sync between Slack and the Command Center"
+      "Multi-provider video bridges: Jitsi Meet (WebRTC), Google Meet, & Zoom",
+      "Bi-directional timeline sync & postmortem retrospective compilation"
     ],
     hotspots: [
       {
@@ -200,6 +200,7 @@ export function ProductTour() {
   // Interactive Slack State
   const [slackStatus, setSlackStatus] = useState<"OPEN" | "ACKNOWLEDGED" | "RESOLVED">("OPEN");
   const [slackAssignee, setSlackAssignee] = useState<string>("Unassigned");
+  const [videoProvider, setVideoProvider] = useState<"jitsi" | "meet" | "zoom">("jitsi");
   const [slackToast, setSlackToast] = useState<string | null>(null);
 
   const showSlackToast = (msg: string) => {
@@ -303,119 +304,200 @@ export function ProductTour() {
                       <div className="flex flex-col min-w-0">
                         <div className="flex items-center gap-2">
                           <span className="text-slate-400 font-bold text-xs">☆</span>
-                          <span className="font-extrabold text-white text-sm"># inc-payment-gateway-492</span>
+                          <span className="font-extrabold text-white text-sm"># inc-y5hh7q-opsknight</span>
                         </div>
                         <div className="text-[11px] text-slate-400 truncate flex items-center gap-1.5 mt-0.5">
-                          <span>🚨 Payment-Gateway Latency Spike | HIGH |</span>
-                          <span className="text-sky-400 hover:underline cursor-pointer">https://opsknight.com/incidents/492</span>
+                          <span>🚨 High-EC2-CPUUtilization | HIGH |</span>
+                          <span className="text-sky-400 hover:underline cursor-pointer">https://opsknight.com/incidents/cmsx07k9q00w4cq1iu5y5hh7q</span>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#222529] border border-white/5 text-xs text-slate-300">
-                          <Video className="w-3.5 h-3.5 text-emerald-400" />
-                          <span className="hidden sm:inline font-medium">WebRTC Video Bridge</span>
-                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse ml-1"></span>
+                      <div className="flex items-center gap-2">
+                        {/* Video Bridge Provider Switcher */}
+                        <div className="flex items-center p-0.5 rounded-lg bg-[#222529] border border-white/5 text-[11px]">
+                          {(["jitsi", "meet", "zoom"] as const).map((prov) => (
+                            <button
+                              key={prov}
+                              onClick={() => setVideoProvider(prov)}
+                              className={`px-2 py-1 rounded-md transition-all font-medium ${
+                                videoProvider === prov
+                                  ? "bg-red-600 text-white shadow-sm"
+                                  : "text-slate-400 hover:text-white"
+                              }`}
+                            >
+                              {prov === "jitsi" ? "Jitsi" : prov === "meet" ? "Google Meet" : "Zoom"}
+                            </button>
+                          ))}
                         </div>
                       </div>
                     </div>
 
                     {/* Slack Messages Area */}
-                    <div className="p-4 sm:p-5 space-y-4 max-h-[420px] overflow-y-auto">
+                    <div className="p-4 sm:p-5 space-y-3.5 max-h-[460px] overflow-y-auto">
                       
-                      {/* Bot Incident Card */}
-                      <div className="flex items-start gap-3 bg-[#222529] p-4 rounded-xl border-l-4 border-red-500 border border-white/5 shadow-md">
-                        <div className="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold flex-shrink-0">
+                      {/* Message 1: Bot Joined */}
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
                           🛡️
                         </div>
-                        <div className="flex-1 min-w-0 space-y-2">
-                          <div className="flex items-center justify-between">
-                            <span className="font-bold text-white text-xs">OpsKnight Incident Bot <span className="bg-[#1164A3] text-white text-[9px] px-1.5 py-0.5 rounded ml-1">APP</span></span>
-                            <span className="text-[10px] text-slate-400 font-mono">Just now</span>
-                          </div>
-
-                          <p className="text-sm font-semibold text-white">
-                            🚨 [P1-CRITICAL] Payment Gateway Latency Spike &gt; 3500ms
-                          </p>
-
-                          <div className="grid grid-cols-2 gap-2 text-xs bg-[#1a1d21] p-2.5 rounded-lg border border-white/5">
-                            <div><span className="text-slate-400">Urgency:</span> <span className="text-red-400 font-bold">HIGH (P1)</span></div>
-                            <div><span className="text-slate-400">Service:</span> <span className="text-slate-200 font-medium">API Gateway</span></div>
-                            <div><span className="text-slate-400">Status:</span> <span className={`font-bold ${slackStatus === 'RESOLVED' ? 'text-emerald-400' : slackStatus === 'ACKNOWLEDGED' ? 'text-amber-400' : 'text-red-400'}`}>{slackStatus}</span></div>
-                            <div><span className="text-slate-400">Assignee:</span> <span className="text-sky-400 font-medium">{slackAssignee}</span></div>
-                          </div>
-
-                          {/* 1-Click Action Buttons */}
-                          <div className="flex flex-wrap gap-2 pt-2">
-                            <button
-                              onClick={() => {
-                                setSlackStatus("ACKNOWLEDGED");
-                                setSlackAssignee("Alex Vance (You)");
-                                showSlackToast("Acknowledge synced to OpsKnight Command Center.");
-                              }}
-                              className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
-                                slackStatus === "ACKNOWLEDGED" 
-                                  ? "bg-amber-500 text-black" 
-                                  : "bg-[#2c3136] text-white hover:bg-[#383f45]"
-                              }`}
-                            >
-                              ✓ Acknowledge
-                            </button>
-
-                            <button
-                              onClick={() => {
-                                setSlackAssignee("Alex Vance (You)");
-                                showSlackToast("Assigned incident commander to Alex Vance.");
-                              }}
-                              className="px-3 py-1.5 rounded-md text-xs font-bold bg-[#2c3136] text-white hover:bg-[#383f45] transition-all"
-                            >
-                              👤 Assign to Me
-                            </button>
-
-                            <button
-                              onClick={() => {
-                                setSlackStatus("RESOLVED");
-                                showSlackToast("Incident RESOLVED in OpsKnight & War Room closed.");
-                              }}
-                              className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
-                                slackStatus === "RESOLVED" 
-                                  ? "bg-emerald-500 text-black" 
-                                  : "bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-600 hover:text-white"
-                              }`}
-                            >
-                              Resolve Incident
-                            </button>
-                          </div>
+                        <div className="text-xs">
+                          <span className="font-bold text-white">OpsKnight</span>{" "}
+                          <span className="bg-[#1164A3] text-white text-[9px] px-1 py-0.2 rounded font-bold">APP</span>{" "}
+                          <span className="text-[10px] text-slate-500">14:30</span>
+                          <p className="text-slate-300 mt-0.5">joined #inc-y5hh7q-opsknight.</p>
                         </div>
                       </div>
 
-                      {/* Chat Messages */}
-                      <div className="flex items-start gap-3 pl-2">
-                        <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
-                          AV
+                      {/* Message 2: Set Channel Topic */}
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                          🛡️
                         </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-bold text-white text-xs">Alex Vance</span>
-                            <span className="text-[10px] text-slate-500">12:04 AM</span>
-                          </div>
-                          <p className="text-xs text-slate-300 mt-1">
-                            Investigating connection pool exhaustion on primary DB cluster. Read replicas are healthy.
+                        <div className="text-xs">
+                          <span className="font-bold text-white">OpsKnight</span>{" "}
+                          <span className="bg-[#1164A3] text-white text-[9px] px-1 py-0.2 rounded font-bold">APP</span>{" "}
+                          <span className="text-[10px] text-slate-500">14:30</span>
+                          <p className="text-slate-300 mt-0.5">
+                            set the channel topic: 🚨 High-EC2-CPUUtilization | HIGH | <span className="text-sky-400">https://opsknight.com/incidents/cmsx07k9q00w4cq1iu5y5hh7q</span>
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex items-start gap-3 pl-2">
-                        <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
-                          SC
+                      {/* Message 3: Member Added */}
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                          DR
                         </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-bold text-white text-xs">Sarah Chen</span>
-                            <span className="text-[10px] text-slate-500">12:05 AM</span>
+                        <div className="text-xs">
+                          <span className="font-bold text-white">Dushyant Rahangdale</span>{" "}
+                          <span className="text-[10px] text-slate-500">14:30</span>
+                          <p className="text-slate-300 mt-0.5">has been added to #inc-y5hh7q-opsknight by OpsKnight.</p>
+                        </div>
+                      </div>
+
+                      {/* Message 4: Bot Incident Card */}
+                      <div className="bg-[#222529] p-4 rounded-xl border-l-4 border-red-500 border border-white/5 shadow-lg space-y-3">
+                        <div className="flex items-start gap-3">
+                          <div className="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold shrink-0">
+                            🛡️
                           </div>
-                          <p className="text-xs text-slate-300 mt-1">
-                            Drain script executed. Traffic rerouted to standby cluster. Latency normalizing.
-                          </p>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between">
+                              <span className="font-bold text-white text-xs">
+                                OpsKnight <span className="bg-[#1164A3] text-white text-[9px] px-1.5 py-0.5 rounded ml-1 font-bold">APP</span>
+                              </span>
+                              <span className="text-[10px] text-slate-400 font-mono">14:30</span>
+                            </div>
+                            <h4 className="text-sm font-bold text-white mt-1">
+                              🚨 Incident Triggered: High-EC2-CPUUtilization
+                            </h4>
+                            <div className="text-[11px] text-slate-400 font-mono">OpsKnight | 17 August at 14:30</div>
+                          </div>
+                        </div>
+
+                        {/* Incident Metadata Grid */}
+                        <div className="grid grid-cols-2 gap-2 text-xs bg-[#1a1d21] p-3 rounded-lg border border-white/5">
+                          <div>
+                            <span className="text-slate-400">Service:</span>
+                            <span className="text-white font-semibold ml-1.5">OpsKnight</span>
+                          </div>
+                          <div>
+                            <span className="text-slate-400">Status:</span>
+                            <span className={`font-bold ml-1.5 ${slackStatus === 'RESOLVED' ? 'text-emerald-400' : slackStatus === 'ACKNOWLEDGED' ? 'text-amber-400' : 'text-red-400'}`}>
+                              {slackStatus}
+                            </span>
+                          </div>
+                          <div>
+                            <span className="text-slate-400">Urgency:</span>
+                            <span className="text-red-400 font-bold ml-1.5">HIGH</span>
+                          </div>
+                          <div>
+                            <span className="text-slate-400">Assignee:</span>
+                            <span className="text-sky-400 font-semibold ml-1.5">{slackAssignee}</span>
+                          </div>
+                        </div>
+
+                        {/* Video Bridge Note */}
+                        <div className="text-xs text-slate-300 bg-[#1a1d21] p-2.5 rounded-lg border border-white/5 flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Video className="w-3.5 h-3.5 text-emerald-400" />
+                            <span className="text-slate-400">Video Bridge:</span>
+                            <span className="text-sky-400 font-mono font-medium">
+                              {videoProvider === "jitsi"
+                                ? "https://meet.jit.si/opsknight-inc-u5y5hh7q"
+                                : videoProvider === "meet"
+                                ? "https://meet.google.com/lookup/opsknight-inc-u5y5hh7q"
+                                : "https://zoom.us/j/9482710492"}
+                            </span>
+                          </div>
+                          <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 font-bold">
+                            {videoProvider === "jitsi" ? "WebRTC" : videoProvider === "meet" ? "Google Meet" : "Zoom"}
+                          </span>
+                        </div>
+
+                        {/* 4 1-Click Action Buttons */}
+                        <div className="flex flex-wrap items-center gap-2 pt-1">
+                          <button
+                            onClick={() => {
+                              setSlackStatus("ACKNOWLEDGED");
+                              setSlackAssignee("Dushyant Rahangdale (You)");
+                              showSlackToast("👀 Acknowledged in OpsKnight Command Center.");
+                            }}
+                            className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all flex items-center gap-1.5 ${
+                              slackStatus === "ACKNOWLEDGED"
+                                ? "bg-amber-500 text-black shadow-md"
+                                : "bg-[#2c3136] text-white hover:bg-[#383f45]"
+                            }`}
+                          >
+                            <span>👀</span> Acknowledge
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              setSlackAssignee("Dushyant Rahangdale (You)");
+                              showSlackToast("🙋 Assigned commander to Dushyant Rahangdale.");
+                            }}
+                            className="px-3 py-1.5 rounded-md text-xs font-bold bg-[#2c3136] text-white hover:bg-[#383f45] transition-all flex items-center gap-1.5"
+                          >
+                            <span>🙋</span> Assign to Me
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              setSlackStatus("RESOLVED");
+                              showSlackToast("✅ Incident RESOLVED in OpsKnight & War Room closed.");
+                            }}
+                            className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all flex items-center gap-1.5 ${
+                              slackStatus === "RESOLVED"
+                                ? "bg-emerald-500 text-black shadow-md"
+                                : "bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-600 hover:text-white"
+                            }`}
+                          >
+                            <span>✅</span> Resolve
+                          </button>
+
+                          <Link
+                            href="https://opsknight.com"
+                            target="_blank"
+                            className="px-3 py-1.5 rounded-md text-xs font-bold bg-[#2c3136] text-slate-300 hover:text-white hover:bg-[#383f45] transition-all flex items-center gap-1"
+                          >
+                            View Details ↗
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Welcome to War Room Box */}
+                      <div className="bg-[#1a1d21] p-3.5 rounded-xl border border-white/5 text-xs text-slate-300 space-y-1.5">
+                        <div className="font-bold text-white flex items-center gap-1.5">
+                          <span>👋</span> Welcome to your Incident War Room!
+                        </div>
+                        <p className="text-slate-400 text-[11px]">
+                          This channel was automatically provisioned to coordinate resolution for <strong>High-EC2-CPUUtilization</strong>.
+                        </p>
+                        <div className="pt-1 text-[11px] text-slate-400 space-y-1">
+                          <div className="font-semibold text-slate-300">⚡ War Room Power Features:</div>
+                          <div>• <strong>1-Click Action Buttons:</strong> Use Acknowledge, Assign to Me, or Resolve above.</div>
+                          <div>• <strong>Timeline Sync:</strong> Messages posted here sync into the incident timeline.</div>
+                          <div>• <strong>Auto-Archive:</strong> Channel logs compile into the retrospective postmortem draft.</div>
                         </div>
                       </div>
 

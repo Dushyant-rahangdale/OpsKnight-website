@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/hero/Hero";
-import { IncidentSimulator } from "@/components/simulator/IncidentSimulator";
+import { ProductTour } from "@/components/showcase/ProductTour";
 import { HowItWorks } from "@/components/how-it-works/HowItWorks";
 import { Features } from "@/components/features/Features";
 import { SlackChatOps } from "@/components/chatops/SlackChatOps";
@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <IncidentSimulator />
+      <ProductTour />
       <HowItWorks />
       <Features />
       <SlackChatOps />

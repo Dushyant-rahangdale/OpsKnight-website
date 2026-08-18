@@ -3,14 +3,9 @@ import { Hero } from "@/components/hero/Hero";
 import { ProductTour } from "@/components/showcase/ProductTour";
 import { HowItWorks } from "@/components/how-it-works/HowItWorks";
 import { Features } from "@/components/features/Features";
-import { SlackChatOps } from "@/components/chatops/SlackChatOps";
-import { DeveloperExperience } from "@/components/developer/DeveloperExperience";
-import { PagerDutyMigration } from "@/components/migration/PagerDutyMigration";
-import { SavingsCalculator } from "@/components/calculator/SavingsCalculator";
-import { Stats } from "@/components/stats/Stats";
 import { Integrations } from "@/components/integrations/Integrations";
 import { Comparison } from "@/components/comparison/Comparison";
-import { SocialProof } from "@/components/social-proof/SocialProof";
+import { SavingsCalculator } from "@/components/calculator/SavingsCalculator";
 import { Pricing } from "@/components/pricing/Pricing";
 import { CTA } from "@/components/cta/CTA";
 import { BRAND } from "@/lib/brand";
@@ -31,20 +26,31 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      {/* 1. Hero: Core proposition + Live Beacon + 1-Click Docker Quickstart + Ecosystem Badges */}
       <Hero />
+
+      {/* 2. Interactive Product Tour: Live 5-tab showcase with real 2x Retina screenshots & hotspots */}
       <ProductTour />
+
+      {/* 3. How It Works: 5-step deterministic low-latency incident lifecycle pipeline */}
       <HowItWorks />
+
+      {/* 4. Enterprise Architecture: Clean 6-card Bento Grid of core engineering capabilities */}
       <Features />
-      <SlackChatOps />
-      <DeveloperExperience />
-      <PagerDutyMigration />
-      <SavingsCalculator />
-      <Stats />
+
+      {/* 5. 24+ Native Integrations Ecosystem */}
       <Integrations />
+
+      {/* 6. Comparison: Transparent feature matrix vs legacy per-seat vendors */}
       <Comparison />
-      {/* Testimonials omitted until verified real user quotes are available */}
-      <SocialProof />
+
+      {/* 7. Savings Calculator: Interactive ROI math slider */}
+      <SavingsCalculator />
+
+      {/* 8. Pricing: Community Edition ($0 Forever) vs Enterprise Cloud */}
       <Pricing />
+
+      {/* 9. Final High-Conversion 1-Command Deploy CTA */}
       <CTA />
     </>
   );

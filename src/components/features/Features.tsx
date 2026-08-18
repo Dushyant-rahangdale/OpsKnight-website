@@ -1,104 +1,84 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import {
-    Activity,
-    Calendar,
-    Bell,
-    Network,
-    Globe,
+    Zap,
+    Shield,
     Repeat,
-    ShieldCheck,
-    Lock,
+    Calendar,
     MessageSquare,
-    FileText,
-    Box,
-    CheckCircle2
+    FileCode,
+    CheckCircle2,
+    ArrowRight
 } from "lucide-react";
+import Link from "next/link";
 
-const spotlights = [
+const bentoFeatures = [
     {
-        id: "command-center",
-        title: "Real-Time Incident Command Center",
-        image: "/dashboard-command-center.png",
-        description: "End-to-end incident orchestration. Ingest alerts from 24+ monitoring tools, deduplicate signals in real time, auto-provision Slack war rooms, assign incident commanders, and generate automated postmortems.",
-        highlights: ["Real-time SSE event streams", "Multi-source alert correlation", "Audit-ready incident timeline", "Role-based command hierarchy"],
-        icon: Activity
+        icon: Zap,
+        tag: "Low-Latency Core",
+        title: "Sub-Second Real-Time Telemetry",
+        description: "Built on live SSE streams and lightweight React client states. Triage, acknowledge, and coordinate critical incidents with zero page reloads and sub-15ms ingest latency.",
+        metric: "< 15ms",
+        metricLabel: "Parse & Route Speed",
+        highlights: ["Real-time Red Alert Beacon", "Sub-second triage actions", "Zero stale cache polling"],
+        colSpan: "lg:col-span-2"
     },
     {
-        id: "scheduling",
-        title: "Multi-Layer On-Call Scheduling & Rotations",
-        image: "/schedule-main.png",
-        description: "Flexible on-call schedules with timezone-aware rotations, shift overrides, multi-layer tiers, and calendar sync (iCal/Google Calendar). Ensure 24/7 coverage without alert fatigue.",
-        highlights: ["Layered rotation schedules", "Instant shift overrides & swaps", "Timezone conversion engine", "Fair on-call distribution analytics"],
-        icon: Calendar
+        icon: Shield,
+        tag: "Security & Privacy",
+        title: "100% VPC Data Sovereignty",
+        description: "Deploy in your own AWS, GCP, Azure, or Kubernetes cluster. All alert payloads, customer metadata, and audit traces remain entirely within your private network.",
+        metric: "100%",
+        metricLabel: "On-Prem / VPC Isolation",
+        highlights: ["Zero external data leakage", "AGPL-3.0 Full Source", "Air-gap deployment ready"],
+        colSpan: "lg:col-span-1"
     },
     {
-        id: "escalation",
-        title: "Multi-Tier Escalation Policies & Routing",
-        image: "/escalation-policies.png",
-        description: "Define automated escalation paths with configurable delay timers, multi-user paging, and fallbacks. Route alerts by service, team, or severity.",
-        highlights: ["Step-based delay triggers", "Multi-channel alerts (SMS, Email, Slack, Push)", "Service-based routing rules", "Automatic escalation acknowledgement"],
-        icon: Bell
+        icon: Repeat,
+        tag: "Instant Migration",
+        title: "Drop-in PagerDuty API v2",
+        description: "Switch from legacy per-seat vendors in 30 seconds. Point your existing PagerDuty webhooks directly to OpsKnight without touching your monitoring agents or codebase.",
+        metric: "30 sec",
+        metricLabel: "Zero-Downtime Migration",
+        highlights: ["v2/enqueue compatibility", "HMAC-SHA256 signature verification", "Zero alert loss fallback"],
+        colSpan: "lg:col-span-1"
     },
     {
-        id: "service-directory",
-        title: "Service Directory & Health Intelligence",
-        image: "/service-directory.png",
-        description: "Map service dependencies, define SLOs/SLAs, track MTTA and MTTR, and identify chronic failure points before they trigger major outages.",
-        highlights: ["Service catalog & ownership", "SLA / SLO compliance tracking", "MTTA / MTTR metric trends", "Component dependency mapping"],
-        icon: Network
+        icon: Calendar,
+        tag: "On-Call Scheduling",
+        title: "Timezone-Aware Multi-Layer Rotations",
+        description: "Design multi-tier primary, secondary, and shadow shifts that adapt automatically to global engineer timezones, daylight savings, and temporary shift swaps.",
+        metric: "24/7",
+        metricLabel: "Multi-Tier Coverage",
+        highlights: ["1-click shift overrides", "iCal / Google Calendar sync", "Fair on-call load balance"],
+        colSpan: "lg:col-span-2"
     },
     {
-        id: "status-pages",
-        title: "Branded Public & Private Status Pages",
-        image: "/dashboard-command-center-1200.jpg",
-        description: "Keep stakeholders and users informed with beautiful, customizable status pages. Support custom domains, automated incident timeline posts, component health status, and email/webhook subscriptions.",
-        highlights: ["Custom domain support", "Real-time subscriber notifications", "Automated component status sync", "Incident retrospective logs"],
-        icon: Globe
-    }
-];
-
-const gridFeatures = [
-    {
-        title: "Drop-in PagerDuty Emulation",
-        description: "Point your monitoring webhooks directly to OpsKnight with zero code changes.",
-        icon: Repeat
+        icon: MessageSquare,
+        tag: "Bi-Directional ChatOps",
+        title: "Native Slack War Rooms",
+        description: "Auto-provision dedicated war room channels for P1/P2 incidents. Responders can acknowledge, reassign, add timeline notes, and resolve crises directly from Slack.",
+        metric: "Bi-Directional",
+        metricLabel: "Live ChatOps Sync",
+        highlights: ["Auto-join incident commander", "Interactive Slack action buttons", "Live channel archive into postmortems"],
+        colSpan: "lg:col-span-2"
     },
     {
-        title: "Role-Based Access Control",
-        description: "Granular permissions for Admins, Responders, Observers, and Team Leads.",
-        icon: ShieldCheck
-    },
-    {
-        title: "Encrypted Webhooks & Signatures",
-        description: "HMAC-SHA256 signature verification for AWS, Datadog, Grafana, Sentry, and custom endpoints.",
-        icon: Lock
-    },
-    {
-        title: "Slack & ChatOps Integration",
-        description: "Trigger, acknowledge, resolve, and reassign incidents directly from Slack.",
-        icon: MessageSquare
-    },
-    {
-        title: "Audit Logs & Compliance",
-        description: "Immutable event log tracking every configuration change and incident action.",
-        icon: FileText
-    },
-    {
-        title: "Single Docker Container",
-        description: "Deploys in seconds with zero bloat and runs on as little as 512MB RAM.",
-        icon: Box
+        icon: FileCode,
+        tag: "DevOps & IaC",
+        title: "Infrastructure as Code & Open API",
+        description: "Declare services, escalation policies, and on-call rotations declaratively using Terraform or automate operations via our open RESTful API.",
+        metric: "100%",
+        metricLabel: "Programmable Platform",
+        highlights: ["OpenAPI v3 schema", "Terraform & Pulumi support", "Audit-ready change log"],
+        colSpan: "lg:col-span-1"
     }
 ];
 
 export function Features() {
-    const [activeTab, setActiveTab] = useState(0);
-
     return (
-        <section id="features" className="relative py-32 bg-slate-950 overflow-hidden">
+        <section id="features" className="relative py-28 bg-slate-950 overflow-hidden border-t border-white/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
                 {/* Section Header */}
@@ -108,118 +88,77 @@ export function Features() {
                     viewport={{ once: true }}
                     className="text-center mb-20"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6">
-                        <Activity className="w-4 h-4" />
-                        Complete Reliability Suite
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                        Everything you need to resolve incidents in record time.
+                    <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">
+                        Enterprise Architecture
+                    </span>
+                    <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-6">
+                        Engineered for sub-second incident resolution.
                     </h2>
-                    <p className="text-slate-400 max-w-3xl mx-auto text-lg md:text-xl">
-                        Built for DevOps, SREs, and platform teams who demand control, privacy, and speed.
+                    <p className="text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
+                        Every layer of OpsKnight is crafted for speed, resilience, and complete data privacy — giving your SRE and DevOps teams absolute command over production outages.
                     </p>
                 </motion.div>
 
-                {/* Interactive Feature Spotlight */}
-                <div className="flex flex-col lg:flex-row gap-12 mb-32">
-                    
-                    {/* Tabs */}
-                    <div className="lg:w-1/3 flex flex-col gap-2">
-                        {spotlights.map((spotlight, index) => {
-                            const isActive = activeTab === index;
-                            return (
-                                <button
-                                    key={spotlight.id}
-                                    onClick={() => setActiveTab(index)}
-                                    className={`flex items-start gap-4 p-5 rounded-2xl text-left transition-all duration-300 ${
-                                        isActive 
-                                            ? "bg-slate-900 border border-slate-700 shadow-xl" 
-                                            : "hover:bg-slate-900/50 border border-transparent opacity-70 hover:opacity-100"
-                                    }`}
-                                >
-                                    <div className={`mt-1 p-2 rounded-lg transition-colors ${isActive ? "bg-blue-500/20 text-blue-400" : "bg-slate-800 text-slate-400"}`}>
-                                        <spotlight.icon className="w-5 h-5" />
+                {/* Clean Bento Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {bentoFeatures.map((feat, idx) => (
+                        <motion.div
+                            key={feat.title}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: idx * 0.08 }}
+                            className={`${feat.colSpan} flex flex-col justify-between p-8 rounded-2xl bg-slate-900/60 border border-white/10 hover:border-blue-500/30 hover:bg-slate-900/90 transition-all duration-300 shadow-xl group`}
+                        >
+                            <div>
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                                        <feat.icon className="w-6 h-6" />
                                     </div>
-                                    <div>
-                                        <h3 className={`font-semibold text-lg mb-1 transition-colors ${isActive ? "text-white" : "text-slate-300"}`}>
-                                            {spotlight.title}
-                                        </h3>
+                                    <div className="text-right">
+                                        <div className="text-base font-black text-white font-mono">{feat.metric}</div>
+                                        <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">{feat.metricLabel}</div>
                                     </div>
-                                </button>
-                            );
-                        })}
-                    </div>
+                                </div>
 
-                    {/* Content Area */}
-                    <div className="lg:w-2/3">
-                        <div className="relative rounded-3xl bg-slate-900 border border-slate-800 overflow-hidden shadow-2xl h-full flex flex-col">
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={activeTab}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="flex flex-col h-full"
-                                >
-                                    {/* Image Container */}
-                                    <div className="relative w-full h-[350px] md:h-[450px] bg-slate-950 border-b border-slate-800">
-                                        <Image 
-                                            src={spotlights[activeTab].image} 
-                                            alt={spotlights[activeTab].title}
-                                            fill
-                                            className="object-cover object-top opacity-90"
-                                            sizes="(max-width: 768px) 100vw, 66vw"
-                                            priority
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80" />
-                                    </div>
+                                <div className="inline-block px-2.5 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] font-mono text-slate-300 font-medium mb-3">
+                                    {feat.tag}
+                                </div>
 
-                                    {/* Text & Highlights */}
-                                    <div className="p-8 md:p-10 flex-grow flex flex-col justify-center">
-                                        <h3 className="text-2xl font-bold text-white mb-4">
-                                            {spotlights[activeTab].title}
-                                        </h3>
-                                        <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-                                            {spotlights[activeTab].description}
-                                        </p>
-                                        
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-auto">
-                                            {spotlights[activeTab].highlights.map((highlight, i) => (
-                                                <div key={i} className="flex items-start gap-3">
-                                                    <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
-                                                    <span className="text-slate-300 font-medium">{highlight}</span>
-                                                </div>
-                                            ))}
-                                        </div>
+                                <h3 className="text-xl font-bold text-white mb-3">
+                                    {feat.title}
+                                </h3>
+                                <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                                    {feat.description}
+                                </p>
+                            </div>
+
+                            <div className="pt-6 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                {feat.highlights.map((item, i) => (
+                                    <div key={i} className="flex items-center gap-2 text-xs text-slate-300">
+                                        <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                                        <span>{item}</span>
                                     </div>
-                                </motion.div>
-                            </AnimatePresence>
-                        </div>
-                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    ))}
                 </div>
 
-                {/* Feature Grid */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                {/* Bottom Link to Docs */}
+                <motion.div
+                    initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                    className="mt-12 text-center"
                 >
-                    {gridFeatures.map((feature, idx) => (
-                        <div 
-                            key={idx} 
-                            className="p-8 rounded-2xl bg-slate-900/40 border border-white/5 hover:bg-slate-900/80 hover:border-white/10 transition-all duration-300"
-                        >
-                            <div className="w-12 h-12 rounded-xl bg-slate-800/50 flex items-center justify-center mb-6 border border-white/5">
-                                <feature.icon className="w-6 h-6 text-blue-400" />
-                            </div>
-                            <h4 className="text-lg font-bold text-white mb-3">{feature.title}</h4>
-                            <p className="text-slate-400 leading-relaxed">
-                                {feature.description}
-                            </p>
-                        </div>
-                    ))}
+                    <Link
+                        href="/docs"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                        Explore full technical architecture and developer specifications
+                        <ArrowRight className="w-4 h-4" />
+                    </Link>
                 </motion.div>
 
             </div>

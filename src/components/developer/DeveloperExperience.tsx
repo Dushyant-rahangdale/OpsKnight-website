@@ -21,7 +21,7 @@ export function DeveloperExperience() {
   const [activeTab, setActiveTab] = useState('compose')
 
   return (
-    <section className="bg-slate-950 py-24 px-6 md:px-12 lg:px-24">
+    <section className="bg-slate-950 py-24 px-6 md:px-12 lg:px-24 border-t border-white/5">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16">
         <div className="flex-1">
           <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">

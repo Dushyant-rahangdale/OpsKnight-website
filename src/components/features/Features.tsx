@@ -7,37 +7,11 @@ import {
     Globe,
     Bell,
     BarChart3,
-    Users,
-    FileText,
     Shield,
     List,
     Plug,
     Package,
-    Zap,
 } from "lucide-react";
-
-const flowSteps = [
-    {
-        title: "Detect",
-        description: "Ingest alerts from monitoring sources.",
-        icon: Zap,
-    },
-    {
-        title: "Coordinate",
-        description: "Trigger on-call and track ownership.",
-        icon: Users,
-    },
-    {
-        title: "Communicate",
-        description: "Update status pages instantly.",
-        icon: Globe,
-    },
-    {
-        title: "Learn",
-        description: "Capture postmortems and insights.",
-        icon: FileText,
-    },
-];
 
 const features = [
     {
@@ -140,32 +114,6 @@ export function Features() {
                         From alert ingestion to postmortem — everything runs on a single self-hosted container.
                     </p>
                 </motion.div>
-
-                {/* Ops Flow - Active Signal Pipeline */}
-                <div className="mb-24 relative">
-                    {/* Connecting Line with Signal */}
-                    <div className="absolute top-1/2 left-4 right-4 h-[2px] bg-slate-800 -translate-y-1/2 rounded-full overflow-hidden hidden md:block">
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
-                        {flowSteps.map((step, index) => (
-                            <motion.div
-                                key={step.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.15 }}
-                                className="relative z-10 bg-slate-950 p-6 rounded-2xl border border-white/5 text-center group hover:border-emerald-500/30 hover:shadow-[0_0_20px_-5px_rgba(16,185,129,0.2)] transition-all duration-300"
-                            >
-                                <div className="mx-auto w-12 h-12 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:border-emerald-500/50 transition-all duration-300 shadow-xl">
-                                    <step.icon className="w-5 h-5 text-emerald-400 group-hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.8)] transition-all" />
-                                </div>
-                                <h3 className="text-base font-bold text-white mb-2">{step.title}</h3>
-                                <p className="text-sm text-slate-500 leading-snug">{step.description}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
 
                 {/* Main Features Bento Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 auto-rows-[minmax(250px,auto)]">

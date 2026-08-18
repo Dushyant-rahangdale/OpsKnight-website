@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { Users, AlertTriangle, Bell, Activity, TrendingUp } from "lucide-react";
 
@@ -40,37 +39,6 @@ const stats = [
     },
 ];
 
-function AnimatedCounter({ value, suffix = "", prefix = "" }: { value: number; suffix?: string; prefix?: string }) {
-    const ref = useRef<HTMLSpanElement>(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
-    const [displayValue, setDisplayValue] = useState(0);
-
-    useEffect(() => {
-        if (isInView) {
-            const duration = 2000;
-            const steps = 60;
-            const stepValue = value / steps;
-            let current = 0;
-            const interval = setInterval(() => {
-                current += stepValue;
-                if (current >= value) {
-                    setDisplayValue(value);
-                    clearInterval(interval);
-                } else {
-                    setDisplayValue(Math.floor(current));
-                }
-            }, duration / steps);
-            return () => clearInterval(interval);
-        }
-    }, [isInView, value]);
-
-    return (
-        <span ref={ref} className="tabular-nums">
-            {prefix}{displayValue.toLocaleString()}{suffix}
-        </span>
-    );
-}
-
 function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
     return (
         <motion.div
@@ -89,7 +57,7 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
 
                 {/* Value */}
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2">
-                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                    {stat.value.toLocaleString()}{stat.suffix}
                 </div>
 
                 {/* Label */}
@@ -106,7 +74,7 @@ function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
 
 export function Stats() {
     return (
-        <section className="relative py-24 bg-slate-950 overflow-hidden">
+        <section className="relative py-24 bg-slate-950 overflow-hidden border-t border-white/5">
 
 
 
@@ -121,7 +89,7 @@ export function Stats() {
                 >
 
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Tested at production scale.
+                        Built for scale.
                     </h2>
                     <p className="text-slate-400 max-w-2xl mx-auto text-lg">
                         Benchmarked throughput on a single container deployment.

@@ -29,6 +29,9 @@ export function HowItWorks() {
   return (
     <section className="bg-slate-950 py-24 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
+        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-4">
+          How It Works
+        </span>
         <h2 className="text-3xl md:text-4xl font-semibold text-white mb-16">
           How incidents flow through OpsKnight
         </h2>

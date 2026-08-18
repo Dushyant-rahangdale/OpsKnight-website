@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Menu, X, Github, Heart, ArrowRight, Sparkles } from "lucide-react";
+import { Menu, X, Github, Heart, ArrowRight } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
 const navItems = [
@@ -29,7 +29,7 @@ export function Navbar() {
             <div className="hidden sm:block border-b border-white/5 bg-gradient-to-r from-emerald-500/10 via-transparent to-cyan-500/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-center gap-2 py-1.5 text-xs">
-                        <Sparkles className="w-3 h-3 text-emerald-400" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                         <span className="text-slate-400">
                             {BRAND.name} is in active development.
                         </span>

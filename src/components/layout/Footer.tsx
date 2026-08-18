@@ -38,10 +38,6 @@ const footerLinks = {
 export function Footer() {
     return (
         <footer className="relative border-t border-white/5 bg-slate-950">
-            {/* Background glow */}
-            <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none" />
-
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Main Footer Content */}
                 <div className="py-12 lg:py-16">

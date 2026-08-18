@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, X, Sparkles } from "lucide-react";
+import { Check, X } from "lucide-react";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 
@@ -60,7 +60,6 @@ export function Comparison() {
     return (
         <section className="relative py-24 bg-slate-950 overflow-hidden">
             {/* Background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
             <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
@@ -71,7 +70,6 @@ export function Comparison() {
                     className="text-center mb-16"
                 >
                     <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-4">
-                        <Sparkles className="w-3 h-3" />
                         Compare
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">

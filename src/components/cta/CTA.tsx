@@ -8,7 +8,10 @@ import { BRAND } from "@/lib/brand";
 
 export function CTA() {
     return (
-        <section className="relative py-32 bg-slate-950 overflow-hidden">
+        <section className="relative py-32 bg-slate-950 overflow-hidden border-t border-white/5">
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-500/5 rounded-full blur-[100px]" />
+            </div>
 
 
 

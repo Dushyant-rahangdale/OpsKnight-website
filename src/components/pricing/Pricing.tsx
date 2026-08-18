@@ -29,18 +29,18 @@ export function Pricing() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <span className="text-accent-blue text-sm font-medium uppercase tracking-wide">
+                    <span className="text-emerald-400 text-sm font-medium uppercase tracking-wide">
                         Community Edition
                     </span>
                     <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">
-                        Free and <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">open-source</span>
+                        Free and <span className="text-emerald-400">open-source</span>
                     </h2>
                     <p className="text-foreground-secondary max-w-2xl mx-auto mb-6">
                         {BRAND.name} is free to self-host with all features included.
                         No subscriptions, no limits.
                     </p>
 
-                    <Link href="/compare" className="inline-flex items-center gap-2 text-accent-blue hover:text-accent-blue/80 transition-colors font-medium">
+                    <Link href="/compare" className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors font-medium">
                         See how much you save vs PagerDuty <ArrowRight className="w-4 h-4" />
                     </Link>
                 </motion.div>
@@ -53,19 +53,17 @@ export function Pricing() {
                     className="max-w-2xl mx-auto relative"
                 >
                     {/* Animated glow border */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 rounded-3xl blur-lg opacity-30 animate-pulse" />
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 rounded-2xl opacity-50" />
 
-                    <div className="relative rounded-2xl p-8 bg-slate-900 border border-white/10">
+                    <div className="relative rounded-2xl p-8 bg-slate-900/80 border border-emerald-500/20">
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                            <span className="flex items-center gap-1.5 px-4 py-1.5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-semibold rounded-full shadow-lg shadow-blue-500/25">
+                            <span className="flex items-center gap-1.5 px-4 py-1.5 bg-emerald-500 text-white text-xs font-semibold rounded-full">
                                 <Github className="w-3.5 h-3.5" />
                                 Open Source
                             </span>
                         </div>
 
                         <div className="text-center mb-8 mt-4">
-                            <div className="text-6xl font-bold bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent mb-2">$0</div>
+                            <div className="text-6xl font-bold text-white mb-2">$0</div>
                             <p className="text-foreground-muted">Self-hosted • All features • Forever free</p>
                         </div>
 
@@ -91,7 +89,7 @@ export function Pricing() {
                             <Button
                                 asChild
                                 size="lg"
-                                className="text-base px-8 py-6 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-400 hover:to-cyan-400 border-0 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all"
+                                className="text-base px-8 py-6 bg-emerald-500 hover:bg-emerald-400 border-0 text-white shadow-lg shadow-emerald-500/20 transition-all"
                             >
                                 <Link
                                     href={BRAND.links.github}

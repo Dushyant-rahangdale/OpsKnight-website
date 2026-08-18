@@ -96,7 +96,6 @@ export function Hero() {
                                 className="inline-flex items-center gap-2 h-11 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-6 text-sm font-semibold text-emerald-200 hover:bg-emerald-500/20 transition-colors"
                             >
                                 <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                                 </span>
                                 View status page
@@ -151,7 +150,7 @@ export function Hero() {
                             className="relative perspective-[2000px]"
                         >
                             {/* Glow effect */}
-                            <div className="absolute -inset-4 bg-gradient-to-tr from-emerald-500/20 via-cyan-500/10 to-blue-500/20 rounded-[2rem] blur-2xl opacity-40 pointer-events-none animate-pulse" />
+                            <div className="absolute -inset-4 bg-gradient-to-tr from-emerald-500/20 via-cyan-500/10 to-blue-500/20 rounded-[2rem] blur-2xl opacity-40 pointer-events-none" />
 
                             <div className="relative rounded-2xl border border-white/10 bg-slate-950/80 backdrop-blur-sm shadow-2xl overflow-hidden ring-1 ring-white/5 transform transition-transform hover:scale-[1.01] duration-500">
                                 {/* Browser Chrome */}

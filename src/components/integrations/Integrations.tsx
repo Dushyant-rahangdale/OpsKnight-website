@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, Plug, Route, ShieldCheck, Sparkles } from "lucide-react";
+import { CheckCircle2, Plug, Route, ShieldCheck } from "lucide-react";
 import { integrationIcons, IntegrationKey } from "../icons/IntegrationIcons";
 import { BRAND } from "@/lib/brand";
 
@@ -94,70 +94,16 @@ function IntegrationItem({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className={`flex items-center gap-3 p-3 rounded-xl bg-slate-900/50 border border-white/5 backdrop-blur-sm hover:bg-slate-800 hover:border-emerald-500/50 hover:scale-105 hover:shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)] transition-all duration-300 group w-full cursor-pointer ${align === "right" ? "flex-row-reverse text-right" : ""}`}
+            className={`flex items-center gap-3 p-3 rounded-xl bg-slate-900/50 border border-white/5 backdrop-blur-sm hover:bg-slate-800 hover:border-emerald-500/50 hover:scale-105 transition-all duration-300 group w-full cursor-pointer ${align === "right" ? "flex-row-reverse text-right" : ""}`}
         >
-            <div className="w-10 h-10 shrink-0 rounded-lg bg-slate-950 flex items-center justify-center border border-white/5 group-hover:border-emerald-500/50 group-hover:scale-110 transition-transform duration-300 shadow-inner">
-                <div className="w-6 h-6 text-slate-400 group-hover:text-emerald-400 transition-colors duration-300 group-hover:drop-shadow-[0_0_5px_rgba(16,185,129,0.5)]">
+            <div className="w-10 h-10 shrink-0 rounded-lg bg-slate-950 flex items-center justify-center border border-white/5 group-hover:border-emerald-500/50 transition-transform duration-300 shadow-inner">
+                <div className="w-6 h-6 text-slate-400 group-hover:text-emerald-400 transition-colors duration-300">
                     {integrationIcons[item.key]}
                 </div>
             </div>
             <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">{item.name}</span>
         </motion.div>
     );
-}
-
-function ConnectionLine({
-    side,
-    total,
-    index
-}: {
-    side: "left" | "right",
-    total: number,
-    index: number
-}) {
-    const yPercent = total > 1 ? (index / (total - 1)) * 100 : 50;
-    const pathD = side === "left"
-        ? `M 0 ${yPercent}% C 50 ${yPercent}%, 50 50%, 100 50%`
-        : `M 100 ${yPercent}% C 50 ${yPercent}%, 50 50%, 0 50%`;
-
-    return (
-        <svg className={`absolute top-0 bottom-0 ${side === "left" ? "left-full" : "right-full"} w-12 md:w-20 lg:w-24 h-full pointer-events-none hidden md:block overflow-visible`} style={{ zIndex: 0 }}>
-            {/* Base Line */}
-            <motion.path
-                d={pathD}
-                fill="none"
-                stroke="rgba(255,255,255,0.05)"
-                strokeWidth="2"
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.2 + (index * 0.05) }}
-            />
-            {/* Travelling Data Packet */}
-            <motion.path
-                d={pathD}
-                fill="none"
-                stroke="url(#gradient-packet)"
-                strokeWidth="2"
-                strokeDasharray="4 150"
-                strokeLinecap="round"
-                initial={{ strokeDashoffset: 0 }}
-                animate={{ strokeDashoffset: side === "left" ? -154 : 154 }}
-                transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "linear",
-                    delay: Math.random() * 2 // Random start time for organic feel
-                }}
-            />
-            <defs>
-                <linearGradient id="gradient-packet" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#10b981" stopOpacity="1" />
-                    <stop offset="100%" stopColor="#34d399" stopOpacity="1" />
-                </linearGradient>
-            </defs>
-        </svg>
-    )
 }
 
 export function Integrations() {
@@ -169,7 +115,6 @@ export function Integrations() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16">
                     <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold mb-4">
-                        <Sparkles className="w-3 h-3" />
                         Integration ecosystem
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -283,7 +228,6 @@ export function Integrations() {
                         {destinations.map((item, index) => (
                             <div key={item.key} className="relative">
                                 <IntegrationItem item={item} index={index} align="right" />
-                                <ConnectionLine side="right" total={destinations.length} index={index} />
                             </div>
                         ))}
                     </div>

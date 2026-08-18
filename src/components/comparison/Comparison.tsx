@@ -75,7 +75,7 @@ export function Comparison() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-blue-950/40 to-slate-900 border border-blue-500/20 flex flex-col md:flex-row items-center justify-between gap-6"
+                    className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-red-500/25 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-red-500/5"
                 >
                     <div>
                         <h3 className="text-xl font-bold text-white mb-2">A team of 25 engineers saves over $6,300 every year with {BRAND.name}.</h3>
@@ -83,7 +83,7 @@ export function Comparison() {
                     </div>
                     <Link
                         href="/compare"
-                        className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all hover:scale-105 group"
+                        className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold transition-all hover:scale-105 group shadow-lg shadow-red-500/25"
                     >
                         Explore detailed comparison pages
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

@@ -25,18 +25,21 @@ export function Navbar() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/70"
         >
-            {/* Announcement Banner */}
-            <div className="hidden sm:block border-b border-white/5 bg-slate-900/60">
+            {/* Announcement Banner - Styled like App Topbar */}
+            <div className="hidden sm:block border-b border-white/5 bg-slate-900/80">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-center gap-2 py-2 text-xs">
-                        <span className="w-2 h-2 rounded-full bg-blue-500 inline-block animate-pulse" />
+                    <div className="flex items-center justify-center gap-3 py-2 text-xs">
+                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-500/15 border border-red-500/30 text-red-400 font-bold text-[11px]">
+                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block animate-ping" />
+                            <span>RED ALERT</span>
+                        </span>
                         <span className="text-slate-300">
                             OpsKnight v1.3.0 is live — 24+ native integrations, drop-in PagerDuty emulation & self-hosted status pages
                         </span>
                         <Link
                             href="https://github.com/opsknight-labs/OpsKnight/releases"
                             target="_blank"
-                            className="inline-flex items-center gap-1 text-white hover:text-blue-400 font-medium transition-colors ml-2"
+                            className="inline-flex items-center gap-1 text-white hover:text-red-400 font-semibold transition-colors ml-1"
                         >
                             Read Release Notes
                             <ArrowRight className="w-3 h-3" />
@@ -47,20 +50,25 @@ export function Navbar() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-14">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-3 group">
-                        <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 group-hover:border-blue-500/50 transition-all shadow-sm">
+                    {/* Logo matching App Sidebar */}
+                    <Link href="/" className="flex items-center gap-2.5 group">
+                        <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-slate-900 to-slate-950 border border-red-500/20 group-hover:border-red-500/50 transition-all shadow-md shadow-red-500/5">
                             <Image
                                 src="/logo-mark.png"
                                 alt="OpsKnight"
-                                width={20}
-                                height={20}
+                                width={22}
+                                height={22}
                                 className="w-5 h-5 object-contain"
                             />
                         </div>
-                        <span className="text-base font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
-                            OpsKnight
-                        </span>
+                        <div className="flex flex-col">
+                            <span className="text-base font-extrabold tracking-tight text-white group-hover:text-red-400 transition-colors leading-tight">
+                                OpsKnight
+                            </span>
+                            <span className="text-[8px] font-bold tracking-widest text-slate-400 uppercase leading-none">
+                                INCIDENT RESPONSE
+                            </span>
+                        </div>
                     </Link>
 
                     {/* Desktop Navigation */}

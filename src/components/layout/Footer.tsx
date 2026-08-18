@@ -41,19 +41,27 @@ export function Footer() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8 mb-16">
                     <div className="lg:col-span-2">
-                        <Link href="/" className="flex items-center gap-2 mb-6 inline-block">
-                            <span className="font-bold text-xl text-white">
-                                Ops<span className="text-blue-400">Knight</span>
-                            </span>
+                        <Link href="/" className="flex items-center gap-2.5 mb-6 inline-flex group">
+                            <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-slate-900 to-slate-950 border border-red-500/20 group-hover:border-red-500/50 transition-all shadow-md shadow-red-500/5">
+                                <span className="text-sm font-black text-red-500">⚔</span>
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="font-extrabold text-lg text-white group-hover:text-red-400 transition-colors leading-tight">
+                                    OpsKnight
+                                </span>
+                                <span className="text-[8px] font-bold tracking-widest text-slate-400 uppercase leading-none">
+                                    INCIDENT RESPONSE
+                                </span>
+                            </div>
                         </Link>
                         <p className="text-slate-400 mb-6 max-w-sm">
-                            The open-source incident response platform built for modern engineering teams.
+                            The self-hosted incident command center built for high-scale engineering teams.
                         </p>
                         
                         <div className="flex items-center gap-3 mb-8">
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-900 border border-white/10 text-xs font-medium text-slate-300">
-                                <BookOpen className="w-3 h-3 text-blue-400" />
-                                AGPL-3.0
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-900 border border-red-500/20 text-xs font-semibold text-red-400">
+                                <BookOpen className="w-3 h-3 text-red-400" />
+                                AGPL-3.0 Full Source
                             </span>
                         </div>
 

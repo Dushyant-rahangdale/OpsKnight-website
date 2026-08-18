@@ -55,8 +55,8 @@ export function CTA() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-8">
-                        <Button asChild size="lg" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 text-lg shadow-lg shadow-blue-500/25">
-                            <Link href="/docs">Deploy Now</Link>
+                        <Button asChild size="lg" className="w-full sm:w-auto bg-red-600 hover:bg-red-500 text-white font-bold px-8 h-12 text-lg shadow-lg shadow-red-500/25 rounded-xl">
+                            <Link href="/docs">+ Deploy Community Edition</Link>
                         </Button>
                         <Button asChild size="lg" variant="outline" className="w-full sm:w-auto h-12 px-8 text-lg bg-white/5 border-white/10 hover:bg-white/10 text-white">
                             <Link href="https://github.com/opsknight-labs/OpsKnight" target="_blank" rel="noopener noreferrer">

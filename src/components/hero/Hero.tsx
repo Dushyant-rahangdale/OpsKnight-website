@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Github, Copy, Check, Terminal, ExternalLink, Shield, Server, Box, Users } from "lucide-react";
+import { Github, Copy, Check, Terminal, Shield, Server, Box, Users } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
 
 export function Hero() {
@@ -22,23 +22,21 @@ export function Hero() {
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col items-center text-center">
-                    {/* Top Pill Badge */}
+                    {/* Top Red Alert & Release Badge - Matching Core App */}
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="inline-flex items-center gap-3 mb-8 px-4 py-2 rounded-full bg-slate-900/80 border border-white/10 shadow-sm"
+                        className="inline-flex items-center gap-3 mb-8 px-4 py-1.5 rounded-full bg-slate-900/90 border border-red-500/25 shadow-lg shadow-red-500/5"
                     >
-                        <span className="text-xs font-semibold text-white tracking-wide">
-                            Open-Source Incident Command Center
+                        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-red-400">
+                            <span className="w-2 h-2 rounded-full bg-red-500 inline-block animate-ping" />
+                            RED ALERT · Self-Hosted Incident Command
                         </span>
                         <div className="w-px h-3 bg-white/20"></div>
-                        <span className="text-xs text-blue-400 font-mono">AGPL-3.0</span>
+                        <span className="text-xs text-slate-300 font-mono">v1.3.1</span>
                         <div className="w-px h-3 bg-white/20"></div>
-                        <Link href="https://github.com/opsknight-labs/OpsKnight" target="_blank" className="flex items-center gap-1 text-xs text-slate-300 hover:text-white transition-colors">
-                            <Github className="w-3 h-3" />
-                            Star
-                        </Link>
+                        <span className="text-xs text-slate-400 font-mono">AGPL-3.0</span>
                     </motion.div>
 
                     {/* Main Headline */}
@@ -49,7 +47,7 @@ export function Hero() {
                         className="w-full"
                     >
                         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] max-w-4xl mx-auto text-center">
-                            The open source command center for <span className="text-sky-400">on-call & incident response</span>.
+                            The self-hosted command center for <span className="text-white bg-clip-text">on-call & incident response</span>.
                         </h1>
                     </motion.div>
 
@@ -60,9 +58,34 @@ export function Hero() {
                         transition={{ delay: 0.2, duration: 0.5 }}
                         className="w-full mt-6"
                     >
-                        <p className="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto text-center leading-relaxed">
-                            Self-host complete reliability infrastructure in minutes. Multi-tier on-call schedules, 24+ native integrations, Slack war rooms, automated escalations, and branded public status pages. Free forever.
+                        <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto text-center leading-relaxed">
+                            Take back control from per-seat SaaS vendors. Multi-tier on-call rotations, automated escalations, 24+ native integrations, Slack war rooms, and branded status pages — running inside your infrastructure.
                         </p>
+                    </motion.div>
+
+                    {/* App Metrics Strip - Directly Matching Screenshot */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.25, duration: 0.5 }}
+                        className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl w-full mx-auto mt-8 text-left"
+                    >
+                        <div className="p-3.5 rounded-xl bg-slate-900/90 border border-white/10 shadow-md">
+                            <div className="text-xl sm:text-2xl font-black text-white">347</div>
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">TOTAL INCIDENTS</div>
+                        </div>
+                        <div className="p-3.5 rounded-xl bg-slate-900/90 border border-red-500/20 shadow-md">
+                            <div className="text-xl sm:text-2xl font-black text-red-400">384</div>
+                            <div className="text-[10px] font-bold text-red-300/80 uppercase tracking-wider mt-0.5">OPEN ALERTS</div>
+                        </div>
+                        <div className="p-3.5 rounded-xl bg-slate-900/90 border border-white/10 shadow-md">
+                            <div className="text-xl sm:text-2xl font-black text-emerald-400">165</div>
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">RESOLVED (30D)</div>
+                        </div>
+                        <div className="p-3.5 rounded-xl bg-slate-900/90 border border-white/10 shadow-md">
+                            <div className="text-xl sm:text-2xl font-black text-sky-400">&lt; 15ms</div>
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">PAGE LATENCY</div>
+                        </div>
                     </motion.div>
 
                     {/* CTA Buttons */}
@@ -74,22 +97,22 @@ export function Hero() {
                     >
                         <Link
                             href="/docs"
-                            className="inline-flex h-11 items-center justify-center rounded-md bg-blue-600 px-8 text-sm font-medium text-white hover:bg-blue-500 transition-colors shadow-lg shadow-blue-500/25"
+                            className="inline-flex h-11 items-center justify-center rounded-xl bg-red-600 hover:bg-red-500 px-8 text-sm font-bold text-white transition-all shadow-lg shadow-red-600/30 hover:scale-[1.02]"
                         >
-                            Get Started Free
+                            + Deploy Community Edition
                         </Link>
                         <Link
                             href="https://status.opsknight.com"
                             target="_blank"
-                            className="inline-flex h-11 items-center justify-center rounded-md border border-white/10 bg-slate-900/50 px-6 text-sm font-medium text-white hover:bg-white/10 transition-colors"
+                            className="inline-flex h-11 items-center justify-center rounded-xl border border-white/10 bg-slate-900/80 px-6 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
                         >
-                            Live Demo / Status
-                            <ExternalLink className="ml-2 w-4 h-4 text-slate-400" />
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 mr-2 inline-block"></span>
+                            Live Command Center Demo
                         </Link>
                         <Link
                             href="https://github.com/opsknight-labs/OpsKnight"
                             target="_blank"
-                            className="inline-flex h-11 items-center justify-center rounded-md text-sm font-medium text-slate-300 hover:text-white transition-colors px-4"
+                            className="inline-flex h-11 items-center justify-center rounded-xl border border-white/10 bg-slate-900/50 text-sm font-medium text-slate-300 hover:text-white transition-colors px-5 hover:bg-white/5"
                         >
                             <Github className="mr-2 w-4 h-4" />
                             Star on GitHub

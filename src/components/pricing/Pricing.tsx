@@ -74,9 +74,9 @@ export function Pricing() {
                         </div>
 
                         <div className="flex flex-col sm:flex-row items-center gap-6">
-                            <Button asChild size="lg" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/25">
+                            <Button asChild size="lg" className="w-full sm:w-auto bg-red-600 hover:bg-red-500 text-white font-bold shadow-lg shadow-red-500/25 rounded-xl">
                                 <Link href="/docs">
-                                    Deploy Community Edition
+                                    + Deploy Community Edition
                                     <ArrowRight className="w-4 h-4 ml-2" />
                                 </Link>
                             </Button>

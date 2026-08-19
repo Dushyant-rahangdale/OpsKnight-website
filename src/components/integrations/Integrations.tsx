@@ -7,13 +7,6 @@ import { ArrowRight } from "lucide-react";
 import { integrationIcons } from "../icons/IntegrationIcons";
 import { BRAND } from "@/lib/brand";
 
-// Fallback icon component
-const FallbackIcon = ({ letter, color }: { letter: string; color: string }) => (
-    <div className={`w-full h-full rounded-md flex items-center justify-center text-white font-bold text-xl`} style={{ backgroundColor: color }}>
-        {letter}
-    </div>
-);
-
 type Category = "All (24)" | "APM & Monitoring" | "Cloud Infrastructure" | "Metrics & Daemons" | "CI/CD & DevOps" | "Uptime & Synthetics" | "Chat & Notifications";
 
 interface Integration {
@@ -42,15 +35,15 @@ const integrations: Integration[] = [
     // Metrics & Daemons
     { name: "Prometheus / Alertmanager", category: "Metrics & Daemons", icon: integrationIcons.prometheus, description: "Open-source systems monitoring.", href: "/docs/integrations/prometheus" },
     { name: "Grafana", category: "Metrics & Daemons", icon: integrationIcons.grafana, description: "Operational dashboards and alerting.", href: "/docs/integrations/grafana" },
-    { name: "Zabbix", category: "Metrics & Daemons", icon: <FallbackIcon letter="Z" color="#D32F2F" />, description: "Enterprise-class monitoring solution.", href: "/docs/integrations/zabbix" },
-    { name: "Nagios", category: "Metrics & Daemons", icon: <FallbackIcon letter="N" color="#005A9C" />, description: "IT infrastructure monitoring.", href: "/docs/integrations/nagios" },
-    { name: "Icinga 2", category: "Metrics & Daemons", icon: <FallbackIcon letter="I" color="#00A2D3" />, description: "Open source monitoring system.", href: "/docs/integrations/icinga" },
+    { name: "Zabbix", category: "Metrics & Daemons", icon: integrationIcons.zabbix, description: "Enterprise-class monitoring solution.", href: "/docs/integrations/zabbix" },
+    { name: "Nagios", category: "Metrics & Daemons", icon: integrationIcons.nagios, description: "IT infrastructure monitoring.", href: "/docs/integrations/nagios" },
+    { name: "Icinga 2", category: "Metrics & Daemons", icon: integrationIcons.icinga, description: "Open source monitoring system.", href: "/docs/integrations/icinga" },
 
     // CI/CD & DevOps
     { name: "GitHub Actions", category: "CI/CD & DevOps", icon: integrationIcons.github, description: "Automate your software workflows.", href: "/docs/integrations/github" },
-    { name: "GitLab CI/CD", category: "CI/CD & DevOps", icon: <FallbackIcon letter="G" color="#E24329" />, description: "Continuous integration and deployment.", href: "/docs/integrations/gitlab" },
+    { name: "GitLab CI/CD", category: "CI/CD & DevOps", icon: integrationIcons.gitlab, description: "Continuous integration and deployment.", href: "/docs/integrations/gitlab" },
     { name: "Bitbucket Pipelines", category: "CI/CD & DevOps", icon: integrationIcons.bitbucket, description: "Integrated CI/CD for Bitbucket.", href: "/docs/integrations/bitbucket" },
-    { name: "Vercel", category: "CI/CD & DevOps", icon: <FallbackIcon letter="V" color="#000000" />, description: "Develop, preview, and ship.", href: "/docs/integrations/vercel" },
+    { name: "Vercel", category: "CI/CD & DevOps", icon: integrationIcons.vercel, description: "Develop, preview, and ship.", href: "/docs/integrations/vercel" },
 
     // Uptime & Synthetics
     { name: "UptimeRobot", category: "Uptime & Synthetics", icon: integrationIcons.uptimerobot, description: "Free website uptime monitor.", href: "/docs/integrations/uptimerobot" },
@@ -61,6 +54,7 @@ const integrations: Integration[] = [
     // Chat & Notifications
     { name: "Slack (ChatOps)", category: "Chat & Notifications", icon: integrationIcons.slack, description: "Incident response right in Slack.", href: "/docs/integrations/slack" },
     { name: "Jira Cloud", category: "Chat & Notifications", icon: integrationIcons.jira, description: "Create tickets automatically.", href: "/docs/integrations/jira" },
+    { name: "WhatsApp Alerts", category: "Chat & Notifications", icon: integrationIcons.whatsapp, description: "High-priority WhatsApp pager alerts.", href: "/docs/integrations/whatsapp" },
     { name: "Email", category: "Chat & Notifications", icon: integrationIcons.email, description: "Standard email notifications.", href: "/docs/integrations/email" },
     { name: "SMS", category: "Chat & Notifications", icon: integrationIcons.sms, description: "Text message alerts.", href: "/docs/integrations/sms" },
     { name: "Webhooks", category: "Chat & Notifications", icon: integrationIcons.webhook, description: "Custom HTTP callback routing.", href: "/docs/integrations/webhooks" },

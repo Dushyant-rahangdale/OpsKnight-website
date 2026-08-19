@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getDocPage, getAllDocSlugs } from "@/lib/docs/content";
+import { getDocPage, getAllDocSlugs, getDocFilePath } from "@/lib/docs/content";
 import { DocsToc } from "@/components/docs/DocsToc";
 import { DOC_VERSIONS } from "@/lib/docs/versions";
 import { ChevronRight, Clock, BookOpen } from "lucide-react";
@@ -65,23 +65,6 @@ export async function generateStaticParams() {
   return params;
 }
 
-// Section colors mapping
-const SECTION_COLORS: Record<string, { badge: string; border: string }> = {
-  "getting-started": { badge: "bg-amber-500/10 text-amber-400 border-amber-500/20", border: "border-l-amber-500" },
-  "core-concepts": { badge: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20", border: "border-l-cyan-500" },
-  "administration": { badge: "bg-blue-500/10 text-blue-400 border-blue-500/20", border: "border-l-blue-500" },
-  "integrations": { badge: "bg-blue-500/10 text-blue-400 border-blue-500/20", border: "border-l-blue-500" },
-  "api": { badge: "bg-rose-500/10 text-rose-400 border-rose-500/20", border: "border-l-rose-500" },
-  "deployment": { badge: "bg-lime-500/10 text-lime-400 border-lime-500/20", border: "border-l-lime-500" },
-  "security": { badge: "bg-red-500/10 text-red-400 border-red-500/20", border: "border-l-red-500" },
-  "architecture": { badge: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20", border: "border-l-indigo-500" },
-  "mobile": { badge: "bg-teal-500/10 text-teal-400 border-teal-500/20", border: "border-l-teal-500" },
-};
-
-function getSectionFromSlug(slug: string[]): string | undefined {
-  return slug.length > 0 ? slug[0] : undefined;
-}
-
 function estimateReadTime(html: string): number {
   // Strip HTML tags and count words
   const text = html.replace(/<[^>]*>/g, " ");
@@ -99,11 +82,14 @@ export default async function DocsPage({
   const doc = await getDocPage(version, slug);
   if (!doc) notFound();
 
-  const section = getSectionFromSlug(slug);
-  const sectionColors = section ? SECTION_COLORS[section] : undefined;
+  const section = slug[0];
   const readTime = estimateReadTime(doc.html);
+  const filePath = getDocFilePath(version, slug);
+  const githubDocPath = filePath?.includes("content/docs/")
+    ? filePath.split("content/docs/")[1]
+    : `${version}/README.md`;
+  const editUrl = `${BRAND.links.github}/blob/main/docs/${githubDocPath}`;
 
-  // Build breadcrumb
   const breadcrumbs = [
     { label: "Docs", href: `/docs/${version}` },
     ...slug.map((s, i) => ({
@@ -116,7 +102,7 @@ export default async function DocsPage({
     <div className="grid lg:grid-cols-[1fr_260px] gap-8">
       <article className="space-y-6">
         {/* Article Header */}
-        <div className={`rounded-[14px] border border-slate-200 bg-white overflow-hidden ${sectionColors?.border ? `border-l-4 ${sectionColors.border}` : ""}`}>
+        <div className="overflow-hidden rounded-[14px] border border-slate-200 bg-white">
           {/* Breadcrumbs */}
           <div className="px-6 py-3 border-b border-slate-200 bg-slate-50">
             <nav className="flex items-center gap-1.5 text-xs">
@@ -140,9 +126,9 @@ export default async function DocsPage({
             {/* Meta badges */}
             <div className="flex flex-wrap items-center gap-3 mb-4">
               {section && (
-                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-medium ${sectionColors?.badge || "bg-slate-500/10 text-slate-400 border-slate-500/20"}`}>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-600">
                   <BookOpen className="w-3 h-3" />
-                  {section.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase())}
+                  {section.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
                 </span>
               )}
               <span className="flex items-center gap-1.5 text-xs text-slate-500">
@@ -197,8 +183,9 @@ export default async function DocsPage({
             Last updated for {version}
           </p>
           <Link
-            href={BRAND.links.github}
+            href={editUrl}
             target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-blue-600 transition-colors"
           >
             Edit this page on GitHub

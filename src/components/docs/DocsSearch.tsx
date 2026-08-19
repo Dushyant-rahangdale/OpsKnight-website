@@ -158,7 +158,7 @@ export function DocsSearch({ version, className }: { version: string, className?
       <>
         {parts.map((part, i) =>
           part.toLowerCase() === highlight.toLowerCase() ? (
-            <span key={i} className="text-blue-400 font-medium">{part}</span>
+            <span key={i} className="font-medium text-[#2563eb]">{part}</span>
           ) : (
             part
           )
@@ -172,21 +172,20 @@ export function DocsSearch({ version, className }: { version: string, className?
       {/* Search Input */}
       <div className="relative group">
         <div className="relative flex items-center">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-blue-400 transition-colors" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 group-focus-within:text-[#2563eb]" />
           <input
             ref={inputRef}
             value={query}
             onChange={event => setQuery(event.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Search docs..."
-            className="w-full rounded-xl pl-10 pr-20 py-2 text-sm bg-slate-900/50 border border-white/5 text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-blue-500/50 focus:bg-slate-900 focus:text-white transition-all shadow-sm"
+            className="w-full rounded-[10px] border border-slate-200 bg-white py-2 pl-10 pr-20 text-sm text-[#111827] placeholder:text-slate-400 shadow-sm focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
             onFocus={() => query && setIsOpen(true)}
             onBlur={() => setTimeout(() => setIsOpen(false), 200)}
             autoComplete="off"
             id="docs-search"
           />
-          {/* Keyboard shortcut badge */}
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-slate-800/50 border border-white/5 text-[10px] text-slate-500 font-medium">
+          <div className="absolute right-3 top-1/2 hidden -translate-y-1/2 items-center gap-1 rounded-md border border-slate-200 bg-slate-50 px-1.5 py-0.5 font-mono text-[10px] text-slate-500 sm:flex">
             <span className="text-xs">⌘</span>
             <span>K</span>
           </div>
@@ -197,11 +196,11 @@ export function DocsSearch({ version, className }: { version: string, className?
       {isOpen && (
         <div
           ref={panelRef}
-          className="absolute top-full left-0 z-50 mt-2 w-full origin-top-left rounded-xl shadow-2xl border border-white/10 overflow-hidden bg-slate-900/95 backdrop-blur-xl ring-1 ring-black/5"
+          className="absolute top-full left-0 z-50 mt-2 w-full overflow-hidden rounded-[12px] border border-slate-200 bg-white shadow-lg"
         >
           {query && (
-            <div className="px-3 py-2 border-b border-white/5 bg-white/[0.02]">
-              <p className="text-[10px] font-medium text-slate-500 uppercase tracking-wider">
+            <div className="border-b border-slate-100 bg-slate-50 px-3 py-2">
+              <p className="text-[10px] font-medium uppercase tracking-wider text-slate-500">
                 {isLoading ? "Searching..." : `Results for "${query}"`}
               </p>
             </div>
@@ -221,25 +220,25 @@ export function DocsSearch({ version, className }: { version: string, className?
                   className={cn(
                     "relative flex flex-col gap-1 px-4 py-3 mx-2 rounded-lg transition-all group",
                     index === selectedIndex
-                      ? "bg-blue-500/10"
-                      : "hover:bg-white/5"
+                      ? "bg-blue-50"
+                      : "hover:bg-slate-50"
                   )}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 min-w-0">
                       <FileText className={cn(
                         "w-4 h-4 shrink-0 transition-colors",
-                        index === selectedIndex ? "text-blue-400" : "text-slate-500"
+                        index === selectedIndex ? "text-[#2563eb]" : "text-slate-400"
                       )} />
                       <span className={cn(
                         "text-sm font-medium truncate transition-colors",
-                        index === selectedIndex ? "text-blue-100" : "text-slate-300"
+                        index === selectedIndex ? "text-[#111827]" : "text-slate-700"
                       )}>
                         <Highlight text={result.title} highlight={query} />
                       </span>
                     </div>
                     {result.section && (
-                      <span className="text-[10px] font-medium text-slate-500 bg-slate-800/50 px-1.5 py-0.5 rounded border border-white/5">
+                      <span className="rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-[10px] font-medium text-slate-500">
                         {result.section}
                       </span>
                     )}
@@ -263,16 +262,16 @@ export function DocsSearch({ version, className }: { version: string, className?
               ))}
             </div>
           ) : query && !isLoading ? (
-            <div className="px-4 py-8 text-center text-slate-400">
+            <div className="px-4 py-8 text-center text-slate-500">
               <Search className="w-8 h-8 mx-auto mb-3 text-slate-600 opacity-50" />
-              <p className="text-sm">No results found for <span className="text-white">&quot;{query}&quot;</span></p>
+              <p className="text-sm">No results found for <span className="text-[#111827]">&quot;{query}&quot;</span></p>
               <p className="text-xs text-slate-500 mt-1">Try searching for something else.</p>
             </div>
           ) : null}
 
           {/* Footer - Only show if not empty */}
           {(results.length > 0 || !query) && (
-            <div className="px-4 py-2 border-t border-white/5 bg-slate-900/50 flex items-center justify-between">
+            <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50 px-4 py-2">
               <div className="flex gap-2">
                 <span className="text-[10px] text-slate-600">
                   <kbd className="font-sans px-1 rounded bg-white/5 border border-white/10 text-slate-500">↑↓</kbd> navigate

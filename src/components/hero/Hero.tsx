@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowRight, 
   Copy, 
@@ -22,67 +21,8 @@ import { BRAND } from "@/lib/brand";
 
 type DeployTab = "docker" | "compose" | "helm";
 
-interface ShowcaseView {
-  id: string;
-  name: string;
-  image: string;
-  badge: string;
-  badgeColor: string;
-  caption: string;
-  metric: string;
-}
-
-const SHOWCASE_VIEWS: ShowcaseView[] = [
-  {
-    id: "command-center",
-    name: "Command Center",
-    image: "/dashboard-command-center.png",
-    badge: "Live Telemetry",
-    badgeColor: "bg-red-500/10 text-red-600 border-red-200",
-    caption: "Sub-second incident triage with live SSE streams and 1-click commander actions.",
-    metric: "SSE Live Streaming"
-  },
-  {
-    id: "incidents",
-    name: "Incident Timeline",
-    image: "/incident-detail-timeline.png",
-    badge: "Audit Ready",
-    badgeColor: "bg-blue-500/10 text-blue-600 border-blue-200",
-    caption: "Chronological event logging, Slack sync, and automated postmortem drafting.",
-    metric: "Zero Data Leakage"
-  },
-  {
-    id: "schedules",
-    name: "On-Call Rotations",
-    image: "/schedule-main.png",
-    badge: "Timezone Aware",
-    badgeColor: "bg-purple-500/10 text-purple-600 border-purple-200",
-    caption: "Multi-tier primary, secondary, and shadow shifts with 1-click swaps and calendar sync.",
-    metric: "24/7 Global Coverage"
-  },
-  {
-    id: "escalations",
-    name: "Escalation Policies",
-    image: "/escalation-policies.png",
-    badge: "Automated Routing",
-    badgeColor: "bg-amber-500/10 text-amber-600 border-amber-200",
-    caption: "Urgent SMS, push, Slack, and WhatsApp paging with tiered delay fallbacks.",
-    metric: "< 15ms Ingest-to-Page"
-  },
-  {
-    id: "analytics",
-    name: "SRE Analytics",
-    image: "/analytics-dashboard.png",
-    badge: "SLO Intelligence",
-    badgeColor: "bg-emerald-500/10 text-emerald-600 border-emerald-200",
-    caption: "Real-time MTTA, MTTR, and service health trends with zero external trackers.",
-    metric: "Audit & Compliance"
-  }
-];
-
 export function Hero() {
   const [activeDeploy, setActiveDeploy] = useState<DeployTab>("docker");
-  const [activeView, setActiveView] = useState<string>("command-center");
   const [copied, setCopied] = useState(false);
 
   const deployCommands: Record<DeployTab, string> = {
@@ -103,8 +43,6 @@ helm install opsknight opsknight/opsknight --set app.secret="your-secure-secret"
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
-  const currentView = SHOWCASE_VIEWS.find((v) => v.id === activeView) || SHOWCASE_VIEWS[0];
 
   return (
     <section className="relative pt-32 pb-24 overflow-hidden bg-slate-50 border-b border-slate-200/80">
@@ -261,146 +199,106 @@ helm install opsknight opsknight/opsknight --set app.secret="your-secure-secret"
           </div>
         </div>
 
-        {/* State-of-the-Art Interactive Product Showcase Stage */}
-        <div className="space-y-6">
+        {/* Flagship Command Center Showcase Stage */}
+        <div className="relative rounded-3xl bg-white border border-slate-200 shadow-2xl overflow-hidden mb-12">
           
-          {/* Showcase View Tabs */}
-          <div className="flex items-center justify-center gap-2 overflow-x-auto no-scrollbar py-1">
-            <div className="p-1.5 bg-white border border-slate-200 rounded-2xl flex flex-wrap items-center justify-center gap-1.5 shadow-sm">
-              {SHOWCASE_VIEWS.map((view) => {
-                const isActive = activeView === view.id;
-                return (
-                  <button
-                    key={view.id}
-                    onClick={() => setActiveView(view.id)}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
-                      isActive
-                        ? "bg-slate-900 text-white shadow-md scale-[1.02]"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-                    }`}
-                  >
-                    <span>{view.name}</span>
-                    {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    )}
-                  </button>
-                );
-              })}
+          {/* Top Browser Bar */}
+          <div className="h-12 bg-slate-950 px-4 sm:px-6 flex items-center justify-between border-b border-slate-800 text-xs select-none">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-[#ff5f56] inline-block" />
+              <span className="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block" />
+              <span className="w-3 h-3 rounded-full bg-[#27c93f] inline-block" />
+            </div>
+
+            <div className="flex items-center gap-2 px-4 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 text-[11px] font-mono">
+              <Lock className="w-3 h-3 text-emerald-400" />
+              <span>https://app.opsknight.internal/dashboard</span>
+            </div>
+
+            <div className="hidden sm:flex items-center gap-2 text-emerald-400 font-bold text-[11px]">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+              <span>ALL SYSTEMS OPERATIONAL</span>
             </div>
           </div>
 
-          {/* High-Resolution Stage Card */}
-          <div className="relative rounded-3xl bg-white border border-slate-200 shadow-2xl overflow-hidden">
-            
-            {/* Top Browser Bar */}
-            <div className="h-12 bg-slate-950 px-4 sm:px-6 flex items-center justify-between border-b border-slate-800 text-xs select-none">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#ff5f56] inline-block" />
-                <span className="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block" />
-                <span className="w-3 h-3 rounded-full bg-[#27c93f] inline-block" />
-              </div>
+          {/* Dynamic UI Canvas */}
+          <div className="relative bg-slate-900 aspect-[16/10] overflow-hidden group">
+            <Image
+              src="/dashboard-command-center.png"
+              alt="OpsKnight Command Center — sub-second incident triage and live status beacon"
+              fill
+              priority
+              className="object-cover object-top"
+            />
 
-              <div className="flex items-center gap-2 px-4 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 text-[11px] font-mono">
-                <Lock className="w-3 h-3 text-emerald-400" />
-                <span>https://app.opsknight.internal/{activeView}</span>
-              </div>
-
-              <div className="hidden sm:flex items-center gap-2 text-emerald-400 font-bold text-[11px]">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                <span>ALL SYSTEMS OPERATIONAL</span>
-              </div>
-            </div>
-
-            {/* Dynamic UI Canvas */}
-            <div className="relative bg-slate-900 aspect-[16/10] overflow-hidden group">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentView.id}
-                  initial={{ opacity: 0, scale: 0.99 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.99 }}
-                  transition={{ duration: 0.25 }}
-                  className="relative w-full h-full"
-                >
-                  <Image
-                    src={currentView.image}
-                    alt={currentView.caption}
-                    fill
-                    priority
-                    className="object-cover object-top"
-                  />
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Floating Live Telemetry Cards */}
-              <div className="absolute top-4 left-4 pointer-events-none hidden md:block">
-                <div className="bg-slate-950/90 backdrop-blur-md text-white border border-red-500/30 px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping" />
-                  <div>
-                    <div className="font-bold text-white flex items-center gap-1.5">
-                      <span>RED ALERT INGESTION</span>
-                      <span className="bg-red-500/20 text-red-400 text-[9px] px-1.5 py-0.2 rounded font-mono">P1 CRITICAL</span>
-                    </div>
-                    <div className="text-[10px] text-slate-400 font-mono">Deduplicated in 2.4ms via SHA-256</div>
+            {/* Floating Live Telemetry Cards */}
+            <div className="absolute top-4 left-4 pointer-events-none hidden md:block">
+              <div className="bg-slate-950/90 backdrop-blur-md text-white border border-red-500/30 px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs">
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping" />
+                <div>
+                  <div className="font-bold text-white flex items-center gap-1.5">
+                    <span>RED ALERT INGESTION</span>
+                    <span className="bg-red-500/20 text-red-400 text-[9px] px-1.5 py-0.2 rounded font-mono">P1 CRITICAL</span>
                   </div>
-                </div>
-              </div>
-
-              <div className="absolute top-4 right-4 pointer-events-none hidden md:block">
-                <div className="bg-slate-950/90 backdrop-blur-md text-white border border-blue-500/30 px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs">
-                  <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
-                  <div>
-                    <div className="font-bold text-white">SLACK WAR ROOM READY</div>
-                    <div className="text-[10px] text-slate-400 font-mono">#inc-api-gateway + WebRTC bridge</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute bottom-4 left-4 pointer-events-none hidden md:block">
-                <div className="bg-slate-950/90 backdrop-blur-md text-white border border-slate-700 px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs">
-                  <Activity className="w-4 h-4 text-emerald-400" />
-                  <div>
-                    <div className="font-bold text-white">INGESTION LATENCY</div>
-                    <div className="text-[10px] text-emerald-400 font-mono">11.8ms (Zero Redis overhead)</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute bottom-4 right-4 pointer-events-none hidden md:block">
-                <div className="bg-slate-950/90 backdrop-blur-md text-white border border-emerald-500/30 px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <div>
-                    <div className="font-bold text-white">VPC SOVEREIGNTY</div>
-                    <div className="text-[10px] text-slate-400 font-mono">100% On-Premises • $0 Per-Seat</div>
-                  </div>
+                  <div className="text-[10px] text-slate-400 font-mono">Deduplicated in 2.4ms via SHA-256</div>
                 </div>
               </div>
             </div>
 
-            {/* Bottom Caption Bar */}
-            <div className="p-4 sm:p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <span className={`px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ${currentView.badgeColor}`}>
-                  {currentView.badge}
-                </span>
-                <span className="text-xs sm:text-sm font-medium text-slate-700">
-                  {currentView.caption}
-                </span>
+            <div className="absolute top-4 right-4 pointer-events-none hidden md:block">
+              <div className="bg-slate-950/90 backdrop-blur-md text-white border border-blue-500/30 px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs">
+                <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
+                <div>
+                  <div className="font-bold text-white">SLACK WAR ROOM READY</div>
+                  <div className="text-[10px] text-slate-400 font-mono">#inc-api-gateway + WebRTC bridge</div>
+                </div>
               </div>
-
-              <Link
-                href="/docs"
-                className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-500 transition-colors shrink-0"
-              >
-                Explore {currentView.name} Docs
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
             </div>
+
+            <div className="absolute bottom-4 left-4 pointer-events-none hidden md:block">
+              <div className="bg-slate-950/90 backdrop-blur-md text-white border border-slate-700 px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs">
+                <Activity className="w-4 h-4 text-emerald-400" />
+                <div>
+                  <div className="font-bold text-white">INGESTION LATENCY</div>
+                  <div className="text-[10px] text-emerald-400 font-mono">11.8ms (Zero Redis overhead)</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="absolute bottom-4 right-4 pointer-events-none hidden md:block">
+              <div className="bg-slate-950/90 backdrop-blur-md text-white border border-emerald-500/30 px-3.5 py-2 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <div>
+                  <div className="font-bold text-white">VPC SOVEREIGNTY</div>
+                  <div className="text-[10px] text-slate-400 font-mono">100% On-Premises • $0 Per-Seat</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Caption Bar */}
+          <div className="p-4 sm:p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-500/10 text-red-600 border border-red-200">
+                Live Telemetry
+              </span>
+              <span className="text-xs sm:text-sm font-medium text-slate-700">
+                Sub-second incident triage with live SSE streams, 1-click responder paging, and auto-provisioned Slack bridges.
+              </span>
+            </div>
+
+            <Link
+              href="#product-tour"
+              className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-500 transition-colors shrink-0"
+            >
+              Explore Full Interactive Tour
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
 
         {/* 4-Pillar Trust Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-blue-500/40 hover:shadow-md transition-all">
             <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 mb-3 shadow-sm">
               <Shield className="w-5 h-5" />

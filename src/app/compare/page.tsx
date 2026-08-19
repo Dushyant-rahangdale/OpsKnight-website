@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import {
     ArrowRight,
     BookOpen,
-    Calculator,
     Check,
     Gauge,
     Plug,
@@ -16,19 +15,12 @@ import {
     X,
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
 import { BRAND } from "@/lib/brand";
+import { SavingsCalculator } from "@/components/calculator/SavingsCalculator";
 
 type CellValue = boolean | string;
 
 type VendorKey = "opsknight" | "pagerduty" | "incidentio" | "opsgenie";
-
-type Vendor = {
-    name: string;
-    price: number;
-    unit: string;
-    notes: string;
-};
 
 type ComparisonRow = {
     feature: string;
@@ -47,35 +39,6 @@ type StatCard = {
     tone: string;
     icon: typeof Gauge;
 };
-
-const vendors: Record<VendorKey, Vendor> = {
-    pagerduty: {
-        name: "PagerDuty",
-        price: 21,
-        unit: "/user/mo",
-        notes: "Professional Plan ($21). Automation ($+59) & Status Pages ($+89) are extra.",
-    },
-    opsgenie: {
-        name: "OpsGenie",
-        price: 19,
-        unit: "/user/mo",
-        notes: "Standard Plan. Product retiring in 2027.",
-    },
-    incidentio: {
-        name: "incident.io",
-        price: 35,
-        unit: "/user/mo",
-        notes: "Pro Plan + On-call addon. Prices vary by volume.",
-    },
-    opsknight: {
-        name: BRAND.name,
-        price: 0,
-        unit: "forever",
-        notes: "100% Free & Open Source. Self-hosted or hosted by you.",
-    },
-};
-
-const vendorOrder: VendorKey[] = ["opsknight", "pagerduty", "incidentio", "opsgenie"];
 
 const statCards: StatCard[] = [
     {
@@ -276,7 +239,7 @@ const comparisonSections: ComparisonSection[] = [
                 opsgenie: true,
             },
             {
-                feature: "Terraform + API",
+                feature: "RESTful API & Webhooks",
                 opsknight: true,
                 pagerduty: true,
                 incidentio: "API only",
@@ -376,22 +339,6 @@ function FeatureValue({ value }: { value: CellValue }) {
 }
 
 export default function ComparePage() {
-    const [teamSize, setTeamSize] = useState(10);
-
-    const calculateCost = (price: number) => price * teamSize * 12;
-
-    const annualSavings = calculateCost(vendors.pagerduty.price);
-
-    const costCards = vendorOrder.map((key) => {
-        const vendor = vendors[key];
-        const annual = calculateCost(vendor.price);
-        return {
-            key,
-            vendor,
-            annual,
-        };
-    });
-
     return (
         <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
@@ -481,76 +428,9 @@ export default function ComparePage() {
                     </div>
                 </section>
 
-                {/* Calculator Section */}
+                {/* Multi-Vendor Savings Calculator */}
                 <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-                    <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-8 md:p-12">
-                        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-10">
-                            <div>
-                                <h2 className="text-2xl font-bold flex items-center gap-2">
-                                    <Calculator className="w-6 h-6 text-blue-300" />
-                                    Savings calculator
-                                </h2>
-                                <p className="text-slate-300 mt-2">
-                                    Estimate annual spend for your on-call team and compare recurring costs.
-                                </p>
-                            </div>
-                            <div className="flex items-center gap-4 bg-slate-950/70 p-4 rounded-xl border border-white/10">
-                                <label className="text-sm font-medium text-slate-200">Team size</label>
-                                <input
-                                    type="range"
-                                    min="5"
-                                    max="100"
-                                    step="5"
-                                    value={teamSize}
-                                    onChange={(e) => setTeamSize(parseInt(e.target.value))}
-                                    className="w-40 accent-blue-400"
-                                />
-                                <span className="text-xl font-bold text-blue-300 min-w-[3ch]">
-                                    {teamSize}
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="grid md:grid-cols-4 gap-6">
-                            {costCards.map(({ key, vendor, annual }) => (
-                                <div
-                                    key={vendor.name}
-                                    className={`rounded-2xl p-6 border ${key === "opsknight"
-                                        ? "border-blue-400/40 bg-blue-500/5"
-                                        : "border-white/10 bg-slate-950/60"
-                                        }`}
-                                >
-                                    <div className="flex items-start justify-between">
-                                        <h3 className="font-bold text-lg mb-1">{vendor.name}</h3>
-                                        {key === "opsknight" ? (
-                                            <span className="text-xs font-semibold text-blue-300 bg-blue-500/10 px-2 py-1 rounded-full">
-                                                Recommended
-                                            </span>
-                                        ) : null}
-                                    </div>
-                                    <div className={`text-3xl font-bold mb-4 ${key === "opsknight" ? "text-blue-300" : "text-white"}`}>
-                                        ${vendor.price}
-                                        <span className="text-sm font-normal text-slate-400">{vendor.unit}</span>
-                                    </div>
-                                    <p className="text-xs text-slate-400 mb-4 min-h-[2.5rem]">{vendor.notes}</p>
-                                    <div className="text-sm font-medium text-white">
-                                        Annual: ${annual.toLocaleString()}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="mt-8 grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
-                            <div className="bg-blue-500/10 rounded-xl p-4">
-                                <p className="text-lg font-medium text-blue-300">
-                                    You could save <span className="font-bold">${annualSavings.toLocaleString()} per year</span> by switching to {BRAND.name}.
-                                </p>
-                            </div>
-                            <div className="bg-slate-950/70 rounded-xl p-4 text-sm text-slate-300 border border-white/10">
-                                Add-on fees often apply to status pages, automation, and advanced analytics in SaaS tools.
-                            </div>
-                        </div>
-                    </div>
+                    <SavingsCalculator />
                 </section>
 
                 {/* Decision guide */}

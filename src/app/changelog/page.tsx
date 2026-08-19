@@ -107,38 +107,55 @@ const releases: ReleaseItem[] = [
   },
   {
     version: 'v1.1.0',
-    date: 'June 24, 2026',
-    summary: 'Multi-layer on-call rotations, public & private status pages, escalation policy builder, and SLA/MTTA/MTTR analytics.',
+    date: 'August 8, 2026',
+    summary: 'Full bi-directional Jira Cloud integration, postmortem action items sync, SLA metrics pipeline hardening, and master encryption key migration.',
     dockerTag: 'ghcr.io/opsknight-labs/opsknight:1.1.0',
     githubReleaseUrl: 'https://github.com/opsknight-labs/OpsKnight/releases/tag/v1.1.0',
     categories: [
       {
         type: 'added',
-        title: 'Scheduling & Status Pages',
+        title: 'Bi-Directional Jira Cloud Integration',
         items: [
-          'Multi-layer timezone-aware on-call schedules with primary, secondary, and shadow shift coverage.',
-          '1-click shift overrides with calendar export (iCal / Google Calendar sync).',
-          'Branded public & private status pages with custom domain support and 90-day component uptime history.',
-          'Incident analytics dashboard calculating real-time MTTA, MTTR, and escalation SLA response metrics.'
+          'Jira Cloud Two-Way Sync — link incidents and postmortem action items directly to Jira issues with service-owned project routing and automated ticket creation on incident urgency.',
+          'Jira Comment Mirroring — sync incident notes, status changes, and war room timeline updates as comments to linked Jira issues.',
+          'Documentation Parity — added full v1.1 documentation hierarchy and step-by-step Jira Cloud integration guides.'
+        ]
+      },
+      {
+        type: 'performance',
+        title: 'SLA & Analytics Pipeline Hardening',
+        items: [
+          'Streaming Suspense with layout-matched skeleton and error boundaries for instant analytics page renders.',
+          'Self-healing SLA rollup backfill, drift detection, and business-hours timezone alignment across 180/365-day reporting periods.'
+        ]
+      },
+      {
+        type: 'security',
+        title: 'Security & Session Hardening',
+        items: [
+          'Master Encryption Key Migration — transitioned to environment-variable master encryption key with transparent, self-healing v1 key fallback migration.',
+          'Stable secure cookie enforcement for reverse proxy and load balancer compatibility.'
         ]
       }
     ]
   },
   {
     version: 'v1.0.0',
-    date: 'May 12, 2026',
-    summary: 'Initial open-source release of OpsKnight Incident Command Center under AGPL-3.0 License.',
+    date: 'February 1, 2026',
+    summary: 'Initial production GA release of OpsKnight Incident Command Center under AGPL-3.0 License.',
     dockerTag: 'ghcr.io/opsknight-labs/opsknight:1.0.0',
     githubReleaseUrl: 'https://github.com/opsknight-labs/OpsKnight/releases/tag/v1.0.0',
     categories: [
       {
         type: 'added',
-        title: 'Initial Core Release',
+        title: 'Core Incident Command Center & Scheduling',
         items: [
-          'Real-time Server-Sent Events (SSE) incident triage stream with zero stale caching.',
-          'Multi-channel responder alerts: Mobile Push, SMS, WhatsApp, Email, and Webhooks.',
-          'Deterministic incident deduplication and multi-service routing.',
-          '1-command deployment via Docker, Docker Compose, and Helm charts.'
+          'Real-time Server-Sent Events (SSE) live incident triage stream with zero stale caching and sub-second commander updates.',
+          'Multi-layer timezone-aware on-call schedules with primary, secondary, and shadow shift rotations with 1-click shift swaps.',
+          'Multi-tier automated escalation policies across Slack, Mobile Push, SMS, WhatsApp, Email, and Webhooks.',
+          'Branded public & private status pages with custom domains, component uptime history, and subscriber alerts.',
+          'Production Analytics Engine with real-time MTTA, MTTR, and SLA response analytics with distributed rate limiting.',
+          '1-command container deployment via Docker, Docker Compose, and Kubernetes Helm manifests.'
         ]
       }
     ]

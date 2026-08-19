@@ -1,42 +1,36 @@
-import {
-  Radio,
-  Siren,
-  MessageSquare,
-  FileCheck,
-  Layers,
-} from "lucide-react";
+import { Radio, Siren, MessageSquare, FileCheck, Layers } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
 const steps = [
   {
     n: "01",
     icon: Radio,
-    title: "Alert",
-    body: `Signals arrive from monitoring tools and webhooks — ${BRAND.integrationCountLabel} native integrations, plus generic JSON.`,
+    title: "Something fires",
+    body: `Monitoring tools send a webhook. OpsKnight understands ${BRAND.integrationCountLabel} of those out of the box, plus generic JSON.`,
   },
   {
     n: "02",
     icon: Layers,
-    title: "Dedupe",
-    body: "Related alerts are grouped into a single incident so the on-call engineer is not paged for every downstream symptom.",
+    title: "Noise is grouped",
+    body: "Related alerts become one incident, so one person is not messaged for every downstream symptom.",
   },
   {
     n: "03",
     icon: Siren,
-    title: "Page",
-    body: "Routing follows service ownership and the active rotation. Responders get SMS, email, push, Slack, or WhatsApp.",
+    title: "Someone is paged",
+    body: "The active rotation gets SMS, email, Slack, WhatsApp, or a phone notification. If they miss it, the policy moves on.",
   },
   {
     n: "04",
     icon: MessageSquare,
-    title: "War room",
-    body: "Slack ChatOps opens a dedicated channel, with optional video bridges so the team can work the incident together.",
+    title: "The team gathers",
+    body: "A Slack channel is opened for that incident. Optional video link. Work stays on one timeline.",
   },
   {
     n: "05",
     icon: FileCheck,
-    title: "Close the loop",
-    body: "Resolve, record MTTA/MTTR, update the status page, and draft a postmortem from the timeline.",
+    title: "You close it out",
+    body: "Resolve, update the status page, and write what happened — with follow-up tasks if you need them.",
   },
 ];
 
@@ -46,14 +40,14 @@ export function HowItWorks() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <p className="mb-3 font-mono text-[11px] font-medium tracking-wide text-slate-500">
-            How it works
+            The night, in order
           </p>
           <h2 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-4xl">
-            Alert → page → war room → write-up.
+            Alert, page, talk, write it down.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#4b5563]">
-            The same sequence every SRE already knows. OpsKnight runs it on your
-            network — not as a millisecond scoreboard.
+            The same sequence most teams already run. OpsKnight is the place
+            that sequence lives — on your network.
           </p>
         </div>
 

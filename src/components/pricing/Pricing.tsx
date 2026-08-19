@@ -5,18 +5,12 @@ import { Check } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
 const features = [
-  "Unlimited users & responders",
-  "Unlimited incidents & services",
-  "Multi-layer on-call scheduling",
-  "Automated escalation policies",
-  "Public & private status pages",
-  `${BRAND.integrationCountLabel} native integrations`,
-  "PagerDuty Events API v2 drop-in",
-  "Slack war rooms & ChatOps",
-  "MTTA, MTTR & SLA analytics",
-  "Mobile PWA",
-  "Jira incident sync",
-  `${BRAND.license} source`,
+  "Everyone on the team can use it — no per-person software fee",
+  "Schedules, paging, Slack rooms, status page, write-ups",
+  `${BRAND.integrationCountLabel} inbound monitoring parsers`,
+  "Install on a phone from the browser",
+  "Jira Cloud sync",
+  `${BRAND.license} — you host it`,
 ];
 
 export function Pricing() {
@@ -67,7 +61,7 @@ export function Pricing() {
               href="/compare"
               className="text-sm font-medium text-[#2563eb] hover:underline"
             >
-              Compare cost vs PagerDuty, incident.io, Opsgenie, and others
+              Compare cost vs the usual SaaS on-call stack
             </Link>
           </div>
         </div>

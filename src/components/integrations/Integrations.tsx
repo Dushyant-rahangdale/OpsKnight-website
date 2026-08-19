@@ -79,11 +79,11 @@ export function Integrations() {
             Integrations
           </p>
           <h2 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-4xl">
-            {BRAND.integrationCountLabel} native integrations. No plugin marketplace.
+            Your monitors already know how to send a webhook.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#4b5563]">
-            Point existing webhooks at OpsKnight. HMAC-signed ingest. Official
-            logos, first-party handlers.
+            {BRAND.integrationCountLabel} built-in parsers, signed so the payload
+            is really from you. Point the destination URL at OpsKnight.
           </p>
         </div>
 
@@ -93,11 +93,13 @@ export function Integrations() {
           </div>
           <div>
             <h3 className="text-base font-semibold text-[#111827]">
-              PagerDuty Events API v2
+              Already sending Events API v2?
             </h3>
             <p className="mt-1 text-sm leading-relaxed text-[#4b5563]">
-              Drop-in enqueue compatibility. Change the destination URL; keep
-              existing monitoring integrations and routing keys.
+              OpsKnight accepts the same{" "}
+              <span className="font-mono text-[12px]">/v2/enqueue</span> shape
+              used by many monitoring tools. Change the URL; keep routing keys.
+              (This is an integration, not the product’s identity.)
             </p>
           </div>
         </div>

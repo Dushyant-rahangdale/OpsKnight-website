@@ -12,7 +12,7 @@ export type Competitor = {
   shortName: string;
   href: `/compare/${string}`;
   category: string;
-  listPrice: string;
+  commercialModel: string;
 };
 
 /** Every commercial / OSS alternative we compare against — not just PagerDuty. */
@@ -23,7 +23,7 @@ export const COMPETITORS: Competitor[] = [
     shortName: "PagerDuty",
     href: "/compare/pagerduty",
     category: "Enterprise SaaS",
-    listPrice: "$21–$41 / user / mo",
+    commercialModel: "Vendor-hosted, per-seat (typical)",
   },
   {
     slug: "incidentio",
@@ -31,7 +31,7 @@ export const COMPETITORS: Competitor[] = [
     shortName: "incident.io",
     href: "/compare/incidentio",
     category: "Slack-first SaaS",
-    listPrice: "~$35 / user / mo",
+    commercialModel: "Vendor-hosted, per-seat (typical)",
   },
   {
     slug: "opsgenie",
@@ -39,7 +39,7 @@ export const COMPETITORS: Competitor[] = [
     shortName: "Opsgenie",
     href: "/compare/opsgenie",
     category: "Atlassian SaaS",
-    listPrice: "$11–$29 / user / mo",
+    commercialModel: "Vendor-hosted, per-seat (typical)",
   },
   {
     slug: "squadcast",
@@ -47,7 +47,7 @@ export const COMPETITORS: Competitor[] = [
     shortName: "Squadcast",
     href: "/compare/squadcast",
     category: "On-call SaaS",
-    listPrice: "~$21 / user / mo",
+    commercialModel: "Vendor-hosted, per-seat (typical)",
   },
   {
     slug: "splunk",
@@ -55,7 +55,7 @@ export const COMPETITORS: Competitor[] = [
     shortName: "Splunk",
     href: "/compare/splunk",
     category: "VictorOps / Splunk",
-    listPrice: "~$23 / user / mo",
+    commercialModel: "Vendor-hosted, per-seat (typical)",
   },
   {
     slug: "grafana-oncall",
@@ -63,7 +63,7 @@ export const COMPETITORS: Competitor[] = [
     shortName: "Grafana",
     href: "/compare/grafana-oncall",
     category: "OSS / Grafana Cloud",
-    listPrice: "OSS or Cloud paid",
+    commercialModel: "Self-host OSS (AGPL) and/or Grafana Cloud paid",
   },
 ];
 

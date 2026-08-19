@@ -14,11 +14,6 @@ import {
   Copy, 
   Terminal, 
   ArrowRight,
-  Zap,
-  Lock,
-  DollarSign,
-  Layers,
-  Sparkles,
   Video,
   UserPlus,
   Headphones,
@@ -234,7 +229,7 @@ export function ProductTour() {
             The actual interface.
           </h2>
           <p className="text-base leading-relaxed text-[#4b5563]">
-            Production screenshots: incident command, rotations, ChatOps, analytics. Slack canvas is interactive.
+            Screenshots of the live product. The Slack view is interactive.
           </p>
         </div>
 
@@ -591,7 +586,7 @@ export function ProductTour() {
                       {currentTab.hotspots[1] && (
                         <div className="flex justify-end">
                           <div className="pointer-events-auto bg-slate-950/90 backdrop-blur-md text-white border border-white/20 px-3.5 py-1.5 rounded-xl shadow-2xl flex items-center gap-2 text-xs">
-                            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+                            <Bell className="w-3.5 h-3.5 text-blue-400" />
                             <span className="font-semibold">{currentTab.hotspots[1]?.title}</span>
                           </div>
                         </div>
@@ -664,34 +659,6 @@ export function ProductTour() {
           </div>
 
         </div>
-
-        {/* 4 Core Value Indicators Below Showcase */}
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="p-5 rounded-2xl bg-slate-900/40 border border-white/5 flex flex-col justify-between">
-            <Zap className="w-5 h-5 text-amber-400 mb-3" />
-            <div className="text-lg font-bold text-white">&lt; 15ms Ingest Latency</div>
-            <p className="text-xs text-slate-400 mt-1">Real-time SSE event pipeline with zero page reload latency.</p>
-          </div>
-
-          <div className="p-5 rounded-2xl bg-slate-900/40 border border-white/5 flex flex-col justify-between">
-            <Lock className="w-5 h-5 text-emerald-400 mb-3" />
-            <div className="text-lg font-bold text-white">100% Data Sovereignty</div>
-            <p className="text-xs text-slate-400 mt-1">Deploy on Docker or Kubernetes inside your private VPC.</p>
-          </div>
-
-          <div className="p-5 rounded-2xl bg-slate-900/40 border border-white/5 flex flex-col justify-between">
-            <DollarSign className="w-5 h-5 text-blue-400 mb-3" />
-            <div className="text-lg font-bold text-white">$0 Per-Seat Tax</div>
-            <p className="text-xs text-slate-400 mt-1">Unlimited responders, schedules, services, and alerts.</p>
-          </div>
-
-          <div className="p-5 rounded-2xl bg-slate-900/40 border border-white/5 flex flex-col justify-between">
-            <Layers className="w-5 h-5 text-purple-400 mb-3" />
-            <div className="text-lg font-bold text-white">Drop-in PagerDuty API</div>
-            <p className="text-xs text-slate-400 mt-1">Migrate in 30 seconds using existing PagerDuty webhooks.</p>
-          </div>
-        </div>
-
       </div>
     </section>
   );

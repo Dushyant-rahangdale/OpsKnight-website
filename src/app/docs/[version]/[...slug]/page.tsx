@@ -26,8 +26,8 @@ export async function generateMetadata({
 
   const canonical =
     doc.slug.length > 0
-      ? `/docs/${version}/${doc.slug.join("/")}`
-      : `/docs/${version}`;
+      ? `/docs/${version}/${doc.slug.join("/")}/`
+      : `/docs/${version}/`;
   const title = doc.title;
   const description =
     doc.description ||

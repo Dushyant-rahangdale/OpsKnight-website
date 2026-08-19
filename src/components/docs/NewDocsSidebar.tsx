@@ -74,33 +74,71 @@ function NavLink({
   activePath: string;
   nested?: boolean;
 }) {
+  const isDirectActive = pathMatches(item.href, activePath);
+  const containsActive = sectionContainsPath(item, activePath);
+  const [isOpen, setIsOpen] = React.useState(containsActive);
+
+  React.useEffect(() => {
+    if (containsActive) setIsOpen(true);
+  }, [containsActive]);
+
   if (item.children && item.children.length > 0) {
     return (
-      <div className={nested ? "ml-2 mt-2" : ""}>
-        {item.href ? (
-          <Link
-            href={item.href}
-            className={cn(
-              "mb-1 block rounded-md px-2 py-1.5 text-[12px] font-medium",
-              pathMatches(item.href, activePath)
-                ? "text-white"
-                : "text-slate-400 hover:text-white"
-            )}
+      <div className={nested ? "ml-1.5 mt-1" : "mt-1"}>
+        <div
+          className={cn(
+            "flex w-full items-center justify-between rounded-md transition-colors group",
+            isDirectActive ? "bg-white/10" : "hover:bg-white/5"
+          )}
+        >
+          {item.href ? (
+            <Link
+              href={item.href}
+              onClick={() => setIsOpen(true)}
+              className={cn(
+                "flex-1 truncate px-2 py-1.5 text-[12px] font-medium transition-colors text-left",
+                isDirectActive
+                  ? "text-white font-bold"
+                  : containsActive
+                    ? "text-[#93c5fd]"
+                    : "text-slate-400 group-hover:text-white"
+              )}
+            >
+              {item.title}
+            </Link>
+          ) : (
+            <span className="flex-1 truncate px-2 py-1 text-[11px] font-medium uppercase tracking-wide text-slate-500">
+              {item.title}
+            </span>
+          )}
+
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsOpen((v) => !v);
+            }}
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded p-1 text-slate-400 hover:bg-white/10 hover:text-white"
+            aria-label={isOpen ? `Collapse ${item.title}` : `Expand ${item.title}`}
           >
-            {item.title}
-          </Link>
-        ) : (
-          <p className="mb-1 px-2 py-1 text-[11px] font-medium uppercase tracking-wide text-slate-500">
-            {item.title}
-          </p>
+            <ChevronDown
+              className={cn(
+                "h-3.5 w-3.5 text-slate-500 transition-transform duration-200",
+                isOpen && "rotate-180"
+              )}
+            />
+          </button>
+        </div>
+
+        {isOpen && (
+          <ul className="mt-0.5 space-y-0.5 border-l border-white/10 pl-2">
+            {item.children.map((child) => (
+              <li key={child.title}>
+                <NavLink item={child} activePath={activePath} nested />
+              </li>
+            ))}
+          </ul>
         )}
-        <ul className="space-y-0.5 border-l border-white/10 pl-2">
-          {item.children.map((child) => (
-            <li key={child.title}>
-              <NavLink item={child} activePath={activePath} nested />
-            </li>
-          ))}
-        </ul>
       </div>
     );
   }
@@ -116,10 +154,10 @@ function NavLink({
     <Link
       href={item.href}
       className={cn(
-        "block rounded-md border-l-2 px-2 py-1.5 text-[13px] leading-snug",
+        "block rounded-md border-l-2 px-2 py-1.5 text-[13px] leading-snug transition-colors",
         nested ? "ml-0" : "ml-1",
         active
-          ? "border-[#2563eb] bg-white/10 text-white"
+          ? "border-[#2563eb] bg-white/10 text-white font-medium"
           : "border-transparent text-slate-400 hover:bg-white/5 hover:text-white"
       )}
     >
@@ -139,6 +177,7 @@ function CollapsibleSection({
     getSectionKeyFromHref(item.children?.[0]?.href) ||
     getSectionKeyFromHref(item.href);
   const Icon = (sectionKey && SECTION_ICONS[sectionKey]) || BookOpen;
+  const isDirectActive = pathMatches(item.href, activePath);
   const containsActive = sectionContainsPath(item, activePath);
   const [isOpen, setIsOpen] = React.useState(containsActive);
 
@@ -148,32 +187,78 @@ function CollapsibleSection({
 
   return (
     <SidebarGroup className="p-0">
-      <button
-        type="button"
-        onClick={() => setIsOpen((v) => !v)}
-        className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left hover:bg-white/5"
+      <div
+        className={cn(
+          "flex w-full items-center justify-between rounded-lg transition-colors group",
+          isDirectActive ? "bg-white/10" : "hover:bg-white/5"
+        )}
       >
-        <Icon
-          className={cn(
-            "h-4 w-4 shrink-0",
-            containsActive ? "text-[#93c5fd]" : "text-slate-500"
-          )}
-        />
-        <span
-          className={cn(
-            "min-w-0 flex-1 text-[12px] font-semibold tracking-wide",
-            containsActive ? "text-white" : "text-slate-300"
-          )}
+        {item.href ? (
+          <Link
+            href={item.href}
+            onClick={() => setIsOpen(true)}
+            className="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-left"
+          >
+            <Icon
+              className={cn(
+                "h-4 w-4 shrink-0 transition-colors",
+                isDirectActive
+                  ? "text-blue-400"
+                  : containsActive
+                    ? "text-[#93c5fd]"
+                    : "text-slate-500 group-hover:text-slate-300"
+              )}
+            />
+            <span
+              className={cn(
+                "min-w-0 flex-1 truncate text-[12px] font-semibold tracking-wide transition-colors",
+                isDirectActive
+                  ? "text-white font-bold"
+                  : containsActive
+                    ? "text-white"
+                    : "text-slate-300 group-hover:text-white"
+              )}
+            >
+              {item.title}
+            </span>
+          </Link>
+        ) : (
+          <div className="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-left">
+            <Icon
+              className={cn(
+                "h-4 w-4 shrink-0",
+                containsActive ? "text-[#93c5fd]" : "text-slate-500"
+              )}
+            />
+            <span
+              className={cn(
+                "min-w-0 flex-1 truncate text-[12px] font-semibold tracking-wide",
+                containsActive ? "text-white" : "text-slate-300"
+              )}
+            >
+              {item.title}
+            </span>
+          </div>
+        )}
+
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsOpen((v) => !v);
+          }}
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md p-1.5 text-slate-400 hover:bg-white/10 hover:text-white"
+          aria-label={isOpen ? `Collapse ${item.title}` : `Expand ${item.title}`}
         >
-          {item.title}
-        </span>
-        <ChevronDown
-          className={cn(
-            "h-4 w-4 shrink-0 text-slate-500 transition-transform",
-            isOpen && "rotate-180"
-          )}
-        />
-      </button>
+          <ChevronDown
+            className={cn(
+              "h-4 w-4 shrink-0 text-slate-500 transition-transform duration-200",
+              isOpen && "rotate-180"
+            )}
+          />
+        </button>
+      </div>
+
       {isOpen && (
         <SidebarGroupContent className="pb-2">
           <SidebarMenu>

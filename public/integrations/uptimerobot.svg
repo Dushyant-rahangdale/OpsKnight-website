@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="298" height="298"><g fill="#3BD771" transform="translate(.9 .9)"><circle fill="#3BD671" cx="148.1" cy="148.1" r="148.1" opacity=".3"/><circle fill="#3BD671" cx="148.1" cy="148.1" r="98.9"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+  <circle cx="32" cy="32" r="28" fill="#E8F8F0"/>
+  <circle cx="32" cy="32" r="18" fill="#3BD771"/>
+  <circle cx="32" cy="32" r="8" fill="#1B8045"/>
+</svg>

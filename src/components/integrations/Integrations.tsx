@@ -19,45 +19,45 @@ interface IntegrationItem {
 
 const integrations: IntegrationItem[] = [
     // APM & Monitoring
-    { name: "Datadog", category: "APM & Monitoring", icon: integrationIcons.datadog, description: "Full-stack observability and security.", href: "/docs/integrations/datadog" },
-    { name: "New Relic", category: "APM & Monitoring", icon: integrationIcons.newrelic, description: "Application performance monitoring.", href: "/docs/integrations/newrelic" },
-    { name: "Dynatrace", category: "APM & Monitoring", icon: integrationIcons.dynatrace, description: "AI-powered observability.", href: "/docs/integrations/dynatrace" },
-    { name: "AppDynamics", category: "APM & Monitoring", icon: integrationIcons.appdynamics, description: "Business observability platform.", href: "/docs/integrations/appdynamics" },
-    { name: "Honeycomb", category: "APM & Monitoring", icon: integrationIcons.honeycomb, description: "Fast analysis for distributed systems.", href: "/docs/integrations/honeycomb" },
-    { name: "Sentry", category: "APM & Monitoring", icon: integrationIcons.sentry, description: "Developer-first error tracking.", href: "/docs/integrations/sentry" },
-    { name: "Splunk Observability", category: "APM & Monitoring", icon: integrationIcons.splunk, description: "Real-time enterprise monitoring.", href: "/docs/integrations/splunk" },
+    { name: "Datadog", category: "APM & Monitoring", icon: integrationIcons.datadog, description: "Full-stack observability and security.", href: "/integrations" },
+    { name: "New Relic", category: "APM & Monitoring", icon: integrationIcons.newrelic, description: "Application performance monitoring.", href: "/integrations" },
+    { name: "Dynatrace", category: "APM & Monitoring", icon: integrationIcons.dynatrace, description: "AI-powered observability.", href: "/integrations" },
+    { name: "AppDynamics", category: "APM & Monitoring", icon: integrationIcons.appdynamics, description: "Business observability platform.", href: "/integrations" },
+    { name: "Honeycomb", category: "APM & Monitoring", icon: integrationIcons.honeycomb, description: "Fast analysis for distributed systems.", href: "/integrations" },
+    { name: "Sentry", category: "APM & Monitoring", icon: integrationIcons.sentry, description: "Developer-first error tracking.", href: "/integrations" },
+    { name: "Splunk Observability", category: "APM & Monitoring", icon: integrationIcons.splunk, description: "Real-time enterprise monitoring.", href: "/integrations" },
 
     // Cloud Infrastructure
-    { name: "AWS CloudWatch", category: "Cloud Infrastructure", icon: integrationIcons.cloudwatch, description: "Monitoring for AWS resources.", href: "/docs/integrations/cloudwatch" },
-    { name: "Azure Monitor", category: "Cloud Infrastructure", icon: integrationIcons.azure, description: "Full observability into Azure apps.", href: "/docs/integrations/azure" },
-    { name: "Google Cloud Monitoring", category: "Cloud Infrastructure", icon: integrationIcons.googlecloud, description: "Metrics for Google Cloud.", href: "/docs/integrations/googlecloud" },
+    { name: "AWS CloudWatch", category: "Cloud Infrastructure", icon: integrationIcons.cloudwatch, description: "Monitoring for AWS resources.", href: "/integrations" },
+    { name: "Azure Monitor", category: "Cloud Infrastructure", icon: integrationIcons.azure, description: "Full observability into Azure apps.", href: "/integrations" },
+    { name: "Google Cloud Monitoring", category: "Cloud Infrastructure", icon: integrationIcons.googlecloud, description: "Metrics for Google Cloud.", href: "/integrations" },
 
     // Metrics & Daemons
-    { name: "Prometheus / Alertmanager", category: "Metrics & Daemons", icon: integrationIcons.prometheus, description: "Open-source systems monitoring.", href: "/docs/integrations/prometheus" },
-    { name: "Grafana", category: "Metrics & Daemons", icon: integrationIcons.grafana, description: "Operational dashboards and alerting.", href: "/docs/integrations/grafana" },
-    { name: "Zabbix", category: "Metrics & Daemons", icon: integrationIcons.zabbix, description: "Enterprise-class monitoring solution.", href: "/docs/integrations/zabbix" },
-    { name: "Nagios", category: "Metrics & Daemons", icon: integrationIcons.nagios, description: "IT infrastructure monitoring.", href: "/docs/integrations/nagios" },
-    { name: "Icinga 2", category: "Metrics & Daemons", icon: integrationIcons.icinga, description: "Open source monitoring system.", href: "/docs/integrations/icinga" },
+    { name: "Prometheus / Alertmanager", category: "Metrics & Daemons", icon: integrationIcons.prometheus, description: "Open-source systems monitoring.", href: "/integrations" },
+    { name: "Grafana", category: "Metrics & Daemons", icon: integrationIcons.grafana, description: "Operational dashboards and alerting.", href: "/integrations" },
+    { name: "Zabbix", category: "Metrics & Daemons", icon: integrationIcons.zabbix, description: "Enterprise-class monitoring solution.", href: "/integrations" },
+    { name: "Nagios", category: "Metrics & Daemons", icon: integrationIcons.nagios, description: "IT infrastructure monitoring.", href: "/integrations" },
+    { name: "Icinga 2", category: "Metrics & Daemons", icon: integrationIcons.icinga, description: "Open source monitoring system.", href: "/integrations" },
 
     // CI/CD & DevOps
-    { name: "GitHub Actions", category: "CI/CD & DevOps", icon: integrationIcons.github, description: "Automate your software workflows.", href: "/docs/integrations/github" },
-    { name: "GitLab CI/CD", category: "CI/CD & DevOps", icon: integrationIcons.gitlab, description: "Continuous integration and deployment.", href: "/docs/integrations/gitlab" },
-    { name: "Bitbucket Pipelines", category: "CI/CD & DevOps", icon: integrationIcons.bitbucket, description: "Integrated CI/CD for Bitbucket.", href: "/docs/integrations/bitbucket" },
-    { name: "Vercel", category: "CI/CD & DevOps", icon: integrationIcons.vercel, description: "Develop, preview, and ship.", href: "/docs/integrations/vercel" },
+    { name: "GitHub Actions", category: "CI/CD & DevOps", icon: integrationIcons.github, description: "Automate your software workflows.", href: "/integrations" },
+    { name: "GitLab CI/CD", category: "CI/CD & DevOps", icon: integrationIcons.gitlab, description: "Continuous integration and deployment.", href: "/integrations" },
+    { name: "Bitbucket Pipelines", category: "CI/CD & DevOps", icon: integrationIcons.bitbucket, description: "Integrated CI/CD for Bitbucket.", href: "/integrations" },
+    { name: "Vercel", category: "CI/CD & DevOps", icon: integrationIcons.vercel, description: "Develop, preview, and ship.", href: "/integrations" },
 
     // Uptime & Synthetics
-    { name: "UptimeRobot", category: "Uptime & Synthetics", icon: integrationIcons.uptimerobot, description: "Free website uptime monitor.", href: "/docs/integrations/uptimerobot" },
-    { name: "Pingdom", category: "Uptime & Synthetics", icon: integrationIcons.pingdom, description: "Website performance and availability.", href: "/docs/integrations/pingdom" },
-    { name: "Better Uptime", category: "Uptime & Synthetics", icon: integrationIcons.betterstack, description: "Uptime monitoring and status pages.", href: "/docs/integrations/betteruptime" },
-    { name: "Uptime Kuma", category: "Uptime & Synthetics", icon: integrationIcons.uptimekuma, description: "Self-hosted monitoring tool.", href: "/docs/integrations/uptimekuma" },
+    { name: "UptimeRobot", category: "Uptime & Synthetics", icon: integrationIcons.uptimerobot, description: "Free website uptime monitor.", href: "/integrations" },
+    { name: "Pingdom", category: "Uptime & Synthetics", icon: integrationIcons.pingdom, description: "Website performance and availability.", href: "/integrations" },
+    { name: "Better Uptime", category: "Uptime & Synthetics", icon: integrationIcons.betterstack, description: "Uptime monitoring and status pages.", href: "/integrations" },
+    { name: "Uptime Kuma", category: "Uptime & Synthetics", icon: integrationIcons.uptimekuma, description: "Self-hosted monitoring tool.", href: "/integrations" },
 
     // Chat & Notifications
-    { name: "Slack (ChatOps)", category: "Chat & Notifications", icon: integrationIcons.slack, description: "Incident response right in Slack.", href: "/docs/integrations/slack" },
-    { name: "Jira Cloud", category: "Chat & Notifications", icon: integrationIcons.jira, description: "Create tickets automatically.", href: "/docs/integrations/jira" },
-    { name: "WhatsApp Alerts", category: "Chat & Notifications", icon: integrationIcons.whatsapp, description: "High-priority WhatsApp pager alerts.", href: "/docs/integrations/whatsapp" },
-    { name: "Email", category: "Chat & Notifications", icon: integrationIcons.email, description: "Standard email notifications.", href: "/docs/integrations/email" },
-    { name: "SMS", category: "Chat & Notifications", icon: integrationIcons.sms, description: "Text message alerts.", href: "/docs/integrations/sms" },
-    { name: "Webhooks", category: "Chat & Notifications", icon: integrationIcons.webhook, description: "Custom HTTP callback routing.", href: "/docs/integrations/webhooks" },
+    { name: "Slack (ChatOps)", category: "Chat & Notifications", icon: integrationIcons.slack, description: "Incident response right in Slack.", href: "/integrations" },
+    { name: "Jira Cloud", category: "Chat & Notifications", icon: integrationIcons.jira, description: "Create tickets automatically.", href: "/integrations" },
+    { name: "WhatsApp Alerts", category: "Chat & Notifications", icon: integrationIcons.whatsapp, description: "High-priority WhatsApp pager alerts.", href: "/integrations" },
+    { name: "Email", category: "Chat & Notifications", icon: integrationIcons.email, description: "Standard email notifications.", href: "/integrations" },
+    { name: "SMS", category: "Chat & Notifications", icon: integrationIcons.sms, description: "Text message alerts.", href: "/integrations" },
+    { name: "Webhooks", category: "Chat & Notifications", icon: integrationIcons.webhook, description: "Custom HTTP callback routing.", href: "/integrations" },
 ];
 
 const categories: Category[] = [

@@ -245,7 +245,7 @@ export function ProductTour() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
                     isActive
-                      ? "bg-blue-600 text-white shadow-md scale-[1.02]"
+                      ? "bg-slate-900 text-white shadow-md scale-[1.02]"
                       : "text-slate-600 hover:text-slate-900 hover:bg-white/80"
                   }`}
                 >

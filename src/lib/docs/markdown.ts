@@ -13,17 +13,188 @@ type RenderOptions = {
   imageBasePath?: string;
 };
 
+type HastElement = {
+  type: "element";
+  tagName: string;
+  properties?: Record<string, unknown>;
+  children?: Array<HastElement | { type: "text"; value: string } | Node>;
+};
+
+function classList(node: { properties?: Record<string, unknown> } | undefined): string[] {
+  const value = node?.properties?.className;
+  if (Array.isArray(value)) return value.map(String);
+  if (typeof value === "string") return value.split(/\s+/).filter(Boolean);
+  return [];
+}
+
+function setClass(node: HastElement, classes: string[]) {
+  node.properties = { ...node.properties, className: classes };
+}
+
+function addClass(node: HastElement, ...classes: string[]) {
+  setClass(node, [...new Set([...classList(node), ...classes])]);
+}
+
+function textContent(node: Node | undefined): string {
+  if (!node) return "";
+  if ((node as { type?: string }).type === "text") {
+    return String((node as { value?: string }).value ?? "");
+  }
+  const children = (node as HastElement).children;
+  if (!Array.isArray(children)) return "";
+  return children.map((child) => textContent(child as Node)).join("");
+}
+
+function languageFromCode(code: HastElement): string {
+  const fromClass = classList(code)
+    .find((name) => name.startsWith("language-"))
+    ?.replace(/^language-/, "")
+    .toLowerCase();
+  if (fromClass && fromClass !== "plaintext") return fromClass;
+
+  const snippet = textContent(code).trim();
+  if (/^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)\s+\S+/i.test(snippet)) return "http";
+  if (/^\$\s/.test(snippet) || /^(npm|pnpm|yarn|npx|curl|docker|kubectl|helm)\s/.test(snippet)) {
+    return "bash";
+  }
+  return "text";
+}
+
 function rehypeDocImagePaths(options: RenderOptions) {
   const basePath = options.imageBasePath?.replace(/\/$/, "");
   if (!basePath) return () => {};
   return (tree: unknown) => {
-    visit(tree as Node, "element", (node: { tagName?: string; properties?: Record<string, unknown> }) => {
+    visit(tree as Node, "element", (node: HastElement) => {
       if (node.tagName !== "img") return;
       const src = node.properties?.src;
       if (typeof src !== "string") return;
       if (!src.startsWith("./assets/") && !src.startsWith("../assets/")) return;
       const normalized = src.replace(/^\.{1,2}\//, "");
       node.properties = { ...node.properties, src: `${basePath}/${normalized}` };
+    });
+  };
+}
+
+/** Page chrome already shows the title — drop the duplicate markdown H1. */
+function rehypeDropLeadingH1() {
+  return (tree: HastElement) => {
+    const children = tree.children;
+    if (!Array.isArray(children)) return;
+    const index = children.findIndex((child) => (child as HastElement).tagName === "h1");
+    if (index === -1 || index > 2) return;
+    children.splice(index, 1);
+    const next = children[index] as HastElement | undefined;
+    if (next?.tagName === "hr") children.splice(index, 1);
+  };
+}
+
+function rehypeLeadParagraph() {
+  return (tree: HastElement) => {
+    const children = tree.children;
+    if (!Array.isArray(children)) return;
+    const first = children.find((child) => (child as HastElement).type === "element") as
+      | HastElement
+      | undefined;
+    if (first?.tagName === "p") addClass(first, "docs-lead");
+  };
+}
+
+function rehypeCallouts() {
+  return (tree: unknown) => {
+    visit(tree as Node, "element", (node: HastElement) => {
+      if (node.tagName !== "blockquote") return;
+      const raw = textContent(node).trim();
+      const match = /^(note|warning|tip|important|caution|info)\s*[:—-]\s*/i.exec(raw);
+      if (!match) return;
+      const kind = match[1].toLowerCase();
+      const variant =
+        kind === "warning" || kind === "caution"
+          ? "warning"
+          : kind === "tip"
+            ? "success"
+            : kind === "important"
+              ? "danger"
+              : "info";
+      node.tagName = "div";
+      setClass(node, ["docs-callout", `docs-callout-${variant}`]);
+      const label = kind.charAt(0).toUpperCase() + kind.slice(1);
+      const firstP = node.children?.find((child) => (child as HastElement).tagName === "p") as
+        | HastElement
+        | undefined;
+      if (!firstP) return;
+      const prefix = new RegExp(`^${kind}\\s*[:—-]\\s*`, "i");
+      const rest = textContent(firstP).replace(prefix, "");
+      firstP.children = [
+        {
+          type: "element",
+          tagName: "span",
+          properties: { className: ["docs-callout-label"] },
+          children: [{ type: "text", value: label }],
+        } as HastElement,
+        { type: "text", value: rest ? ` ${rest}` : "" },
+      ];
+    });
+  };
+}
+
+function rehypeTableWrap() {
+  return (tree: unknown) => {
+    visit(tree as Node, "element", (node: HastElement, index, parent: HastElement | undefined) => {
+      if (node.tagName !== "table" || !parent || typeof index !== "number") return;
+      if (classList(parent).includes("docs-table-wrap")) return;
+      parent.children![index] = {
+        type: "element",
+        tagName: "div",
+        properties: { className: ["docs-table-wrap"] },
+        children: [node],
+      };
+    });
+  };
+}
+
+function rehypeCodeFrames() {
+  return (tree: unknown) => {
+    visit(tree as Node, "element", (node: HastElement, index, parent: HastElement | undefined) => {
+      if (node.tagName !== "pre" || !parent || typeof index !== "number") return;
+      if (classList(parent).includes("docs-code")) return;
+
+      const code = node.children?.find((child) => (child as HastElement).tagName === "code") as
+        | HastElement
+        | undefined;
+      const lang = code ? languageFromCode(code) : "text";
+      addClass(node, "docs-code-pre");
+
+      parent.children![index] = {
+        type: "element",
+        tagName: "div",
+        properties: { className: ["docs-code"] },
+        children: [
+          {
+            type: "element",
+            tagName: "div",
+            properties: { className: ["docs-code-bar"] },
+            children: [
+              {
+                type: "element",
+                tagName: "span",
+                properties: { className: ["docs-code-lang"] },
+                children: [{ type: "text", value: lang }],
+              },
+              {
+                type: "element",
+                tagName: "button",
+                properties: {
+                  type: "button",
+                  className: ["docs-code-copy"],
+                  "aria-label": "Copy code",
+                },
+                children: [{ type: "text", value: "Copy" }],
+              },
+            ],
+          },
+          node,
+        ],
+      };
     });
   };
 }
@@ -37,6 +208,11 @@ export async function renderMarkdown(markdown: string, options: RenderOptions = 
     .use(rehypeAutolinkHeadings, { behavior: "wrap" })
     .use(rehypeHighlight)
     .use(rehypeDocImagePaths, options)
+    .use(rehypeDropLeadingH1)
+    .use(rehypeLeadParagraph)
+    .use(rehypeCallouts)
+    .use(rehypeTableWrap)
+    .use(rehypeCodeFrames)
     // @ts-expect-error rehype typings don't align with unified's overloaded use signature
     .use(rehypeStringify)
     .process(markdown);

@@ -53,13 +53,13 @@ export function Pricing() {
           <div className="mt-8 flex flex-col gap-3 border-t border-slate-200 pt-8 sm:flex-row sm:items-center sm:justify-between">
             <Link
               href={BRAND.links.docs}
-              className="inline-flex h-11 items-center justify-center rounded-[12px] bg-[#2563eb] px-6 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+              className="inline-flex h-11 items-center justify-center rounded-[12px] bg-slate-900 px-8 text-sm font-semibold text-white hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 transition-all shadow-sm"
             >
               Deploy
             </Link>
             <Link
               href="/compare"
-              className="text-sm font-medium text-[#2563eb] hover:underline"
+              className="text-sm font-medium text-slate-700 hover:text-slate-900 hover:underline"
             >
               Compare cost vs the usual SaaS on-call stack
             </Link>

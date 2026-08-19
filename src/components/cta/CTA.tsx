@@ -55,7 +55,7 @@ export function CTA() {
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
             href={BRAND.links.docs}
-            className="inline-flex h-11 w-full items-center justify-center rounded-[12px] bg-[#2563eb] px-8 text-sm font-semibold text-white hover:bg-blue-700 sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+            className="inline-flex h-11 w-full items-center justify-center rounded-[12px] bg-slate-900 px-8 text-sm font-semibold text-white hover:bg-slate-800 sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 transition-all shadow-sm"
           >
             Deploy
           </Link>

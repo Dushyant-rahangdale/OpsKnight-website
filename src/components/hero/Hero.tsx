@@ -73,14 +73,14 @@ kubectl apply -k .`
             backgroundSize: "48px 48px",
           }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(37,99,235,0.06),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(15,23,42,0.04),transparent_50%)]" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         {/* Version & License Mono Tagline */}
         <div className="mb-6 inline-flex items-center justify-center">
-          <p className="font-mono text-xs sm:text-[13px] font-medium tracking-wide text-slate-500 bg-white/80 backdrop-blur-sm border border-slate-200/80 px-3.5 py-1.5 rounded-full shadow-xs">
+          <p className="font-mono text-xs sm:text-[13px] font-medium tracking-wide text-slate-600 bg-white/90 backdrop-blur-sm border border-slate-200 px-4 py-1.5 rounded-full shadow-xs">
             OpsKnight 1.3.1 · you run it · Apache-2.0
           </p>
         </div>
@@ -99,17 +99,17 @@ kubectl apply -k .`
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
           <Link
             href="#product-tour"
-            className="w-full sm:w-auto inline-flex h-12 items-center justify-center rounded-[12px] bg-[#2563eb] px-8 text-sm font-semibold tracking-wide text-white transition-all hover:bg-[#1d4ed8] shadow-sm hover:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+            className="w-full sm:w-auto inline-flex h-12 items-center justify-center rounded-[12px] bg-slate-900 px-8 text-sm font-semibold tracking-wide text-white transition-all hover:bg-slate-800 shadow-sm hover:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
           >
             See how a night goes
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-2 h-4 w-4 text-slate-300" />
           </Link>
 
           <Link
             href={BRAND.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-white border border-slate-300 px-6 text-sm font-semibold tracking-wide text-[#111827] transition-all hover:bg-slate-50 hover:border-slate-400 shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+            className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-white border border-slate-300 px-6 text-sm font-semibold tracking-wide text-[#111827] transition-all hover:bg-slate-50 hover:border-slate-400 shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
           >
             <Github className="w-4 h-4 text-[#111827]" />
             <span>Source on GitHub</span>
@@ -118,7 +118,7 @@ kubectl apply -k .`
           <button
             type="button"
             onClick={() => setShowDeployBox((prev) => !prev)}
-            className="text-sm font-semibold text-[#2563eb] hover:text-[#1d4ed8] hover:underline px-2 py-1 flex items-center gap-1 transition-colors"
+            className="text-sm font-semibold text-slate-700 hover:text-slate-900 hover:underline px-2 py-1 flex items-center gap-1 transition-colors"
           >
             <span>{showDeployBox ? "Hide run commands" : "How to run it on your machines"}</span>
             {showDeployBox ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -147,7 +147,7 @@ kubectl apply -k .`
                       onClick={() => setActiveDeploy(tab)}
                       className={`px-3 py-1 rounded-lg text-xs font-bold font-mono transition-all ${
                         activeDeploy === tab
-                          ? "bg-[#2563eb] text-white shadow-xs"
+                          ? "bg-slate-800 text-white shadow-xs"
                           : "text-slate-400 hover:text-white"
                       }`}
                     >
@@ -189,10 +189,10 @@ kubectl apply -k .`
                   <span className="text-[#059669]">●</span> DB: Bundled PostgreSQL 15 (Zero Setup)
                 </span>
                 <span className="flex items-center gap-1">
-                  <span className="text-[#2563eb]">●</span> Latency: &lt; 15ms Ingest
+                  <span className="text-sky-400">●</span> Latency: &lt; 15ms Ingest
                 </span>
                 <span className="flex items-center gap-1">
-                  <span className="text-[#38bdf8]">●</span> Privacy: 100% On-Premises
+                  <span className="text-slate-300">●</span> Privacy: 100% On-Premises
                 </span>
                 <span className="flex items-center gap-1">
                   <span className="text-amber-400">●</span> License: Apache-2.0
@@ -204,8 +204,8 @@ kubectl apply -k .`
 
         {/* 4-Pillar Trust Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-blue-500/40 hover:shadow-sm transition-all">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#2563eb] mb-3">
+          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-slate-400 hover:shadow-sm transition-all">
+            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 mb-3">
               <Shield className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-[#111827] text-sm mb-1">100% VPC Sovereignty</h3>
@@ -214,8 +214,8 @@ kubectl apply -k .`
             </p>
           </div>
 
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-blue-500/40 hover:shadow-sm transition-all">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#2563eb] mb-3">
+          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-slate-400 hover:shadow-sm transition-all">
+            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 mb-3">
               <Zap className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-[#111827] text-sm mb-1">28+ Native Integrations</h3>
@@ -224,18 +224,18 @@ kubectl apply -k .`
             </p>
           </div>
 
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-blue-500/40 hover:shadow-sm transition-all">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#2563eb] mb-3">
+          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-slate-400 hover:shadow-sm transition-all">
+            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 mb-3">
               <Repeat className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-[#111827] text-sm mb-1">Drop-in PagerDuty API</h3>
             <p className="text-xs text-[#4b5563] leading-relaxed">
-              Implements <code className="text-[#2563eb] font-mono">/api/v2/enqueue</code>. Migrate in 30 seconds with 0 alert loss.
+              Implements <code className="text-slate-900 font-mono font-bold">/api/v2/enqueue</code>. Migrate in 30 seconds with 0 alert loss.
             </p>
           </div>
 
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-blue-500/40 hover:shadow-sm transition-all">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#2563eb] mb-3">
+          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-slate-400 hover:shadow-sm transition-all">
+            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 mb-3">
               <Users className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-[#111827] text-sm mb-1">$0 Per-Seat Tax</h3>

@@ -1,43 +1,34 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
 export function CopyCodeButton() {
   useEffect(() => {
-    const preElements = document.querySelectorAll('pre')
-    preElements.forEach((pre) => {
-      // Avoid attaching multiple buttons
-      if (pre.querySelector('.copy-code-btn')) return
+    const frames = document.querySelectorAll<HTMLElement>(".docs-code");
+    const cleanups: Array<() => void> = [];
 
-      pre.style.position = 'relative'
+    frames.forEach((frame) => {
+      const btn = frame.querySelector<HTMLButtonElement>(".docs-code-copy");
+      const code = frame.querySelector("pre code");
+      if (!btn || !code) return;
 
-      const btn = document.createElement('button')
-      btn.className = 'copy-code-btn absolute top-2 right-2 p-1.5 rounded-md bg-white/10 hover:bg-white/20 text-slate-400 transition-colors'
-      btn.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      `
+      const onClick = async () => {
+        await navigator.clipboard.writeText(code.textContent || "");
+        const previous = btn.textContent;
+        btn.textContent = "Copied";
+        btn.dataset.copied = "true";
+        window.setTimeout(() => {
+          btn.textContent = previous || "Copy";
+          delete btn.dataset.copied;
+        }, 1600);
+      };
 
-      btn.addEventListener('click', async () => {
-        const code = pre.querySelector('code')?.innerText || ''
-        await navigator.clipboard.writeText(code)
-        
-        const originalHTML = btn.innerHTML
-        btn.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-        `
-        setTimeout(() => {
-          btn.innerHTML = originalHTML
-        }, 2000)
-      })
+      btn.addEventListener("click", onClick);
+      cleanups.push(() => btn.removeEventListener("click", onClick));
+    });
 
-      pre.appendChild(btn)
-    })
-  }, [])
+    return () => cleanups.forEach((fn) => fn());
+  }, []);
 
-  return null
+  return null;
 }

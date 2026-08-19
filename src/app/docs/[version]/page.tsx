@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getDocPage, getDocFilePath } from "@/lib/docs/content";
 import { getSidebar } from "@/lib/docs/sidebar";
 import { DocsToc } from "@/components/docs/DocsToc";
+import { DocsArticleBody } from "@/components/docs/DocsArticleBody";
 import { DOC_VERSIONS } from "@/lib/docs/versions";
 import { BRAND } from "@/lib/brand";
 import { ArrowRight, Code2, Rocket } from "lucide-react";
@@ -156,10 +157,7 @@ export default async function DocsIndexPage({
           <h2 className="mb-6 border-b border-slate-200 pb-4 text-xl font-semibold text-[#111827]">
             This version
           </h2>
-          <div
-            className="docs-content prose prose-slate max-w-none prose-headings:text-slate-900 prose-a:text-blue-600"
-            dangerouslySetInnerHTML={{ __html: doc.html }}
-          />
+          <DocsArticleBody html={doc.html} />
         </article>
         <aside className="hidden lg:block">
           <div className="sticky top-24">

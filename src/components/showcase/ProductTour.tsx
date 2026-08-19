@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Activity, Calendar, MessageSquare, ShieldCheck, BarChart3, Check } from "lucide-react";
-import { BRAND } from "@/lib/brand";
 
 type TourTab = {
   id: string;
@@ -44,7 +43,7 @@ const TOUR_TABS: TourTab[] = [
   {
     id: "slack",
     name: "Slack rooms",
-    image: null,
+    image: "/slack-chatops.png",
     heading: "A channel for that incident.",
     description:
       "From v1.2, OpsKnight can open a Slack channel, invite the people on call, and let you acknowledge or resolve from the message. Optional Jitsi, Zoom, or Meet link. Not native voice paging.",
@@ -84,7 +83,6 @@ const TOUR_TABS: TourTab[] = [
 
 export function ProductTour() {
   const [activeTab, setActiveTab] = useState("incidents");
-  const [slackStatus, setSlackStatus] = useState<"OPEN" | "ACKNOWLEDGED" | "RESOLVED">("OPEN");
   const currentTab = TOUR_TABS.find((t) => t.id === activeTab) || TOUR_TABS[0];
 
   return (
@@ -98,7 +96,7 @@ export function ProductTour() {
             Screens from a real install.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#4b5563]">
-            Same sequence as the night: list, schedule, Slack, policy, service. Slack below is a mock of the ChatOps card — try Acknowledge.
+            Same sequence as the night: list, schedule, Slack, policy, service.
           </p>
         </div>
 
@@ -136,39 +134,7 @@ export function ProductTour() {
         <div className="mt-8 overflow-hidden rounded-[14px] border border-slate-200 bg-slate-50">
           <div className="grid lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,1fr)]">
             <div className="bg-[#0f172a] p-4 sm:p-6">
-              {currentTab.id === "slack" ? (
-                <div className="overflow-hidden rounded-[12px] border border-slate-700 bg-[#1a1d21] text-slate-200">
-                  <div className="border-b border-[#2c3136] px-4 py-3">
-                    <p className="text-sm font-semibold text-white">#inc-payments-1842</p>
-                    <p className="mt-0.5 text-xs text-slate-400">Opened for this incident · {BRAND.name}</p>
-                  </div>
-                  <div className="space-y-3 p-4 text-sm">
-                    <p className="text-slate-300">
-                      High CPU on checkout-api. Status:{" "}
-                      <span className="font-semibold text-white">{slackStatus}</span>
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setSlackStatus("ACKNOWLEDGED")}
-                        className="rounded-md border border-slate-600 bg-slate-800 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-700"
-                      >
-                        Acknowledge
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setSlackStatus("RESOLVED")}
-                        className="rounded-md border border-emerald-800 bg-emerald-950 px-3 py-1.5 text-xs font-semibold text-emerald-200 hover:bg-emerald-900"
-                      >
-                        Resolve
-                      </button>
-                    </div>
-                    <p className="text-xs text-slate-500">
-                      Optional video is a link you paste (Jitsi, Meet, Zoom). OpsKnight does not place voice calls.
-                    </p>
-                  </div>
-                </div>
-              ) : currentTab.image ? (
+              {currentTab.image ? (
                 <Image
                   src={currentTab.image}
                   alt={currentTab.heading}

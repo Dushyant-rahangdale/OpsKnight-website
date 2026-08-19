@@ -120,8 +120,20 @@ for (let depth = 1; depth <= 6; depth += 1) {
   txtToHtml.push(`${segments(depth, ".txt")} ${segments(depth, "/")} 301`);
 }
 
+const duplicateSegmentRules = [
+  `/docs/:v/api/api/* /docs/:v/api/:splat 301`,
+  `/docs/:v/integrations/integrations/* /docs/:v/integrations/:splat 301`,
+  `/docs/:v/getting-started/getting-started/* /docs/:v/getting-started/:splat 301`,
+  `/docs/:v/getting-started/deployment/* /docs/:v/deployment/:splat 301`,
+  `/docs/:v/core-concepts/core-concepts/* /docs/:v/core-concepts/:splat 301`,
+  `/docs/:v/administration/administration/* /docs/:v/administration/:splat 301`,
+];
+
 const reserved = [
   ...txtToHtml,
+  "",
+  "# Section deduplication fixes",
+  ...duplicateSegmentRules,
   "",
   "# Version-agnostic alias",
   `/docs/latest/* /docs/${newest}/:splat 302`,

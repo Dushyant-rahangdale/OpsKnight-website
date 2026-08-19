@@ -97,6 +97,18 @@ function rehypeDocLinkPaths(options: RenderOptions) {
         return;
       }
 
+      // Check if this is an image or static asset link
+      if (/\.(png|jpe?g|svg|webp|gif|drawio)$/i.test(href)) {
+        const imgBase = path.basename(href);
+        node.properties = {
+          ...node.properties,
+          href: `/docs/${version}/assets/${imgBase}`,
+          target: "_blank",
+          rel: "noopener noreferrer",
+        };
+        return;
+      }
+
       const [pathAndSearch, hash] = href.split("#");
       const [rawPathname, search] = pathAndSearch.split("?");
 
@@ -114,9 +126,11 @@ function rehypeDocLinkPaths(options: RenderOptions) {
 
         // Strip duplicate top-level section prefix if author wrote e.g. ./api/events inside api/
         let finalRel = normalizedRel.replace(/^\.\//, "").replace(/^\//, "");
-        const firstSec = relDir.split("/")[0];
-        if (firstSec && finalRel.startsWith(`${firstSec}/${firstSec}/`)) {
-          finalRel = finalRel.slice(firstSec.length + 1);
+        const parts = relDir.split("/").filter(Boolean);
+        for (const part of parts) {
+          if (finalRel.startsWith(`${part}/${part}/`)) {
+            finalRel = finalRel.slice(part.length + 1);
+          }
         }
 
         clean = `/docs/${version}/${finalRel}`;

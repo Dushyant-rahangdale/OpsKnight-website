@@ -5,7 +5,7 @@ import { BRAND } from "@/lib/brand";
 
 const footerLinks = {
   product: [
-    { label: "Features", href: "/#features" },
+    { label: "Product", href: "/#product-tour" },
     { label: "Integrations", href: "/integrations" },
     { label: "Changelog", href: "/changelog" },
     { label: "Compare", href: "/compare" },

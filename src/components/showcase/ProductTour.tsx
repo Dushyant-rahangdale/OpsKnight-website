@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Activity, Calendar, MessageSquare, ShieldCheck, BarChart3, Check } from "lucide-react";
+import { BRAND } from "@/lib/brand";
 
 type TourTab = {
   id: string;
@@ -24,7 +26,8 @@ const TOUR_TABS: TourTab[] = [
     notes: [
       "Open, acknowledged, and resolved in one place",
       "Filter by service, urgency, and who is assigned",
-      "Timeline of what people did — you write the postmortem from that",
+      "Write the postmortem from the timeline — OpsKnight does not invent a report",
+      "Ack from a phone by installing the site; same login as desktop",
     ],
   },
   {
@@ -76,7 +79,7 @@ const TOUR_TABS: TourTab[] = [
     notes: [
       "Ownership and the policy that pages",
       "Inbound integrations hang off the service",
-      "One public or private status page per install",
+      "One public or private status page per install — not unlimited sites per team",
     ],
   },
 ];
@@ -96,7 +99,7 @@ export function ProductTour() {
             Screens from a real install.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[#4b5563]">
-            Same sequence as the night: list, schedule, Slack, policy, service.
+            Same sequence as the night: list, schedule, Slack, policy, service. Status is one page. Ack from a phone is the site on the home screen — no extra app-store product.
           </p>
         </div>
 
@@ -155,6 +158,17 @@ export function ProductTour() {
                   </li>
                 ))}
               </ul>
+              {currentTab.id === "services" ? (
+                <Link
+                  href={BRAND.links.status}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[#2563eb] hover:underline"
+                >
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#059669]" />
+                  Live status example
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>

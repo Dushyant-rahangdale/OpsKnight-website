@@ -1,6 +1,24 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { COMPETITORS } from "@/lib/competitors";
+
+const facts = [
+  {
+    title: "You operate it",
+    body: "Self-hosted. There is no OpsKnight cloud and no per-seat software fee. You pay compute, SMS, and Slack.",
+  },
+  {
+    title: "Paging is text, chat, and push",
+    body: "Email, SMS (Twilio or SNS), Slack, WhatsApp, webhooks. No native voice calls.",
+  },
+  {
+    title: "One status page per install",
+    body: "Public or private, optional custom domain. Not unlimited separate sites per team.",
+  },
+  {
+    title: "Events API v2 ingest",
+    body: "Keep routing keys; change the destination URL. That is an adapter, not a PagerDuty clone of the whole product.",
+  },
+];
 
 export function Comparison() {
   return (
@@ -13,22 +31,14 @@ export function Comparison() {
           <h2 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-4xl">
             Same job as the paid on-call products. You operate the software.
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-[#4b5563]">
-            The full matrix, honest gaps, and a cost sketch (your invoice rates,
-            not our claimed list prices) live on the compare page.
-          </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          {COMPETITORS.map((vendor) => (
-            <Link
-              key={vendor.slug}
-              href={vendor.href}
-              className="rounded-[12px] border border-slate-200 bg-white p-4 transition-colors hover:border-slate-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
-            >
-              <p className="text-sm font-semibold text-[#111827]">{vendor.name}</p>
-              <p className="mt-1 text-[11px] text-[#4b5563]">{vendor.category}</p>
-            </Link>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          {facts.map((fact) => (
+            <div key={fact.title} className="rounded-[14px] border border-slate-200 bg-white p-6">
+              <h3 className="text-base font-semibold text-[#111827]">{fact.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#4b5563]">{fact.body}</p>
+            </div>
           ))}
         </div>
 
@@ -37,7 +47,7 @@ export function Comparison() {
             href="/compare"
             className="inline-flex items-center gap-2 text-sm font-medium text-[#2563eb] hover:underline"
           >
-            See cost vs the usual SaaS on-call stack
+            Full matrix and a cost sketch (your invoice rates)
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

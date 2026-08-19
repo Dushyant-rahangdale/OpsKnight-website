@@ -689,7 +689,7 @@ export default function ComparePage() {
                         <h2 className="text-2xl font-bold mb-6">Frequently asked questions</h2>
                         <div className="grid gap-6 md:grid-cols-3">
                             {faqs.map((faq) => (
-                                <div className="rounded-[12px] border border-slate-200 bg-slate-50 p-5">
+                                <div key={faq.question} className="rounded-[12px] border border-slate-200 bg-slate-50 p-5">
                                     <h3 className="font-semibold mb-2">{faq.question}</h3>
                                     <p className="text-sm text-[#4b5563]">{faq.answer}</p>
                                 </div>

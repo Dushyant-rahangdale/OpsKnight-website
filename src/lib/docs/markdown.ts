@@ -75,6 +75,29 @@ function rehypeDocImagePaths(options: RenderOptions) {
   };
 }
 
+function rehypeDocLinkPaths() {
+  return (tree: unknown) => {
+    visit(tree as Node, "element", (node: HastElement) => {
+      if (node.tagName !== "a") return;
+      const href = node.properties?.href;
+      if (typeof href !== "string") return;
+      if (href.startsWith("http://") || href.startsWith("https://") || href.startsWith("#") || href.startsWith("mailto:")) return;
+
+      // Remove .md suffix from internal links
+      let clean = href.replace(/\.md$/, "").replace(/\.md#/, "#");
+
+      // Ensure trailing slash on directory/page links so Next.js static router navigates to index.html
+      const [path, hash] = clean.split("#");
+      const [pathname, search] = path.split("?");
+      if (!pathname.endsWith("/") && !/\.[a-z0-9]+$/i.test(pathname)) {
+        clean = `${pathname}/${search ? `?${search}` : ""}${hash ? `#${hash}` : ""}`;
+      }
+
+      node.properties = { ...node.properties, href: clean };
+    });
+  };
+}
+
 /** Page chrome already shows the title — drop the duplicate markdown H1. */
 function rehypeDropLeadingH1() {
   return (tree: HastElement) => {
@@ -208,6 +231,7 @@ export async function renderMarkdown(markdown: string, options: RenderOptions = 
     .use(rehypeAutolinkHeadings, { behavior: "wrap" })
     .use(rehypeHighlight)
     .use(rehypeDocImagePaths, options)
+    .use(rehypeDocLinkPaths)
     .use(rehypeDropLeadingH1)
     .use(rehypeLeadParagraph)
     .use(rehypeCallouts)

@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
-type DeployTab = "compose" | "docker" | "helm";
+type DeployTab = "compose" | "docker" | "helm" | "kustomize";
 
 export function Hero() {
   const [activeDeploy, setActiveDeploy] = useState<DeployTab>("compose");
@@ -24,16 +24,35 @@ export function Hero() {
   const [showDeployBox, setShowDeployBox] = useState(true);
 
   const deployCommands: Record<DeployTab, string> = {
-    compose: `curl -sL https://raw.githubusercontent.com/opsknight-labs/OpsKnight/main/docker-compose.yml > docker-compose.yml
-docker-compose up -d`,
-    docker: `docker run -d -p 3000:3000 \\
-  -e DATABASE_URL="postgresql://user:pass@host:5432/opsknight" \\
-  -e NEXTAUTH_SECRET="generate-a-secure-secret-key" \\
-  -e ENCRYPTION_KEY="your-32-byte-hex-encryption-key" \\
+    compose: `# 1-Command Full Stack (OpsKnight + PostgreSQL + Healthchecks)
+curl -sL https://raw.githubusercontent.com/opsknight-labs/OpsKnight/main/docker-compose.yml > docker-compose.yml
+docker compose up -d`,
+    docker: `# 1. Start persistent PostgreSQL database container
+docker run -d --name opsknight-db \\
+  -e POSTGRES_DB=opsknight_db \\
+  -e POSTGRES_USER=opsknight \\
+  -e POSTGRES_PASSWORD=opsknight_secure_password \\
+  -v opsknight_postgres_data:/var/lib/postgresql/data \\
+  postgres:15-alpine
+
+# 2. Run OpsKnight connected to database
+docker run -d --name opsknight-app -p 3000:3000 \\
+  -e DATABASE_URL="postgresql://opsknight:opsknight_secure_password@opsknight-db:5432/opsknight_db" \\
+  -e NEXTAUTH_URL="http://localhost:3000" \\
+  -e NEXTAUTH_SECRET="$(openssl rand -base64 32)" \\
+  -e ENCRYPTION_KEY="$(openssl rand -hex 32)" \\
+  --link opsknight-db \\
   ghcr.io/opsknight-labs/opsknight:latest`,
-    helm: `helm repo add opsknight https://opsknight-labs.github.io/helm-charts
-helm repo update
-helm install opsknight opsknight/opsknight --set app.secret="your-secure-secret"`
+    helm: `# Deploy on Kubernetes via official Helm Chart
+git clone https://github.com/opsknight-labs/OpsKnight.git
+cd OpsKnight
+helm install opsknight ./helm/opsknight \\
+  --namespace opsknight \\
+  --create-namespace`,
+    kustomize: `# Deploy via Kubernetes Kustomize manifests (GitOps / ArgoCD / Flux)
+git clone https://github.com/opsknight-labs/OpsKnight.git
+cd OpsKnight/k8s
+kubectl apply -k .`
   };
 
   const handleCopy = () => {
@@ -117,12 +136,12 @@ helm install opsknight opsknight/opsknight --set app.secret="your-secure-secret"
                   <span className="w-3 h-3 rounded-full bg-[#ff5f56] inline-block" />
                   <span className="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block" />
                   <span className="w-3 h-3 rounded-full bg-[#27c93f] inline-block" />
-                  <span className="text-xs font-mono text-slate-400 ml-2 hidden sm:inline">1-Command Deployment</span>
+                  <span className="text-xs font-mono text-slate-400 ml-2 hidden sm:inline">Production Deployment</span>
                 </div>
 
                 {/* Deploy Switcher Tabs */}
                 <div className="flex items-center gap-1 bg-[#020617] p-1 rounded-xl border border-slate-800">
-                  {(["compose", "docker", "helm"] as const).map((tab) => (
+                  {(["compose", "docker", "helm", "kustomize"] as const).map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveDeploy(tab)}
@@ -132,7 +151,7 @@ helm install opsknight opsknight/opsknight --set app.secret="your-secure-secret"
                           : "text-slate-400 hover:text-white"
                       }`}
                     >
-                      {tab === "compose" ? "Compose" : tab === "docker" ? "Docker" : "Helm"}
+                      {tab === "compose" ? "Compose (with DB)" : tab === "docker" ? "Docker + DB" : tab === "helm" ? "Helm" : "Kustomize"}
                     </button>
                   ))}
                 </div>
@@ -167,7 +186,7 @@ helm install opsknight opsknight/opsknight --set app.secret="your-secure-secret"
               {/* Micro Specs Footer */}
               <div className="px-4 py-2.5 bg-slate-900/60 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400 font-mono">
                 <span className="flex items-center gap-1">
-                  <span className="text-[#059669]">●</span> Memory: &lt; 512MB RAM
+                  <span className="text-[#059669]">●</span> DB: Bundled PostgreSQL 15 (Zero Setup)
                 </span>
                 <span className="flex items-center gap-1">
                   <span className="text-[#2563eb]">●</span> Latency: &lt; 15ms Ingest

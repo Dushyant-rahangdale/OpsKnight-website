@@ -22,7 +22,6 @@ import {
   FileText,
   Lock
 } from "lucide-react";
-import { BRAND } from "@/lib/brand";
 
 interface TourTab {
   id: string;
@@ -210,7 +209,7 @@ export function ProductTour() {
   };
 
   const handleCopyCommand = () => {
-    navigator.clipboard.writeText(BRAND.deploy.compose);
+    navigator.clipboard.writeText("curl -sL https://raw.githubusercontent.com/opsknight-labs/OpsKnight/main/docker-compose.yml > docker-compose.yml && docker compose up -d");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -642,7 +641,7 @@ export function ProductTour() {
                   <div className="flex items-center gap-2 min-w-0 pr-2">
                     <Terminal className="w-3.5 h-3.5 text-slate-500 shrink-0" />
                     <span className="text-[11px] font-mono text-sky-400 truncate">
-                      docker run -d -p 3000:3000 ghcr.io/opsknight-labs/opsknight:latest
+                      curl -sL .../docker-compose.yml &gt; docker-compose.yml &amp;&amp; docker compose up -d
                     </span>
                   </div>
                   <button

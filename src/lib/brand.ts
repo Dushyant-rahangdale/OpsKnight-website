@@ -68,24 +68,33 @@ export const BRAND = {
 
   deploy: {
     secretsNote:
-      "First boot requires NEXTAUTH_SECRET and ENCRYPTION_KEY. Copy env.example, generate both secrets, then start Compose. A docker run without a database and these secrets will not boot.",
-    compose: `git clone https://github.com/opsknight-labs/OpsKnight.git
-cd OpsKnight
-cp env.example .env
-printf 'NEXTAUTH_SECRET=%s\\n' "$(openssl rand -base64 32)" >> .env
-printf 'ENCRYPTION_KEY=%s\\n' "$(openssl rand -hex 32)" >> .env
+      "OpsKnight requires PostgreSQL, NEXTAUTH_SECRET, and ENCRYPTION_KEY. The bundled Docker Compose configuration starts both PostgreSQL and OpsKnight automatically.",
+    compose: `curl -sL https://raw.githubusercontent.com/opsknight-labs/OpsKnight/main/docker-compose.yml > docker-compose.yml
 docker compose up -d`,
-    docker: `docker run -d --name opsknight -p 3000:3000 \\
-  -e DATABASE_URL="postgresql://user:password@your-db-host:5432/opsknight" \\
+    docker: `# 1. Run PostgreSQL database container
+docker run -d --name opsknight-db \\
+  -e POSTGRES_DB=opsknight_db \\
+  -e POSTGRES_USER=opsknight \\
+  -e POSTGRES_PASSWORD=opsknight_secure_password \\
+  -v opsknight_postgres_data:/var/lib/postgresql/data \\
+  postgres:15-alpine
+
+# 2. Run OpsKnight container connected to database
+docker run -d --name opsknight-app -p 3000:3000 \\
+  -e DATABASE_URL="postgresql://opsknight:opsknight_secure_password@opsknight-db:5432/opsknight_db" \\
   -e NEXTAUTH_URL="http://localhost:3000" \\
-  -e NEXT_PUBLIC_APP_URL="http://localhost:3000" \\
   -e NEXTAUTH_SECRET="$(openssl rand -base64 32)" \\
   -e ENCRYPTION_KEY="$(openssl rand -hex 32)" \\
-  ghcr.io/opsknight-labs/opsknight:1.3.1`,
-    helm: `helm repo add opsknight https://charts.opsknight.com
-helm install opsknight opsknight/opsknight \\
-  --set env.NEXTAUTH_SECRET="<secret>" \\
-  --set env.ENCRYPTION_KEY="<32-byte-hex>"`,
+  --link opsknight-db \\
+  ghcr.io/opsknight-labs/opsknight:latest`,
+    helm: `git clone https://github.com/opsknight-labs/OpsKnight.git
+cd OpsKnight
+helm install opsknight ./helm/opsknight \\
+  --namespace opsknight \\
+  --create-namespace`,
+    kustomize: `git clone https://github.com/opsknight-labs/OpsKnight.git
+cd OpsKnight/k8s
+kubectl apply -k .`,
   },
 
   authors: [

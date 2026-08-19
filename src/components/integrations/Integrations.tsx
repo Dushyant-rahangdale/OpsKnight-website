@@ -137,7 +137,7 @@ export function Integrations() {
                                 transition={{ duration: 0.2 }}
                             >
                                 <Link href={item.href} className="flex items-start gap-4 p-5 rounded-2xl bg-slate-900/40 border border-white/5 hover:border-blue-500/30 hover:bg-slate-900/80 transition-all group h-full">
-                                    <div className="w-10 h-10 shrink-0 text-slate-300 group-hover:text-blue-400 transition-colors">
+                                    <div className="w-11 h-11 rounded-xl bg-white p-2 shrink-0 shadow-md flex items-center justify-center group-hover:scale-105 transition-transform">
                                         {item.icon}
                                     </div>
                                     <div>

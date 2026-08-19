@@ -630,7 +630,7 @@ export default function IntegrationsGrid() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-11 h-11 rounded-xl bg-slate-950 border border-white/10 p-1.5 flex items-center justify-center group-hover:scale-105 transition-transform shadow-inner">
+                <div className="w-11 h-11 rounded-xl bg-white p-2 flex items-center justify-center group-hover:scale-105 transition-transform shadow-md shrink-0">
                   {integrationIcons[integration.iconKey]}
                 </div>
                 <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400">
@@ -680,7 +680,7 @@ export default function IntegrationsGrid() {
             {/* Modal Header */}
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-slate-950 border border-white/10 p-2 shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-white p-2.5 shrink-0 shadow-md flex items-center justify-center">
                   {integrationIcons[selectedIntegration.iconKey]}
                 </div>
                 <div>

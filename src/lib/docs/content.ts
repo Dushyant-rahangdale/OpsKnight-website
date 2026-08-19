@@ -75,8 +75,15 @@ export function getDocFilePath(version: string, slugParts: string[]) {
 export async function getDocPage(version: string, slugParts: string[]) {
   const filePath = getDocFilePath(version, slugParts);
   if (!filePath) return null;
+  const root = getVersionRoot(version);
+  const relPath = path.relative(root, filePath);
+  const docRelDir = path.dirname(relPath);
   const { title, description, content } = readMarkdownFile(filePath);
-  const html = await renderMarkdown(content, { imageBasePath: `/docs/${version}` });
+  const html = await renderMarkdown(content, {
+    imageBasePath: `/docs/${version}`,
+    docVersion: version,
+    docRelDir: docRelDir === "." ? "" : docRelDir.replace(/\\/g, "/"),
+  });
   const headings = extractHeadings(content);
   return {
     title,

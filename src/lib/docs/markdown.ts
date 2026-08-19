@@ -9,8 +9,12 @@ import rehypeStringify from "rehype-stringify";
 import type { Node } from "unist";
 import { visit } from "unist-util-visit";
 
+import path from "node:path";
+
 type RenderOptions = {
   imageBasePath?: string;
+  docVersion?: string;
+  docRelDir?: string;
 };
 
 type HastElement = {
@@ -75,25 +79,56 @@ function rehypeDocImagePaths(options: RenderOptions) {
   };
 }
 
-function rehypeDocLinkPaths() {
+function rehypeDocLinkPaths(options: RenderOptions) {
+  const version = options.docVersion;
+  const relDir = options.docRelDir ?? "";
+
   return (tree: unknown) => {
     visit(tree as Node, "element", (node: HastElement) => {
       if (node.tagName !== "a") return;
       const href = node.properties?.href;
       if (typeof href !== "string") return;
-      if (href.startsWith("http://") || href.startsWith("https://") || href.startsWith("#") || href.startsWith("mailto:")) return;
-
-      // Remove .md suffix from internal links
-      let clean = href.replace(/\.md$/, "").replace(/\.md#/, "#");
-
-      // Ensure trailing slash on directory/page links so Next.js static router navigates to index.html
-      const [path, hash] = clean.split("#");
-      const [pathname, search] = path.split("?");
-      if (!pathname.endsWith("/") && !/\.[a-z0-9]+$/i.test(pathname)) {
-        clean = `${pathname}/${search ? `?${search}` : ""}${hash ? `#${hash}` : ""}`;
+      if (
+        href.startsWith("http://") ||
+        href.startsWith("https://") ||
+        href.startsWith("#") ||
+        href.startsWith("mailto:")
+      ) {
+        return;
       }
 
-      node.properties = { ...node.properties, href: clean };
+      const [pathAndSearch, hash] = href.split("#");
+      const [rawPathname, search] = pathAndSearch.split("?");
+
+      // Remove .md suffix
+      let clean = rawPathname.replace(/\.mdx?$/i, "");
+
+      if (clean.startsWith("/")) {
+        // Absolute path from site root
+        if (!clean.startsWith("/docs") && version) {
+          clean = `/docs/${version}${clean}`;
+        }
+      } else if (version) {
+        // Resolve relative path against document directory
+        const normalizedRel = path.posix.normalize(path.posix.join(relDir, clean));
+
+        // Strip duplicate top-level section prefix if author wrote e.g. ./api/events inside api/
+        let finalRel = normalizedRel.replace(/^\.\//, "").replace(/^\//, "");
+        const firstSec = relDir.split("/")[0];
+        if (firstSec && finalRel.startsWith(`${firstSec}/${firstSec}/`)) {
+          finalRel = finalRel.slice(firstSec.length + 1);
+        }
+
+        clean = `/docs/${version}/${finalRel}`;
+      }
+
+      // Ensure trailing slash on directory/page links so Next.js static router navigates to index.html
+      if (!clean.endsWith("/") && !/\.[a-z0-9]+$/i.test(clean)) {
+        clean = `${clean}/`;
+      }
+
+      const finalHref = `${clean}${search ? `?${search}` : ""}${hash ? `#${hash}` : ""}`;
+      node.properties = { ...node.properties, href: finalHref };
     });
   };
 }
@@ -231,7 +266,7 @@ export async function renderMarkdown(markdown: string, options: RenderOptions = 
     .use(rehypeAutolinkHeadings, { behavior: "wrap" })
     .use(rehypeHighlight)
     .use(rehypeDocImagePaths, options)
-    .use(rehypeDocLinkPaths)
+    .use(rehypeDocLinkPaths, options)
     .use(rehypeDropLeadingH1)
     .use(rehypeLeadParagraph)
     .use(rehypeCallouts)

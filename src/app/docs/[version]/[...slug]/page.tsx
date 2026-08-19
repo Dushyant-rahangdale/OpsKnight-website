@@ -8,6 +8,7 @@ import { DOC_VERSIONS } from "@/lib/docs/versions";
 import { ChevronRight, Clock, BookOpen } from "lucide-react";
 import { DocsPrevNext } from "@/components/docs/DocsPrevNext";
 import { BRAND } from "@/lib/brand";
+import { docsHref } from "@/lib/docs/paths";
 
 export const dynamicParams = false;
 // export const dynamic = "force-static";
@@ -26,8 +27,8 @@ export async function generateMetadata({
 
   const canonical =
     doc.slug.length > 0
-      ? `/docs/${version}/${doc.slug.join("/")}/`
-      : `/docs/${version}/`;
+      ? docsHref(version, doc.slug)
+      : docsHref(version);
   const title = doc.title;
   const description =
     doc.description ||
@@ -91,10 +92,10 @@ export default async function DocsPage({
   const editUrl = `${BRAND.links.github}/blob/main/docs/${githubDocPath}`;
 
   const breadcrumbs = [
-    { label: "Docs", href: `/docs/${version}` },
+    { label: "Docs", href: docsHref(version) },
     ...slug.map((s, i) => ({
       label: s.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
-      href: `/docs/${version}/${slug.slice(0, i + 1).join("/")}`,
+      href: docsHref(version, slug.slice(0, i + 1)),
     })),
   ];
 
@@ -152,7 +153,7 @@ export default async function DocsPage({
 
         <div className="rounded-[14px] border border-slate-200 bg-white px-6 py-8 sm:px-10">
           <DocsArticleBody html={doc.html} />
-          <DocsPrevNext version={version} currentPath={`/docs/${version}${slug.length > 0 ? `/${slug.join("/")}` : ""}`} />
+          <DocsPrevNext version={version} currentPath={docsHref(version, slug)} />
         </div>
 
         {/* Footer Navigation */}

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { withTrailingSlash } from '@/lib/docs/paths';
 import { 
   Search, 
   Copy, 
@@ -775,7 +776,7 @@ export default function IntegrationsGrid() {
               </button>
 
               <Link
-                href={selectedIntegration.docPath}
+                href={withTrailingSlash(selectedIntegration.docPath)}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md"
               >
                 Read Setup Guide

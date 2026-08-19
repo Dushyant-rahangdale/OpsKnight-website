@@ -20,7 +20,7 @@ export const BRAND = {
   links: {
     github: "https://github.com/opsknight-labs/OpsKnight",
     sponsor: "https://github.com/sponsors/dushyant-rahangdale",
-    docs: "/docs/latest",
+    docs: "/docs/latest/",
     twitter: "https://twitter.com/opsknight",
     email: "help@opsknight.com",
     status: "https://status.opsknight.com",

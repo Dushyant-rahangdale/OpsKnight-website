@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Check } from "lucide-react";
 import type { DocsVersion } from "@/lib/docs/types";
+import { withTrailingSlash } from "@/lib/docs/paths";
 
 export function DocsVersionSwitcher({
   currentVersion,
@@ -33,7 +34,7 @@ export function DocsVersionSwitcher({
     const parts = pathname.split("/").filter(Boolean);
     if (parts[0] !== "docs") return;
     const rest = parts.slice(2);
-    window.location.href = ["/docs", versionId, ...rest].join("/");
+    window.location.href = withTrailingSlash(["/docs", versionId, ...rest].join("/"));
     setIsOpen(false);
   };
 

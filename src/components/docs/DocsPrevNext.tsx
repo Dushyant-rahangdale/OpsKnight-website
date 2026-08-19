@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSidebar, SidebarItem } from "@/lib/docs/sidebar";
+import { withTrailingSlash } from "@/lib/docs/paths";
 
 export function DocsPrevNext({ version, currentPath }: { version: string; currentPath: string }) {
   const sidebar = getSidebar(version);
@@ -14,7 +15,9 @@ export function DocsPrevNext({ version, currentPath }: { version: string; curren
   };
 
   const flatList = flatten(sidebar);
-  const currentIndex = flatList.findIndex((item) => item.href === currentPath);
+  const currentIndex = flatList.findIndex(
+    (item) => withTrailingSlash(item.href) === withTrailingSlash(currentPath)
+  );
 
   if (currentIndex === -1) return null;
 

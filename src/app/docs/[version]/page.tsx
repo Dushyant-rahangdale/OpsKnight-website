@@ -98,14 +98,14 @@ export default async function DocsIndexPage({
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
-            href={`/docs/${version}/getting-started/installation`}
+            href={`/docs/${version}/getting-started/installation/`}
             className="inline-flex h-11 items-center gap-2 rounded-[12px] bg-[#2563eb] px-5 text-sm font-semibold text-white hover:bg-blue-700"
           >
             <Rocket className="h-4 w-4" />
             Install
           </Link>
           <Link
-            href={`/docs/${version}/api`}
+            href={`/docs/${version}/api/`}
             className="inline-flex h-11 items-center gap-2 rounded-[12px] border border-slate-200 bg-white px-5 text-sm font-medium text-slate-800 hover:bg-slate-50"
           >
             <Code2 className="h-4 w-4" />
@@ -118,7 +118,7 @@ export default async function DocsIndexPage({
         {cards.map((card) => (
           <Link
             key={card.slug.join("/")}
-            href={`/docs/${version}/${card.slug.join("/")}`}
+            href={`/docs/${version}/${card.slug.join("/")}/`}
             className="rounded-[14px] border border-slate-200 bg-white p-5 hover:border-slate-300"
           >
             <h2 className="text-base font-semibold text-[#111827]">{card.title}</h2>

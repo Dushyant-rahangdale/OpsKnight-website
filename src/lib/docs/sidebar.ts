@@ -65,7 +65,7 @@ function buildTree(dirPath: string, baseHref: string[], version: string): Sideba
         indexPath ? readOrder(indexPath) : getPreferredOrder(baseHref, entry.name);
       items.push({
         title,
-        href: indexPath ? `/docs/${version}/${[...baseHref, entry.name].join("/")}` : undefined,
+        href: indexPath ? `/docs/${version}/${[...baseHref, entry.name].join("/")}/` : undefined,
         children,
         order,
       });
@@ -74,7 +74,7 @@ function buildTree(dirPath: string, baseHref: string[], version: string): Sideba
       if (slug.toLowerCase() === "readme") {
         continue;
       }
-      const href = `/docs/${version}/${[...baseHref, slug].join("/")}`;
+      const href = `/docs/${version}/${[...baseHref, slug].join("/")}/`;
       const title = readTitle(fullPath);
       const order = readOrder(fullPath);
       items.push({ title, href, order });

@@ -36,7 +36,7 @@ function buildIndex(version: string) {
             content.split("\n").find(line => line.startsWith("# "))?.replace(/^#\s+/, "") ||
             path.basename(filePath).replace(/\.mdx?$/, "");
         const text = stripMarkdown(content);
-        const href = `/docs/${version}/${slug.join("/")}`.replace(/\/$/, "");
+        const href = `/docs/${version}${slug.length ? `/${slug.join("/")}` : ""}/`.replace(/\/{2,}/g, "/");
         entries.push({ title, href, text });
     }
 

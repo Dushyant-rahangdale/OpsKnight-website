@@ -13,7 +13,7 @@ const footerLinks = {
   ],
   resources: [
     { label: "Documentation", href: BRAND.links.docs },
-    { label: "Quickstart", href: "/docs/latest/getting-started" },
+    { label: "Quickstart", href: "/docs/latest/getting-started/" },
     { label: "Helm charts", href: BRAND.links.helmCharts },
   ],
   community: [

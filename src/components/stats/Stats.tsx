@@ -89,7 +89,7 @@ export function Stats() {
 
                 <div className="mt-12 text-center">
                     <Link
-                        href="/docs/v1.3/core-concepts/scalability"
+                        href="/docs/v1.3/core-concepts/scalability/"
                         className="inline-flex items-center gap-2 text-blue-400 font-medium hover:text-blue-300 transition-colors group"
                     >
                         View scalability documentation

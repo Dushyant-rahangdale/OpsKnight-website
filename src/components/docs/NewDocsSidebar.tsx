@@ -32,6 +32,7 @@ import {
 import { SidebarItem } from "@/lib/docs/sidebar";
 import { DocsVersionSwitcher } from "@/components/docs/DocsVersionSwitcher";
 import { DocsSearch } from "@/components/docs/DocsSearch";
+import { pathsMatch } from "@/lib/docs/paths";
 import { cn } from "@/lib/utils";
 import { BRAND } from "@/lib/brand";
 import type { DocsVersion } from "@/lib/docs/types";
@@ -56,8 +57,7 @@ function getSectionKeyFromHref(href?: string) {
 }
 
 function pathMatches(href: string | undefined, active: string) {
-  if (!href) return false;
-  return active === href || active.startsWith(`${href}/`);
+  return pathsMatch(href, active);
 }
 
 function sectionContainsPath(item: SidebarItem, active: string): boolean {

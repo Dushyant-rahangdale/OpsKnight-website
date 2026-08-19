@@ -67,22 +67,19 @@ export function Hero() {
           <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-4 py-3 sm:px-5">
             <div>
               <p className="text-sm font-semibold text-[#111827]">
-                Workflow failed: Docker Image (build + push)
+                Command Center
               </p>
               <p className="mt-0.5 text-xs text-[#4b5563]">
-                Open incident · assigned · timeline on the same screen
+                Live incident metrics, filters, and quick actions
               </p>
             </div>
-            <span className="shrink-0 rounded-full bg-red-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-red-700">
-              Open
-            </span>
           </div>
           <div className="relative aspect-[16/9] bg-slate-100 sm:aspect-[2/1]">
             <Image
-              src="/incident-detail-timeline.png"
-              alt="An open OpsKnight incident with assignee, urgency, and description"
+              src="/command-center.png"
+              alt="OpsKnight Command Center with sidebar navigation, incident metric cards, filters, and quick actions"
               fill
-              className="object-cover object-[center_22%]"
+              className="object-cover object-top"
               priority
               sizes="(min-width: 1280px) 1200px, 100vw"
             />

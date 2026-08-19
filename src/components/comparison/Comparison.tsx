@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { BRAND } from "@/lib/brand";
 import { COMPETITORS } from "@/lib/competitors";
 
 export function Comparison() {

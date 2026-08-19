@@ -19,7 +19,8 @@ import {
   Headphones,
   Bell,
   Search,
-  FileText
+  FileText,
+  Lock
 } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 

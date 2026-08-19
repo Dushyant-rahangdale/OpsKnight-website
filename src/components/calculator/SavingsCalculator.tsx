@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Users, Sparkles, Check, ArrowRight, Server } from "lucide-react";
 import Link from "next/link";
+import { BRAND } from "@/lib/brand";
 
 interface VendorOption {
   id: string;
@@ -50,7 +51,7 @@ export function SavingsCalculator() {
   const presetSizes = [15, 30, 50, 100, 250];
 
   return (
-    <div className="w-full max-w-4xl mx-auto my-8 p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xl relative overflow-hidden font-sans text-slate-900">
+    <div className="w-full max-w-4xl mx-auto my-8 p-6 sm:p-8 rounded-[14px] bg-white border border-slate-200 relative overflow-hidden font-sans text-slate-900">
       <div className="relative z-10 space-y-6">
         
         {/* Top Header Row */}
@@ -60,7 +61,7 @@ export function SavingsCalculator() {
               <Sparkles className="w-3.5 h-3.5" />
               Multi-Vendor ROI Calculator
             </div>
-            <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+            <h3 className="text-xl sm:text-2xl font-semibold text-slate-900">
               Calculate Your Infrastructure Savings
             </h3>
             <p className="text-xs sm:text-sm text-slate-600">
@@ -209,7 +210,7 @@ export function SavingsCalculator() {
             <div className="text-[11px] font-bold uppercase tracking-wider text-red-600">
               {selectedVendor.name} {period === "annual" ? "Annual" : "Monthly"} Bill
             </div>
-            <div className="text-3xl font-black text-slate-900 font-mono">
+            <div className="text-3xl font-semibold text-slate-900 font-mono">
               {formatCurrency(currentVendorCost)}
             </div>
             <p className="text-[11px] text-slate-600">
@@ -222,11 +223,11 @@ export function SavingsCalculator() {
             <div className="text-[11px] font-bold uppercase tracking-wider text-blue-700">
               OpsKnight Total Cost
             </div>
-            <div className="text-3xl font-black text-slate-900 font-mono">
+            <div className="text-3xl font-semibold text-slate-900 font-mono">
               {formatCurrency(opsknightInfraCost)}
             </div>
             <p className="text-[11px] text-slate-600">
-              $0 software license (AGPL-3.0) + {formatCurrency(opsknightInfraCost)} hosting
+              $0 software ({BRAND.license}) + {formatCurrency(opsknightInfraCost)} hosting
             </p>
           </div>
 
@@ -236,7 +237,7 @@ export function SavingsCalculator() {
               <span>Net ROI Savings</span>
               <span className="bg-white/20 px-2 py-0.5 rounded-full text-[10px] font-mono">-{savingsPercent}%</span>
             </div>
-            <div className="text-3xl font-black text-white font-mono">
+            <div className="text-3xl font-semibold text-white font-mono">
               {formatCurrency(netSavings)}
             </div>
             <p className="text-[11px] text-emerald-100">

@@ -1,114 +1,77 @@
 import React from "react";
 import Image from "next/image";
-import { Mail, MessageSquare, Bell, Webhook } from "lucide-react";
 
-// Real, Official Brand Logos loaded directly from authentic SVG assets in /public/integrations/
+function BrandMark({
+    src,
+    alt,
+}: {
+    src: string;
+    alt: string;
+}) {
+    return (
+        <Image
+            src={src}
+            alt={alt}
+            width={40}
+            height={40}
+            unoptimized
+            className="w-full h-full object-contain p-1"
+        />
+    );
+}
+
+/**
+ * Official vendor marks from Simple Icons, Wikimedia, and VectorLogoZone.
+ * Channel-only items (email / push / webhook) use generic glyphs, not fake brands.
+ */
 export const integrationIcons = {
-    email: <Mail className="w-full h-full text-blue-400 p-1.5" />,
-    sms: <MessageSquare className="w-full h-full text-blue-400 p-1.5" />,
-    push: <Bell className="w-full h-full text-blue-400 p-1.5" />,
-    webhook: <Webhook className="w-full h-full text-sky-400 p-1.5" />,
+    email: (
+        <Image src="/integrations/email.svg" alt="Email" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
+    ),
+    sms: <BrandMark src="/integrations/twilio.svg" alt="Twilio SMS" />,
+    push: (
+        <Image src="/integrations/push.svg" alt="Push notifications" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
+    ),
+    webhook: (
+        <Image src="/integrations/webhook.svg" alt="Webhooks" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
+    ),
+    twilio: <BrandMark src="/integrations/twilio.svg" alt="Twilio" />,
 
-    // APM & Observability
-    datadog: (
-        <Image src="/integrations/datadog.svg" alt="Datadog" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    prometheus: (
-        <Image src="/integrations/prometheus.svg" alt="Prometheus" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    grafana: (
-        <Image src="/integrations/grafana.svg" alt="Grafana" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    sentry: (
-        <Image src="/integrations/sentry.svg" alt="Sentry" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    newrelic: (
-        <Image src="/integrations/newrelic.svg" alt="New Relic" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    dynatrace: (
-        <Image src="/integrations/dynatrace.svg" alt="Dynatrace" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    appdynamics: (
-        <Image src="/integrations/appdynamics.svg" alt="AppDynamics" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    honeycomb: (
-        <Image src="/integrations/honeycomb.svg" alt="Honeycomb" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    splunk: (
-        <Image src="/integrations/splunk.svg" alt="Splunk" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
+    datadog: <BrandMark src="/integrations/datadog.svg" alt="Datadog" />,
+    prometheus: <BrandMark src="/integrations/prometheus.svg" alt="Prometheus" />,
+    grafana: <BrandMark src="/integrations/grafana.svg" alt="Grafana" />,
+    sentry: <BrandMark src="/integrations/sentry.svg" alt="Sentry" />,
+    newrelic: <BrandMark src="/integrations/newrelic.svg" alt="New Relic" />,
+    dynatrace: <BrandMark src="/integrations/dynatrace.svg" alt="Dynatrace" />,
+    appdynamics: <BrandMark src="/integrations/appdynamics.svg" alt="AppDynamics" />,
+    honeycomb: <BrandMark src="/integrations/honeycomb.svg" alt="Honeycomb" />,
+    splunk: <BrandMark src="/integrations/splunk.svg" alt="Splunk" />,
 
-    // Cloud Infrastructure
-    cloudwatch: (
-        <Image src="/integrations/cloudwatch.svg" alt="AWS CloudWatch" width={40} height={40} unoptimized className="w-full h-full object-contain p-0.5" />
-    ),
-    azure: (
-        <Image src="/integrations/azure.svg" alt="Microsoft Azure" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    googlecloud: (
-        <Image src="/integrations/googlecloud.svg" alt="Google Cloud" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
+    cloudwatch: <BrandMark src="/integrations/cloudwatch.svg" alt="AWS CloudWatch" />,
+    azure: <BrandMark src="/integrations/azure.svg" alt="Microsoft Azure" />,
+    googlecloud: <BrandMark src="/integrations/googlecloud.svg" alt="Google Cloud" />,
 
-    // Metrics & Daemons
-    zabbix: (
-        <Image src="/integrations/zabbix.svg" alt="Zabbix" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    nagios: (
-        <Image src="/integrations/nagios.svg" alt="Nagios" width={40} height={40} unoptimized className="w-full h-full object-contain p-0.5" />
-    ),
-    icinga: (
-        <Image src="/integrations/icinga.svg" alt="Icinga 2" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
+    zabbix: <BrandMark src="/integrations/zabbix.svg" alt="Zabbix" />,
+    nagios: <BrandMark src="/integrations/nagios.svg" alt="Nagios" />,
+    icinga: <BrandMark src="/integrations/icinga.svg" alt="Icinga 2" />,
 
-    // CI/CD & Deployments
-    github: (
-        <Image src="/integrations/github.svg" alt="GitHub" width={40} height={40} unoptimized className="w-full h-full object-contain p-1 invert dark:invert-0" />
-    ),
-    gitlab: (
-        <Image src="/integrations/gitlab.svg" alt="GitLab" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    bitbucket: (
-        <Image src="/integrations/bitbucket.svg" alt="Bitbucket" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    vercel: (
-        <Image src="/integrations/vercel.svg" alt="Vercel" width={40} height={40} unoptimized className="w-full h-full object-contain p-1.5" />
-    ),
+    github: <BrandMark src="/integrations/github.svg" alt="GitHub" />,
+    gitlab: <BrandMark src="/integrations/gitlab.svg" alt="GitLab" />,
+    bitbucket: <BrandMark src="/integrations/bitbucket.svg" alt="Bitbucket" />,
+    vercel: <BrandMark src="/integrations/vercel.svg" alt="Vercel" />,
 
-    // Uptime & Synthetics
-    uptimerobot: (
-        <Image src="/integrations/uptimerobot.svg" alt="UptimeRobot" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    pingdom: (
-        <Image src="/integrations/pingdom.svg" alt="Pingdom" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    betterstack: (
-        <Image src="/integrations/betterstack.svg" alt="Better Stack" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    uptimekuma: (
-        <Image src="/integrations/uptimekuma.svg" alt="Uptime Kuma" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
+    uptimerobot: <BrandMark src="/integrations/uptimerobot.png" alt="UptimeRobot" />,
+    pingdom: <BrandMark src="/integrations/pingdom.svg" alt="Pingdom" />,
+    betterstack: <BrandMark src="/integrations/betterstack.svg" alt="Better Stack" />,
+    uptimekuma: <BrandMark src="/integrations/uptimekuma.svg" alt="Uptime Kuma" />,
 
-    // ChatOps & Alerts
-    slack: (
-        <Image src="/integrations/slack.svg" alt="Slack" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    jira: (
-        <Image src="/integrations/jira.svg" alt="Jira Cloud" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    whatsapp: (
-        <Image src="/integrations/whatsapp.svg" alt="WhatsApp" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    pagerduty: (
-        <Image src="/integrations/pagerduty.svg" alt="PagerDuty" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
+    slack: <BrandMark src="/integrations/slack.svg" alt="Slack" />,
+    jira: <BrandMark src="/integrations/jira.svg" alt="Jira Cloud" />,
+    whatsapp: <BrandMark src="/integrations/whatsapp.svg" alt="WhatsApp" />,
+    pagerduty: <BrandMark src="/integrations/pagerduty.svg" alt="PagerDuty" />,
 
-    // Core & Database
-    kubernetes: (
-        <Image src="/integrations/kubernetes.svg" alt="Kubernetes" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
-    postgres: (
-        <Image src="/integrations/postgres.svg" alt="PostgreSQL" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
-    ),
+    kubernetes: <BrandMark src="/integrations/kubernetes.svg" alt="Kubernetes" />,
+    postgres: <BrandMark src="/integrations/postgres.svg" alt="PostgreSQL" />,
 };
 
 export type IntegrationKey = keyof typeof integrationIcons;

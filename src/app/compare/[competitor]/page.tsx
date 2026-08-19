@@ -7,6 +7,8 @@ import {
   Sparkles
 } from 'lucide-react';
 import { SavingsCalculator } from '@/components/calculator/SavingsCalculator';
+import { COMPETITORS } from '@/lib/competitors';
+import { BRAND } from '@/lib/brand';
 
 interface CompetitorData {
   name: string;
@@ -184,7 +186,29 @@ const competitors: Record<string, CompetitorData> = {
       dropInApi: false,
     },
     pros: ['Open-source license option', 'Grafana integration'],
-    cons: ['Requires heavy microservice stack', 'No built-in postmortem retrospective generator', 'No drop-in PagerDuty API emulation']
+    cons: ['Requires a heavier Grafana microservice stack', 'No built-in postmortem generator', 'No drop-in PagerDuty API emulation']
+  },
+  victorops: {
+    name: 'Splunk On-Call (VictorOps)',
+    badge: 'Enterprise On-Call',
+    description: 'Splunk On-Call (formerly VictorOps) provides timeline-based alerting, but has high per-seat pricing and proprietary hosting.',
+    pricingNote: '$23.00 / user / month (Standard)',
+    monthlyPerSeat: 23,
+    features: {
+      selfHosted: false,
+      openSource: false,
+      freeTier: false,
+      slackChatOps: 'partial',
+      nativeIntegrations: 'partial',
+      onCallScheduling: true,
+      statusPages: 'partial',
+      postmortemTemplates: true,
+      noPerSeatPricing: false,
+      dataSovereignty: false,
+      dropInApi: false,
+    },
+    pros: ['Splunk ecosystem ties'],
+    cons: ['Per-seat pricing tax', 'No self-hosted container', 'Closed source']
   }
 };
 
@@ -253,13 +277,32 @@ export default async function CompetitorComparePage({
             <Sparkles className="w-3.5 h-3.5" />
             Direct Platform Comparison
           </div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 mb-6">
+          <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
             OpsKnight vs {competitor.name}
           </h1>
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
             {competitor.description} See why engineering teams switch to OpsKnight for 100% data sovereignty, unlimited users, and zero per-seat licensing.
           </p>
         </header>
+
+        <nav className="flex flex-wrap justify-center gap-2">
+          {COMPETITORS.map((vendor) => {
+            const active = vendor.slug === compKey || (compKey === 'incident-io' && vendor.slug === 'incidentio') || (compKey === 'victorops' && vendor.slug === 'splunk');
+            return (
+              <Link
+                key={vendor.slug}
+                href={vendor.href}
+                className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+                  active
+                    ? 'border-blue-600 bg-blue-50 text-blue-700'
+                    : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+                }`}
+              >
+                vs {vendor.shortName}
+              </Link>
+            );
+          })}
+        </nav>
 
         {/* Multi-Vendor ROI Calculator */}
         <section>
@@ -270,7 +313,7 @@ export default async function CompetitorComparePage({
         <section className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xl space-y-6 text-slate-900">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
             <div>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+              <h2 className="text-xl sm:text-2xl font-semibold text-slate-900">
                 Detailed Capability Matrix
               </h2>
               <p className="text-xs text-slate-600 mt-1">
@@ -287,7 +330,7 @@ export default async function CompetitorComparePage({
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-200">
                   <th className="p-4 font-bold text-slate-900">Platform Dimension</th>
-                  <th className="p-4 font-black text-blue-600 text-center w-48 bg-blue-50/40 border-x border-slate-200">
+                  <th className="p-4 font-semibold text-blue-600 text-center w-48 bg-blue-50/40 border-x border-slate-200">
                     OpsKnight (Self-Hosted)
                   </th>
                   <th className="p-4 font-bold text-slate-700 text-center w-48">
@@ -308,7 +351,7 @@ export default async function CompetitorComparePage({
                 <tr className="hover:bg-slate-50/80">
                   <td className="p-4 font-bold text-slate-900">
                     Full Source Code Access
-                    <span className="block text-[11px] font-normal text-slate-500 mt-0.5">AGPL-3.0 copyleft open-source license</span>
+                    <span className="block text-[11px] font-normal text-slate-500 mt-0.5">{BRAND.license} open-source license</span>
                   </td>
                   <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200">{renderFeatureCell(true)}</td>
                   <td className="p-4 text-center">{renderFeatureCell(competitor.features.openSource)}</td>
@@ -319,7 +362,7 @@ export default async function CompetitorComparePage({
                     Per-Seat Licensing Tax
                     <span className="block text-[11px] font-normal text-slate-500 mt-0.5">Charge per on-call engineer or responder</span>
                   </td>
-                  <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200 text-emerald-600 font-black font-mono">
+                  <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200 text-emerald-700 font-semibold font-mono">
                     $0 (Unlimited)
                   </td>
                   <td className="p-4 text-center text-red-600 font-bold font-mono">
@@ -338,7 +381,7 @@ export default async function CompetitorComparePage({
 
                 <tr className="hover:bg-slate-50/80">
                   <td className="p-4 font-bold text-slate-900">
-                    28+ Native APM & Cloud Webhooks
+                    {BRAND.integrationCountLabel} native APM & cloud webhooks
                     <span className="block text-[11px] font-normal text-slate-500 mt-0.5">Datadog, Prometheus, Zabbix, CloudWatch, GitLab, Sentry</span>
                   </td>
                   <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200">{renderFeatureCell('yes')}</td>
@@ -426,7 +469,7 @@ export default async function CompetitorComparePage({
 
         {/* Migration & Quick Start CTA */}
         <section className="text-center p-10 rounded-3xl bg-white border border-slate-200 shadow-xl space-y-6">
-          <h2 className="text-3xl font-black text-slate-900">
+          <h2 className="text-3xl font-semibold text-slate-900">
             Ready to replace {competitor.name}?
           </h2>
           <p className="text-slate-600 max-w-xl mx-auto text-sm">

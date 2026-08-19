@@ -16,11 +16,19 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
+import { COMPETITORS } from "@/lib/competitors";
 import { SavingsCalculator } from "@/components/calculator/SavingsCalculator";
 
 type CellValue = boolean | string;
 
-type VendorKey = "opsknight" | "pagerduty" | "incidentio" | "opsgenie";
+type VendorKey =
+    | "opsknight"
+    | "pagerduty"
+    | "incidentio"
+    | "opsgenie"
+    | "squadcast"
+    | "splunk"
+    | "grafana";
 
 type ComparisonRow = {
     feature: string;
@@ -75,38 +83,56 @@ const decisionGuides = [
     {
         title: `Choose ${BRAND.name} if...`,
         bullets: [
-            "You need on-call, alerting, and postmortems without per-seat costs",
-            "You want to self-host, customize workflows, or ship new integrations",
-            "Data residency or audit requirements require full control",
+            "You want on-call, paging, war rooms, and status pages with no per-seat tax",
+            "You need to self-host and keep incident data in your VPC",
+            "You are leaving PagerDuty, Opsgenie, incident.io, or another SaaS pager",
         ],
-        accent: "border-blue-500/30 bg-blue-500/5 text-blue-300",
+        accent: "border-blue-200 bg-blue-50 text-blue-800",
     },
     {
         title: "Choose PagerDuty if...",
         bullets: [
-            "You are locked into a vendor-managed SaaS stack",
-            "You need enterprise contracts for global support",
-            "Budget is less important than out-of-the-box add-ons",
+            "You need a managed global SaaS contract and vendor SLA",
+            "You already run a large PagerDuty automation estate",
+            "Seat cost is acceptable versus operating your own stack",
         ],
-        accent: "border-white/10 bg-white/5 text-slate-200",
+        accent: "border-slate-200 bg-white text-slate-800",
     },
     {
         title: "Choose incident.io if...",
         bullets: [
-            "You want Slack-first workflows and can accept usage-based pricing",
-            "You have smaller teams that benefit from guided templates",
-            "You are comfortable with SaaS-only deployments",
+            "Slack-native incident process is the whole product for you",
+            "You want guided templates and can pay per seat",
+            "Self-hosting is not a requirement",
         ],
-        accent: "border-white/10 bg-white/5 text-slate-200",
+        accent: "border-slate-200 bg-white text-slate-800",
     },
     {
-        title: "Choose OpsGenie if...",
+        title: "Choose Opsgenie if...",
         bullets: [
-            "You want a familiar on-call UI for smaller teams",
-            "You already use Atlassian tooling",
-            "You accept the 2027 retirement notice",
+            "You are already deep in Atlassian and Jira",
+            "You can accept Atlassian’s retirement / migration path",
+            "You do not need self-hosted incident data",
         ],
-        accent: "border-white/10 bg-white/5 text-slate-200",
+        accent: "border-slate-200 bg-white text-slate-800",
+    },
+    {
+        title: "Choose Squadcast or Splunk if...",
+        bullets: [
+            "You want a SaaS pager with a modern UI (Squadcast)",
+            "You already live in the Splunk observability suite",
+            "Per-seat SaaS is acceptable",
+        ],
+        accent: "border-slate-200 bg-white text-slate-800",
+    },
+    {
+        title: "Choose Grafana OnCall if...",
+        bullets: [
+            "Grafana is already your operations console",
+            "You can run its microservice stack or Grafana Cloud",
+            "You do not need a full incident command center and status pages in one app",
+        ],
+        accent: "border-slate-200 bg-white text-slate-800",
     },
 ];
 
@@ -121,6 +147,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: true,
                 incidentio: true,
                 opsgenie: true,
+                squadcast: true,
+                splunk: true,
+                grafana: true,
             },
             {
                 feature: "Escalation policies",
@@ -128,6 +157,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: true,
                 incidentio: true,
                 opsgenie: true,
+                squadcast: true,
+                splunk: true,
+                grafana: true,
             },
             {
                 feature: "Multi-channel alerting",
@@ -135,6 +167,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: "Email, SMS, Voice, Mobile",
                 incidentio: "Slack, Email",
                 opsgenie: "Email, SMS, Voice, Mobile",
+                squadcast: "Email, SMS, Slack, Push",
+                splunk: "Email, SMS, Push",
+                grafana: "Slack, Email, Phone",
             },
             {
                 feature: "Schedules by team/service",
@@ -142,6 +177,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: true,
                 incidentio: "Limited",
                 opsgenie: true,
+                squadcast: true,
+                splunk: true,
+                grafana: true,
             },
             {
                 feature: "Runbook links",
@@ -149,6 +187,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: "Add-on",
                 incidentio: true,
                 opsgenie: true,
+                squadcast: true,
+                splunk: "Limited",
+                grafana: "Limited",
             },
         ],
     },
@@ -162,6 +203,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: "Add-on",
                 incidentio: true,
                 opsgenie: true,
+                squadcast: true,
+                splunk: true,
+                grafana: false,
             },
             {
                 feature: "Action item tracking",
@@ -169,6 +213,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: "Add-on",
                 incidentio: true,
                 opsgenie: "Limited",
+                squadcast: true,
+                splunk: "Limited",
+                grafana: false,
             },
             {
                 feature: "Timeline + audit log",
@@ -176,6 +223,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: true,
                 incidentio: true,
                 opsgenie: true,
+                squadcast: true,
+                splunk: true,
+                grafana: true,
             },
             {
                 feature: "Impact + status updates",
@@ -183,6 +233,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: "Add-on",
                 incidentio: true,
                 opsgenie: true,
+                squadcast: "Limited",
+                splunk: "Limited",
+                grafana: "Separate product",
             },
         ],
     },
@@ -196,6 +249,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: false,
                 incidentio: false,
                 opsgenie: false,
+                squadcast: false,
+                splunk: false,
+                grafana: true,
             },
             {
                 feature: "Source code access",
@@ -203,6 +259,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: false,
                 incidentio: false,
                 opsgenie: false,
+                squadcast: false,
+                splunk: false,
+                grafana: true,
             },
             {
                 feature: "Custom workflows",
@@ -210,6 +269,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: "Limited",
                 incidentio: "Templates",
                 opsgenie: "Limited",
+                squadcast: "Limited",
+                splunk: "Limited",
+                grafana: "Limited",
             },
             {
                 feature: "No vendor lock-in",
@@ -217,6 +279,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: false,
                 incidentio: false,
                 opsgenie: false,
+                squadcast: false,
+                splunk: false,
+                grafana: "Partial",
             },
         ],
     },
@@ -230,6 +295,9 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: true,
                 incidentio: true,
                 opsgenie: true,
+                squadcast: true,
+                splunk: true,
+                grafana: true,
             },
             {
                 feature: "Monitoring webhooks",
@@ -237,13 +305,19 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: true,
                 incidentio: true,
                 opsgenie: true,
+                squadcast: true,
+                splunk: true,
+                grafana: true,
             },
             {
-                feature: "RESTful API & Webhooks",
+                feature: "PagerDuty Events API v2 drop-in",
                 opsknight: true,
-                pagerduty: true,
-                incidentio: "API only",
-                opsgenie: true,
+                pagerduty: "Native",
+                incidentio: false,
+                opsgenie: false,
+                squadcast: false,
+                splunk: false,
+                grafana: false,
             },
             {
                 feature: "Custom integrations",
@@ -251,12 +325,13 @@ const comparisonSections: ComparisonSection[] = [
                 pagerduty: "Limited",
                 incidentio: "Limited",
                 opsgenie: "Limited",
+                squadcast: "Limited",
+                splunk: "Limited",
+                grafana: "Grafana stack",
             },
         ],
     },
 ];
-
-
 
 const migrationSteps = [
     {
@@ -360,7 +435,7 @@ export default function ComparePage() {
                             </motion.span>
                             <motion.h1
                                 variants={itemMotion}
-                                className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 mb-6"
+                                className="text-4xl sm:text-5xl font-semibold text-slate-900 mb-6"
                             >
                                 The full {BRAND.name} comparison breakdown
                             </motion.h1>
@@ -368,8 +443,7 @@ export default function ComparePage() {
                                 variants={itemMotion}
                                 className="text-lg sm:text-xl text-slate-600 max-w-2xl font-normal"
                             >
-                                Side-by-side pricing, capabilities, and ownership differences to help your team
-                                pick the right incident management platform.
+                                Side-by-side with PagerDuty, incident.io, Opsgenie, Squadcast, Splunk On-Call, and Grafana OnCall — pricing, ownership, and features.
                             </motion.p>
                         </div>
                         <motion.div
@@ -402,6 +476,26 @@ export default function ComparePage() {
                     </motion.div>
                 </section>
 
+                <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+                    <h2 className="text-2xl font-semibold text-center mb-6">Compare OpsKnight with each product</h2>
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        {COMPETITORS.map((vendor) => (
+                            <Link
+                                key={vendor.slug}
+                                href={vendor.href}
+                                className="rounded-[12px] border border-slate-200 bg-white p-4 hover:border-slate-300 transition-colors"
+                            >
+                                <p className="text-sm font-semibold text-[#111827]">{vendor.name}</p>
+                                <p className="mt-1 text-xs text-[#4b5563]">{vendor.category} · {vendor.listPrice}</p>
+                                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#2563eb]">
+                                    OpsKnight vs {vendor.shortName}
+                                    <ArrowRight className="h-3 w-3" />
+                                </span>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+
                 {/* Stat Cards */}
                 <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -415,7 +509,7 @@ export default function ComparePage() {
                                     <div className="text-xs uppercase tracking-[0.25em] text-slate-500 font-bold">
                                         {stat.label}
                                     </div>
-                                    <div className="text-3xl font-black text-slate-900 mt-2 mb-2">{stat.value}</div>
+                                    <div className="text-3xl font-semibold text-slate-900 mt-2 mb-2">{stat.value}</div>
                                     <p className="text-xs sm:text-sm text-slate-600">{stat.description}</p>
                                 </div>
                             </div>
@@ -431,17 +525,17 @@ export default function ComparePage() {
                 {/* Decision guide */}
                 <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                     <h2 className="text-3xl font-bold text-center mb-10">Make the right choice faster</h2>
-                    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                         {decisionGuides.map((guide) => (
                             <div
                                 key={guide.title}
-                                className={`rounded-2xl p-6 border ${guide.accent} bg-slate-900/60`}
+                                className={`rounded-[14px] p-6 border ${guide.accent}`}
                             >
                                 <h3 className="font-semibold mb-3">{guide.title}</h3>
-                                <ul className="space-y-2 text-sm text-slate-300">
+                                <ul className="space-y-2 text-sm text-[#4b5563]">
                                     {guide.bullets.map((bullet) => (
                                         <li key={bullet} className="flex gap-2">
-                                            <Check className="w-4 h-4 text-blue-300 mt-0.5" />
+                                            <Check className="w-4 h-4 text-[#2563eb] mt-0.5" />
                                             <span>{bullet}</span>
                                         </li>
                                     ))}
@@ -454,15 +548,15 @@ export default function ComparePage() {
 
 
                 {/* Feature Comparison */}
-                <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+                <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                     <h2 className="text-3xl font-bold text-center mb-10">Detailed feature comparison</h2>
                     <div className="space-y-6">
                         {comparisonSections.map((section) => (
-                            <div key={section.title} className="rounded-3xl border border-white/10 bg-slate-900/60 p-6 md:p-8">
+                            <div key={section.title} className="rounded-[14px] border border-slate-200 bg-white p-6 md:p-8">
                                 <div className="flex items-start justify-between gap-4 mb-6">
                                     <div>
                                         <h3 className="text-xl font-semibold mb-2">{section.title}</h3>
-                                        <p className="text-sm text-slate-300">{section.description}</p>
+                                        <p className="text-sm text-[#4b5563]">{section.description}</p>
                                     </div>
                                     <div className="hidden md:flex items-center gap-2 text-xs text-slate-500">
                                         <Plug className="w-4 h-4" />
@@ -472,14 +566,17 @@ export default function ComparePage() {
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-left border-collapse">
                                         <thead>
-                                            <tr className="border-b border-white/10">
-                                                <th className="py-3 px-4 text-slate-400 font-medium w-1/3">Feature</th>
-                                                <th className="py-3 px-4 text-blue-300 font-semibold bg-blue-500/5 rounded-t-xl">
+                                            <tr className="border-b border-slate-200">
+                                                <th className="py-3 px-4 text-slate-500 font-medium w-1/3">Feature</th>
+                                                <th className="py-3 px-4 text-[#2563eb] font-semibold bg-blue-50 rounded-t-xl">
                                                     OpsKnight
                                                 </th>
-                                                <th className="py-3 px-4 text-slate-400 font-medium">PagerDuty</th>
-                                                <th className="py-3 px-4 text-slate-400 font-medium">incident.io</th>
-                                                <th className="py-3 px-4 text-slate-400 font-medium">OpsGenie</th>
+                                                <th className="py-3 px-3 text-slate-500 font-medium whitespace-nowrap">PagerDuty</th>
+                                                <th className="py-3 px-3 text-slate-500 font-medium whitespace-nowrap">incident.io</th>
+                                                <th className="py-3 px-3 text-slate-500 font-medium whitespace-nowrap">Opsgenie</th>
+                                                <th className="py-3 px-3 text-slate-500 font-medium whitespace-nowrap">Squadcast</th>
+                                                <th className="py-3 px-3 text-slate-500 font-medium whitespace-nowrap">Splunk On-Call</th>
+                                                <th className="py-3 px-3 text-slate-500 font-medium whitespace-nowrap">Grafana OnCall</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -490,20 +587,29 @@ export default function ComparePage() {
                                                     whileInView={{ opacity: 1, x: 0 }}
                                                     viewport={{ once: true }}
                                                     transition={{ delay: index * 0.02 }}
-                                                    className="border-b border-white/5 hover:bg-white/[0.02] transition-colors"
+                                                    className="border-b border-slate-100 hover:bg-slate-50/80 transition-colors"
                                                 >
-                                                    <td className="py-3 px-4 text-sm text-slate-200 font-medium">{row.feature}</td>
-                                                    <td className="py-3 px-4 bg-blue-500/5">
+                                                    <td className="py-3 px-4 text-sm text-slate-800 font-medium">{row.feature}</td>
+                                                    <td className="py-3 px-4 bg-blue-50/50">
                                                         <FeatureValue value={row.opsknight} />
                                                     </td>
-                                                    <td className="py-3 px-4 text-slate-300">
+                                                    <td className="py-3 px-4 text-slate-600">
                                                         <FeatureValue value={row.pagerduty} />
                                                     </td>
-                                                    <td className="py-3 px-4 text-slate-300">
+                                                    <td className="py-3 px-4 text-slate-600">
                                                         <FeatureValue value={row.incidentio} />
                                                     </td>
-                                                    <td className="py-3 px-4 text-slate-300">
+                                                    <td className="py-3 px-3 text-slate-600">
                                                         <FeatureValue value={row.opsgenie} />
+                                                    </td>
+                                                    <td className="py-3 px-3 text-slate-600">
+                                                        <FeatureValue value={row.squadcast} />
+                                                    </td>
+                                                    <td className="py-3 px-3 text-slate-600">
+                                                        <FeatureValue value={row.splunk} />
+                                                    </td>
+                                                    <td className="py-3 px-3 text-slate-600">
+                                                        <FeatureValue value={row.grafana} />
                                                     </td>
                                                 </motion.tr>
                                             ))}
@@ -520,32 +626,32 @@ export default function ComparePage() {
                     <div className="grid gap-6 lg:grid-cols-3">
                         <div className="rounded-2xl border border-blue-500/20 bg-blue-500/5 p-6">
                             <div className="flex items-center gap-2 mb-4">
-                                <BookOpen className="w-5 h-5 text-blue-300" />
+                                <BookOpen className="w-5 h-5 text-[#2563eb]" />
                                 <h3 className="font-semibold">{BRAND.name} deep dive</h3>
                             </div>
-                            <ul className="space-y-3 text-sm text-slate-200">
+                            <ul className="space-y-3 text-sm text-[#4b5563]">
                                 <li>Open-source repo with full auditability and customization.</li>
                                 <li>Self-hosted deployments with your infra, IAM, and logging stack.</li>
                                 <li>Unlimited users, integrations, and postmortems without add-ons.</li>
                             </ul>
                         </div>
-                        <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-6">
+                        <div className="rounded-[14px] border border-slate-200 bg-white p-6">
                             <div className="flex items-center gap-2 mb-4">
-                                <Shield className="w-5 h-5 text-slate-300" />
+                                <Shield className="w-5 h-5 text-slate-600" />
                                 <h3 className="font-semibold">SaaS trade-offs</h3>
                             </div>
-                            <ul className="space-y-3 text-sm text-slate-300">
+                            <ul className="space-y-3 text-sm text-[#4b5563]">
                                 <li>Per-seat pricing scales quickly as teams and services grow.</li>
                                 <li>Add-ons required for status pages, automation, or advanced analytics.</li>
                                 <li>Limited control over data residency and audit requirements.</li>
                             </ul>
                         </div>
-                        <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-6">
+                        <div className="rounded-[14px] border border-slate-200 bg-white p-6">
                             <div className="flex items-center gap-2 mb-4">
-                                <Users className="w-5 h-5 text-slate-300" />
+                                <Users className="w-5 h-5 text-slate-600" />
                                 <h3 className="font-semibold">Best-fit scenarios</h3>
                             </div>
-                            <ul className="space-y-3 text-sm text-slate-300">
+                            <ul className="space-y-3 text-sm text-[#4b5563]">
                                 <li>Platform teams with multiple services and multiple schedules.</li>
                                 <li>Security-conscious orgs that cannot ship data to external SaaS.</li>
                                 <li>Scaling teams who want predictable, self-hosted costs.</li>
@@ -556,20 +662,20 @@ export default function ComparePage() {
 
                 {/* Migration */}
                 <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-                    <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-8 md:p-10">
+                    <div className="rounded-[14px] border border-slate-200 bg-white p-8 md:p-10">
                         <div className="flex items-center gap-3 mb-6">
-                            <Server className="w-6 h-6 text-blue-300" />
+                            <Server className="w-6 h-6 text-[#2563eb]" />
                             <h2 className="text-2xl font-bold">Migration plan</h2>
                         </div>
                         <div className="grid gap-6 md:grid-cols-2">
                             {migrationSteps.map((step, index) => (
                                 <div key={step.title} className="flex gap-4">
-                                    <div className="h-9 w-9 rounded-full bg-blue-500/20 text-blue-300 flex items-center justify-center font-semibold">
+                                    <div className="h-9 w-9 rounded-full bg-blue-50 text-[#2563eb] flex items-center justify-center font-semibold">
                                         {index + 1}
                                     </div>
                                     <div>
                                         <h3 className="font-semibold mb-1">{step.title}</h3>
-                                        <p className="text-sm text-slate-300">{step.detail}</p>
+                                        <p className="text-sm text-[#4b5563]">{step.detail}</p>
                                     </div>
                                 </div>
                             ))}
@@ -579,13 +685,13 @@ export default function ComparePage() {
 
                 {/* FAQ */}
                 <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-8 md:p-10">
+                    <div className="rounded-[14px] border border-slate-200 bg-white p-8 md:p-10">
                         <h2 className="text-2xl font-bold mb-6">Frequently asked questions</h2>
                         <div className="grid gap-6 md:grid-cols-3">
                             {faqs.map((faq) => (
-                                <div key={faq.question} className="rounded-xl border border-white/10 bg-slate-950/60 p-5">
+                                <div className="rounded-[12px] border border-slate-200 bg-slate-50 p-5">
                                     <h3 className="font-semibold mb-2">{faq.question}</h3>
-                                    <p className="text-sm text-slate-300">{faq.answer}</p>
+                                    <p className="text-sm text-[#4b5563]">{faq.answer}</p>
                                 </div>
                             ))}
                         </div>

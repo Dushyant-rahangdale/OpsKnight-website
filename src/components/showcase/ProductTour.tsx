@@ -26,6 +26,7 @@ import {
   Search,
   FileText
 } from "lucide-react";
+import { BRAND } from "@/lib/brand";
 
 interface TourTab {
   id: string;
@@ -213,7 +214,7 @@ export function ProductTour() {
   };
 
   const handleCopyCommand = () => {
-    navigator.clipboard.writeText("docker run -d -p 3000:3000 ghcr.io/opsknight-labs/opsknight:latest");
+    navigator.clipboard.writeText(BRAND.deploy.compose);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -226,15 +227,14 @@ export function ProductTour() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            Interactive Product Tour
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-4">
-            Command Center Architecture
+          <p className="mb-3 font-mono text-[11px] font-medium tracking-wide text-slate-500">
+            Product tour
+          </p>
+          <h2 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-4xl mb-4">
+            The actual interface.
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Experience the real, production-ready interface of OpsKnight. Explore live triage, timezone-aware rotations, automated escalation rules, and Slack war rooms.
+          <p className="text-base leading-relaxed text-[#4b5563]">
+            Production screenshots: incident command, rotations, ChatOps, analytics. Slack canvas is interactive.
           </p>
         </div>
 
@@ -263,7 +263,7 @@ export function ProductTour() {
         </div>
 
         {/* Main Product Showcase Card */}
-        <div className="rounded-3xl bg-slate-50 border border-slate-200/80 shadow-2xl overflow-hidden">
+        <div className="rounded-[14px] bg-slate-50 border border-slate-200 overflow-hidden">
           
           {/* Top Browser Bar */}
           <div className="h-12 bg-slate-950 px-4 sm:px-6 flex items-center justify-between border-b border-slate-800 text-xs select-none">
@@ -278,9 +278,9 @@ export function ProductTour() {
               <span>{currentTab.url}</span>
             </div>
 
-            <div className="hidden sm:flex items-center gap-1.5 text-emerald-400 font-bold text-[11px]">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Production 100% Crisp 2x Retina</span>
+            <div className="hidden sm:flex items-center gap-1.5 text-slate-400 font-medium text-[11px]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+              <span>Production UI</span>
             </div>
           </div>
 

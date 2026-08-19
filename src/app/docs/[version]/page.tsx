@@ -18,7 +18,6 @@ import {
   Smartphone,
   ArrowRight,
   BookOpen,
-  Sparkles,
 } from "lucide-react";
 
 export const dynamicParams = false;
@@ -142,44 +141,34 @@ export default async function DocsIndexPage({
   return (
     <div className="space-y-8">
       {/* Hero Section */}
-      <section className="relative rounded-3xl overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-slate-900/70 to-slate-900/90" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none" />
-
-        {/* Border */}
-        <div className="absolute inset-0 rounded-3xl border border-white/10" />
-
+      <section className="relative rounded-[14px] overflow-hidden border border-slate-200 bg-white">
         <div className="relative px-8 py-12 md:px-12 md:py-16">
           <div className="flex items-center gap-3 mb-6">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5" />
-              v{version} Documentation
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-medium">
+              {version} documentation
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-semibold text-slate-900 tracking-tight">
             {doc.title}
           </h1>
 
-          <p className="text-slate-400 max-w-2xl mt-4 text-lg leading-relaxed">
+          <p className="text-slate-600 max-w-2xl mt-4 text-lg leading-relaxed">
             {doc.description ??
-              "Dive into the OpsKnight platform, learn the core concepts, and follow step-by-step guides to get operational fast."}
+              "Setup, integrations, and operations for the self-hosted incident command center."}
           </p>
 
-          {/* Quick actions */}
           <div className="flex flex-wrap items-center gap-3 mt-8">
             <Link
               href={`/docs/${version}/getting-started/installation`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-500 text-white font-medium text-sm hover:bg-blue-400 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[12px] bg-[#2563eb] text-white font-medium text-sm hover:bg-blue-700 transition-colors"
             >
               <Rocket className="w-4 h-4" />
-              Quick Start
+              Quick start
             </Link>
             <Link
               href={`/docs/${version}/api`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white font-medium text-sm hover:bg-white/10 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[12px] border border-slate-200 bg-white text-slate-800 font-medium text-sm hover:bg-slate-50 transition-colors"
             >
               <Code2 className="w-4 h-4" />
               API Reference
@@ -191,9 +180,9 @@ export default async function DocsIndexPage({
       {/* Sections Grid */}
       <section>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-white flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-blue-400" />
-            Browse Documentation
+          <h2 className="text-xl font-semibold text-slate-900 flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-[#2563eb]" />
+            Browse documentation
           </h2>
         </div>
 
@@ -206,38 +195,30 @@ export default async function DocsIndexPage({
             return (
               <div
                 key={section.title}
-                className="group relative rounded-2xl overflow-hidden"
+                className="rounded-[14px] overflow-hidden"
               >
-                {/* Hover glow */}
-                <div className={`absolute -inset-0.5 bg-gradient-to-r ${config?.gradient || "from-blue-500 to-cyan-500"} rounded-2xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
-
-                {/* Card */}
-                <div className="relative p-5 bg-slate-900/80 border border-white/10 rounded-2xl hover:border-white/20 transition-all h-full">
-                  {/* Icon */}
-                  <div className={`inline-flex p-2.5 rounded-xl bg-gradient-to-br ${config?.gradient || "from-blue-500 to-cyan-500"} mb-4`}>
-                    <Icon className="w-5 h-5 text-white" />
+                <div className="relative p-5 bg-white border border-slate-200 rounded-[14px] h-full">
+                  <div className="inline-flex p-2.5 rounded-[12px] bg-slate-100 mb-4">
+                    <Icon className="w-5 h-5 text-[#2563eb]" />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-lg font-semibold text-white group-hover:text-blue-50 transition-colors">
+                  <h3 className="text-lg font-semibold text-slate-900">
                     {section.title}
                   </h3>
 
-                  {/* Description */}
-                  <p className="text-sm text-slate-400 mt-2 group-hover:text-slate-300 transition-colors">
+                  <p className="text-sm text-slate-600 mt-2">
                     {config?.description || (section.children?.length
-                      ? `${section.children.length} guides available`
-                      : "Explore the fundamentals and workflows.")}
+                      ? `${section.children.length} guides`
+                      : "Guides and reference.")}
                   </p>
 
-                  {/* Link */}
                   {(section.href || section.children?.[0]?.href) && (
                     <Link
                       href={section.href || section.children?.[0]?.href || "#"}
-                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
+                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[#2563eb] hover:underline"
                     >
                       Explore
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   )}
                 </div>
@@ -249,24 +230,23 @@ export default async function DocsIndexPage({
 
       {/* Content Grid */}
       <div className="grid lg:grid-cols-[1fr_260px] gap-8">
-        <article className="rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-sm p-8">
-          <h2 className="text-2xl font-semibold text-white mb-6 pb-4 border-b border-white/10 flex items-center gap-2">
-            <span className="w-1 h-6 bg-blue-500 rounded-full" />
+        <article className="rounded-[14px] border border-slate-200 bg-white p-8">
+          <h2 className="text-2xl font-semibold text-slate-900 mb-6 pb-4 border-b border-slate-200">
             Overview
           </h2>
           <div
-            className="docs-content prose prose-invert prose-slate max-w-none
-              prose-headings:text-white prose-headings:font-semibold
+            className="docs-content prose prose-slate max-w-none
+              prose-headings:text-slate-900 prose-headings:font-semibold
               prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-4
               prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-3
-              prose-p:text-slate-300 prose-p:leading-relaxed
-              prose-a:text-blue-400 prose-a:no-underline hover:prose-a:text-blue-300
-              prose-strong:text-white
-              prose-code:text-blue-300 prose-code:bg-slate-800/80 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
-              prose-pre:bg-slate-800/80 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl
-              prose-ul:text-slate-300 prose-ol:text-slate-300
-              prose-li:marker:text-blue-500
-              prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-500/5 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-slate-300
+              prose-p:text-slate-600 prose-p:leading-relaxed
+              prose-a:text-blue-600 prose-a:no-underline hover:prose-a:text-blue-700
+              prose-strong:text-slate-900
+              prose-code:text-slate-800 prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
+              prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-800 prose-pre:rounded-xl
+              prose-ul:text-slate-600 prose-ol:text-slate-600
+              prose-li:marker:text-blue-600
+              prose-blockquote:border-l-blue-600 prose-blockquote:bg-blue-50 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-slate-600
             "
             dangerouslySetInnerHTML={{ __html: doc.html }}
           />

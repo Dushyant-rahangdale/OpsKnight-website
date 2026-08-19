@@ -75,14 +75,14 @@ export function SocialProof() {
                         </Link>
                     </Button>
                     <Button asChild size="lg" variant="outline" className="border-blue-500/20 hover:bg-blue-500/10 text-blue-400">
-                        <Link href="https://github.com/sponsors/opsknight-labs" target="_blank" rel="noopener noreferrer">
+                        <Link href={BRAND.links.sponsor} target="_blank" rel="noopener noreferrer">
                             <Heart className="w-5 h-5 mr-2" />
                             Sponsor Project
                         </Link>
                     </Button>
                     <Link href={`${BRAND.links.github}/blob/main/LICENSE`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors ml-4">
                         <BookOpen className="w-4 h-4" />
-                        AGPL-3.0 License
+                        {BRAND.license} License
                     </Link>
                 </div>
             </div>

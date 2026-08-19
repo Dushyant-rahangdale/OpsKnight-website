@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Manrope, JetBrains_Mono } from "next/font/google"; // [MODIFIED]
+import { Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { BRAND } from "@/lib/brand";
 import { ConditionalNavbar } from "@/components/layout/ConditionalNavbar";
@@ -42,7 +42,7 @@ const structuredData = [
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Docker, Kubernetes, Linux",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    license: "https://opensource.org/licenses/AGPL-3.0",
+    license: BRAND.licenseUrl,
     url: baseUrl,
     description: BRAND.seo.description,
   },

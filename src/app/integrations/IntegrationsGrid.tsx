@@ -16,6 +16,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { integrationIcons, IntegrationKey } from '@/components/icons/IntegrationIcons';
+import { BRAND } from '@/lib/brand';
 
 interface IntegrationItem {
   id: string;
@@ -589,7 +590,7 @@ export default function IntegrationsGrid() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search 28+ integrations by tool name, APM, cloud, or protocol (e.g. Datadog, Zabbix, GitLab, AWS, Slack)..."
+            placeholder={`Search ${BRAND.integrationCountLabel} integrations by name, APM, cloud, or protocol…`}
             className="w-full bg-white border border-slate-300 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 shadow-sm"
           />
           {searchQuery && (
@@ -630,7 +631,7 @@ export default function IntegrationsGrid() {
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 p-2 flex items-center justify-center group-hover:scale-105 transition-transform shadow-sm shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 p-2 flex items-center justify-center shrink-0">
                   {integrationIcons[integration.iconKey]}
                 </div>
                 <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-blue-50 border border-blue-200 text-blue-700">

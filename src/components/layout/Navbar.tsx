@@ -1,184 +1,132 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Menu, X, Github, ArrowRight } from "lucide-react";
+import { Menu, X, Github } from "lucide-react";
+import { BRAND } from "@/lib/brand";
 
 const navItems = [
-    { label: "Features", href: "/#features" },
-    { label: "How It Works", href: "/#how-it-works" },
-    { label: "Integrations", href: "/integrations" },
-    { label: "Changelog", href: "/changelog" },
-    { label: "Compare", href: "/compare" },
-    { label: "Docs", href: "/docs" },
+  { label: "Features", href: "/#features" },
+  { label: "Integrations", href: "/integrations" },
+  { label: "Compare", href: "/compare" },
+  { label: "Changelog", href: "/changelog" },
+  { label: "Docs", href: BRAND.links.docs },
 ];
 
 export function Navbar() {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    return (
-        <motion.nav
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/70"
-        >
-            {/* Announcement Banner - Styled like App Topbar */}
-            <div className="hidden sm:block border-b border-white/5 bg-slate-900/80">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-center gap-3 py-2 text-xs">
-                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-500/15 border border-red-500/30 text-red-400 font-bold text-[11px]">
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block animate-ping" />
-                            <span>RED ALERT</span>
-                        </span>
-                        <span className="text-slate-300">
-                            OpsKnight v1.3.0 is live — 24+ native integrations, drop-in PagerDuty emulation & self-hosted status pages
-                        </span>
-                        <Link
-                            href="https://github.com/opsknight-labs/OpsKnight/releases"
-                            target="_blank"
-                            className="inline-flex items-center gap-1 text-white hover:text-red-400 font-semibold transition-colors ml-1"
-                        >
-                            Read Release Notes
-                            <ArrowRight className="w-3 h-3" />
-                        </Link>
-                    </div>
-                </div>
+  return (
+    <nav className="fixed top-0 right-0 left-0 z-50 border-b border-slate-800 bg-[#0f172a]">
+      <div className="hidden border-b border-slate-800/80 bg-[#1e293b] sm:block">
+        <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-1.5 sm:px-6 lg:px-8">
+          <p className="font-mono text-[11px] text-slate-400">
+            {BRAND.name} {BRAND.version} · {BRAND.integrationCountLabel} integrations ·{" "}
+            <Link
+              href={BRAND.links.releases}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-200 underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+            >
+              release notes
+            </Link>
+          </p>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-14 items-center justify-between">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+          >
+            <Image
+              src={BRAND.assets.logo}
+              alt=""
+              width={28}
+              height={28}
+              className="h-7 w-7 object-contain"
+            />
+            <span className="text-[15px] font-semibold tracking-tight text-white">
+              {BRAND.name}
+            </span>
+          </Link>
+
+          <div className="hidden items-center gap-0.5 md:flex">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="rounded-md px-3 py-1.5 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="hidden items-center gap-3 md:flex">
+            <Link
+              href={BRAND.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+            >
+              <Github className="h-4 w-4" />
+              GitHub
+            </Link>
+            <Link
+              href={BRAND.links.docs}
+              className="inline-flex h-8 items-center justify-center rounded-[10px] bg-[#2563eb] px-3.5 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
+            >
+              Deploy
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className="rounded-md p-2 text-slate-300 hover:bg-white/5 hover:text-white md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+            aria-expanded={isOpen}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+
+        {isOpen && (
+          <div className="border-t border-slate-800 py-3 md:hidden">
+            <div className="flex flex-col gap-0.5">
+              {navItems.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="rounded-md px-3 py-2.5 text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Link
+                href={BRAND.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-md px-3 py-2.5 text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white"
+                onClick={() => setIsOpen(false)}
+              >
+                GitHub
+              </Link>
+              <Link
+                href={BRAND.links.docs}
+                className="mx-3 mt-2 inline-flex h-10 items-center justify-center rounded-[10px] bg-[#2563eb] text-sm font-semibold text-white"
+                onClick={() => setIsOpen(false)}
+              >
+                Deploy
+              </Link>
             </div>
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-14">
-                    {/* Logo matching App Sidebar */}
-                    <Link href="/" className="flex items-center gap-2.5 group">
-                        <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-slate-900 to-slate-950 border border-red-500/20 group-hover:border-red-500/50 transition-all shadow-md shadow-red-500/5">
-                            <Image
-                                src="/logo-mark.png"
-                                alt="OpsKnight"
-                                width={22}
-                                height={22}
-                                className="w-5 h-5 object-contain"
-                            />
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-base font-extrabold tracking-tight text-white group-hover:text-red-400 transition-colors leading-tight">
-                                OpsKnight
-                            </span>
-                            <span className="text-[8px] font-bold tracking-widest text-slate-400 uppercase leading-none">
-                                INCIDENT RESPONSE
-                            </span>
-                        </div>
-                    </Link>
-
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-1">
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.label}
-                                href={item.href}
-                                className="px-3 py-1.5 text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-colors"
-                            >
-                                {item.label}
-                            </Link>
-                        ))}
-                    </div>
-
-                    {/* Right-side actions */}
-                    <div className="hidden md:flex items-center gap-4">
-                        <Link
-                            href="https://status.opsknight.com"
-                            target="_blank"
-                            className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-full bg-slate-900/50 border border-white/5 transition-colors"
-                        >
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                            </span>
-                            All Systems Operational
-                        </Link>
-                        
-                        <div className="w-px h-4 bg-white/10"></div>
-
-                        <Link
-                            href="https://github.com/opsknight-labs/OpsKnight"
-                            target="_blank"
-                            className="flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition-colors"
-                        >
-                            <Github className="w-4 h-4" />
-                            <span>Star</span>
-                        </Link>
-                        
-                        <Link
-                            href="/docs"
-                            className="inline-flex h-8 items-center justify-center rounded-md bg-white px-4 text-sm font-medium text-black hover:bg-slate-200 transition-colors"
-                        >
-                            Get Started
-                        </Link>
-                    </div>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-colors"
-                    >
-                        {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                    </button>
-                </div>
-
-                {/* Mobile Menu */}
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden py-4 border-t border-white/10"
-                    >
-                        <div className="flex flex-col gap-1">
-                            {navItems.map((item) => (
-                                <Link
-                                    key={item.label}
-                                    href={item.href}
-                                    className="px-4 py-2.5 text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 rounded-md transition-colors"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    {item.label}
-                                </Link>
-                            ))}
-                            <div className="flex flex-col gap-3 p-4 mt-2 border-t border-white/10">
-                                <Link
-                                    href="https://status.opsknight.com"
-                                    target="_blank"
-                                    className="flex items-center gap-2 text-slate-300 hover:text-white text-sm font-medium"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    <span className="relative flex h-2 w-2">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                                    </span>
-                                    <span>Live Status</span>
-                                </Link>
-                                <Link
-                                    href="https://github.com/opsknight-labs/OpsKnight"
-                                    target="_blank"
-                                    className="flex items-center gap-2 text-slate-300 hover:text-white text-sm font-medium"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    <Github className="w-4 h-4" />
-                                    <span>Star on GitHub</span>
-                                </Link>
-                                <Link
-                                    href="/docs"
-                                    className="flex items-center justify-center h-10 mt-2 rounded-md bg-white text-black text-sm font-medium hover:bg-slate-200 transition-colors"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    Get Started
-                                </Link>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </div>
-        </motion.nav>
-    );
+          </div>
+        )}
+      </div>
+    </nav>
+  );
 }

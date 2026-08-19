@@ -58,7 +58,7 @@ const releases: ReleaseItem[] = [
         type: 'security',
         title: 'Forensic Ingestion Security & Authentication',
         items: [
-          'HMAC-SHA256 & SHA-1 Webhook Signature Verification — timing-safe signature comparison prevents forgery across all 28+ webhook receivers.',
+          'HMAC-SHA256 & SHA-1 webhook signature verification — timing-safe comparison across native webhook receivers.',
           'Replay Attack Prevention — enforced 5-minute timestamp tolerance window rejecting stale or spoofed alerts.',
           'Distributed Token Bucket Rate Limiter — per-token/per-IP rate limiting protecting webhook ingest endpoints from DDoS storms.'
         ]
@@ -138,7 +138,7 @@ const releases: ReleaseItem[] = [
   {
     version: 'v1.0.0',
     date: 'February 1, 2026',
-    summary: 'Initial production GA release of OpsKnight Incident Command Center under AGPL-3.0 License.',
+    summary: 'Initial production GA release of OpsKnight Incident Command Center under Apache-2.0.',
     dockerTag: 'ghcr.io/opsknight-labs/opsknight:1.0.0',
     githubReleaseUrl: 'https://github.com/opsknight-labs/OpsKnight/releases/tag/v1.0.0',
     categories: [
@@ -169,7 +169,7 @@ export default function ChangelogPage() {
             <Tag className="w-3.5 h-3.5" />
             Continuous Evolution
           </div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 mb-6">
+          <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
             Release Changelog
           </h1>
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
@@ -192,12 +192,12 @@ export default function ChangelogPage() {
               <div className="absolute left-4 -translate-x-1/2 top-7 w-4 h-4 rounded-full bg-white border-2 border-blue-600 shadow-md hidden sm:block group-hover:scale-125 transition-transform" />
 
               {/* Release Card */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xl hover:border-blue-500/30 transition-all space-y-6">
+              <div className="p-6 sm:p-8 rounded-[14px] bg-white border border-slate-200 space-y-6">
                 
                 {/* Release Top Metadata */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                   <div className="flex items-center gap-3 flex-wrap">
-                    <span className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
+                    <span className="text-2xl sm:text-3xl font-semibold text-slate-900 font-mono">
                       {rel.version}
                     </span>
                     {rel.badge && (

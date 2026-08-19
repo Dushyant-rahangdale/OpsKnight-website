@@ -116,17 +116,17 @@ export default async function DocsPage({
     <div className="grid lg:grid-cols-[1fr_260px] gap-8">
       <article className="space-y-6">
         {/* Article Header */}
-        <div className={`rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-sm overflow-hidden ${sectionColors?.border ? `border-l-4 ${sectionColors.border}` : ""}`}>
+        <div className={`rounded-[14px] border border-slate-200 bg-white overflow-hidden ${sectionColors?.border ? `border-l-4 ${sectionColors.border}` : ""}`}>
           {/* Breadcrumbs */}
-          <div className="px-6 py-3 border-b border-white/5 bg-slate-900/50">
+          <div className="px-6 py-3 border-b border-slate-200 bg-slate-50">
             <nav className="flex items-center gap-1.5 text-xs">
               {breadcrumbs.map((crumb, i) => (
                 <span key={crumb.href} className="flex items-center gap-1.5">
-                  {i > 0 && <ChevronRight className="w-3 h-3 text-slate-600" />}
+                  {i > 0 && <ChevronRight className="w-3 h-3 text-slate-400" />}
                   {i === breadcrumbs.length - 1 ? (
-                    <span className="text-slate-300 font-medium">{crumb.label}</span>
+                    <span className="text-slate-800 font-medium">{crumb.label}</span>
                   ) : (
-                    <Link href={crumb.href} className="text-slate-500 hover:text-slate-300 transition-colors">
+                    <Link href={crumb.href} className="text-slate-500 hover:text-slate-800 transition-colors">
                       {crumb.label}
                     </Link>
                   )}
@@ -152,13 +152,12 @@ export default async function DocsPage({
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight">
               {doc.title}
             </h1>
 
-            {/* Description */}
             {doc.description && (
-              <p className="mt-3 text-slate-400 text-lg leading-relaxed max-w-3xl">
+              <p className="mt-3 text-slate-600 text-lg leading-relaxed max-w-3xl">
                 {doc.description}
               </p>
             )}
@@ -166,26 +165,26 @@ export default async function DocsPage({
         </div>
 
         {/* Article Content */}
-        <div className="rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-sm p-8">
+        <div className="rounded-[14px] border border-slate-200 bg-white p-8">
           <CopyCodeButton />
           <div
-            className="docs-content prose prose-invert prose-slate max-w-none
-              prose-headings:text-white prose-headings:font-semibold prose-headings:tracking-tight
-              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-white/10
+            className="docs-content prose prose-slate max-w-none
+              prose-headings:text-slate-900 prose-headings:font-semibold prose-headings:tracking-tight
+              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-slate-200
               prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-              prose-p:text-slate-300 prose-p:leading-relaxed
-              prose-a:text-blue-400 prose-a:no-underline hover:prose-a:text-blue-300 prose-a:transition-colors
-              prose-strong:text-white prose-strong:font-semibold
-              prose-code:text-blue-300 prose-code:bg-slate-800/80 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:font-normal prose-code:before:content-none prose-code:after:content-none
-              prose-pre:bg-slate-800/80 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl
-              prose-ul:text-slate-300 prose-ol:text-slate-300
-              prose-li:marker:text-blue-500
-              prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-500/5 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-slate-300 prose-blockquote:not-italic
+              prose-p:text-slate-600 prose-p:leading-relaxed
+              prose-a:text-blue-600 prose-a:no-underline hover:prose-a:text-blue-700 prose-a:transition-colors
+              prose-strong:text-slate-900 prose-strong:font-semibold
+              prose-code:text-slate-800 prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:font-normal prose-code:before:content-none prose-code:after:content-none
+              prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-800 prose-pre:rounded-xl
+              prose-ul:text-slate-600 prose-ol:text-slate-600
+              prose-li:marker:text-blue-600
+              prose-blockquote:border-l-blue-600 prose-blockquote:bg-blue-50 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-slate-600 prose-blockquote:not-italic
               prose-table:border-collapse
-              prose-th:bg-slate-800/80 prose-th:text-slate-200 prose-th:font-semibold prose-th:px-4 prose-th:py-2
-              prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-white/10
-              prose-img:rounded-xl prose-img:border prose-img:border-white/10
-              prose-hr:border-white/10
+              prose-th:bg-slate-50 prose-th:text-slate-800 prose-th:font-semibold prose-th:px-4 prose-th:py-2
+              prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-slate-200
+              prose-img:rounded-xl prose-img:border prose-img:border-slate-200
+              prose-hr:border-slate-200
             "
             dangerouslySetInnerHTML={{ __html: doc.html }}
           />
@@ -193,14 +192,14 @@ export default async function DocsPage({
         </div>
 
         {/* Footer Navigation */}
-        <div className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-slate-900/40">
+        <div className="flex items-center justify-between p-4 rounded-[12px] border border-slate-200 bg-white">
           <p className="text-xs text-slate-500">
             Last updated for {version}
           </p>
           <Link
             href={BRAND.links.github}
             target="_blank"
-            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-blue-400 transition-colors"
+            className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-blue-600 transition-colors"
           >
             Edit this page on GitHub
             <ChevronRight className="w-3 h-3" />

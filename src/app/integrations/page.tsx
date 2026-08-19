@@ -1,11 +1,12 @@
 import { Metadata } from 'next';
+import { BRAND } from '@/lib/brand';
 import IntegrationsGrid from './IntegrationsGrid';
 import { Blocks, ShieldCheck, Terminal, Webhook } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Integrations Ecosystem | OpsKnight',
-  description: 'Connect your entire observability and alerting stack with 28+ native integrations. Timing-safe HMAC security, zero plugins required.',
+  description: `Connect your observability stack with ${BRAND.integrationCountLabel} native integrations. HMAC-signed ingest, no plugins.`,
 };
 
 export default function IntegrationsPage() {
@@ -18,13 +19,13 @@ export default function IntegrationsPage() {
         <header className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-semibold mb-4">
             <Blocks className="w-3.5 h-3.5" />
-            28+ Native Integrations • Zero Plugins Required
+            {BRAND.integrationCountLabel} native integrations · no plugins
           </div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 mb-6">
-            Ecosystem & Integrations
+          <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
+            Integrations
           </h1>
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Connect APM, cloud platforms, metric daemons, and chat tools directly into OpsKnight. Every integration ships built-in with timing-safe HMAC security and sub-15ms ingestion.
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+            APM, cloud, metrics daemons, CI, and chat — first-party handlers with HMAC verification.
           </p>
         </header>
 

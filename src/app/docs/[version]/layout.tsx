@@ -21,40 +21,29 @@ export default async function DocsLayout({
   return (
     <SidebarProvider defaultOpen>
       <NewDocsSidebar items={sidebar} version={version} versions={DOC_VERSIONS} />
-      <SidebarInset className="bg-slate-950 min-h-screen">
-        {/* Header */}
-        <header className="flex h-14 shrink-0 items-center gap-3 border-b border-white/5 px-4 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-10">
-          <SidebarTrigger className="-ml-1 text-slate-400 hover:text-white transition-colors" />
-          <div className="h-4 w-px bg-white/10" />
+      <SidebarInset className="bg-[#f8fafc] min-h-screen">
+        <header className="flex h-14 shrink-0 items-center gap-3 border-b border-slate-200 px-4 bg-white sticky top-0 z-10">
+          <SidebarTrigger className="-ml-1 text-slate-500 hover:text-slate-900 transition-colors" />
+          <div className="h-4 w-px bg-slate-200" />
           <nav className="flex items-center gap-2 text-sm">
-            <Link href="/" className="text-slate-400 hover:text-white transition-colors">
+            <Link href="/" className="text-slate-500 hover:text-slate-900 transition-colors">
               Home
             </Link>
-            <span className="text-slate-600">/</span>
-            <span className="font-medium text-white">Documentation</span>
+            <span className="text-slate-400">/</span>
+            <span className="font-medium text-slate-900">Documentation</span>
           </nav>
           <div className="ml-auto flex items-center gap-4">
-            {/* Search */}
             <div className="hidden md:block w-64 lg:w-80">
               <DocsSearch version={version} />
             </div>
 
-            <span className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500"></span>
-              </span>
+            <span className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-600 text-xs font-medium">
               {version}
             </span>
           </div>
         </header>
 
-        {/* Background effects */}
         <div className="relative">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none" />
-
-          {/* Content */}
           <div className="relative p-4 lg:p-10 max-w-[1600px] mx-auto w-full">
             {children}
           </div>

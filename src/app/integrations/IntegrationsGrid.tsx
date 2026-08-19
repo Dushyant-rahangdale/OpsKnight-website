@@ -551,29 +551,29 @@ export default function IntegrationsGrid() {
   return (
     <div className="space-y-12">
       
-      {/* PagerDuty Drop-in Banner */}
-      <div className="p-6 rounded-3xl bg-gradient-to-r from-blue-950/60 via-slate-900 to-slate-950 border border-blue-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-2xl">
+      {/* PagerDuty Drop-in Emulation Banner */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-white border border-blue-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-black border border-white/10 p-2.5 shrink-0">
+          <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 p-2 shrink-0 flex items-center justify-center shadow-inner">
             {integrationIcons.pagerduty}
           </div>
           <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] font-bold uppercase tracking-wider mb-1">
-              <Sparkles className="w-3 h-3 text-blue-400" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold uppercase tracking-wider mb-1">
+              <Sparkles className="w-3 h-3 text-blue-600" />
               Drop-In Migration Endpoint
             </div>
-            <h3 className="text-lg font-bold text-white">
+            <h3 className="text-lg font-bold text-slate-900">
               Migrate from PagerDuty in 60 seconds with zero tool reconfiguration
             </h3>
-            <p className="text-xs text-slate-400 max-w-2xl mt-1">
-              OpsKnight implements the standard <strong>PagerDuty Events API v2 (<code className="text-sky-300 font-mono">/api/v2/enqueue</code>)</strong>. Point Datadog, Prometheus, or Grafana alerts directly to your OpsKnight server and incidents triage immediately.
+            <p className="text-xs text-slate-600 max-w-2xl mt-1">
+              OpsKnight implements the standard <strong>PagerDuty Events API v2 (<code className="text-blue-600 font-mono">/api/v2/enqueue</code>)</strong>. Point Datadog, Prometheus, or Grafana alerts directly to your OpsKnight server and incidents triage immediately.
             </p>
           </div>
         </div>
 
         <Link
           href="/compare/pagerduty"
-          className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md"
+          className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-blue-600/20"
         >
           Explore Migration
           <ArrowRight className="w-4 h-4" />
@@ -584,18 +584,18 @@ export default function IntegrationsGrid() {
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Search Input */}
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search 28+ integrations by tool name, APM, cloud, or protocol (e.g. Datadog, Zabbix, GitLab, AWS, Slack)..."
-            className="w-full bg-slate-900/90 border border-white/10 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 shadow-xl"
+            className="w-full bg-white border border-slate-300 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 shadow-sm"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white px-2 py-1 rounded-md bg-white/5"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-slate-500 hover:text-slate-900 px-2 py-1 rounded-md bg-slate-100"
             >
               Clear
             </button>
@@ -610,8 +610,8 @@ export default function IntegrationsGrid() {
               onClick={() => setActiveCategory(cat)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all border ${
                 activeCategory === cat
-                  ? 'bg-blue-600 text-white border-blue-500 shadow-md'
-                  : 'bg-slate-900/60 text-slate-400 hover:bg-slate-800 hover:text-white border-white/5'
+                  ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 border-slate-200 shadow-sm'
               }`}
             >
               {cat}
@@ -626,29 +626,29 @@ export default function IntegrationsGrid() {
           <div
             key={integration.id}
             onClick={() => setSelectedIntegration(integration)}
-            className="group flex flex-col justify-between p-6 rounded-2xl bg-slate-900/60 border border-white/10 hover:border-blue-500/40 hover:bg-slate-900 transition-all cursor-pointer shadow-lg relative overflow-hidden"
+            className="group flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-500/40 hover:shadow-md transition-all cursor-pointer shadow-sm relative overflow-hidden"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-11 h-11 rounded-xl bg-white p-2 flex items-center justify-center group-hover:scale-105 transition-transform shadow-md shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 p-2 flex items-center justify-center group-hover:scale-105 transition-transform shadow-sm shrink-0">
                   {integrationIcons[integration.iconKey]}
                 </div>
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-blue-50 border border-blue-200 text-blue-700">
                   {integration.protocol}
                 </span>
               </div>
 
-              <h3 className="font-bold text-white text-base group-hover:text-blue-400 transition-colors mb-1.5">
+              <h3 className="font-bold text-slate-900 text-base group-hover:text-blue-600 transition-colors mb-1.5">
                 {integration.name}
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed mb-4">
+              <p className="text-xs text-slate-600 leading-relaxed mb-4">
                 {integration.desc}
               </p>
             </div>
 
-            <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-blue-400 group-hover:text-blue-300">
+            <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-blue-600 group-hover:text-blue-700">
               <span className="flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5 text-blue-400" />
+                <Zap className="w-3.5 h-3.5 text-blue-600" />
                 Inspect Payload
               </span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

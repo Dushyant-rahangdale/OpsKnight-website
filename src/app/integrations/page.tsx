@@ -10,24 +10,20 @@ export const metadata: Metadata = {
 
 export default function IntegrationsPage() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden font-sans">
       
-      {/* Subtle Aurora Glows */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-sky-500/10 rounded-full blur-[120px] pointer-events-none" />
-
       <div className="max-w-7xl mx-auto relative z-10 space-y-20">
         
         {/* Header */}
         <header className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-semibold mb-4">
             <Blocks className="w-3.5 h-3.5" />
             28+ Native Integrations • Zero Plugins Required
           </div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6">
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 mb-6">
             Ecosystem & Integrations
           </h1>
-          <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
             Connect APM, cloud platforms, metric daemons, and chat tools directly into OpsKnight. Every integration ships built-in with timing-safe HMAC security and sub-15ms ingestion.
           </p>
         </header>
@@ -36,32 +32,32 @@ export default function IntegrationsPage() {
         <IntegrationsGrid />
 
         {/* Custom Webhook / SDK Ingestion Section */}
-        <section className="p-8 sm:p-12 rounded-3xl bg-slate-900/80 border border-white/10 shadow-2xl relative overflow-hidden">
+        <section className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-200 shadow-xl relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-6 space-y-4">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-bold uppercase tracking-wider">
                 <Webhook className="w-3.5 h-3.5" />
                 Custom Ingestion API
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
                 Need a custom internal tool integration?
               </h2>
-              <p className="text-sm text-slate-300 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed">
                 OpsKnight supports generic JSON webhooks with SHA-256 fingerprint deduplication. Send a single HTTP POST request from internal cron jobs, Kubernetes operators, or custom monitoring scripts.
               </p>
               
-              <div className="flex flex-wrap gap-4 text-xs font-semibold pt-2 text-slate-400">
+              <div className="flex flex-wrap gap-4 text-xs font-semibold pt-2 text-slate-700">
                 <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
                   HMAC-SHA256 Signed
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Terminal className="w-4 h-4 text-sky-400" />
+                  <Terminal className="w-4 h-4 text-blue-600" />
                   Sub-15ms Ingestion
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Blocks className="w-4 h-4 text-blue-400" />
+                  <Blocks className="w-4 h-4 text-slate-700" />
                   Auto-Deduplication
                 </div>
               </div>
@@ -69,7 +65,7 @@ export default function IntegrationsPage() {
               <div className="pt-2">
                 <Link
                   href="/docs/v1.3/integrations/custom-webhooks"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-blue-600/20"
                 >
                   Read Custom Webhook Documentation
                 </Link>
@@ -78,10 +74,10 @@ export default function IntegrationsPage() {
 
             {/* Code Snippet Box */}
             <div className="lg:col-span-6">
-              <div className="rounded-2xl bg-black/90 border border-white/10 p-5 font-mono text-xs text-slate-300 shadow-2xl space-y-2">
-                <div className="flex items-center justify-between pb-3 border-b border-white/10 text-[11px] text-slate-500">
+              <div className="rounded-2xl bg-slate-950 border border-slate-800 p-5 font-mono text-xs text-slate-300 shadow-2xl space-y-2">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-[11px] text-slate-400">
                   <span>POST /api/webhooks/custom</span>
-                  <span className="text-emerald-400">200 OK</span>
+                  <span className="text-emerald-400 font-bold">200 OK</span>
                 </div>
                 <pre className="text-emerald-300 overflow-x-auto py-2">
 {`curl -X POST https://opsknight.yourdomain.com/api/webhooks/custom \\

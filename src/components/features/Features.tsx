@@ -58,108 +58,100 @@ const bentoFeatures = [
         icon: MessageSquare,
         tag: "Bi-Directional ChatOps",
         title: "Native Slack War Rooms & Video",
-        description: "Auto-provision dedicated war room channels for critical incidents with built-in Jitsi WebRTC, Google Meet, or Zoom bridges and interactive triage buttons.",
-        metric: "Bi-Directional",
-        metricLabel: "Live ChatOps Sync",
-        highlights: ["Auto-join incident commander", "Jitsi / Meet / Zoom bridges", "Live channel archive into postmortems"],
-        colSpan: "lg:col-span-2"
+        description: "Auto-provision dedicated channels (#inc-*) on P1 incidents, invite primary responders, and launch instant Jitsi Meet WebRTC, Google Meet, or Zoom bridges.",
+        metric: "Instant",
+        metricLabel: "War Room Creation",
+        highlights: ["Interactive Slack buttons", "1-click Acknowledge / Resolve", "Video bridge auto-provisioning"],
+        colSpan: "lg:col-span-1"
     },
     {
         icon: FileText,
-        tag: "Continuous Learning",
-        title: "Automated Postmortems & Retrospectives",
-        description: "Turn every outage into actionable prevention. OpsKnight automatically compiles incident timelines, Slack war room discussions, and telemetry into structured retrospective reports.",
-        metric: "Auto-Draft",
-        metricLabel: "Retrospective Reports",
-        highlights: ["Chronological audit timeline", "Root cause & contributing factors", "Action item tracking & export"],
+        tag: "Automated Governance",
+        title: "Postmortems & Compliance Audits",
+        description: "Generate structured markdown retrospectives from timeline events with one click. Maintain immutable audit trails of all alert lifecycle actions for SOC2 & ISO27001.",
+        metric: "0 Effort",
+        metricLabel: "Timeline Compilation",
+        highlights: ["Automated MTTA/MTTR metrics", "Markdown export", "Immutable audit logging"],
         colSpan: "lg:col-span-1"
     }
 ];
 
 export function Features() {
     return (
-        <section id="features" className="relative py-28 bg-slate-950 overflow-hidden border-t border-white/5">
+        <section id="features" className="py-28 bg-white border-b border-slate-200/80 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
                 {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-20"
-                >
-                    <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">
-                        Enterprise Architecture
+                <div className="text-center max-w-3xl mx-auto mb-20">
+                    <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-semibold mb-4">
+                        Enterprise Reliability Engine
                     </span>
-                    <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-6">
-                        Engineered for sub-second incident resolution.
+                    <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-4">
+                        Built for SREs, platform engineers, and on-call teams.
                     </h2>
-                    <p className="text-slate-400 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
-                        Every layer of OpsKnight is crafted for speed, resilience, and complete data privacy — giving your SRE and DevOps teams absolute command over production outages.
+                    <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+                        Every tool you need to eliminate downtime, silence alert fatigue, and manage critical outages — without the enterprise SaaS markup.
                     </p>
-                </motion.div>
-
-                {/* Clean Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {bentoFeatures.map((feat, idx) => (
-                        <motion.div
-                            key={feat.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: idx * 0.08 }}
-                            className={`${feat.colSpan} flex flex-col justify-between p-8 rounded-2xl bg-slate-900/60 border border-white/10 hover:border-blue-500/30 hover:bg-slate-900/90 transition-all duration-300 shadow-xl group`}
-                        >
-                            <div>
-                                <div className="flex items-center justify-between mb-6">
-                                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
-                                        <feat.icon className="w-6 h-6" />
-                                    </div>
-                                    <div className="text-right">
-                                        <div className="text-base font-black text-white font-mono">{feat.metric}</div>
-                                        <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">{feat.metricLabel}</div>
-                                    </div>
-                                </div>
-
-                                <div className="inline-block px-2.5 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] font-mono text-slate-300 font-medium mb-3">
-                                    {feat.tag}
-                                </div>
-
-                                <h3 className="text-xl font-bold text-white mb-3">
-                                    {feat.title}
-                                </h3>
-                                <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                                    {feat.description}
-                                </p>
-                            </div>
-
-                            <div className="pt-6 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                                {feat.highlights.map((item, i) => (
-                                    <div key={i} className="flex items-center gap-2 text-xs text-slate-300">
-                                        <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                                        <span>{item}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </motion.div>
-                    ))}
                 </div>
 
-                {/* Bottom Link to Docs */}
-                <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mt-12 text-center"
-                >
-                    <Link
-                        href="/docs"
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                        Explore full technical architecture and developer specifications
-                        <ArrowRight className="w-4 h-4" />
-                    </Link>
-                </motion.div>
+                {/* Bento Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    {bentoFeatures.map((feat, idx) => {
+                        const Icon = feat.icon;
+                        return (
+                            <motion.div
+                                key={feat.title}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: idx * 0.08, duration: 0.4 }}
+                                className={`p-8 rounded-3xl bg-slate-50 border border-slate-200/80 hover:border-blue-500/40 hover:bg-white shadow-sm hover:shadow-md transition-all flex flex-col justify-between group ${feat.colSpan}`}
+                            >
+                                <div className="space-y-4">
+                                    <div className="flex items-center justify-between">
+                                        <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 group-hover:scale-105 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                                            <Icon className="w-6 h-6" />
+                                        </div>
+                                        <span className="text-xs font-mono font-semibold px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700">
+                                            {feat.tag}
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                                            {feat.title}
+                                        </h3>
+                                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                            {feat.description}
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-2 pt-2 border-t border-slate-200/60">
+                                        {feat.highlights.map((item) => (
+                                            <div key={item} className="flex items-center gap-2 text-xs text-slate-700">
+                                                <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                                                <span>{item}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="mt-8 pt-4 border-t border-slate-200/60 flex items-center justify-between">
+                                    <div>
+                                        <div className="text-2xl font-black text-blue-600 font-mono">{feat.metric}</div>
+                                        <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">{feat.metricLabel}</div>
+                                    </div>
+                                    <Link
+                                        href="/docs"
+                                        className="text-xs font-bold text-slate-700 group-hover:text-blue-600 flex items-center gap-1 transition-colors"
+                                    >
+                                        Docs <ArrowRight className="w-3.5 h-3.5" />
+                                    </Link>
+                                </div>
+                            </motion.div>
+                        );
+                    })}
+                </div>
 
             </div>
         </section>

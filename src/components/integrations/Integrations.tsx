@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { integrationIcons } from "../icons/IntegrationIcons";
+import Link from "next/link";
 import { BRAND } from "@/lib/brand";
+import { integrationIcons } from "@/components/icons/IntegrationIcons";
 
-type Category = "All (24)" | "APM & Monitoring" | "Cloud Infrastructure" | "Metrics & Daemons" | "CI/CD & DevOps" | "Uptime & Synthetics" | "Chat & Notifications";
+type Category = "All (28)" | "APM & Monitoring" | "Cloud Infrastructure" | "Metrics & Daemons" | "CI/CD & DevOps" | "Uptime & Synthetics" | "Chat & Notifications";
 
-interface Integration {
+interface IntegrationItem {
     name: string;
     category: Category;
     icon: React.ReactNode;
@@ -17,7 +17,7 @@ interface Integration {
     href: string;
 }
 
-const integrations: Integration[] = [
+const integrations: IntegrationItem[] = [
     // APM & Monitoring
     { name: "Datadog", category: "APM & Monitoring", icon: integrationIcons.datadog, description: "Full-stack observability and security.", href: "/docs/integrations/datadog" },
     { name: "New Relic", category: "APM & Monitoring", icon: integrationIcons.newrelic, description: "Application performance monitoring.", href: "/docs/integrations/newrelic" },
@@ -30,7 +30,7 @@ const integrations: Integration[] = [
     // Cloud Infrastructure
     { name: "AWS CloudWatch", category: "Cloud Infrastructure", icon: integrationIcons.cloudwatch, description: "Monitoring for AWS resources.", href: "/docs/integrations/cloudwatch" },
     { name: "Azure Monitor", category: "Cloud Infrastructure", icon: integrationIcons.azure, description: "Full observability into Azure apps.", href: "/docs/integrations/azure" },
-    { name: "Google Cloud Monitoring", category: "Cloud Infrastructure", icon: integrationIcons.googlecloud, description: "Metrics for Google Cloud.", href: "/docs/integrations/gcp" },
+    { name: "Google Cloud Monitoring", category: "Cloud Infrastructure", icon: integrationIcons.googlecloud, description: "Metrics for Google Cloud.", href: "/docs/integrations/googlecloud" },
 
     // Metrics & Daemons
     { name: "Prometheus / Alertmanager", category: "Metrics & Daemons", icon: integrationIcons.prometheus, description: "Open-source systems monitoring.", href: "/docs/integrations/prometheus" },
@@ -61,7 +61,7 @@ const integrations: Integration[] = [
 ];
 
 const categories: Category[] = [
-    "All (24)",
+    "All (28)",
     "APM & Monitoring",
     "Cloud Infrastructure",
     "Metrics & Daemons",
@@ -71,24 +71,21 @@ const categories: Category[] = [
 ];
 
 export function Integrations() {
-    const [activeFilter, setActiveFilter] = useState<Category>("All (24)");
+    const [activeFilter, setActiveFilter] = useState<Category>("All (28)");
 
-    const filtered = integrations.filter(it => activeFilter === "All (24)" || it.category === activeFilter);
+    const filtered = integrations.filter(it => activeFilter === "All (28)" || it.category === activeFilter);
 
     return (
-        <section id="integrations" className="relative py-32 bg-slate-950 overflow-hidden">
-            {/* Background Effects */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900/30 via-slate-950 to-slate-950 pointer-events-none" />
-
+        <section id="integrations" className="relative py-28 bg-slate-50 border-b border-slate-200/80 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16">
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-semibold mb-4">
+                    <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-semibold mb-4">
                         Ecosystem & Interoperability
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                        24+ native integrations. Zero plugins needed.
+                    <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-4">
+                        28+ native integrations. Zero plugins needed.
                     </h2>
-                    <p className="text-slate-400 max-w-3xl mx-auto text-lg">
+                    <p className="text-slate-600 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed font-normal">
                         Connect your existing observability, APM, cloud, and alert channels without writing custom adapters.
                     </p>
                 </div>
@@ -99,10 +96,10 @@ export function Integrations() {
                         <button
                             key={cat}
                             onClick={() => setActiveFilter(cat)}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
+                            className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${
                                 activeFilter === cat
-                                    ? "bg-blue-600/20 border-blue-500/50 text-blue-300"
-                                    : "bg-slate-900/50 border-white/5 text-slate-400 hover:text-white hover:bg-slate-800"
+                                    ? "bg-blue-600 border-blue-600 text-white shadow-md"
+                                    : "bg-white border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-100 shadow-sm"
                             }`}
                         >
                             {cat}
@@ -110,21 +107,21 @@ export function Integrations() {
                     ))}
                 </div>
 
-                {/* Special Highlight */}
-                <div className="mb-12 max-w-3xl mx-auto bg-blue-950/30 border border-blue-500/20 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6">
-                    <div className="w-16 h-16 shrink-0 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center p-3 text-blue-400">
+                {/* Drop-in PagerDuty Banner */}
+                <div className="mb-12 max-w-3xl mx-auto bg-white border border-blue-200 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6 shadow-sm">
+                    <div className="w-16 h-16 shrink-0 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center p-3 text-blue-600 shadow-inner">
                         {integrationIcons.pagerduty}
                     </div>
                     <div>
-                        <h3 className="text-blue-400 font-semibold text-lg mb-1">PagerDuty Events API v2 Emulation</h3>
-                        <p className="text-slate-300 text-sm">Drop-in endpoint - change URL to {BRAND.name} and everything works instantly. No need to update existing integrations or scripts.</p>
+                        <h3 className="text-slate-900 font-bold text-lg mb-1">PagerDuty Events API v2 Emulation</h3>
+                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">Drop-in endpoint - change URL to {BRAND.name} and everything works instantly. No need to update existing monitoring integrations or scripts.</p>
                     </div>
                 </div>
 
                 {/* Grid */}
                 <motion.div 
                     layout
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-16"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-16"
                 >
                     <AnimatePresence>
                         {filtered.map((item) => (
@@ -136,13 +133,13 @@ export function Integrations() {
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                <Link href={item.href} className="flex items-start gap-4 p-5 rounded-2xl bg-slate-900/40 border border-white/5 hover:border-blue-500/30 hover:bg-slate-900/80 transition-all group h-full">
-                                    <div className="w-11 h-11 rounded-xl bg-white p-2 shrink-0 shadow-md flex items-center justify-center group-hover:scale-105 transition-transform">
+                                <Link href={item.href} className="flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-200/80 hover:border-blue-500/40 hover:shadow-md transition-all group h-full shadow-sm">
+                                    <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 p-2 shrink-0 shadow-sm flex items-center justify-center group-hover:scale-105 transition-transform">
                                         {item.icon}
                                     </div>
                                     <div>
-                                        <h4 className="text-white font-medium text-sm mb-1 group-hover:text-blue-400 transition-colors">{item.name}</h4>
-                                        <p className="text-slate-400 text-xs leading-relaxed line-clamp-2">{item.description}</p>
+                                        <h4 className="text-slate-900 font-bold text-sm mb-1 group-hover:text-blue-600 transition-colors">{item.name}</h4>
+                                        <p className="text-slate-600 text-xs leading-relaxed line-clamp-2">{item.description}</p>
                                     </div>
                                 </Link>
                             </motion.div>
@@ -154,9 +151,9 @@ export function Integrations() {
                 <div className="text-center">
                     <Link
                         href="/integrations"
-                        className="inline-flex items-center gap-2 text-blue-400 font-medium hover:text-blue-300 transition-colors group"
+                        className="inline-flex items-center gap-2 text-blue-600 font-bold text-sm hover:text-blue-500 transition-colors group"
                     >
-                        View all 24+ integrations directory 
+                        View all 28+ integrations directory 
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
@@ -164,4 +161,3 @@ export function Integrations() {
         </section>
     );
 }
-

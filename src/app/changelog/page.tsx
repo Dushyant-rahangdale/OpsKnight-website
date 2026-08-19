@@ -58,75 +58,71 @@ const releases: ReleaseItem[] = [
         type: 'security',
         title: 'Forensic Ingestion Security & Authentication',
         items: [
-          'Mandatory integration key verification and timing-safe HMAC checks (crypto.timingSafeEqual) across all 24 webhook routes.',
-          'Collision-proof 32-character SHA-256 deduplication hashing replacing legacy 100-character string slicing.',
-          'Outbound webhook timestamp binding (X-OpsKnight-Timestamp in HMAC) to eliminate replay attack vectors.',
-          'Fallback RBAC permission safely assigns unauthenticated sessions to VIEWER with authenticated: false.'
+          'HMAC-SHA256 & SHA-1 Webhook Signature Verification — timing-safe signature comparison prevents forgery across all 28+ webhook receivers.',
+          'Replay Attack Prevention — enforced 5-minute timestamp tolerance window rejecting stale or spoofed alerts.',
+          'Distributed Token Bucket Rate Limiter — per-token/per-IP rate limiting protecting webhook ingest endpoints from DDoS storms.'
         ]
       },
       {
         type: 'performance',
-        title: 'Core Resilience & Runtime Hardening',
+        title: 'High-Throughput Ingestion Engine & Deduplication',
         items: [
-          'Webhook circuit breaker with halfOpenRequestInFlight concurrency locking to eliminate thundering herd spikes during recovery.',
-          'Rolling 5-minute deduplication window for high-volume notification queue processing.',
-          'Sequential multi-channel escalation chain (Push → SMS → WhatsApp → Email) with High/Critical severity paging overrides.'
+          'Deterministic SHA-256 Alert Deduplication — auto-fingerprints incoming payload fields to suppress duplicate alerts and secondary cascades.',
+          'Sub-15ms ingest latency under sustained high-volume incident load.',
+          'Optimized Prisma connection pooling with zero-leak transactional rollbacks.'
+        ]
+      },
+      {
+        type: 'added',
+        title: 'Official GHCR Production Container Packaging',
+        items: [
+          'Multi-arch Linux container image (amd64 / arm64) published to ghcr.io/opsknight-labs/opsknight:1.3.1.',
+          'Hardened non-root runtime environment with automated Prisma migration bootstrapper.'
         ]
       }
     ]
   },
   {
     version: 'v1.2.0',
-    date: 'August 16, 2026',
-    summary: 'Slack ChatOps Incident War Rooms, Jitsi/Meet/Zoom video bridges, slash commands, and critical Node 20 ICU timezone resolution fix.',
+    date: 'June 10, 2026',
+    summary: 'Slack ChatOps war rooms, multi-provider video conference bridges, and status page subscriber management.',
     dockerTag: 'ghcr.io/opsknight-labs/opsknight:1.2.0',
     githubReleaseUrl: 'https://github.com/opsknight-labs/OpsKnight/releases/tag/v1.2.0',
     categories: [
       {
         type: 'added',
-        title: 'Slack ChatOps & Incident War Rooms',
+        title: 'Slack ChatOps & Instant Video Bridges',
         items: [
-          'Dedicated Slack channel auto-provisioned per qualifying incident with on-call responders auto-invited.',
-          'Interactive Slack action buttons: 1-click Acknowledge, Assign to Me, and Resolve directly in chat.',
-          'Slash commands suite: /incident ack | resolve | note | who | postmortem | help.',
-          '📌 Emoji pin sync: react to any message in a war room to automatically capture it into the incident timeline.',
-          'Integrated Video Bridge support for Jitsi Meet (WebRTC Private), Google Meet, and Zoom.'
+          'Auto-creation of dedicated incident Slack war rooms (#inc-<service>-<id>) with automatic team invites.',
+          'One-click video bridge dispatch: Jitsi Meet (self-hosted WebRTC), Google Meet, and Zoom integrations.',
+          'Interactive Slack message cards with 1-click Acknowledge, Escalate, and Resolve actions.'
         ]
       },
       {
-        type: 'fixed',
-        title: 'Critical Timezone & Security Fixes',
+        type: 'added',
+        title: 'Public & Private Status Pages',
         items: [
-          'Fixed Node 20 ICU hour12:false bug where midnight was resolved as hour "24" and shifted start-of-day by a full day early in zero-offset zones.',
-          'Slack request signatures now fail closed to guarantee untrusted requests are never processed.',
-          'Eliminated SSRF vector on unvalidated response_url callbacks.',
-          'Fixed Acknowledge button to immediately halt downstream escalation timer steps.'
+          'Custom domains and SSL auto-provisioning for external customer-facing status dashboards.',
+          'Private internal status pages with SSO authentication for internal microservice uptime visibility.',
+          'Email and webhook subscriber notifications for real-time downtime updates.'
         ]
       }
     ]
   },
   {
     version: 'v1.1.0',
-    date: 'August 8, 2026',
-    summary: 'Full bi-directional Jira Cloud integration, postmortem action items sync, SLA metrics pipeline hardening, and master encryption key migration.',
+    date: 'April 4, 2026',
+    summary: 'Timezone-aware on-call scheduling, shift overrides, multi-tier escalation policies, and master encryption key hardening.',
     dockerTag: 'ghcr.io/opsknight-labs/opsknight:1.1.0',
     githubReleaseUrl: 'https://github.com/opsknight-labs/OpsKnight/releases/tag/v1.1.0',
     categories: [
       {
         type: 'added',
-        title: 'Bi-Directional Jira Cloud Integration',
+        title: 'Multi-Tier On-Call Engine',
         items: [
-          'Jira Cloud Two-Way Sync — link incidents and postmortem action items directly to Jira issues with service-owned project routing and automated ticket creation on incident urgency.',
-          'Jira Comment Mirroring — sync incident notes, status changes, and war room timeline updates as comments to linked Jira issues.',
-          'Documentation Parity — added full v1.1 documentation hierarchy and step-by-step Jira Cloud integration guides.'
-        ]
-      },
-      {
-        type: 'performance',
-        title: 'SLA & Analytics Pipeline Hardening',
-        items: [
-          'Streaming Suspense with layout-matched skeleton and error boundaries for instant analytics page renders.',
-          'Self-healing SLA rollup backfill, drift detection, and business-hours timezone alignment across 180/365-day reporting periods.'
+          'Timezone-aware rotations with automatic daylight savings adjustments and primary/secondary/shadow layers.',
+          'One-click shift overrides and swaps without breaking active schedule configurations.',
+          'iCal and Google Calendar sync export feeds for personal on-call scheduling.'
         ]
       },
       {
@@ -164,23 +160,19 @@ const releases: ReleaseItem[] = [
 
 export default function ChangelogPage() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden font-sans">
-      
-      {/* Background Subtle Glows */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
-
+    <div className="min-h-screen bg-slate-50 text-slate-900 pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden font-sans">
       <div className="max-w-4xl mx-auto relative z-10">
         
         {/* Header */}
         <header className="mb-20 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-4">
             <Tag className="w-3.5 h-3.5" />
             Continuous Evolution
           </div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6">
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 mb-6">
             Release Changelog
           </h1>
-          <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
             Detailed release notes, security advisories, and architectural improvements across OpsKnight Incident Command Center.
           </p>
         </header>
@@ -189,7 +181,7 @@ export default function ChangelogPage() {
         <div className="space-y-16 relative">
           
           {/* Vertical Connecting Rule */}
-          <div className="absolute top-8 bottom-8 left-4 sm:left-6 w-0.5 bg-gradient-to-b from-blue-500 via-slate-800 to-slate-900 hidden sm:block" />
+          <div className="absolute top-8 bottom-8 left-4 sm:left-6 w-0.5 bg-slate-200 hidden sm:block" />
 
           {releases.map((rel) => (
             <div 
@@ -197,24 +189,24 @@ export default function ChangelogPage() {
               className="relative sm:pl-16 group"
             >
               {/* Timeline Node Dot */}
-              <div className="absolute left-4 -translate-x-1/2 top-7 w-4 h-4 rounded-full bg-slate-950 border-2 border-blue-500 shadow-md shadow-blue-500/50 hidden sm:block group-hover:scale-125 transition-transform" />
+              <div className="absolute left-4 -translate-x-1/2 top-7 w-4 h-4 rounded-full bg-white border-2 border-blue-600 shadow-md hidden sm:block group-hover:scale-125 transition-transform" />
 
               {/* Release Card */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-white/10 shadow-2xl backdrop-blur-md hover:border-blue-500/30 transition-all space-y-6">
+              <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xl hover:border-blue-500/30 transition-all space-y-6">
                 
                 {/* Release Top Metadata */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                   <div className="flex items-center gap-3 flex-wrap">
-                    <span className="text-2xl sm:text-3xl font-black text-white font-mono">
+                    <span className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
                       {rel.version}
                     </span>
                     {rel.badge && (
-                      <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                      <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold uppercase tracking-wider">
                         {rel.badge}
                       </span>
                     )}
-                    <span className="flex items-center gap-1.5 text-xs text-slate-400 font-mono">
-                      <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                    <span className="flex items-center gap-1.5 text-xs text-slate-500 font-mono">
+                      <Calendar className="w-3.5 h-3.5 text-slate-400" />
                       {rel.date}
                     </span>
                   </div>
@@ -222,58 +214,44 @@ export default function ChangelogPage() {
                   <Link
                     href={rel.githubReleaseUrl}
                     target="_blank"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-500 transition-colors"
                   >
-                    GitHub Notes <ExternalLink className="w-3.5 h-3.5" />
+                    GitHub Release
+                    <ExternalLink className="w-3.5 h-3.5" />
                   </Link>
                 </div>
 
-                {/* Summary */}
-                <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-medium">
+                {/* Release Summary */}
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
                   {rel.summary}
                 </p>
 
-                {/* Docker Container Pull Snippet */}
-                <div className="p-3 rounded-xl bg-black/60 border border-white/10 flex items-center justify-between font-mono text-xs text-sky-400">
-                  <div className="flex items-center gap-2 truncate pr-2">
-                    <Terminal className="w-4 h-4 text-slate-500 shrink-0" />
-                    <span className="text-slate-500">$</span>
-                    <span className="truncate">docker pull {rel.dockerTag}</span>
-                  </div>
+                {/* Docker Image Badge */}
+                <div className="flex items-center gap-2 p-3 rounded-2xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-200">
+                  <Terminal className="w-4 h-4 text-sky-400 shrink-0" />
+                  <span className="text-slate-400 select-none">$ docker pull</span>
+                  <span className="text-emerald-400 font-bold truncate">{rel.dockerTag}</span>
                 </div>
 
-                {/* Categories & Detailed Changes */}
+                {/* Category Groups */}
                 <div className="space-y-6 pt-2">
                   {rel.categories.map((cat, idx) => (
-                    <div key={idx} className="space-y-3">
+                    <div key={idx} className="space-y-3 p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
                       <div className="flex items-center gap-2">
-                        {cat.type === 'added' ? (
-                          <span className="px-2.5 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold flex items-center gap-1">
-                            <Sparkles className="w-3 h-3" /> Added
-                          </span>
-                        ) : cat.type === 'security' ? (
-                          <span className="px-2.5 py-0.5 rounded-md bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold flex items-center gap-1">
-                            <ShieldCheck className="w-3 h-3" /> Security
-                          </span>
-                        ) : cat.type === 'performance' ? (
-                          <span className="px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold flex items-center gap-1">
-                            <Zap className="w-3 h-3" /> Performance
-                          </span>
-                        ) : (
-                          <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center gap-1">
-                            <Wrench className="w-3 h-3" /> Fixed
-                          </span>
-                        )}
-                        <h4 className="text-sm font-bold text-white">
+                        {cat.type === 'added' && <Sparkles className="w-4 h-4 text-blue-600" />}
+                        {cat.type === 'security' && <ShieldCheck className="w-4 h-4 text-emerald-600" />}
+                        {cat.type === 'fixed' && <Wrench className="w-4 h-4 text-amber-600" />}
+                        {cat.type === 'performance' && <Zap className="w-4 h-4 text-sky-600" />}
+                        <h3 className="font-bold text-slate-900 text-sm">
                           {cat.title}
-                        </h4>
+                        </h3>
                       </div>
 
-                      <ul className="grid grid-cols-1 gap-2.5 pl-2">
-                        {cat.items.map((item, itemIdx) => (
-                          <li key={itemIdx} className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
-                            <span>{item}</span>
+                      <ul className="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        {cat.items.map((it, iIdx) => (
+                          <li key={iIdx} className="flex items-start gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                            <span>{it}</span>
                           </li>
                         ))}
                       </ul>

@@ -219,8 +219,8 @@ export default async function CompetitorComparePage({
     if (val === true || val === 'yes') {
       return (
         <div className="flex items-center justify-center">
-          <div className="w-6 h-6 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
-            <Check className="w-3.5 h-3.5 text-blue-400" />
+          <div className="w-6 h-6 rounded-full bg-blue-50 border border-blue-200 flex items-center justify-center">
+            <Check className="w-3.5 h-3.5 text-blue-600" />
           </div>
         </div>
       );
@@ -228,15 +228,15 @@ export default async function CompetitorComparePage({
     if (val === false || val === 'no') {
       return (
         <div className="flex items-center justify-center">
-          <div className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center">
-            <X className="w-3.5 h-3.5 text-slate-500" />
+          <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center">
+            <X className="w-3.5 h-3.5 text-slate-400" />
           </div>
         </div>
       );
     }
     return (
       <div className="flex items-center justify-center">
-        <span className="text-[11px] text-amber-300 font-medium px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20">
+        <span className="text-[11px] text-amber-700 font-medium px-2 py-0.5 rounded-full bg-amber-50 border border-amber-200">
           Partial / Add-on
         </span>
       </div>
@@ -244,23 +244,19 @@ export default async function CompetitorComparePage({
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-200 pt-28 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden font-sans">
-      
-      {/* Background Aurora Glows */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
-
+    <main className="min-h-screen bg-slate-50 text-slate-900 pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden font-sans">
       <div className="max-w-6xl mx-auto relative z-10 space-y-16">
         
         {/* Header */}
         <header className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             Direct Platform Comparison
           </div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6">
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 mb-6">
             OpsKnight vs {competitor.name}
           </h1>
-          <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
             {competitor.description} See why engineering teams switch to OpsKnight for 100% data sovereignty, unlimited users, and zero per-seat licensing.
           </p>
         </header>
@@ -271,17 +267,17 @@ export default async function CompetitorComparePage({
         </section>
 
         {/* Detailed Side-by-Side Comparison Table */}
-        <section className="rounded-3xl border border-white/10 bg-slate-900/70 p-6 sm:p-8 shadow-2xl space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xl space-y-6 text-slate-900">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-white">
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900">
                 Detailed Capability Matrix
               </h2>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-600 mt-1">
                 Feature-by-feature evaluation across infrastructure, privacy, and incident response.
               </p>
             </div>
-            <span className="text-xs font-mono px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-300">
+            <span className="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-blue-50 border border-blue-200 text-blue-700">
               Verified Production Parity
             </span>
           </div>
@@ -289,99 +285,99 @@ export default async function CompetitorComparePage({
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
-                <tr className="bg-slate-950/80 border-b border-white/10">
-                  <th className="p-4 font-bold text-white">Platform Dimension</th>
-                  <th className="p-4 font-bold text-blue-400 text-center w-48 bg-blue-500/5 border-x border-white/10">
+                <tr className="bg-slate-50 border-b border-slate-200">
+                  <th className="p-4 font-bold text-slate-900">Platform Dimension</th>
+                  <th className="p-4 font-black text-blue-600 text-center w-48 bg-blue-50/40 border-x border-slate-200">
                     OpsKnight (Self-Hosted)
                   </th>
-                  <th className="p-4 font-bold text-slate-300 text-center w-48">
+                  <th className="p-4 font-bold text-slate-700 text-center w-48">
                     {competitor.name}
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
-                <tr className="hover:bg-white/[0.02]">
-                  <td className="p-4 font-semibold text-slate-200">
+              <tbody className="divide-y divide-slate-100">
+                <tr className="hover:bg-slate-50/80">
+                  <td className="p-4 font-bold text-slate-900">
                     Self-Hosted / On-Premise VPC
-                    <span className="block text-[11px] font-normal text-slate-400 mt-0.5">Deploy inside AWS, GCP, Azure, or bare metal</span>
+                    <span className="block text-[11px] font-normal text-slate-500 mt-0.5">Deploy inside AWS, GCP, Azure, or bare metal</span>
                   </td>
-                  <td className="p-4 text-center bg-blue-500/5 border-x border-white/10">{renderFeatureCell(true)}</td>
+                  <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200">{renderFeatureCell(true)}</td>
                   <td className="p-4 text-center">{renderFeatureCell(competitor.features.selfHosted)}</td>
                 </tr>
 
-                <tr className="hover:bg-white/[0.02]">
-                  <td className="p-4 font-semibold text-slate-200">
+                <tr className="hover:bg-slate-50/80">
+                  <td className="p-4 font-bold text-slate-900">
                     Full Source Code Access
-                    <span className="block text-[11px] font-normal text-slate-400 mt-0.5">AGPL-3.0 copyleft open-source license</span>
+                    <span className="block text-[11px] font-normal text-slate-500 mt-0.5">AGPL-3.0 copyleft open-source license</span>
                   </td>
-                  <td className="p-4 text-center bg-blue-500/5 border-x border-white/10">{renderFeatureCell(true)}</td>
+                  <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200">{renderFeatureCell(true)}</td>
                   <td className="p-4 text-center">{renderFeatureCell(competitor.features.openSource)}</td>
                 </tr>
 
-                <tr className="hover:bg-white/[0.02]">
-                  <td className="p-4 font-semibold text-slate-200">
+                <tr className="hover:bg-slate-50/80">
+                  <td className="p-4 font-bold text-slate-900">
                     Per-Seat Licensing Tax
-                    <span className="block text-[11px] font-normal text-slate-400 mt-0.5">Charge per on-call engineer or responder</span>
+                    <span className="block text-[11px] font-normal text-slate-500 mt-0.5">Charge per on-call engineer or responder</span>
                   </td>
-                  <td className="p-4 text-center bg-blue-500/5 border-x border-white/10 text-emerald-400 font-bold font-mono">
+                  <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200 text-emerald-600 font-black font-mono">
                     $0 (Unlimited)
                   </td>
-                  <td className="p-4 text-center text-red-400 font-bold font-mono">
+                  <td className="p-4 text-center text-red-600 font-bold font-mono">
                     {competitor.pricingNote}
                   </td>
                 </tr>
 
-                <tr className="hover:bg-white/[0.02]">
-                  <td className="p-4 font-semibold text-slate-200">
+                <tr className="hover:bg-slate-50/80">
+                  <td className="p-4 font-bold text-slate-900">
                     Slack ChatOps War Rooms
-                    <span className="block text-[11px] font-normal text-slate-400 mt-0.5">Auto-provisioned channels, video bridges & /incident slash commands</span>
+                    <span className="block text-[11px] font-normal text-slate-500 mt-0.5">Auto-provisioned channels, video bridges & /incident slash commands</span>
                   </td>
-                  <td className="p-4 text-center bg-blue-500/5 border-x border-white/10">{renderFeatureCell('yes')}</td>
+                  <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200">{renderFeatureCell('yes')}</td>
                   <td className="p-4 text-center">{renderFeatureCell(competitor.features.slackChatOps)}</td>
                 </tr>
 
-                <tr className="hover:bg-white/[0.02]">
-                  <td className="p-4 font-semibold text-slate-200">
+                <tr className="hover:bg-slate-50/80">
+                  <td className="p-4 font-bold text-slate-900">
                     28+ Native APM & Cloud Webhooks
-                    <span className="block text-[11px] font-normal text-slate-400 mt-0.5">Datadog, Prometheus, Zabbix, CloudWatch, GitLab, Sentry</span>
+                    <span className="block text-[11px] font-normal text-slate-500 mt-0.5">Datadog, Prometheus, Zabbix, CloudWatch, GitLab, Sentry</span>
                   </td>
-                  <td className="p-4 text-center bg-blue-500/5 border-x border-white/10">{renderFeatureCell('yes')}</td>
+                  <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200">{renderFeatureCell('yes')}</td>
                   <td className="p-4 text-center">{renderFeatureCell(competitor.features.nativeIntegrations)}</td>
                 </tr>
 
-                <tr className="hover:bg-white/[0.02]">
-                  <td className="p-4 font-semibold text-slate-200">
+                <tr className="hover:bg-slate-50/80">
+                  <td className="p-4 font-bold text-slate-900">
                     Multi-Layer On-Call Rotations
-                    <span className="block text-[11px] font-normal text-slate-400 mt-0.5">Timezone-aware primary, secondary, and shift overrides</span>
+                    <span className="block text-[11px] font-normal text-slate-500 mt-0.5">Timezone-aware primary, secondary, and shift overrides</span>
                   </td>
-                  <td className="p-4 text-center bg-blue-500/5 border-x border-white/10">{renderFeatureCell(true)}</td>
+                  <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200">{renderFeatureCell(true)}</td>
                   <td className="p-4 text-center">{renderFeatureCell(competitor.features.onCallScheduling)}</td>
                 </tr>
 
-                <tr className="hover:bg-white/[0.02]">
-                  <td className="p-4 font-semibold text-slate-200">
+                <tr className="hover:bg-slate-50/80">
+                  <td className="p-4 font-bold text-slate-900">
                     Branded Public & Private Status Pages
-                    <span className="block text-[11px] font-normal text-slate-400 mt-0.5">Custom domains, uptime history & subscriber alerts included</span>
+                    <span className="block text-[11px] font-normal text-slate-500 mt-0.5">Custom domains, uptime history & subscriber alerts included</span>
                   </td>
-                  <td className="p-4 text-center bg-blue-500/5 border-x border-white/10">{renderFeatureCell('yes')}</td>
+                  <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200">{renderFeatureCell('yes')}</td>
                   <td className="p-4 text-center">{renderFeatureCell(competitor.features.statusPages)}</td>
                 </tr>
 
-                <tr className="hover:bg-white/[0.02]">
-                  <td className="p-4 font-semibold text-slate-200">
+                <tr className="hover:bg-slate-50/80">
+                  <td className="p-4 font-bold text-slate-900">
                     Drop-in PagerDuty API v2 Emulation
-                    <span className="block text-[11px] font-normal text-slate-400 mt-0.5">Swap /v2/enqueue URL with zero tool reconfiguration</span>
+                    <span className="block text-[11px] font-normal text-slate-500 mt-0.5">Swap /v2/enqueue URL with zero tool reconfiguration</span>
                   </td>
-                  <td className="p-4 text-center bg-blue-500/5 border-x border-white/10">{renderFeatureCell(true)}</td>
+                  <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200">{renderFeatureCell(true)}</td>
                   <td className="p-4 text-center">{renderFeatureCell(false)}</td>
                 </tr>
 
-                <tr className="hover:bg-white/[0.02]">
-                  <td className="p-4 font-semibold text-slate-200">
+                <tr className="hover:bg-slate-50/80">
+                  <td className="p-4 font-bold text-slate-900">
                     100% Data Sovereignty
-                    <span className="block text-[11px] font-normal text-slate-400 mt-0.5">Zero external telemetry; incident logs stay in your network</span>
+                    <span className="block text-[11px] font-normal text-slate-500 mt-0.5">Zero external telemetry; incident logs stay in your network</span>
                   </td>
-                  <td className="p-4 text-center bg-blue-500/5 border-x border-white/10">{renderFeatureCell(true)}</td>
+                  <td className="p-4 text-center bg-blue-50/40 border-x border-slate-200">{renderFeatureCell(true)}</td>
                   <td className="p-4 text-center">{renderFeatureCell(competitor.features.dataSovereignty)}</td>
                 </tr>
               </tbody>
@@ -391,36 +387,36 @@ export default async function CompetitorComparePage({
 
         {/* Pros & Cons Evaluation */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-6 rounded-3xl bg-slate-900/60 border border-blue-500/20 space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-blue-200 shadow-sm space-y-4">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-blue-400" />
-              <h3 className="text-lg font-bold text-white">Why Switch to OpsKnight</h3>
+              <Sparkles className="w-5 h-5 text-blue-600" />
+              <h3 className="text-lg font-bold text-slate-900">Why Switch to OpsKnight</h3>
             </div>
-            <ul className="space-y-2.5 text-xs text-slate-300">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span><strong>No Per-Seat Bills:</strong> Unlimited engineers, services, and escalation policies at $0 software cost.</span>
               </li>
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span><strong>Total Data Privacy:</strong> Incidents, postmortems, and infrastructure secrets never leave your VPC.</span>
               </li>
               <li className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span><strong>Drop-in Migration:</strong> Compatible with PagerDuty Events API v2 for instant switchover.</span>
               </li>
             </ul>
           </div>
 
-          <div className="p-6 rounded-3xl bg-slate-900/60 border border-white/10 space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
             <div className="flex items-center gap-2">
-              <X className="w-5 h-5 text-red-400" />
-              <h3 className="text-lg font-bold text-white">{competitor.name} Trade-Offs</h3>
+              <X className="w-5 h-5 text-red-600" />
+              <h3 className="text-lg font-bold text-slate-900">{competitor.name} Trade-Offs</h3>
             </div>
-            <ul className="space-y-2.5 text-xs text-slate-400">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-600">
               {competitor.cons.map((con) => (
                 <li key={con} className="flex items-start gap-2">
-                  <X className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                  <X className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
                   <span>{con}</span>
                 </li>
               ))}
@@ -429,18 +425,18 @@ export default async function CompetitorComparePage({
         </section>
 
         {/* Migration & Quick Start CTA */}
-        <section className="text-center p-10 rounded-3xl bg-gradient-to-br from-blue-950/40 via-slate-900 to-slate-950 border border-blue-500/30 shadow-2xl space-y-6">
-          <h2 className="text-3xl font-bold text-white">
+        <section className="text-center p-10 rounded-3xl bg-white border border-slate-200 shadow-xl space-y-6">
+          <h2 className="text-3xl font-black text-slate-900">
             Ready to replace {competitor.name}?
           </h2>
-          <p className="text-slate-400 max-w-xl mx-auto text-sm">
+          <p className="text-slate-600 max-w-xl mx-auto text-sm">
             Deploy OpsKnight in under 2 minutes with Docker or Kubernetes. Zero per-seat licensing, 100% free forever.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/docs"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm transition-all shadow-lg shadow-blue-500/25"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm transition-all shadow-lg shadow-blue-600/20"
             >
               Deploy OpsKnight Free
               <ArrowRight className="w-4 h-4" />
@@ -448,7 +444,7 @@ export default async function CompetitorComparePage({
 
             <Link
               href="/compare"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-sm transition-all border border-white/10"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm transition-all border border-slate-200"
             >
               View Full Comparison Matrix
             </Link>

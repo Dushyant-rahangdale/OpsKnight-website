@@ -23,26 +23,26 @@ export function Hero() {
     };
 
     return (
-        <section className="relative overflow-hidden pt-36 pb-24 md:pt-48 md:pb-32 bg-slate-950">
+        <section className="relative overflow-hidden pt-36 pb-24 md:pt-48 md:pb-32 bg-slate-50 border-b border-slate-200/80">
             <AnimatedBackground />
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col items-center text-center">
-                    {/* Top Red Alert & Release Badge - Matching Core App */}
+                    {/* Top Red Alert & Release Badge */}
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="inline-flex items-center gap-3 mb-8 px-4 py-1.5 rounded-full bg-slate-900/90 border border-red-500/25 shadow-lg shadow-red-500/5"
+                        className="inline-flex items-center gap-3 mb-8 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm"
                     >
-                        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-red-400">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-red-600">
                             <span className="w-2 h-2 rounded-full bg-red-500 inline-block animate-ping" />
                             RED ALERT · Self-Hosted Incident Command
                         </span>
-                        <div className="w-px h-3 bg-white/20"></div>
-                        <span className="text-xs text-slate-300 font-mono">v1.3.1</span>
-                        <div className="w-px h-3 bg-white/20"></div>
-                        <span className="text-xs text-slate-400 font-mono">AGPL-3.0</span>
+                        <div className="w-px h-3 bg-slate-200"></div>
+                        <span className="text-xs text-slate-700 font-mono font-semibold">v1.3.1</span>
+                        <div className="w-px h-3 bg-slate-200"></div>
+                        <span className="text-xs text-slate-500 font-mono">AGPL-3.0</span>
                     </motion.div>
 
                     {/* Main Headline */}
@@ -52,8 +52,8 @@ export function Hero() {
                         transition={{ delay: 0.1, duration: 0.5 }}
                         className="w-full"
                     >
-                        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] max-w-4xl mx-auto text-center">
-                            The self-hosted command center for <span className="text-white bg-clip-text">on-call & incident response</span>.
+                        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 leading-[1.08] max-w-4xl mx-auto text-center">
+                            The self-hosted command center for <span className="text-blue-600">on-call & incident response</span>.
                         </h1>
                     </motion.div>
 
@@ -64,33 +64,33 @@ export function Hero() {
                         transition={{ delay: 0.2, duration: 0.5 }}
                         className="w-full mt-6"
                     >
-                        <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto text-center leading-relaxed">
-                            Take back control from per-seat SaaS vendors. Multi-tier on-call rotations, automated escalations, 24+ native integrations, Slack war rooms, and branded status pages — running inside your infrastructure.
+                        <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto text-center leading-relaxed font-normal">
+                            Take back control from per-seat SaaS vendors. Multi-tier on-call rotations, automated escalations, 28+ native integrations, Slack war rooms, and branded status pages — running inside your private infrastructure.
                         </p>
                     </motion.div>
 
-                    {/* App Metrics Strip - Directly Matching Screenshot */}
+                    {/* App Metrics Strip - Matching Product */}
                     <motion.div
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.25, duration: 0.5 }}
                         className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl w-full mx-auto mt-8 text-left"
                     >
-                        <div className="p-3.5 rounded-xl bg-slate-900/90 border border-white/10 shadow-md">
-                            <div className="text-xl sm:text-2xl font-black text-white">347</div>
-                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">TOTAL INCIDENTS</div>
+                        <div className="p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-sm">
+                            <div className="text-xl sm:text-2xl font-black text-slate-900">347</div>
+                            <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">TOTAL INCIDENTS</div>
                         </div>
-                        <div className="p-3.5 rounded-xl bg-slate-900/90 border border-red-500/20 shadow-md">
-                            <div className="text-xl sm:text-2xl font-black text-red-400">384</div>
-                            <div className="text-[10px] font-bold text-red-300/80 uppercase tracking-wider mt-0.5">OPEN ALERTS</div>
+                        <div className="p-3.5 rounded-xl bg-white border border-red-200 shadow-sm">
+                            <div className="text-xl sm:text-2xl font-black text-red-600">384</div>
+                            <div className="text-[10px] font-bold text-red-600 uppercase tracking-wider mt-0.5">OPEN ALERTS</div>
                         </div>
-                        <div className="p-3.5 rounded-xl bg-slate-900/90 border border-white/10 shadow-md">
-                            <div className="text-xl sm:text-2xl font-black text-emerald-400">165</div>
-                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">RESOLVED (30D)</div>
+                        <div className="p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-sm">
+                            <div className="text-xl sm:text-2xl font-black text-emerald-600">165</div>
+                            <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">RESOLVED (30D)</div>
                         </div>
-                        <div className="p-3.5 rounded-xl bg-slate-900/90 border border-white/10 shadow-md">
-                            <div className="text-xl sm:text-2xl font-black text-sky-400">&lt; 15ms</div>
-                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">PAGE LATENCY</div>
+                        <div className="p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-sm">
+                            <div className="text-xl sm:text-2xl font-black text-blue-600">&lt; 15ms</div>
+                            <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">PAGE LATENCY</div>
                         </div>
                     </motion.div>
 
@@ -103,36 +103,36 @@ export function Hero() {
                     >
                         <Link
                             href="/docs"
-                            className="inline-flex h-11 items-center justify-center rounded-xl bg-red-600 hover:bg-red-500 px-8 text-sm font-bold text-white transition-all shadow-lg shadow-red-600/30 hover:scale-[1.02]"
+                            className="inline-flex h-11 items-center justify-center rounded-xl bg-blue-600 hover:bg-blue-500 px-8 text-sm font-bold text-white transition-all shadow-lg shadow-blue-600/20 hover:scale-[1.02]"
                         >
-                            + Deploy Community Edition
+                            + Deploy Community Edition ($0)
                         </Link>
                         <Link
                             href="https://status.opsknight.com"
                             target="_blank"
-                            className="inline-flex h-11 items-center justify-center rounded-xl border border-white/10 bg-slate-900/80 px-6 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+                            className="inline-flex h-11 items-center justify-center rounded-xl border border-slate-300 bg-white px-6 text-sm font-semibold text-slate-800 hover:bg-slate-100 transition-colors shadow-sm"
                         >
                             <span className="w-2 h-2 rounded-full bg-emerald-500 mr-2 inline-block"></span>
-                            Live Command Center Demo
+                            Live Status Demo
                         </Link>
                         <Link
                             href="https://github.com/opsknight-labs/OpsKnight"
                             target="_blank"
-                            className="inline-flex h-11 items-center justify-center rounded-xl border border-white/10 bg-slate-900/50 text-sm font-medium text-slate-300 hover:text-white transition-colors px-5 hover:bg-white/5"
+                            className="inline-flex h-11 items-center justify-center rounded-xl border border-slate-300 bg-white text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors px-5 hover:bg-slate-100 shadow-sm"
                         >
                             <Github className="mr-2 w-4 h-4" />
                             Star on GitHub
                         </Link>
                     </motion.div>
 
-                    {/* Interactive Deployment Command Switcher */}
+                    {/* Interactive Deployment Command Switcher (Dark Dev Terminal) */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4, duration: 0.5 }}
                         className="mt-12 w-full max-w-2xl mx-auto"
                     >
-                        <div className="flex items-center justify-between px-3 py-1.5 bg-[#0a0f18] border-t border-x border-white/10 rounded-t-xl text-xs font-mono">
+                        <div className="flex items-center justify-between px-3 py-2 bg-slate-900 border-t border-x border-slate-800 rounded-t-2xl text-xs font-mono">
                             <div className="flex items-center gap-1.5">
                                 {(["docker", "compose", "helm"] as const).map((method) => (
                                     <button
@@ -148,76 +148,30 @@ export function Hero() {
                                     </button>
                                 ))}
                             </div>
-                            <span className="text-[10px] text-slate-500 font-sans hidden sm:inline">1-Line Quickstart</span>
+                            <div className="flex items-center gap-2">
+                                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 animate-pulse"></span>
+                                <span className="text-[11px] text-slate-400 hidden sm:inline">Production Ready</span>
+                            </div>
                         </div>
 
-                        <div className="flex items-center justify-between p-1 pl-4 rounded-b-xl bg-[#0d1117] border border-white/10 shadow-2xl overflow-hidden group">
-                            <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-3">
-                                <Terminal className="w-4 h-4 text-slate-500 flex-shrink-0" />
-                                <code className="text-xs sm:text-sm text-sky-400 font-mono whitespace-nowrap">
-                                    {deployCommands[deployMethod]}
-                                </code>
+                        <div className="relative flex items-center justify-between bg-slate-950 border border-slate-800 rounded-b-2xl p-4 font-mono text-xs sm:text-sm text-slate-200 shadow-2xl">
+                            <div className="flex items-center gap-3 overflow-x-auto py-1 pr-12 scrollbar-none text-left">
+                                <Terminal className="w-4 h-4 text-sky-400 shrink-0" />
+                                <span className="text-emerald-400 shrink-0">$</span>
+                                <span className="text-slate-100 whitespace-nowrap">{deployCommands[deployMethod]}</span>
                             </div>
+
                             <button
                                 onClick={handleCopy}
-                                className="flex-shrink-0 ml-4 mr-2 p-2 rounded-md bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-all flex items-center gap-2"
+                                className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-all border border-slate-700 shadow-sm"
                                 title="Copy command"
                             >
                                 {copied ? (
-                                    <>
-                                        <Check className="w-4 h-4 text-emerald-400" />
-                                        <span className="text-xs font-medium text-emerald-400">Copied!</span>
-                                    </>
+                                    <Check className="w-4 h-4 text-emerald-400" />
                                 ) : (
                                     <Copy className="w-4 h-4" />
                                 )}
                             </button>
-                        </div>
-                    </motion.div>
-
-                    {/* Ecosystem Trust Strip */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5, duration: 0.5 }}
-                        className="mt-16 pt-8 border-t border-white/5 w-full max-w-4xl mx-auto"
-                    >
-                        <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest text-center mb-6">
-                            Native Ingestion & Webhook Compatibility
-                        </p>
-                        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-xs font-medium text-slate-400">
-                            <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5">
-                                <span className="w-2 h-2 rounded-full bg-orange-500" />
-                                Datadog
-                            </span>
-                            <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5">
-                                <span className="w-2 h-2 rounded-full bg-red-500" />
-                                Prometheus
-                            </span>
-                            <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5">
-                                <span className="w-2 h-2 rounded-full bg-orange-400" />
-                                Grafana
-                            </span>
-                            <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5">
-                                <span className="w-2 h-2 rounded-full bg-amber-500" />
-                                AWS CloudWatch
-                            </span>
-                            <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5">
-                                <span className="w-2 h-2 rounded-full bg-purple-500" />
-                                Sentry
-                            </span>
-                            <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5">
-                                <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                                Slack ChatOps
-                            </span>
-                            <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5">
-                                <span className="w-2 h-2 rounded-full bg-sky-500" />
-                                Kubernetes
-                            </span>
-                            <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-white/5">
-                                <span className="w-2 h-2 rounded-full bg-blue-500" />
-                                PagerDuty API v2
-                            </span>
                         </div>
                     </motion.div>
                 </div>

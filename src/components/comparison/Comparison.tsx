@@ -22,7 +22,7 @@ const comparisonData = [
 
 export function Comparison() {
     return (
-        <section className="relative py-24 bg-slate-950 overflow-hidden border-t border-white/5">
+        <section className="relative py-28 bg-white overflow-hidden border-b border-slate-200/80">
             <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <motion.div
@@ -31,13 +31,13 @@ export function Comparison() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-4">
+                    <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-semibold mb-4">
                         Transparent Comparison
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-4">
                         Why engineering teams switch to {BRAND.name}.
                     </h2>
-                    <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+                    <p className="text-slate-600 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed font-normal">
                         Compare {BRAND.name} against legacy enterprise on-call tools. Full feature parity, zero per-seat tax.
                     </p>
                 </motion.div>
@@ -47,46 +47,46 @@ export function Comparison() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="relative overflow-x-auto rounded-2xl border border-white/10 bg-slate-900/50"
+                    className="relative overflow-x-auto rounded-3xl border border-slate-200 bg-white shadow-xl mb-12"
                 >
                     <table className="w-full text-left border-collapse min-w-[800px]">
                         <thead>
-                            <tr className="border-b border-white/10 bg-slate-900/80">
-                                <th className="py-5 px-6 text-slate-300 font-semibold w-1/4">Feature</th>
-                                <th className="py-5 px-6 text-blue-400 font-bold text-lg w-1/4">{BRAND.name}</th>
-                                <th className="py-5 px-6 text-slate-400 font-medium w-1/4">PagerDuty</th>
-                                <th className="py-5 px-6 text-slate-400 font-medium w-1/4">OpsGenie</th>
+                            <tr className="border-b border-slate-200 bg-slate-50">
+                                <th className="py-5 px-6 text-slate-900 font-bold w-1/4">Feature</th>
+                                <th className="py-5 px-6 text-blue-600 font-black text-lg w-1/4 bg-blue-50/50 border-x border-slate-200">{BRAND.name}</th>
+                                <th className="py-5 px-6 text-slate-700 font-semibold w-1/4">PagerDuty</th>
+                                <th className="py-5 px-6 text-slate-700 font-semibold w-1/4">OpsGenie</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y divide-slate-100 text-sm">
                             {comparisonData.map((row) => (
-                                <tr key={row.name} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                                    <td className="py-4 px-6 text-slate-300 text-sm font-medium">{row.name}</td>
-                                    <td className="py-4 px-6 text-blue-300 text-sm font-semibold bg-blue-500/5">{row.opsknight}</td>
-                                    <td className="py-4 px-6 text-slate-400 text-sm">{row.pagerduty}</td>
-                                    <td className="py-4 px-6 text-slate-400 text-sm">{row.opsgenie}</td>
+                                <tr key={row.name} className="hover:bg-slate-50/80 transition-colors">
+                                    <td className="py-4 px-6 text-slate-900 font-medium">{row.name}</td>
+                                    <td className="py-4 px-6 text-blue-700 font-bold bg-blue-50/30 border-x border-slate-200 font-mono">{row.opsknight}</td>
+                                    <td className="py-4 px-6 text-slate-600">{row.pagerduty}</td>
+                                    <td className="py-4 px-6 text-slate-600">{row.opsgenie}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </motion.div>
 
-                {/* Compact Interactive Savings Calculator */}
+                {/* Embedded Interactive ROI Calculator */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
                     <SavingsCalculator />
                 </motion.div>
 
-                {/* Bottom Comparison Link */}
-                <div className="text-center mt-6">
+                {/* Link to Full Compare Page */}
+                <div className="text-center mt-12">
                     <Link
                         href="/compare"
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors group"
+                        className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-500 font-bold text-sm transition-colors group"
                     >
-                        Explore detailed side-by-side breakdowns vs PagerDuty, Opsgenie, and Squadcast
+                        Explore detailed side-by-side competitor deep dives
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>

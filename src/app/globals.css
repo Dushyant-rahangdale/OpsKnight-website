@@ -478,29 +478,29 @@ h4 {
 }
 
 .prose :where(a):hover {
-  color: #bfdbfe;
-  text-decoration-color: #93c5fd;
+  color: #1d4ed8;
+  text-decoration-color: #2563eb;
 }
 
 .prose :where(pre) {
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  box-shadow: none;
 }
 
 .prose :where(blockquote) {
   font-style: normal;
-  background: rgba(59, 130, 246, 0.12);
+  background: #eff6ff;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   border-left-width: 4px;
 }
 
 .prose :where(code):not(:where(pre code)) {
-  background: rgba(148, 163, 184, 0.22);
-  padding: 0.2em 0.4em;
+  background: #f1f5f9;
+  padding: 0.15em 0.35em;
   border-radius: 0.25rem;
   font-weight: 500;
-  color: #e2e8f0;
+  color: #111827;
 }
 
 /* Docs images: keep high quality but constrained to doc-friendly width */

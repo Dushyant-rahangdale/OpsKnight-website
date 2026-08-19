@@ -99,7 +99,7 @@ export default async function DocsPage({
   ];
 
   return (
-    <div className="grid lg:grid-cols-[1fr_260px] gap-8">
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_15rem] xl:grid-cols-[minmax(0,1fr)_16rem]">
       <article className="space-y-6">
         {/* Article Header */}
         <div className="overflow-hidden rounded-[14px] border border-slate-200 bg-white">
@@ -156,7 +156,7 @@ export default async function DocsPage({
           <div
             className="docs-content prose prose-slate max-w-none
               prose-headings:text-slate-900 prose-headings:font-semibold prose-headings:tracking-tight
-              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-slate-200
+              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
               prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
               prose-p:text-slate-600 prose-p:leading-relaxed
               prose-a:text-blue-600 prose-a:no-underline hover:prose-a:text-blue-700 prose-a:transition-colors

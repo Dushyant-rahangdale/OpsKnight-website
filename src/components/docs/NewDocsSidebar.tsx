@@ -21,12 +21,11 @@ import {
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
@@ -56,123 +55,138 @@ function getSectionKeyFromHref(href?: string) {
   return parts[2];
 }
 
-function CollapsibleSection({
+function pathMatches(href: string | undefined, active: string) {
+  if (!href) return false;
+  return active === href || active.startsWith(`${href}/`);
+}
+
+function sectionContainsPath(item: SidebarItem, active: string): boolean {
+  if (pathMatches(item.href, active)) return true;
+  return item.children?.some((child) => sectionContainsPath(child, active)) ?? false;
+}
+
+function NavLink({
   item,
   activePath,
-  defaultOpen = false,
+  nested = false,
 }: {
   item: SidebarItem;
   activePath: string;
-  defaultOpen?: boolean;
+  nested?: boolean;
 }) {
-  const sectionKey = getSectionKeyFromHref(item.children?.[0]?.href);
-  const Icon = (sectionKey && SECTION_ICONS[sectionKey]) || BookOpen;
-  const hasActiveChild =
-    item.children?.some((child) => child.href === activePath) || false;
-  const [isOpen, setIsOpen] = React.useState(defaultOpen || hasActiveChild);
-
-  React.useEffect(() => {
-    if (hasActiveChild) setIsOpen(true);
-  }, [hasActiveChild]);
-
-  return (
-    <SidebarGroup>
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex h-auto w-full items-start justify-between rounded-lg px-2 py-2.5 hover:bg-white/5"
-      >
-        <div className="flex min-w-0 flex-1 items-start gap-2.5">
-          <Icon
+  if (item.children && item.children.length > 0) {
+    return (
+      <div className={nested ? "ml-2 mt-2" : ""}>
+        {item.href ? (
+          <Link
+            href={item.href}
             className={cn(
-              "mt-0.5 h-4 w-4 shrink-0",
-              hasActiveChild ? "text-[#60a5fa]" : "text-slate-500"
-            )}
-          />
-          <SidebarGroupLabel
-            className={cn(
-              "m-0 block h-auto w-full p-0 text-left text-[11px] font-semibold uppercase tracking-wider",
-              hasActiveChild ? "text-white" : "text-slate-400"
+              "mb-1 block rounded-md px-2 py-1.5 text-[12px] font-medium",
+              pathMatches(item.href, activePath)
+                ? "text-white"
+                : "text-slate-400 hover:text-white"
             )}
           >
             {item.title}
-          </SidebarGroupLabel>
-        </div>
+          </Link>
+        ) : (
+          <p className="mb-1 px-2 py-1 text-[11px] font-medium uppercase tracking-wide text-slate-500">
+            {item.title}
+          </p>
+        )}
+        <ul className="space-y-0.5 border-l border-white/10 pl-2">
+          {item.children.map((child) => (
+            <li key={child.title}>
+              <NavLink item={child} activePath={activePath} nested />
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  if (!item.href) {
+    return (
+      <span className="block px-2 py-1.5 text-[13px] text-slate-500">{item.title}</span>
+    );
+  }
+
+  const active = pathMatches(item.href, activePath);
+  return (
+    <Link
+      href={item.href}
+      className={cn(
+        "block rounded-md border-l-2 px-2 py-1.5 text-[13px] leading-snug",
+        nested ? "ml-0" : "ml-1",
+        active
+          ? "border-[#2563eb] bg-white/10 text-white"
+          : "border-transparent text-slate-400 hover:bg-white/5 hover:text-white"
+      )}
+    >
+      {item.title}
+    </Link>
+  );
+}
+
+function CollapsibleSection({
+  item,
+  activePath,
+}: {
+  item: SidebarItem;
+  activePath: string;
+}) {
+  const sectionKey =
+    getSectionKeyFromHref(item.children?.[0]?.href) ||
+    getSectionKeyFromHref(item.href);
+  const Icon = (sectionKey && SECTION_ICONS[sectionKey]) || BookOpen;
+  const containsActive = sectionContainsPath(item, activePath);
+  const [isOpen, setIsOpen] = React.useState(containsActive);
+
+  React.useEffect(() => {
+    if (containsActive) setIsOpen(true);
+  }, [containsActive]);
+
+  return (
+    <SidebarGroup className="p-0">
+      <button
+        type="button"
+        onClick={() => setIsOpen((v) => !v)}
+        className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left hover:bg-white/5"
+      >
+        <Icon
+          className={cn(
+            "h-4 w-4 shrink-0",
+            containsActive ? "text-[#93c5fd]" : "text-slate-500"
+          )}
+        />
+        <span
+          className={cn(
+            "min-w-0 flex-1 text-[12px] font-semibold tracking-wide",
+            containsActive ? "text-white" : "text-slate-300"
+          )}
+        >
+          {item.title}
+        </span>
         <ChevronDown
           className={cn(
-            "h-4 w-4 text-slate-500 transition-transform",
+            "h-4 w-4 shrink-0 text-slate-500 transition-transform",
             isOpen && "rotate-180"
           )}
         />
       </button>
-      <div
-        className={cn(
-          "overflow-hidden",
-          isOpen ? "max-h-[2000px]" : "max-h-0"
-        )}
-      >
-        <SidebarGroupContent>
+      {isOpen && (
+        <SidebarGroupContent className="pb-2">
           <SidebarMenu>
             {item.children?.map((child) => (
               <SidebarMenuItem key={child.title}>
-                <SidebarMenuButton
-                  asChild={Boolean(child.href)}
-                  isActive={child.href === activePath}
-                  className="ml-5 h-auto items-start border-l-2 border-transparent py-2 text-slate-400 hover:bg-white/5 hover:text-white data-[active=true]:border-[#2563eb] data-[active=true]:bg-white/10 data-[active=true]:text-white"
-                >
-                  {child.href ? (
-                    <Link href={child.href} className="block min-w-0 flex-1 text-[13px] leading-snug">
-                      {child.title}
-                    </Link>
-                  ) : (
-                    <span className="block min-w-0 flex-1 text-[13px] leading-snug">
-                      {child.title}
-                    </span>
-                  )}
-                </SidebarMenuButton>
+                <NavLink item={child} activePath={activePath} />
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
         </SidebarGroupContent>
-      </div>
+      )}
     </SidebarGroup>
   );
-}
-
-function renderSidebarItems(
-  items: SidebarItem[],
-  activePath: string
-) {
-  return items.map((item, index) => {
-    if (item.children && item.children.length > 0) {
-      return (
-        <CollapsibleSection
-          key={item.title}
-          item={item}
-          activePath={activePath}
-          defaultOpen={index < 2}
-        />
-      );
-    }
-    const isActive = item.href ? activePath === item.href : false;
-    return (
-      <SidebarMenuItem key={item.title} className="mb-0.5">
-        <SidebarMenuButton
-          asChild={Boolean(item.href)}
-          isActive={isActive}
-          className="h-auto items-start border-l-2 border-transparent py-2 text-slate-400 hover:bg-white/5 hover:text-white data-[active=true]:border-[#2563eb] data-[active=true]:bg-white/10 data-[active=true]:text-white"
-        >
-          {item.href ? (
-            <Link href={item.href} className="text-[13px] leading-snug">
-              {item.title}
-            </Link>
-          ) : (
-            <span className="text-[13px] leading-snug">{item.title}</span>
-          )}
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-    );
-  });
 }
 
 export function NewDocsSidebar({
@@ -189,8 +203,8 @@ export function NewDocsSidebar({
 
   return (
     <Sidebar className="border-r border-white/10 [&_[data-sidebar=sidebar]]:!bg-[#0f172a]">
-      <SidebarHeader className="border-b border-white/10 pb-4">
-        <Link href="/" className="flex items-center gap-3 px-2 pt-2">
+      <SidebarHeader className="shrink-0 border-b border-white/10 pb-3">
+        <Link href="/" className="flex items-center gap-3 px-2 pt-1">
           <Image
             src="/logo-mark.png"
             alt=""
@@ -198,48 +212,62 @@ export function NewDocsSidebar({
             height={32}
             className="h-8 w-8 object-contain"
           />
-          <div className="flex flex-col leading-none group-data-[collapsible=icon]:hidden">
-            <span className="text-sm font-semibold text-white">{BRAND.name}</span>
+          <div className="flex min-w-0 flex-col leading-none">
+            <span className="truncate text-sm font-semibold text-white">
+              {BRAND.name}
+            </span>
             <span className="mt-1 font-mono text-[11px] tracking-wide text-slate-400">
               Documentation
             </span>
           </div>
         </Link>
-        <div className="mt-4 px-2">
+        <div className="mt-3 px-1">
           <DocsVersionSwitcher currentVersion={version} versions={versions} />
         </div>
-        <div className="mt-2 px-2 md:hidden">
+        <div className="mt-2 px-1 md:hidden">
           <DocsSearch version={version} />
         </div>
       </SidebarHeader>
-      <SidebarContent className="px-2 py-3">
-        {renderSidebarItems(items, activePath)}
+      <SidebarContent className="custom-scrollbar px-2 py-2">
+        {items.map((item) =>
+          item.children && item.children.length > 0 ? (
+            <CollapsibleSection
+              key={item.title}
+              item={item}
+              activePath={activePath}
+            />
+          ) : (
+            <div key={item.title} className="px-1">
+              <NavLink item={item} activePath={activePath} />
+            </div>
+          )
+        )}
       </SidebarContent>
-      <div className="mt-auto space-y-2 border-t border-white/10 p-3">
-        <div className="grid grid-cols-2 gap-2">
+      <SidebarFooter className="shrink-0 border-t border-white/10">
+        <div className="flex flex-col gap-1.5">
           <Link
             href="/"
-            className="rounded-lg border border-white/10 px-2 py-1.5 text-center text-xs text-slate-400 hover:bg-white/5 hover:text-white"
+            className="rounded-lg px-2 py-1.5 text-xs text-slate-400 hover:bg-white/5 hover:text-white"
           >
             Home
           </Link>
           <Link
             href="/changelog"
-            className="rounded-lg border border-white/10 px-2 py-1.5 text-center text-xs text-slate-400 hover:bg-white/5 hover:text-white"
+            className="rounded-lg px-2 py-1.5 text-xs text-slate-400 hover:bg-white/5 hover:text-white"
           >
             Changelog
           </Link>
+          <Link
+            href={BRAND.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs text-slate-400 hover:bg-white/5 hover:text-white"
+          >
+            GitHub
+            <ExternalLink className="h-3 w-3" />
+          </Link>
         </div>
-        <Link
-          href={BRAND.links.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-xs text-slate-300 hover:bg-white/5 hover:text-white"
-        >
-          GitHub
-          <ExternalLink className="h-3 w-3" />
-        </Link>
-      </div>
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );

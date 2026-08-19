@@ -26,8 +26,8 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <ProductTour />
       <HowItWorks />
+      <ProductTour />
       <Features />
       <Integrations />
       <Comparison />

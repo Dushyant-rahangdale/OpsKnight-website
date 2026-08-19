@@ -2,17 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { 
-  ArrowRight, 
-  Copy, 
-  Check, 
-  Zap, 
-  Repeat, 
-  Users, 
-  Shield, 
+import {
+  ArrowRight,
+  Copy,
+  Check,
+  Repeat,
+  Users,
+  Shield,
   Github,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Plug,
 } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
@@ -21,38 +21,13 @@ type DeployTab = "compose" | "docker" | "helm" | "kustomize";
 export function Hero() {
   const [activeDeploy, setActiveDeploy] = useState<DeployTab>("compose");
   const [copied, setCopied] = useState(false);
-  const [showDeployBox, setShowDeployBox] = useState(true);
+  const [showDeployBox, setShowDeployBox] = useState(false);
 
   const deployCommands: Record<DeployTab, string> = {
-    compose: `# 1-Command Full Stack (OpsKnight + PostgreSQL + Healthchecks)
-curl -sL https://raw.githubusercontent.com/opsknight-labs/OpsKnight/main/docker-compose.yml > docker-compose.yml
-docker compose up -d`,
-    docker: `# 1. Start persistent PostgreSQL database container
-docker run -d --name opsknight-db \\
-  -e POSTGRES_DB=opsknight_db \\
-  -e POSTGRES_USER=opsknight \\
-  -e POSTGRES_PASSWORD=opsknight_secure_password \\
-  -v opsknight_postgres_data:/var/lib/postgresql/data \\
-  postgres:15-alpine
-
-# 2. Run OpsKnight connected to database
-docker run -d --name opsknight-app -p 3000:3000 \\
-  -e DATABASE_URL="postgresql://opsknight:opsknight_secure_password@opsknight-db:5432/opsknight_db" \\
-  -e NEXTAUTH_URL="http://localhost:3000" \\
-  -e NEXTAUTH_SECRET="$(openssl rand -base64 32)" \\
-  -e ENCRYPTION_KEY="$(openssl rand -hex 32)" \\
-  --link opsknight-db \\
-  ghcr.io/opsknight-labs/opsknight:latest`,
-    helm: `# Deploy on Kubernetes via official Helm Chart
-git clone https://github.com/opsknight-labs/OpsKnight.git
-cd OpsKnight
-helm install opsknight ./helm/opsknight \\
-  --namespace opsknight \\
-  --create-namespace`,
-    kustomize: `# Deploy via Kubernetes Kustomize manifests (GitOps / ArgoCD / Flux)
-git clone https://github.com/opsknight-labs/OpsKnight.git
-cd OpsKnight/k8s
-kubectl apply -k .`
+    compose: BRAND.deploy.compose,
+    docker: BRAND.deploy.docker,
+    helm: BRAND.deploy.helm,
+    kustomize: BRAND.deploy.kustomize,
   };
 
   const handleCopy = () => {
@@ -62,46 +37,39 @@ kubectl apply -k .`
   };
 
   return (
-    <section className="relative pt-36 pb-20 overflow-hidden bg-[#f8fafc] border-b border-slate-200">
-      
-      {/* Background Subtle Mesh */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-        <div 
+    <section className="relative overflow-hidden border-b border-slate-200 bg-[#f8fafc] pt-36 pb-20">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <div
           className="absolute inset-0 opacity-[0.45]"
           style={{
-            backgroundImage: "linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px)",
+            backgroundImage:
+              "linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px)",
             backgroundSize: "48px 48px",
           }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(15,23,42,0.04),transparent_50%)]" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        
-        {/* Version & License Mono Tagline */}
+      <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
         <div className="mb-6 inline-flex items-center justify-center">
-          <p className="font-mono text-xs sm:text-[13px] font-medium tracking-wide text-slate-600 bg-white/90 backdrop-blur-sm border border-slate-200 px-4 py-1.5 rounded-full shadow-xs">
-            OpsKnight 1.3.1 · you run it · Apache-2.0
+          <p className="rounded-full border border-slate-200 bg-white px-4 py-1.5 font-mono text-xs font-medium tracking-wide text-slate-600 sm:text-[13px]">
+            OpsKnight {BRAND.version} · you run it · {BRAND.license}
           </p>
         </div>
 
-        {/* Exact Core Pitch Headline */}
-        <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-bold tracking-tight text-[#111827] leading-[1.12] max-w-4xl mx-auto mb-6">
+        <h1 className="mx-auto mb-6 max-w-4xl text-3xl font-bold leading-[1.12] tracking-tight text-[#111827] sm:text-5xl lg:text-[3.5rem]">
           The 2am page should live on your servers — not in a SaaS you rent per person.
         </h1>
 
-        {/* Exact Core Pitch Subtitle */}
-        <p className="text-base sm:text-lg lg:text-xl text-[#4b5563] max-w-3xl mx-auto leading-relaxed font-normal mb-10">
+        <p className="mx-auto mb-10 max-w-3xl text-base leading-relaxed text-[#4b5563] sm:text-lg lg:text-xl">
           When production breaks, OpsKnight messages whoever is on call, opens a Slack room, and gives customers a status page. Afterward you write what happened. One product. Your machines.
         </p>
 
-        {/* CTA Button Row */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+        <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
-            href="#product-tour"
-            className="w-full sm:w-auto inline-flex h-12 items-center justify-center rounded-[12px] bg-slate-900 px-8 text-sm font-semibold tracking-wide text-white transition-all hover:bg-slate-800 shadow-sm hover:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+            href={BRAND.links.docs}
+            className="inline-flex h-12 w-full items-center justify-center rounded-[12px] bg-slate-900 px-8 text-sm font-semibold tracking-wide text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 sm:w-auto"
           >
-            See how a night goes
+            Install
             <ArrowRight className="ml-2 h-4 w-4 text-slate-300" />
           </Link>
 
@@ -109,142 +77,122 @@ kubectl apply -k .`
             href={BRAND.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 rounded-[12px] bg-white border border-slate-300 px-6 text-sm font-semibold tracking-wide text-[#111827] transition-all hover:bg-slate-50 hover:border-slate-400 shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+            className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-[12px] border border-slate-300 bg-white px-6 text-sm font-semibold tracking-wide text-[#111827] transition-all hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 sm:w-auto"
           >
-            <Github className="w-4 h-4 text-[#111827]" />
-            <span>Source on GitHub</span>
+            <Github className="h-4 w-4" />
+            <span>GitHub</span>
           </Link>
 
+          <Link
+            href="#how-it-works"
+            className="text-sm font-semibold text-slate-700 hover:text-slate-900 hover:underline"
+          >
+            How a night goes
+          </Link>
+        </div>
+
+        <div className="mb-12">
           <button
             type="button"
             onClick={() => setShowDeployBox((prev) => !prev)}
-            className="text-sm font-semibold text-slate-700 hover:text-slate-900 hover:underline px-2 py-1 flex items-center gap-1 transition-colors"
+            className="mx-auto flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-slate-900"
           >
-            <span>{showDeployBox ? "Hide run commands" : "How to run it on your machines"}</span>
-            {showDeployBox ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            <span>{showDeployBox ? "Hide run commands" : "Run commands"}</span>
+            {showDeployBox ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
           </button>
         </div>
 
-        {/* Interactive 1-Command Deploy Terminal */}
         {showDeployBox && (
-          <div className="max-w-3xl mx-auto text-left mb-16 animate-in fade-in duration-200">
-            <div className="rounded-[16px] bg-[#0f172a] border border-slate-800 shadow-2xl overflow-hidden">
-              
-              {/* Terminal Header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-slate-900/90 border-b border-slate-800">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-[#ff5f56] inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-[#27c93f] inline-block" />
-                  <span className="text-xs font-mono text-slate-400 ml-2 hidden sm:inline">Production Deployment</span>
-                </div>
-
-                {/* Deploy Switcher Tabs */}
-                <div className="flex items-center gap-1 bg-[#020617] p-1 rounded-xl border border-slate-800">
+          <div className="mx-auto mb-16 max-w-3xl animate-in fade-in text-left duration-200">
+            <div className="overflow-hidden rounded-[16px] border border-slate-800 bg-[#0f172a]">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 bg-slate-900/90 px-4 py-3">
+                <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-[#020617] p-1">
                   {(["compose", "docker", "helm", "kustomize"] as const).map((tab) => (
                     <button
                       key={tab}
+                      type="button"
                       onClick={() => setActiveDeploy(tab)}
-                      className={`px-3 py-1 rounded-lg text-xs font-bold font-mono transition-all ${
+                      className={`rounded-lg px-3 py-1 font-mono text-xs font-semibold transition-all ${
                         activeDeploy === tab
-                          ? "bg-slate-800 text-white shadow-xs"
+                          ? "bg-slate-800 text-white"
                           : "text-slate-400 hover:text-white"
                       }`}
                     >
-                      {tab === "compose" ? "Compose (with DB)" : tab === "docker" ? "Docker + DB" : tab === "helm" ? "Helm" : "Kustomize"}
+                      {tab === "compose" ? "Compose" : tab === "docker" ? "Docker" : tab === "helm" ? "Helm" : "Kustomize"}
                     </button>
                   ))}
                 </div>
-
-                {/* Copy Button */}
                 <button
+                  type="button"
                   onClick={handleCopy}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold font-mono transition-colors"
-                  title="Copy command"
+                  className="flex items-center gap-1.5 rounded-lg bg-slate-800 px-3 py-1.5 font-mono text-xs font-semibold text-slate-200 hover:bg-slate-700"
                 >
                   {copied ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-[#059669]" />
-                      <span className="text-[#059669]">Copied!</span>
+                      <Check className="h-3.5 w-3.5 text-[#059669]" />
+                      <span className="text-[#059669]">Copied</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3.5 h-3.5 text-slate-400" />
+                      <Copy className="h-3.5 w-3.5 text-slate-400" />
                       <span>Copy</span>
                     </>
                   )}
                 </button>
               </div>
-
-              {/* Code Body */}
-              <div className="p-4 sm:p-5 font-mono text-xs sm:text-[13px] text-slate-200 overflow-x-auto">
-                <pre className="text-[#38bdf8] whitespace-pre leading-relaxed">
-                  {deployCommands[activeDeploy]}
-                </pre>
-              </div>
-
-              {/* Micro Specs Footer */}
-              <div className="px-4 py-2.5 bg-slate-900/60 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400 font-mono">
-                <span className="flex items-center gap-1">
-                  <span className="text-[#059669]">●</span> DB: Bundled PostgreSQL 15 (Zero Setup)
-                </span>
-                <span className="flex items-center gap-1">
-                  <span className="text-sky-400">●</span> Latency: &lt; 15ms Ingest
-                </span>
-                <span className="flex items-center gap-1">
-                  <span className="text-slate-300">●</span> Privacy: 100% On-Premises
-                </span>
-                <span className="flex items-center gap-1">
-                  <span className="text-amber-400">●</span> License: Apache-2.0
-                </span>
-              </div>
+              <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-slate-200 sm:p-5 sm:text-[13px]">
+                {deployCommands[activeDeploy]}
+              </pre>
+              <p className="border-t border-slate-800 px-4 py-3 text-left text-[11px] leading-relaxed text-slate-400">
+                {BRAND.deploy.secretsNote}
+              </p>
             </div>
           </div>
         )}
 
-        {/* 4-Pillar Trust Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-slate-400 hover:shadow-sm transition-all">
-            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 mb-3">
-              <Shield className="w-5 h-5" />
+        <div className="grid grid-cols-1 gap-4 text-left sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-[14px] border border-slate-200 bg-white p-5 sm:p-6">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 text-slate-800">
+              <Shield className="h-5 w-5" />
             </div>
-            <h3 className="font-bold text-[#111827] text-sm mb-1">100% VPC Sovereignty</h3>
-            <p className="text-xs text-[#4b5563] leading-relaxed">
-              All incident payloads, timeline traces, and credentials stay entirely inside your private network.
+            <h3 className="mb-1 text-sm font-semibold text-[#111827]">You run it</h3>
+            <p className="text-xs leading-relaxed text-[#4b5563]">
+              Incidents, schedules, and credentials stay on machines you operate. There is no OpsKnight cloud.
             </p>
           </div>
 
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-slate-400 hover:shadow-sm transition-all">
-            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 mb-3">
-              <Zap className="w-5 h-5" />
+          <div className="rounded-[14px] border border-slate-200 bg-white p-5 sm:p-6">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 text-slate-800">
+              <Plug className="h-5 w-5" />
             </div>
-            <h3 className="font-bold text-[#111827] text-sm mb-1">28+ Native Integrations</h3>
-            <p className="text-xs text-[#4b5563] leading-relaxed">
-              Direct ingestion for Datadog, Prometheus, Grafana, CloudWatch, Sentry, Zabbix, and GitLab.
+            <h3 className="mb-1 text-sm font-semibold text-[#111827]">
+              {BRAND.integrationCountLabel} inbound parsers
+            </h3>
+            <p className="text-xs leading-relaxed text-[#4b5563]">
+              Datadog, Prometheus, Grafana, CloudWatch, Sentry, and the rest of the catalog — plus generic JSON.
             </p>
           </div>
 
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-slate-400 hover:shadow-sm transition-all">
-            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 mb-3">
-              <Repeat className="w-5 h-5" />
+          <div className="rounded-[14px] border border-slate-200 bg-white p-5 sm:p-6">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 text-slate-800">
+              <Repeat className="h-5 w-5" />
             </div>
-            <h3 className="font-bold text-[#111827] text-sm mb-1">Drop-in PagerDuty API</h3>
-            <p className="text-xs text-[#4b5563] leading-relaxed">
-              Implements <code className="text-slate-900 font-mono font-bold">/api/v2/enqueue</code>. Migrate in 30 seconds with 0 alert loss.
+            <h3 className="mb-1 text-sm font-semibold text-[#111827]">PagerDuty Events API v2</h3>
+            <p className="text-xs leading-relaxed text-[#4b5563]">
+              Accepts the same <code className="font-mono text-slate-900">/v2/enqueue</code> shape. Point the destination at OpsKnight; keep routing keys.
             </p>
           </div>
 
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white border border-slate-200 shadow-xs hover:border-slate-400 hover:shadow-sm transition-all">
-            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800 mb-3">
-              <Users className="w-5 h-5" />
+          <div className="rounded-[14px] border border-slate-200 bg-white p-5 sm:p-6">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 text-slate-800">
+              <Users className="h-5 w-5" />
             </div>
-            <h3 className="font-bold text-[#111827] text-sm mb-1">$0 Per-Seat Tax</h3>
-            <p className="text-xs text-[#4b5563] leading-relaxed">
-              Unlimited engineers, responder seats, services, and escalation policies without per-seat billing.
+            <h3 className="mb-1 text-sm font-semibold text-[#111827]">No per-seat software fee</h3>
+            <p className="text-xs leading-relaxed text-[#4b5563]">
+              Unlimited users on {BRAND.license}. You still pay hosting, SMS, and Slack.
             </p>
           </div>
         </div>
-
       </div>
     </section>
   );

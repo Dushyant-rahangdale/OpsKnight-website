@@ -473,7 +473,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'ChatOps & Collaboration',
     iconKey: 'whatsapp',
     desc: 'High-priority SMS & WhatsApp pager alerts for urgent Sev-0/Sev-1 escalations with ack links.',
-    docPath: '/docs/v1.3/integrations/communication/slack/',
+    docPath: '/docs/v1.3/administration/notifications/',
     protocol: 'Multi-Channel Pager',
     webhookSlug: 'whatsapp-pager',
     samplePayload: {
@@ -504,7 +504,7 @@ const allIntegrations: IntegrationItem[] = [
 ];
 
 const categoryList = [
-  'All (28)',
+  'All',
   'APM & Observability',
   'Metrics & Daemons',
   'Cloud & Infrastructure',
@@ -514,7 +514,7 @@ const categoryList = [
 ];
 
 export default function IntegrationsGrid() {
-  const [activeCategory, setActiveCategory] = useState('All (28)');
+  const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIntegration, setSelectedIntegration] = useState<IntegrationItem | null>(null);
   const [copiedWebhook, setCopiedWebhook] = useState(false);
@@ -522,7 +522,7 @@ export default function IntegrationsGrid() {
   const [copiedCurl, setCopiedCurl] = useState(false);
 
   const filteredIntegrations = allIntegrations.filter((item) => {
-    const matchesCategory = activeCategory === 'All (28)' || item.category === activeCategory;
+    const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
     const matchesSearch = 
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -616,7 +616,7 @@ export default function IntegrationsGrid() {
                   : 'bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 border-slate-200 shadow-sm'
               }`}
             >
-              {cat}
+              {cat === "All" ? `All (${allIntegrations.length})` : cat}
             </button>
           ))}
         </div>
@@ -665,7 +665,7 @@ export default function IntegrationsGrid() {
           <button
             onClick={() => {
               setSearchQuery('');
-              setActiveCategory('All (28)');
+              setActiveCategory('All');
             }}
             className="mt-3 text-xs font-semibold text-blue-400 hover:underline"
           >

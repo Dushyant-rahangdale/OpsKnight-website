@@ -18,7 +18,7 @@ const steps = [
     n: "03",
     icon: Siren,
     title: "Someone is paged",
-    body: "The active rotation gets SMS, email, Slack, WhatsApp, or a phone notification. If they miss it, the policy moves on.",
+    body: "The active rotation gets SMS, email, Slack, WhatsApp, or a push notification. If they miss it, the policy moves on.",
   },
   {
     n: "04",

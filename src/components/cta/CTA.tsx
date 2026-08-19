@@ -57,7 +57,7 @@ export function CTA() {
             href={BRAND.links.docs}
             className="inline-flex h-11 w-full items-center justify-center rounded-[12px] bg-slate-900 px-8 text-sm font-semibold text-white hover:bg-slate-800 sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 transition-all shadow-sm"
           >
-            Deploy
+            Install
           </Link>
           <Link
             href={BRAND.links.github}

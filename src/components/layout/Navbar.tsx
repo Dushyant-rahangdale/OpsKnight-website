@@ -79,7 +79,7 @@ export function Navbar() {
               href={BRAND.links.docs}
               className="inline-flex h-8 items-center justify-center rounded-[10px] bg-slate-800 hover:bg-slate-700 text-white border border-slate-700/80 px-3.5 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a] transition-colors"
             >
-              Deploy
+              Install
             </Link>
           </div>
 
@@ -121,7 +121,7 @@ export function Navbar() {
                 className="mx-3 mt-2 inline-flex h-10 items-center justify-center rounded-[10px] bg-[#2563eb] text-sm font-semibold text-white"
                 onClick={() => setIsOpen(false)}
               >
-                Deploy
+              Install
               </Link>
             </div>
           </div>

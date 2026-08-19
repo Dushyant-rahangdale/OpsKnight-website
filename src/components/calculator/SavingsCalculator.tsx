@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Users, Sparkles, Check, ArrowRight } from "lucide-react";
+import { Users, Sparkles, Check, ArrowRight, Server } from "lucide-react";
 import Link from "next/link";
 
 interface VendorOption {
@@ -24,12 +24,20 @@ export function SavingsCalculator() {
   const [selectedVendorId, setSelectedVendorId] = useState<string>("pagerduty");
   const [engineers, setEngineers] = useState<number>(30);
   const [period, setPeriod] = useState<"annual" | "monthly">("annual");
+  const [infraTier, setInfraTier] = useState<"dedicated" | "existing">("dedicated");
 
   const selectedVendor = VENDORS.find((v) => v.id === selectedVendorId) || VENDORS[0];
   const multiplier = period === "annual" ? 12 : 1;
 
   const currentVendorCost = engineers * selectedVendor.monthlyPerSeat * multiplier;
-  const savings = currentVendorCost;
+  
+  // Flat infra cost: $15/mo for dedicated VM (t4g.small / droplet), $0 marginal on existing K8s cluster
+  const infraMonthly = infraTier === "dedicated" ? 15 : 0;
+  const opsknightInfraCost = infraMonthly * multiplier;
+  
+  // Net savings = Vendor SaaS bill - OpsKnight infra cost
+  const netSavings = Math.max(0, currentVendorCost - opsknightInfraCost);
+  const savingsPercent = currentVendorCost > 0 ? ((netSavings / currentVendorCost) * 100).toFixed(1) : "100";
 
   const formatCurrency = (val: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -54,10 +62,10 @@ export function SavingsCalculator() {
           <div>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] font-bold uppercase tracking-wider mb-1.5">
               <Sparkles className="w-3 h-3 text-blue-400" />
-              Multi-Vendor ROI Calculator
+              Realistic ROI & Infrastructure Calculator
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-              Calculate your exact savings vs SaaS on-call tools
+              Calculate your net savings vs SaaS on-call tools
             </h3>
           </div>
 
@@ -110,72 +118,110 @@ export function SavingsCalculator() {
           </div>
         </div>
 
-        {/* Slider & Input Controls */}
-        <div className="bg-slate-950/70 p-4 sm:p-5 rounded-2xl border border-white/5 space-y-3">
-          <div className="flex items-center justify-between">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-              <Users className="w-4 h-4 text-blue-400" />
-              On-Call Responders & Engineers
-            </label>
-            <div className="flex items-center gap-1.5 bg-slate-900 px-3 py-1 rounded-xl border border-white/10 font-mono">
-              <input
-                type="number"
-                min={1}
-                max={500}
-                value={engineers}
-                onChange={(e) => setEngineers(Math.max(1, Math.min(500, Number(e.target.value))))}
-                className="w-12 bg-transparent text-white font-black text-center focus:outline-none text-sm"
-              />
-              <span className="text-xs text-slate-400">seats</span>
+        {/* Slider & Hosting Mode Controls */}
+        <div className="bg-slate-950/70 p-4 sm:p-5 rounded-2xl border border-white/5 space-y-4">
+          
+          {/* Engineers Slider */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                <Users className="w-4 h-4 text-blue-400" />
+                On-Call Responders & Engineers
+              </label>
+              <div className="flex items-center gap-1.5 bg-slate-900 px-3 py-1 rounded-xl border border-white/10 font-mono">
+                <input
+                  type="number"
+                  min={1}
+                  max={500}
+                  value={engineers}
+                  onChange={(e) => setEngineers(Math.max(1, Math.min(500, Number(e.target.value))))}
+                  className="w-12 bg-transparent text-white font-black text-center focus:outline-none text-sm"
+                />
+                <span className="text-xs text-slate-400">seats</span>
+              </div>
+            </div>
+
+            <input
+              type="range"
+              min={5}
+              max={300}
+              step={1}
+              value={engineers}
+              onChange={(e) => setEngineers(Number(e.target.value))}
+              className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
+            />
+
+            {/* Quick Preset Buttons */}
+            <div className="flex items-center justify-between pt-1">
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Quick Presets:</span>
+              <div className="flex items-center gap-1.5">
+                {presetSizes.map((size) => (
+                  <button
+                    key={size}
+                    onClick={() => setEngineers(size)}
+                    className={`px-2 py-0.5 rounded-md text-[11px] font-mono font-medium transition-all ${
+                      engineers === size
+                        ? "bg-blue-600 text-white font-bold"
+                        : "bg-white/5 text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
-          <input
-            type="range"
-            min={5}
-            max={300}
-            step={1}
-            value={engineers}
-            onChange={(e) => setEngineers(Number(e.target.value))}
-            className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
-          />
-
-          {/* Quick Preset Buttons */}
-          <div className="flex items-center justify-between pt-1">
-            <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Quick Presets:</span>
-            <div className="flex items-center gap-1.5">
-              {presetSizes.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setEngineers(size)}
-                  className={`px-2 py-0.5 rounded-md text-[11px] font-mono font-medium transition-all ${
-                    engineers === size
-                      ? "bg-blue-600 text-white font-bold"
-                      : "bg-white/5 text-slate-400 hover:text-white"
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
+          {/* Self-Hosted Infrastructure Assumption Switcher */}
+          <div className="pt-3 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2 text-slate-300">
+              <Server className="w-4 h-4 text-slate-400" />
+              <span className="font-semibold">Self-Hosted Infrastructure:</span>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setInfraTier("dedicated")}
+                className={`px-3 py-1 rounded-lg font-mono text-[11px] transition-all border ${
+                  infraTier === "dedicated"
+                    ? "bg-blue-600/30 border-blue-500 text-blue-300 font-bold"
+                    : "bg-slate-900 border-white/5 text-slate-400 hover:text-white"
+                }`}
+              >
+                Dedicated Cloud VM (~$15/mo flat)
+              </button>
+              <button
+                onClick={() => setInfraTier("existing")}
+                className={`px-3 py-1 rounded-lg font-mono text-[11px] transition-all border ${
+                  infraTier === "existing"
+                    ? "bg-blue-600/30 border-blue-500 text-blue-300 font-bold"
+                    : "bg-slate-900 border-white/5 text-slate-400 hover:text-white"
+                }`}
+              >
+                Existing K8s / VPC ($0 marginal)
+              </button>
             </div>
           </div>
+
         </div>
 
         {/* Live Calculation Output Card */}
         <div className="p-5 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
-          <div>
-            <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">
-              Estimated Organization Savings
+          <div className="space-y-1">
+            <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+              Net Organization Savings ({savingsPercent}% Saved)
             </div>
             <div className="text-3xl sm:text-4xl font-black text-emerald-400 font-mono tracking-tight">
-              Save {formatCurrency(savings)}
+              Save {formatCurrency(netSavings)}
               <span className="text-xs text-slate-400 font-sans font-normal ml-1.5">
                 /{period === "annual" ? "year" : "month"}
               </span>
             </div>
-            <p className="text-xs text-slate-400 mt-1">
-              Switching from <strong>{selectedVendor.name}</strong> ({formatCurrency(currentVendorCost)}/{period === "annual" ? "yr" : "mo"}) to <strong>OpsKnight</strong> ($0 forever).
-            </p>
+            
+            <div className="text-xs text-slate-400 space-y-0.5 pt-1">
+              <div>• <strong>{selectedVendor.name} SaaS Bill:</strong> <span className="text-red-400 font-mono font-bold">{formatCurrency(currentVendorCost)}</span>/{period === "annual" ? "yr" : "mo"} ({engineers} seats)</div>
+              <div>• <strong>OpsKnight Total Cost:</strong> <span className="text-emerald-400 font-mono font-bold">{formatCurrency(opsknightInfraCost)}</span>/{period === "annual" ? "yr" : "mo"} ($0 license + {formatCurrency(opsknightInfraCost)} flat server hosting)</div>
+            </div>
           </div>
 
           <Link
@@ -190,7 +236,7 @@ export function SavingsCalculator() {
         {/* Multi-Competitor Breakdown Strip */}
         <div className="pt-2 border-t border-white/5">
           <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-2">
-            Annual Cost for {engineers} Engineers Across All Vendors:
+            Annual Cost for {engineers} Engineers Across All Options:
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-6 gap-2 text-center text-xs">
             {VENDORS.map((v) => (
@@ -202,8 +248,8 @@ export function SavingsCalculator() {
               </div>
             ))}
             <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400">
-              <div className="text-[10px] font-bold">OpsKnight</div>
-              <div className="font-mono font-black mt-0.5">$0</div>
+              <div className="text-[10px] font-bold">OpsKnight + Infra</div>
+              <div className="font-mono font-black mt-0.5">{formatCurrency(infraMonthly * 12)}</div>
             </div>
           </div>
         </div>

@@ -12,10 +12,10 @@ Send metric-based alerts and daemon status checks into OpsKnight using native we
 
 <!-- integrations-list:start -->
 
-- [Prometheus / Alertmanager](./metrics-alerting/prometheus) — Receive Prometheus Alertmanager grouped alerts and resolve notifications in OpsKnight.
-- [Zabbix](./metrics-alerting/zabbix) — Connect Zabbix triggers, problems, and recoveries with dynamic severity mapping (`Disaster`, `High`, `Average`, `Warning`, `Information`).
-- [Nagios Core & XI](./metrics-alerting/nagios) — Process Nagios host and service state transitions (`CRITICAL`, `WARNING`, `DOWN`, `RECOVERY`) with macro variable support.
-- [Icinga 2](./metrics-alerting/icinga) — Ingest check results and notifications from Icinga 2 monitoring daemons.
+- [Prometheus / Alertmanager](./prometheus) — Receive Prometheus Alertmanager grouped alerts and resolve notifications in OpsKnight.
+- [Zabbix](./zabbix) — Connect Zabbix triggers, problems, and recoveries with dynamic severity mapping (`Disaster`, `High`, `Average`, `Warning`, `Information`).
+- [Nagios Core & XI](./nagios) — Process Nagios host and service state transitions (`CRITICAL`, `WARNING`, `DOWN`, `RECOVERY`) with macro variable support.
+- [Icinga 2](./icinga) — Ingest check results and notifications from Icinga 2 monitoring daemons.
 <!-- integrations-list:end -->
 
 ---

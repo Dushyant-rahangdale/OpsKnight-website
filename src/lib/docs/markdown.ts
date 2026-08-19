@@ -112,8 +112,8 @@ function rehypeDocLinkPaths(options: RenderOptions) {
       const [pathAndSearch, hash] = href.split("#");
       const [rawPathname, search] = pathAndSearch.split("?");
 
-      // Remove .md suffix
-      let clean = rawPathname.replace(/\.mdx?$/i, "");
+      // Remove .md suffix and leading ./
+      let clean = rawPathname.replace(/\.mdx?$/i, "").replace(/^\.\//, "");
 
       if (clean.startsWith("/")) {
         // Absolute path from site root
@@ -122,16 +122,20 @@ function rehypeDocLinkPaths(options: RenderOptions) {
         }
       } else if (version) {
         // Resolve relative path against document directory
-        const normalizedRel = path.posix.normalize(path.posix.join(relDir, clean));
+        const normalizedRel = path.posix.normalize(
+          path.posix.join(relDir === "." ? "" : relDir, clean)
+        );
 
-        // Strip duplicate top-level section prefix if author wrote e.g. ./api/events inside api/
-        let finalRel = normalizedRel.replace(/^\.\//, "").replace(/^\//, "");
-        const parts = relDir.split("/").filter(Boolean);
-        for (const part of parts) {
-          if (finalRel.startsWith(`${part}/${part}/`)) {
-            finalRel = finalRel.slice(part.length + 1);
+        // Deduplicate any consecutive duplicate segments (e.g. integrations/cloud/cloud/aws-cloudwatch -> integrations/cloud/aws-cloudwatch)
+        const segments = normalizedRel.split("/").filter(Boolean);
+        const deduplicated: string[] = [];
+        for (let i = 0; i < segments.length; i++) {
+          if (i > 0 && segments[i] === segments[i - 1]) {
+            continue;
           }
+          deduplicated.push(segments[i]);
         }
+        const finalRel = deduplicated.join("/");
 
         clean = `/docs/${version}/${finalRel}`;
       }

@@ -12,8 +12,8 @@ Connect custom scripts, internal microservices, or proprietary alerting systems 
 
 <!-- integrations-list:start -->
 
-- [Generic Webhooks](./custom/webhooks) — Receive alerts from any external system via customizable JSON payloads and HMAC signatures.
-- [PagerDuty Emulation (Events API v2)](./custom/pagerduty-emulation) — Drop-in replacement for PagerDuty Events API v2 (`/api/integrations/pagerduty` and `/api/events/v2`). Connect any tool with native PagerDuty support with 0 code changes.
+- [Generic Webhooks](./webhooks) — Receive alerts from any external system via customizable JSON payloads and HMAC signatures.
+- [PagerDuty Emulation (Events API v2)](./pagerduty-emulation) — Drop-in replacement for PagerDuty Events API v2 (`/api/integrations/pagerduty` and `/api/events/v2`). Connect any tool with native PagerDuty support with 0 code changes.
 <!-- integrations-list:end -->
 
 ---

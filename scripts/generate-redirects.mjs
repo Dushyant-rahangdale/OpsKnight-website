@@ -122,11 +122,22 @@ for (let depth = 1; depth <= 6; depth += 1) {
 
 const duplicateSegmentRules = [
   `/docs/:v/api/api/* /docs/:v/api/:splat 301`,
+  `/docs/:v/integrations/apm-monitoring/apm-monitoring/* /docs/:v/integrations/apm-monitoring/:splat 301`,
+  `/docs/:v/integrations/cloud/cloud/* /docs/:v/integrations/cloud/:splat 301`,
+  `/docs/:v/integrations/metrics-alerting/metrics-alerting/* /docs/:v/integrations/metrics-alerting/:splat 301`,
+  `/docs/:v/integrations/uptime/uptime/* /docs/:v/integrations/uptime/:splat 301`,
+  `/docs/:v/integrations/ci-cd/ci-cd/* /docs/:v/integrations/ci-cd/:splat 301`,
+  `/docs/:v/integrations/logs-events/logs-events/* /docs/:v/integrations/logs-events/:splat 301`,
+  `/docs/:v/integrations/communication/communication/* /docs/:v/integrations/communication/:splat 301`,
+  `/docs/:v/integrations/custom/custom/* /docs/:v/integrations/custom/:splat 301`,
+  `/docs/:v/integrations/issue-tracking/issue-tracking/* /docs/:v/integrations/issue-tracking/:splat 301`,
   `/docs/:v/integrations/integrations/* /docs/:v/integrations/:splat 301`,
   `/docs/:v/getting-started/getting-started/* /docs/:v/getting-started/:splat 301`,
   `/docs/:v/getting-started/deployment/* /docs/:v/deployment/:splat 301`,
   `/docs/:v/core-concepts/core-concepts/* /docs/:v/core-concepts/:splat 301`,
   `/docs/:v/administration/administration/* /docs/:v/administration/:splat 301`,
+  `/docs/:v/security/security/* /docs/:v/security/:splat 301`,
+  `/docs/:v/deployment/deployment/* /docs/:v/deployment/:splat 301`,
 ];
 
 const reserved = [

@@ -11,7 +11,8 @@ export const BRAND = {
   fullDescription:
     "OpsKnight is a self-hosted incident command center — an alternative to PagerDuty, incident.io, Opsgenie, Squadcast, Splunk On-Call, and Grafana OnCall.",
   domain: "opsknight.com",
-  integrationCountLabel: "24+",
+  integrationCount: 27,
+  integrationCountLabel: "27",
   stack: "Next.js 15, React 19, Prisma, Postgres, Docker Compose / Helm",
 
   status: "Accepting Contributions",
@@ -159,12 +160,6 @@ export const FEATURES = [
     description: "Acknowledge and triage from a phone without an app store.",
     icon: "Smartphone",
   },
-] as const;
-
-export const STATS = [
-  { label: "Users", value: "Unlimited", color: "blue" },
-  { label: "License", value: "Apache-2.0", color: "blue" },
-  { label: "Integrations", value: "24+", color: "blue" },
 ] as const;
 
 export const COMPETITORS = [

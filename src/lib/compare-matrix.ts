@@ -273,9 +273,9 @@ export const COMPARE_SECTIONS: CompareSection[] = [
     rows: [
       {
         feature: "Inbound monitoring webhooks",
-        source: "Docs v1.3 integrations catalog; 24+ native routes with HMAC.",
+        source: `Docs v1.3 integrations catalog; ${BRAND.integrationCountLabel} native inbound routes.`,
         values: {
-          opsknight: "24+ native parsers",
+          opsknight: `${BRAND.integrationCountLabel} native parsers`,
           pagerduty: "Large SaaS catalog",
           incidentio: "SaaS catalog",
           opsgenie: "SaaS catalog",

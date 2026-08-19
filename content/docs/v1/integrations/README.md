@@ -92,7 +92,7 @@ Trigger a test alert to verify the integration is working.
 
 ### APM & Application Monitoring
 
-#### [Datadog](./integrations/apm-monitoring/datadog)
+#### [Datadog](./apm-monitoring/datadog)
 
 Full-stack monitoring with APM, infrastructure metrics, and logs.
 
@@ -101,7 +101,7 @@ Endpoint: /api/integrations/datadog
 Supports: Monitors, Synthetics, APM alerts
 ```
 
-#### [New Relic](./integrations/apm-monitoring/new-relic)
+#### [New Relic](./apm-monitoring/new-relic)
 
 Application performance monitoring and infrastructure.
 
@@ -110,7 +110,7 @@ Endpoint: /api/integrations/newrelic
 Supports: Alert policies, incidents, synthetics
 ```
 
-#### [Dynatrace](./integrations/apm-monitoring/dynatrace)
+#### [Dynatrace](./apm-monitoring/dynatrace)
 
 AI-powered full-stack observability.
 
@@ -119,7 +119,7 @@ Endpoint: /api/integrations/dynatrace
 Supports: Problems, anomaly detection
 ```
 
-#### [AppDynamics](./integrations/apm-monitoring/appdynamics)
+#### [AppDynamics](./apm-monitoring/appdynamics)
 
 Business-aware application performance management.
 
@@ -128,7 +128,7 @@ Endpoint: /api/integrations/appdynamics
 Supports: Health rules, policy violations
 ```
 
-#### [Grafana](./integrations/apm-monitoring/grafana)
+#### [Grafana](./apm-monitoring/grafana)
 
 Visualization and alerting platform.
 
@@ -137,7 +137,7 @@ Endpoint: /api/integrations/grafana
 Supports: Alert notifications
 ```
 
-#### [Honeycomb](./integrations/apm-monitoring/honeycomb)
+#### [Honeycomb](./apm-monitoring/honeycomb)
 
 Observability for distributed systems.
 
@@ -146,7 +146,7 @@ Endpoint: /api/integrations/honeycomb
 Supports: Triggers
 ```
 
-#### [Sentry](./integrations/apm-monitoring/sentry)
+#### [Sentry](./apm-monitoring/sentry)
 
 Error tracking and performance monitoring.
 
@@ -155,7 +155,7 @@ Endpoint: /api/integrations/sentry
 Supports: Issues, errors, performance alerts
 ```
 
-#### [Splunk Observability](./integrations/apm-monitoring/splunk-observability)
+#### [Splunk Observability](./apm-monitoring/splunk-observability)
 
 Splunk's observability platform.
 
@@ -164,7 +164,7 @@ Endpoint: /api/integrations/splunk-observability
 Supports: Detectors, alerts
 ```
 
-#### [Elastic / Kibana](./integrations/logs-events/elastic-kibana)
+#### [Elastic / Kibana](./logs-events/elastic-kibana)
 
 Elasticsearch and Kibana alerting.
 
@@ -177,7 +177,7 @@ Supports: Watcher alerts, Kibana alerting
 
 ### Infrastructure & Cloud
 
-#### [AWS CloudWatch](./integrations/cloud/aws-cloudwatch)
+#### [AWS CloudWatch](./cloud/aws-cloudwatch)
 
 Native AWS monitoring and alerting.
 
@@ -186,7 +186,7 @@ Endpoint: /api/integrations/cloudwatch
 Supports: CloudWatch Alarms via SNS
 ```
 
-#### [Azure Monitor](./integrations/cloud/azure-monitor)
+#### [Azure Monitor](./cloud/azure-monitor)
 
 Microsoft Azure monitoring service.
 
@@ -195,7 +195,7 @@ Endpoint: /api/integrations/azure-monitor
 Supports: Alerts, action groups
 ```
 
-#### [Google Cloud Monitoring](./integrations/cloud/google-cloud-monitoring)
+#### [Google Cloud Monitoring](./cloud/google-cloud-monitoring)
 
 GCP native monitoring (formerly Stackdriver).
 
@@ -208,7 +208,7 @@ Supports: Alerting policies
 
 ### Metrics & Alerting
 
-#### [Prometheus/Alertmanager](./integrations/metrics-alerting/prometheus)
+#### [Prometheus/Alertmanager](./metrics-alerting/prometheus)
 
 Open-source metrics and alerting.
 
@@ -221,7 +221,7 @@ Supports: Alertmanager webhooks
 
 ### Uptime Monitoring
 
-#### [UptimeRobot](./integrations/uptime/uptimerobot)
+#### [UptimeRobot](./uptime/uptimerobot)
 
 Website and API uptime monitoring.
 
@@ -230,7 +230,7 @@ Endpoint: /api/integrations/uptimerobot
 Supports: Monitor alerts (down/up)
 ```
 
-#### [Pingdom](./integrations/uptime/pingdom)
+#### [Pingdom](./uptime/pingdom)
 
 Website uptime and performance monitoring.
 
@@ -239,7 +239,7 @@ Endpoint: /api/integrations/pingdom
 Supports: Uptime checks, transaction checks
 ```
 
-#### [Better Uptime](./integrations/uptime/better-uptime)
+#### [Better Uptime](./uptime/better-uptime)
 
 Modern uptime monitoring with status pages.
 
@@ -248,7 +248,7 @@ Endpoint: /api/integrations/betteruptime
 Supports: Monitor incidents
 ```
 
-#### [Uptime Kuma](./integrations/uptime/uptime-kuma)
+#### [Uptime Kuma](./uptime/uptime-kuma)
 
 Self-hosted uptime monitoring.
 
@@ -261,7 +261,7 @@ Supports: Monitor notifications
 
 ### Log & Event Analysis
 
-#### [Splunk On-Call](./integrations/logs-events/splunk-oncall)
+#### [Splunk On-Call](./logs-events/splunk-oncall)
 
 Incident management from Splunk.
 
@@ -274,7 +274,7 @@ Supports: Alerts, incidents
 
 ### CI/CD & DevOps
 
-#### [GitHub](./integrations/ci-cd/github)
+#### [GitHub](./ci-cd/github)
 
 GitHub Actions and repository events.
 
@@ -283,7 +283,7 @@ Endpoint: /api/integrations/github
 Supports: Workflow failures, security alerts
 ```
 
-#### [Bitbucket](./integrations/ci-cd/bitbucket)
+#### [Bitbucket](./ci-cd/bitbucket)
 
 Bitbucket Pipelines and repository events.
 
@@ -296,7 +296,7 @@ Supports: Pipeline failures
 
 ### Communication
 
-#### [Slack](./integrations/communication/slack)
+#### [Slack](./communication/slack)
 
 Team communication with interactive incident management.
 
@@ -305,13 +305,13 @@ Team communication with interactive incident management.
 - Thread updates for incident timeline
 - Channel-based routing
 
-[Full Setup Guide →](./integrations/communication/slack-oauth-setup)
+[Full Setup Guide →](./communication/slack-oauth-setup)
 
 ---
 
 ### Custom Integrations
 
-#### [Generic Webhooks](./integrations/custom/webhooks)
+#### [Generic Webhooks](./custom/webhooks)
 
 Connect any tool that can send HTTP webhooks.
 

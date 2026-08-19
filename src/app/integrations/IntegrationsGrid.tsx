@@ -40,7 +40,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'APM & Observability',
     iconKey: 'datadog',
     desc: 'Sync monitor alerts, metric anomalies, and synthesized events from Datadog monitors.',
-    docPath: '/docs/v1.3/integrations/apm-monitoring',
+    docPath: '/docs/v1.3/integrations/apm-monitoring/datadog/',
     protocol: 'HMAC-SHA256 Webhook',
     webhookSlug: 'datadog',
     samplePayload: {
@@ -57,7 +57,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'APM & Observability',
     iconKey: 'newrelic',
     desc: 'Route New Relic APM policy violations, NRQL condition alerts, and Golden Signal breaches.',
-    docPath: '/docs/v1.3/integrations/apm-monitoring',
+    docPath: '/docs/v1.3/integrations/apm-monitoring/new-relic/',
     protocol: 'JSON Webhook',
     webhookSlug: 'newrelic',
     samplePayload: {
@@ -73,7 +73,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'APM & Observability',
     iconKey: 'dynatrace',
     desc: 'Ingest Davis AI root cause notifications and multi-component failure clusters.',
-    docPath: '/docs/v1.3/integrations/apm-monitoring',
+    docPath: '/docs/v1.3/integrations/apm-monitoring/dynatrace/',
     protocol: 'REST Webhook',
     webhookSlug: 'dynatrace',
     samplePayload: {
@@ -89,7 +89,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'APM & Observability',
     iconKey: 'appdynamics',
     desc: 'Forward business transaction health violations and infrastructure event triggers.',
-    docPath: '/docs/v1.3/integrations/apm-monitoring',
+    docPath: '/docs/v1.3/integrations/apm-monitoring/appdynamics/',
     protocol: 'HTTP Post',
     webhookSlug: 'appdynamics',
     samplePayload: {
@@ -104,7 +104,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'APM & Observability',
     iconKey: 'honeycomb',
     desc: 'Trigger high-urgency alerts from Honeycomb BubbleUp triggers and distributed SLO burn rates.',
-    docPath: '/docs/v1.3/integrations/apm-monitoring',
+    docPath: '/docs/v1.3/integrations/apm-monitoring/honeycomb/',
     protocol: 'JSON Trigger',
     webhookSlug: 'honeycomb',
     samplePayload: {
@@ -120,7 +120,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'APM & Observability',
     iconKey: 'sentry',
     desc: 'Create deduplicated incidents from uncaught application exceptions and performance transactions.',
-    docPath: '/docs/v1.3/integrations/apm-monitoring',
+    docPath: '/docs/v1.3/integrations/apm-monitoring/sentry/',
     protocol: 'Signed Webhook',
     webhookSlug: 'sentry',
     samplePayload: {
@@ -136,7 +136,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'APM & Observability',
     iconKey: 'splunk',
     desc: 'Real-time ingestion for Splunk Infrastructure Monitoring detector alerts and incident bridges.',
-    docPath: '/docs/v1.3/integrations/apm-monitoring',
+    docPath: '/docs/v1.3/integrations/apm-monitoring/splunk-observability/',
     protocol: 'Detector Webhook',
     webhookSlug: 'splunk',
     samplePayload: {
@@ -153,7 +153,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Metrics & Daemons',
     iconKey: 'prometheus',
     desc: 'Native Alertmanager webhook receiver with deterministic SHA-256 fingerprint deduplication.',
-    docPath: '/docs/v1.3/integrations/metrics-alerting',
+    docPath: '/docs/v1.3/integrations/metrics-alerting/prometheus/',
     protocol: 'Native Alertmanager',
     webhookSlug: 'prometheus',
     samplePayload: {
@@ -174,7 +174,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Metrics & Daemons',
     iconKey: 'grafana',
     desc: 'Ingest Grafana unified alerting rules and contact point webhooks in real time.',
-    docPath: '/docs/v1.3/integrations/metrics-alerting',
+    docPath: '/docs/v1.3/integrations/apm-monitoring/grafana/',
     protocol: 'Contact Point',
     webhookSlug: 'grafana',
     samplePayload: {
@@ -190,7 +190,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Metrics & Daemons',
     iconKey: 'zabbix',
     desc: 'Enterprise-grade Zabbix media type webhook with EVENT.ID deduplication & recovery sync.',
-    docPath: '/docs/v1.3/integrations/metrics-alerting',
+    docPath: '/docs/v1.3/integrations/metrics-alerting/zabbix/',
     protocol: 'Media Type Webhook',
     webhookSlug: 'zabbix',
     samplePayload: {
@@ -207,7 +207,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Metrics & Daemons',
     iconKey: 'nagios',
     desc: 'Connect host & service state changes, notification macros, and scheduled downtime.',
-    docPath: '/docs/v1.3/integrations/metrics-alerting',
+    docPath: '/docs/v1.3/integrations/metrics-alerting/nagios/',
     protocol: 'Notification Macro',
     webhookSlug: 'nagios',
     samplePayload: {
@@ -224,7 +224,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Metrics & Daemons',
     iconKey: 'icinga',
     desc: 'Native notification command scripts for Icinga 2 check results, state changes, and recovery events.',
-    docPath: '/docs/v1.3/integrations/metrics-alerting',
+    docPath: '/docs/v1.3/integrations/metrics-alerting/icinga/',
     protocol: 'Notification Pipe',
     webhookSlug: 'icinga',
     samplePayload: {
@@ -242,7 +242,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Cloud & Infrastructure',
     iconKey: 'cloudwatch',
     desc: 'Connect AWS CloudWatch composite alarms, SNS notifications, and EventBridge events.',
-    docPath: '/docs/v1.3/integrations/cloud',
+    docPath: '/docs/v1.3/integrations/cloud/aws-cloudwatch/',
     protocol: 'AWS SNS / HTTPS',
     webhookSlug: 'aws-cloudwatch',
     samplePayload: {
@@ -258,7 +258,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Cloud & Infrastructure',
     iconKey: 'azure',
     desc: 'Ingest Azure Monitor Action Groups, Log Analytics alerts, and Application Insights signals.',
-    docPath: '/docs/v1.3/integrations/cloud',
+    docPath: '/docs/v1.3/integrations/cloud/azure-monitor/',
     protocol: 'Azure Action Group',
     webhookSlug: 'azure-monitor',
     samplePayload: {
@@ -278,7 +278,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Cloud & Infrastructure',
     iconKey: 'googlecloud',
     desc: 'Sync Google Cloud Alerting notification channels and Incident Summary webhooks.',
-    docPath: '/docs/v1.3/integrations/cloud',
+    docPath: '/docs/v1.3/integrations/cloud/google-cloud-monitoring/',
     protocol: 'GCP Notification Channel',
     webhookSlug: 'gcp-monitoring',
     samplePayload: {
@@ -298,7 +298,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'CI/CD & Deployments',
     iconKey: 'github',
     desc: 'Automate incident triggering and deployment rollback alerts on workflow failures.',
-    docPath: '/docs/v1.3/integrations/ci-cd',
+    docPath: '/docs/v1.3/integrations/ci-cd/github/',
     protocol: 'GitHub Webhook',
     webhookSlug: 'github-actions',
     samplePayload: {
@@ -317,7 +317,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'CI/CD & Deployments',
     iconKey: 'gitlab',
     desc: 'Track pipeline execution failures, runner downtime, and automatic incident resolution on retry success.',
-    docPath: '/docs/v1.3/integrations/ci-cd',
+    docPath: '/docs/v1.3/integrations/ci-cd/gitlab/',
     protocol: 'GitLab Pipeline Hook',
     webhookSlug: 'gitlab-ci',
     samplePayload: {
@@ -336,7 +336,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'CI/CD & Deployments',
     iconKey: 'bitbucket',
     desc: 'Catch build breaks and automated deployment pipeline failures with zero latency.',
-    docPath: '/docs/v1.3/integrations/ci-cd',
+    docPath: '/docs/v1.3/integrations/ci-cd/bitbucket/',
     protocol: 'Bitbucket Webhook',
     webhookSlug: 'bitbucket-pipelines',
     samplePayload: {
@@ -351,7 +351,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'CI/CD & Deployments',
     iconKey: 'vercel',
     desc: 'Alert immediately on production deployment build failures and edge function crashes.',
-    docPath: '/docs/v1.3/integrations/ci-cd',
+    docPath: '/docs/v1.3/integrations/ci-cd/vercel/',
     protocol: 'Vercel Deployment Webhook',
     webhookSlug: 'vercel',
     samplePayload: {
@@ -371,7 +371,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Uptime & Synthetics',
     iconKey: 'uptimerobot',
     desc: 'Ingest synthetic ping, HTTP keyword, and port check failure notifications with auto-resolve.',
-    docPath: '/docs/v1.3/integrations/uptime-synthetics',
+    docPath: '/docs/v1.3/integrations/uptime/uptimerobot/',
     protocol: 'Uptime Webhook',
     webhookSlug: 'uptimerobot',
     samplePayload: {
@@ -387,7 +387,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Uptime & Synthetics',
     iconKey: 'pingdom',
     desc: 'Route global probe synthetic check failures and latency degradations to on-call teams.',
-    docPath: '/docs/v1.3/integrations/uptime-synthetics',
+    docPath: '/docs/v1.3/integrations/uptime/pingdom/',
     protocol: 'Pingdom Webhook',
     webhookSlug: 'pingdom',
     samplePayload: {
@@ -402,7 +402,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Uptime & Synthetics',
     iconKey: 'betterstack',
     desc: 'Stream heartbeats, synthetic checks, and cron monitor timeouts directly into OpsKnight.',
-    docPath: '/docs/v1.3/integrations/uptime-synthetics',
+    docPath: '/docs/v1.3/integrations/uptime/better-uptime/',
     protocol: 'Heartbeat Webhook',
     webhookSlug: 'betterstack',
     samplePayload: {
@@ -417,7 +417,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'Uptime & Synthetics',
     iconKey: 'uptimekuma',
     desc: 'Connect self-hosted Uptime Kuma monitors to trigger OpsKnight escalation schedules.',
-    docPath: '/docs/v1.3/integrations/uptime-synthetics',
+    docPath: '/docs/v1.3/integrations/uptime/uptime-kuma/',
     protocol: 'Kuma Webhook',
     webhookSlug: 'uptimekuma',
     samplePayload: {
@@ -439,7 +439,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'ChatOps & Collaboration',
     iconKey: 'slack',
     desc: 'Dedicated war room auto-provisioning, auto-invited on-call responders, interactive action buttons, and slash commands.',
-    docPath: '/docs/v1.3/integrations/slack',
+    docPath: '/docs/v1.3/integrations/communication/slack-chatops/',
     protocol: 'Two-Way ChatOps Bot',
     webhookSlug: 'slack-events',
     samplePayload: {
@@ -454,7 +454,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'ChatOps & Collaboration',
     iconKey: 'jira',
     desc: 'Bi-directional issue creation, postmortem action items sync, and live status mirroring with Jira Software.',
-    docPath: '/docs/v1.3/integrations/jira',
+    docPath: '/docs/v1.3/integrations/issue-tracking/jira/',
     protocol: 'Bi-Directional Sync',
     webhookSlug: 'jira-cloud',
     samplePayload: {
@@ -473,7 +473,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'ChatOps & Collaboration',
     iconKey: 'whatsapp',
     desc: 'High-priority SMS & WhatsApp pager alerts for urgent Sev-0/Sev-1 escalations with ack links.',
-    docPath: '/docs/v1.3/integrations/whatsapp',
+    docPath: '/docs/v1.3/integrations/communication/slack/',
     protocol: 'Multi-Channel Pager',
     webhookSlug: 'whatsapp-pager',
     samplePayload: {
@@ -488,7 +488,7 @@ const allIntegrations: IntegrationItem[] = [
     category: 'ChatOps & Collaboration',
     iconKey: 'pagerduty',
     desc: 'Drop-in replacement for /v2/enqueue. Point existing PagerDuty webhooks to OpsKnight with 0 code changes.',
-    docPath: '/docs/v1.3/integrations/pagerduty-migration',
+    docPath: '/docs/v1.3/integrations/custom/pagerduty-emulation/',
     protocol: 'Drop-in API v2',
     webhookSlug: 'pagerduty-v2',
     samplePayload: {

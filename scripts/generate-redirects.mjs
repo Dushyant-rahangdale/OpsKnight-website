@@ -112,22 +112,15 @@ function segments(count, suffix) {
   return `/${Array.from({ length: count }, (_, i) => `:s${i}`).join("/")}${suffix}`;
 }
 
-const rscPassThrough = [
+const txtToHtml = [
   `/robots.txt /robots.txt 200`,
-  `/index.txt /index.txt 200`,
 ];
 for (let depth = 1; depth <= 6; depth += 1) {
-  const file = segments(depth, "/index.txt");
-  rscPassThrough.push(`${file} ${file} 200`);
-}
-
-const txtToHtml = [];
-for (let depth = 1; depth <= 6; depth += 1) {
+  txtToHtml.push(`${segments(depth, "/index.txt")} ${segments(depth, "/")} 301`);
   txtToHtml.push(`${segments(depth, ".txt")} ${segments(depth, "/")} 301`);
 }
 
 const reserved = [
-  ...rscPassThrough,
   ...txtToHtml,
   "",
   "# Version-agnostic alias",

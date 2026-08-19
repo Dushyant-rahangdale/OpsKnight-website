@@ -506,6 +506,11 @@ h4 {
   color: #111827;
 }
 
+.prose :where(code):not(:where(pre code))::before,
+.prose :where(code):not(:where(pre code))::after {
+  content: none;
+}
+
 /* Docs images: keep high quality but constrained to doc-friendly width */
 .docs-content img {
   max-width: 900px;

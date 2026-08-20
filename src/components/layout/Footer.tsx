@@ -17,12 +17,14 @@ const footerLinks = {
     { label: "Helm charts", href: BRAND.links.helmCharts },
   ],
   community: [
+    { label: "Contact", href: "/contact" },
     { label: "GitHub Discussions", href: BRAND.links.discussions },
     { label: "Issues", href: BRAND.links.issues },
     { label: "Contributing", href: BRAND.links.contributing },
     { label: "Sponsor", href: BRAND.links.sponsor },
   ],
   legal: [
+    { label: "About", href: "/about" },
     { label: "Privacy", href: "/privacy" },
     { label: "Terms", href: "/terms" },
     { label: `${BRAND.license} License`, href: BRAND.links.license },

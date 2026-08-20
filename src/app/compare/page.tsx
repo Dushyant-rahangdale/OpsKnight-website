@@ -71,12 +71,7 @@ export default function ComparePage() {
         </section>
 
         <section className="mt-14">
-          <h2 className="mb-2 text-xl font-semibold text-[#111827]">Cost sketch</h2>
-          <p className="mb-6 max-w-2xl text-sm text-[#4b5563]">
-            {BRAND.name} software is $0. Pick a public list plan from a vendor that
-            is still selling seats. Confirm the number on their pricing page
-            before you treat it as an invoice.
-          </p>
+          <h2 className="mb-3 text-xl font-semibold text-[#111827]">Cost sketch</h2>
           <SavingsCalculator />
         </section>
 

@@ -13,6 +13,8 @@ export type ListPlan = {
   vendor: string;
   name: string;
   kind: PricingKind;
+  /** Path under /public for a mark we already ship. Omit rather than invent a logo. */
+  logo?: string;
   /** USD per user per month on a month-to-month contract, if published. */
   monthlyPerSeat?: number;
   /** USD per user per month when billed annually, if published. */
@@ -34,6 +36,7 @@ export const LIST_PLANS: ListPlan[] = [
     vendor: "PagerDuty",
     name: "Professional",
     kind: "per_seat",
+    logo: "/integrations/pagerduty.svg",
     monthlyPerSeat: 25,
     annualPerSeat: 21,
     note: "Incident Response Professional on pagerduty.com/pricing. Status Pages, AIOps, and stakeholders are add-ons.",
@@ -94,6 +97,7 @@ export const LIST_PLANS: ListPlan[] = [
     vendor: "Grafana Cloud IRM",
     name: "Pro (active users)",
     kind: "grafana_irm",
+    logo: "/integrations/grafana.svg",
     grafana: { platformMonthly: 19, includedUsers: 3, extraPerSeat: 20 },
     note: "$19/mo platform includes 3 active IRM users, then $20 per extra active user (grafana.com/products/cloud/irm).",
     sourceUrl: "https://grafana.com/products/cloud/irm/",
@@ -103,6 +107,7 @@ export const LIST_PLANS: ListPlan[] = [
     vendor: "Splunk On-Call",
     name: "Starting SKU (≤10 seats)",
     kind: "per_seat",
+    logo: "/integrations/splunk.svg",
     annualPerSeat: 5,
     maxSeats: 10,
     note: "Official line: from $5/user/mo billed annually, up to 10 seats. Larger orgs are a sales quote.",
@@ -118,8 +123,16 @@ export const LIST_PLANS: ListPlan[] = [
   },
 ];
 
-export function vendorGroups(): string[] {
-  return [...new Set(LIST_PLANS.map((p) => p.vendor))];
+export function vendorMeta(): { vendor: string; logo?: string }[] {
+  const seen = new Map<string, string | undefined>();
+  for (const p of LIST_PLANS) {
+    if (!seen.has(p.vendor)) seen.set(p.vendor, p.logo);
+  }
+  return [...seen.entries()].map(([vendor, logo]) => ({ vendor, logo }));
+}
+
+export function plansForVendor(vendor: string) {
+  return LIST_PLANS.filter((p) => p.vendor === vendor);
 }
 
 export function monthlyVendorCost(

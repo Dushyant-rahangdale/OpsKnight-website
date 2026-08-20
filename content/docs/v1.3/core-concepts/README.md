@@ -8,7 +8,6 @@ description: Master the fundamental building blocks of OpsKnight incident manage
 
 Understanding OpsKnight's core concepts is essential for building an effective incident management workflow. This section explains how each component works, why it exists, and how they connect to form a complete system.
 
-
 ---
 
 ## The Big Picture
@@ -62,8 +61,8 @@ OpsKnight is built around a simple but powerful model: **Alerts become Incidents
 
 ## Concepts at a Glance
 
-| Concept                                                    | What It Is                              | Why It Matters                            |
-| ---------------------------------------------------------- | --------------------------------------- | ----------------------------------------- |
+| Concept                                      | What It Is                              | Why It Matters                            |
+| -------------------------------------------- | --------------------------------------- | ----------------------------------------- |
 | [Dashboard](./dashboard)                     | Command center for real-time visibility | See the forest, not just the trees        |
 | [Services](./services)                       | Systems you monitor with ownership      | Alerts need context and routing           |
 | [Incidents](./incidents)                     | Actionable work items from alerts       | Track resolution from trigger to close    |

@@ -12,8 +12,8 @@ This section covers production deployment of OpsKnight. Choose the deployment me
 
 ## Deployment Options
 
-| Method                                | Best For                  | Complexity | HA Support |
-| ------------------------------------- | ------------------------- | ---------- | ---------- |
+| Method                     | Best For                  | Complexity | HA Support |
+| -------------------------- | ------------------------- | ---------- | ---------- |
 | [Docker Compose](./docker) | Small teams, dev/staging  | Low        | No         |
 | [Kubernetes](./kubernetes) | Production, enterprise    | Medium     | Yes        |
 | [Helm](./helm)             | Templated K8s deployments | Medium     | Yes        |

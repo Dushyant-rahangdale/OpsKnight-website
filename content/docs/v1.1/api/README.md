@@ -12,14 +12,14 @@ The OpsKnight API lets you programmatically manage incidents, integrate monitori
 
 ## API Endpoints Overview
 
-| Endpoint                         | Description                             | Common Use Cases              |
-| -------------------------------- | --------------------------------------- | ----------------------------- |
+| Endpoint                     | Description                             | Common Use Cases              |
+| ---------------------------- | --------------------------------------- | ----------------------------- |
 | [Events API](./events)       | Trigger, acknowledge, resolve incidents | Monitoring integrations       |
 | [Incidents API](./incidents) | List, create, update incidents          | Custom dashboards, automation |
-| Services API                     | Manage services                         | Service catalog automation    |
-| Schedules API                    | Query on-call schedules                 | Who's on-call integrations    |
-| Users API                        | Manage users                            | User provisioning             |
-| Teams API                        | Manage teams                            | Team automation               |
+| Services API                 | Manage services                         | Service catalog automation    |
+| Schedules API                | Query on-call schedules                 | Who's on-call integrations    |
+| Users API                    | Manage users                            | User provisioning             |
+| Teams API                    | Manage teams                            | Team automation               |
 
 ---
 
@@ -34,7 +34,6 @@ All API requests require authentication. OpsKnight supports API key authenticati
 3. Enter a name (e.g., "Datadog Integration")
 4. Select scopes (permissions)
 5. Copy the key — it's only shown once!
-
 
 ### Using Your API Key
 

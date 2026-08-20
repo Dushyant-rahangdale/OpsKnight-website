@@ -10,10 +10,10 @@ This section covers identity management, cryptographic data protection, webhook 
 
 ## In This Section
 
-| Guide | Description |
-| :--- | :--- |
-| [OIDC SSO Setup](./oidc-setup) | Configure single sign-on with Google, Okta, Azure AD, and Keycloak |
-| [Envelope Encryption](./encryption) | AES-256-CBC envelope encryption for integration secrets and tokens |
+| Guide                                          | Description                                                           |
+| :--------------------------------------------- | :-------------------------------------------------------------------- |
+| [OIDC SSO Setup](./oidc-setup)                 | Configure single sign-on with Google, Okta, Azure AD, and Keycloak    |
+| [Envelope Encryption](./encryption)            | AES-256-CBC envelope encryption for integration secrets and tokens    |
 | [Webhook Verification](./webhook-verification) | HMAC-SHA256 signature verification and timing-safe payload validation |
 
 ## Key Concepts

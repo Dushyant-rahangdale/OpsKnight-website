@@ -8,7 +8,6 @@ description: Connect OpsKnight with 20+ monitoring tools, Slack, and custom webh
 
 OpsKnight integrates with your entire monitoring and observability stack, routing alerts from any tool to the right people at the right time.
 
-
 ---
 
 ## Why Integrations Matter
@@ -45,22 +44,22 @@ These tools send alerts TO OpsKnight:
 | **Log Analysis**       | Splunk, Elastic                                        |
 | **Observability**      | Honeycomb, Splunk Observability                        |
 | **CI/CD**              | GitHub Actions, Bitbucket Pipelines                    |
-| **Issue Tracking**     | [Jira Cloud](./issue-tracking/jira)       |
+| **Issue Tracking**     | [Jira Cloud](./issue-tracking/jira)                    |
 | **Custom**             | Generic Webhooks, Events API                           |
 
 ### Notification Channels (Outbound)
 
 These tools receive notifications FROM OpsKnight:
 
-| Channel      | Purpose                                                                    |
-| ------------ | -------------------------------------------------------------------------- |
-| **Slack**    | Team channels, interactive buttons, and per-incident war rooms             |
-| **Jira**     | [Bi-directional issue tracking & sync](./issue-tracking/jira) |
-| **Email**    | Direct inbox notifications                                                 |
-| **SMS**      | Urgent alerts via text message                                             |
-| **Push**     | Mobile app notifications                                                   |
-| **WhatsApp** | Messaging alerts                                                           |
-| **Webhooks** | Custom HTTP integrations                                                   |
+| Channel      | Purpose                                                        |
+| ------------ | -------------------------------------------------------------- |
+| **Slack**    | Team channels, interactive buttons, and per-incident war rooms |
+| **Jira**     | [Bi-directional issue tracking & sync](./issue-tracking/jira)  |
+| **Email**    | Direct inbox notifications                                     |
+| **SMS**      | Urgent alerts via text message                                 |
+| **Push**     | Mobile app notifications                                       |
+| **WhatsApp** | Messaging alerts                                               |
+| **Webhooks** | Custom HTTP integrations                                       |
 
 ---
 

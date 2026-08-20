@@ -8,13 +8,12 @@ description: Everything you need to install, configure, and start using OpsKnigh
 
 This section will take you from zero to a fully operational incident management system. By the end, you'll have OpsKnight running, your first service configured, and understand how to create and manage incidents.
 
-
 ---
 
 ## What You'll Learn
 
-| Guide                                            | What You'll Accomplish                                    |
-| ------------------------------------------------ | --------------------------------------------------------- |
+| Guide                            | What You'll Accomplish                                    |
+| -------------------------------- | --------------------------------------------------------- |
 | [Installation](./installation)   | Get OpsKnight running with Docker, Kubernetes, or locally |
 | [Configuration](./configuration) | Understand environment variables and system settings      |
 | [First Steps](./first-steps)     | Create your first service, incident, and on-call schedule |

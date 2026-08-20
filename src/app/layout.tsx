@@ -77,9 +77,9 @@ export const metadata: Metadata = {
     siteName: BRAND.name,
     images: [
       {
-        url: BRAND.assets.og,
-        width: 1536,
-        height: 1024,
+        url: BRAND.assets.banner,
+        width: 1200,
+        height: 630,
         alt: `${BRAND.name} — ${BRAND.tagline}`,
       },
     ],
@@ -89,17 +89,17 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: BRAND.seo.title,
     description: BRAND.seo.description,
-    images: [BRAND.assets.og],
+    images: [BRAND.assets.banner],
     creator: BRAND.authors[0]?.twitter
       ? `@${BRAND.authors[0].twitter.split("twitter.com/")[1]?.replace(/\/.*/, "")}`
       : undefined,
   },
   icons: {
     icon: [
-      { url: "/brand/mark.svg", type: "image/svg+xml" },
-      { url: "/logo-mark.png", type: "image/png" },
+      { url: "/logo.svg", type: "image/svg+xml" },
+      { url: "/logo.png", type: "image/png" },
     ],
-    apple: "/logo-mark.png",
+    apple: "/logo.png",
   },
   metadataBase: new URL(baseUrl),
 };

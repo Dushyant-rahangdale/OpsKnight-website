@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LogoMark } from "@/components/brand/LogoMark";
+import Image from "next/image";
 import { BRAND } from "@/lib/brand";
 
 type BrandLockupProps = {
@@ -20,7 +20,14 @@ export function BrandLockup({
       href={href}
       className={`inline-flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] ${className}`}
     >
-      <LogoMark size={size} />
+      <Image
+        src={BRAND.assets.logo}
+        alt=""
+        width={size}
+        height={size}
+        className="object-contain"
+        style={{ width: size, height: size }}
+      />
       <span className="flex min-w-0 flex-col leading-none">
         <span className="truncate text-[15px] font-semibold tracking-tight text-white">
           {BRAND.name}

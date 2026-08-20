@@ -35,11 +35,9 @@ export const BRAND = {
   },
 
   assets: {
-    logo: "/brand/mark.svg",
-    logoSvg: "/brand/mark.svg",
-    logoOnLight: "/brand/mark-on-light.svg",
-    og: "/og.png",
-    banner: "/og.png",
+    logo: "/logo-mark.png",
+    logoSvg: "/logo.svg",
+    banner: "/banner.png",
     dashboard: "/dashboard-command-center.png",
     dashboardWide: "/dashboard-command-center-1200.jpg",
   },

@@ -24,8 +24,7 @@ export default function AboutPage() {
             describes.
           </p>
           <p>
-            The name is the job: hold the watch at 2am. The mark is a watchtower
-            with a pager lantern — not a costume knight, and not a clone of
+            OpsKnight is self-hosted incident command. It is not a clone of
             anyone else’s product.
           </p>
           <h2 className="pt-4 text-2xl font-semibold text-[#111827]">Who it is for</h2>

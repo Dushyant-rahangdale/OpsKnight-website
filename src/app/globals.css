@@ -178,6 +178,26 @@ h4 {
   letter-spacing: -0.02em;
 }
 
+@keyframes logo-beacon {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.logo-beacon {
+  animation: logo-beacon 2.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-beacon {
+    animation: none;
+  }
+}
+
 ::selection {
   background: rgba(37, 99, 235, 0.18);
   color: #1e3a8a;

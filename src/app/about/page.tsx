@@ -5,7 +5,7 @@ import { BRAND } from "@/lib/brand";
 export const metadata: Metadata = {
   title: "About OpsKnight",
   description:
-    "OpsKnight is a self-hosted incident command center. Other product names are used only to identify them. OpsKnight is not affiliated with PagerDuty or Atlassian.",
+    "OpsKnight is self-hosted incident command. Other product names identify those products. Not affiliated with PagerDuty or Atlassian.",
 };
 
 export default function AboutPage() {
@@ -23,6 +23,25 @@ export default function AboutPage() {
             incident data belongs on the same infrastructure as the systems it
             describes.
           </p>
+          <p>
+            The name is the job: hold the watch at 2am. The mark is a watchtower
+            with a pager lantern — not a costume knight, and not a clone of
+            anyone else’s product.
+          </p>
+          <h2 className="pt-4 text-2xl font-semibold text-[#111827]">Who it is for</h2>
+          <p>
+            SRE and platform teams that already run Postgres, Docker, or
+            Kubernetes. Teams that cannot put incident timelines in a vendor
+            cloud. Teams that would rather operate a pager than meter seats.
+            {BRAND.integrationCountLabel} inbound parsers, Slack war rooms, one
+            status page, local accounts and OIDC.
+          </p>
+          <h2 className="pt-4 text-2xl font-semibold text-[#111827]">Who it is not for</h2>
+          <p>
+            Anyone who needs a hosted cloud, native voice calls, or SAML in this
+            release. Anyone who needs a PagerDuty clone — Events API v2 is an
+            ingest adapter. Change the destination URL and test.
+          </p>
           <h2 className="pt-4 text-2xl font-semibold text-[#111827]">Mission</h2>
           <p>
             Make on-call, paging, war rooms, status pages, and postmortems
@@ -35,9 +54,20 @@ export default function AboutPage() {
             There is no hosted Enterprise Cloud offering.
           </p>
           <h2 className="pt-4 text-2xl font-semibold text-[#111827]">Maintainer</h2>
-          <p>Created and maintained by Dushyant Rahangdale.</p>
+          <p>
+            Created and maintained by{" "}
+            <a
+              href={BRAND.authors[0].url}
+              className="font-medium text-[#111827] underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {BRAND.authors[0].name}
+            </a>
+            . Press and partnership notes: {BRAND.links.email}.
+          </p>
         </div>
-        <div className="mt-12 flex gap-3">
+        <div className="mt-12 flex flex-wrap gap-3">
           <a
             href={BRAND.links.github}
             target="_blank"
@@ -47,10 +77,16 @@ export default function AboutPage() {
             GitHub
           </a>
           <Link
-            href={BRAND.links.docs}
+            href="/install"
             className="inline-flex h-10 items-center rounded-[12px] border border-slate-200 bg-white px-5 text-sm font-medium text-slate-800 hover:bg-slate-50"
           >
-            Docs
+            Install
+          </Link>
+          <Link
+            href="/brand"
+            className="inline-flex h-10 items-center rounded-[12px] border border-slate-200 bg-white px-5 text-sm font-medium text-slate-800 hover:bg-slate-50"
+          >
+            Brand
           </Link>
         </div>
       </div>

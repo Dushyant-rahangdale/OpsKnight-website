@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { Menu, X, Github } from "lucide-react";
 import { BRAND } from "@/lib/brand";
+import { BrandLockup } from "@/components/brand/BrandLockup";
 
 const navItems = [
   { label: "Product", href: "/#product-tour" },
@@ -20,23 +20,13 @@ export function Navbar() {
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 border-b border-slate-800 bg-[#0f172a]">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-[#2563eb] via-[#2563eb]/40 to-transparent"
+        aria-hidden
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
-          >
-            <Image
-              src={BRAND.assets.logo}
-              alt=""
-              width={28}
-              height={28}
-              className="h-7 w-7 object-contain"
-            />
-            <span className="text-[15px] font-semibold tracking-tight text-white">
-              {BRAND.name}
-            </span>
-          </Link>
+          <BrandLockup size={28} />
 
           <div className="hidden items-center gap-0.5 md:flex">
             {navItems.map((item) => (
@@ -61,8 +51,8 @@ export function Navbar() {
               GitHub
             </Link>
             <Link
-              href={BRAND.links.docs}
-              className="inline-flex h-8 items-center justify-center rounded-[10px] bg-slate-800 hover:bg-slate-700 text-white border border-slate-700/80 px-3.5 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a] transition-colors"
+              href="/install"
+              className="inline-flex h-8 items-center justify-center rounded-[10px] bg-[#2563eb] px-3.5 text-xs font-semibold text-white transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
             >
               Install
             </Link>
@@ -102,11 +92,11 @@ export function Navbar() {
                 GitHub
               </Link>
               <Link
-                href={BRAND.links.docs}
+                href="/install"
                 className="mx-3 mt-2 inline-flex h-10 items-center justify-center rounded-[10px] bg-[#2563eb] text-sm font-semibold text-white"
                 onClick={() => setIsOpen(false)}
               >
-              Install
+                Install
               </Link>
             </div>
           </div>

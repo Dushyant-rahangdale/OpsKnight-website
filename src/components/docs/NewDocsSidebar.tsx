@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   BookOpen,
@@ -35,6 +34,7 @@ import { DocsSearch } from "@/components/docs/DocsSearch";
 import { pathsMatch } from "@/lib/docs/paths";
 import { cn } from "@/lib/utils";
 import { BRAND } from "@/lib/brand";
+import { BrandLockup } from "@/components/brand/BrandLockup";
 import type { DocsVersion } from "@/lib/docs/types";
 
 const SECTION_ICONS: Record<string, React.ElementType> = {
@@ -289,23 +289,7 @@ export function NewDocsSidebar({
   return (
     <Sidebar className="border-r border-white/10 [&_[data-sidebar=sidebar]]:!bg-[#0f172a]">
       <SidebarHeader className="shrink-0 border-b border-white/10 pb-3">
-        <Link href="/" className="flex items-center gap-3 px-2 pt-1">
-          <Image
-            src="/logo-mark.png"
-            alt=""
-            width={32}
-            height={32}
-            className="h-8 w-8 object-contain"
-          />
-          <div className="flex min-w-0 flex-col leading-none">
-            <span className="truncate text-sm font-semibold text-white">
-              {BRAND.name}
-            </span>
-            <span className="mt-1 font-mono text-[11px] tracking-wide text-slate-400">
-              Documentation
-            </span>
-          </div>
-        </Link>
+        <BrandLockup href="/" size={32} subtitle="Documentation" className="px-2 pt-1" />
         <div className="mt-3 px-1">
           <DocsVersionSwitcher currentVersion={version} versions={versions} />
         </div>

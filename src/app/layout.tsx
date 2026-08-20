@@ -10,11 +10,6 @@ const baseUrl = `https://${BRAND.domain}`;
 const mergedKeywords = Array.from(
   new Set([...(BRAND.keywords || []), ...(BRAND.seo.keywords || [])])
 );
-const twitterHandle =
-  BRAND.links.twitter?.includes("twitter.com/")
-    ? `@${BRAND.links.twitter.split("twitter.com/")[1]?.replace(/\/.*/, "")}`
-    : undefined;
-
 const structuredData = [
   {
     "@context": "https://schema.org",
@@ -22,7 +17,7 @@ const structuredData = [
     name: BRAND.name,
     url: baseUrl,
     logo: `${baseUrl}${BRAND.assets.logo}`,
-    sameAs: [BRAND.links.github, BRAND.links.twitter].filter(Boolean),
+    sameAs: [BRAND.links.github],
   },
   {
     "@context": "https://schema.org",
@@ -60,7 +55,6 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  // ... (unchanged)
   title: {
     default: BRAND.seo.title,
     template: `%s | ${BRAND.name}`,
@@ -83,10 +77,10 @@ export const metadata: Metadata = {
     siteName: BRAND.name,
     images: [
       {
-        url: BRAND.assets.banner,
-        width: 1200,
-        height: 630,
-        alt: `${BRAND.name} - ${BRAND.tagline}`,
+        url: BRAND.assets.og,
+        width: 1536,
+        height: 1024,
+        alt: `${BRAND.name} — ${BRAND.tagline}`,
       },
     ],
     type: "website",
@@ -95,16 +89,17 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: BRAND.seo.title,
     description: BRAND.seo.description,
-    images: [BRAND.assets.banner],
-    site: twitterHandle,
-    creator: twitterHandle,
+    images: [BRAND.assets.og],
+    creator: BRAND.authors[0]?.twitter
+      ? `@${BRAND.authors[0].twitter.split("twitter.com/")[1]?.replace(/\/.*/, "")}`
+      : undefined,
   },
   icons: {
     icon: [
-      { url: '/logo.svg', type: 'image/svg+xml' },
-      { url: '/logo.png', type: 'image/png' },
+      { url: "/brand/mark.svg", type: "image/svg+xml" },
+      { url: "/logo-mark.png", type: "image/png" },
     ],
-    apple: '/logo.png', // Fallback to logo.png as explicit apple icon might be missing
+    apple: "/logo-mark.png",
   },
   metadataBase: new URL(baseUrl),
 };

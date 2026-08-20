@@ -22,7 +22,6 @@ export const BRAND = {
     github: "https://github.com/opsknight-labs/OpsKnight",
     sponsor: "https://github.com/sponsors/dushyant-rahangdale",
     docs: "/docs/latest/",
-    twitter: "https://twitter.com/opsknight",
     email: "help@opsknight.com",
     status: "https://status.opsknight.com",
     issues: "https://github.com/opsknight-labs/OpsKnight/issues",
@@ -36,9 +35,11 @@ export const BRAND = {
   },
 
   assets: {
-    logo: "/logo-mark.png",
-    logoSvg: "/logo.svg",
-    banner: "/banner.png",
+    logo: "/brand/mark.svg",
+    logoSvg: "/brand/mark.svg",
+    logoOnLight: "/brand/mark-on-light.svg",
+    og: "/og.png",
+    banner: "/og.png",
     dashboard: "/dashboard-command-center.png",
     dashboardWide: "/dashboard-command-center-1200.jpg",
   },

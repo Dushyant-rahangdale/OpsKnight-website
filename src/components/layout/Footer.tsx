@@ -1,20 +1,23 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Github, Mail, Heart } from "lucide-react";
 import { BRAND } from "@/lib/brand";
+import { BrandLockup } from "@/components/brand/BrandLockup";
 
 const footerLinks = {
   product: [
     { label: "Product", href: "/#product-tour" },
     { label: "Integrations", href: "/integrations" },
-    { label: "Changelog", href: "/changelog" },
+    { label: "Use cases", href: "/use-cases" },
     { label: "Compare", href: "/compare" },
+    { label: "Changelog", href: "/changelog" },
     { label: "Status demo", href: BRAND.links.status },
   ],
   resources: [
+    { label: "Install", href: "/install" },
     { label: "Documentation", href: BRAND.links.docs },
     { label: "Quickstart", href: "/docs/latest/getting-started/" },
     { label: "Helm charts", href: BRAND.links.helmCharts },
+    { label: "Brand", href: "/brand" },
   ],
   community: [
     { label: "Community", href: "/contact" },
@@ -33,23 +36,18 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-800 bg-[#0f172a] pt-16 pb-10">
+    <footer className="relative border-t border-slate-800 bg-[#0f172a] pt-16 pb-10">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-[#2563eb] via-[#2563eb]/30 to-transparent"
+        aria-hidden
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-6 lg:gap-8">
           <div className="lg:col-span-2">
-            <Link href="/" className="mb-5 inline-flex items-center gap-2.5">
-              <Image
-                src={BRAND.assets.logo}
-                alt=""
-                width={28}
-                height={28}
-                className="h-7 w-7 object-contain"
-              />
-              <span className="text-base font-semibold text-white">{BRAND.name}</span>
-            </Link>
-            <p className="mb-6 max-w-sm text-sm leading-relaxed text-slate-400">
-              Self-hosted incident command center. On-call, paging, war rooms, and
-              status pages on your infrastructure.
+            <BrandLockup size={28} className="mb-5" />
+            <p className="mb-3 max-w-sm text-sm leading-relaxed text-slate-400">
+              The desk that holds the watch. On-call, paging, war rooms, and
+              status pages on infrastructure you run.
             </p>
             <p className="mb-6 font-mono text-xs text-slate-500">
               {BRAND.license} · {BRAND.version} · {BRAND.integrationCountLabel} integrations

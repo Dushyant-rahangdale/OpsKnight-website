@@ -28,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
-    ...["/changelog", "/integrations", "/about", "/privacy", "/terms", "/compare/pagerduty", "/compare/opsgenie", "/compare/squadcast", "/compare/incident-io", "/compare/grafana-oncall"].map((route) => ({
+    ...["/changelog", "/integrations", "/about", "/privacy", "/terms", "/install", "/brand", "/use-cases", "/compare/pagerduty", "/compare/opsgenie", "/compare/squadcast", "/compare/incident-io", "/compare/grafana-oncall"].map((route) => ({
       url: `${baseUrl}${route}`,
       lastModified,
       changeFrequency: "monthly" as const,

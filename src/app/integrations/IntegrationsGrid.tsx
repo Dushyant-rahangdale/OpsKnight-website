@@ -565,19 +565,21 @@ export default function IntegrationsGrid() {
               Drop-In Migration Endpoint
             </div>
             <h3 className="text-lg font-bold text-slate-900">
-              Migrate from PagerDuty in 60 seconds with zero tool reconfiguration
+              Keep Events API v2 payloads. Change the destination URL.
             </h3>
             <p className="text-xs text-slate-600 max-w-2xl mt-1">
-              OpsKnight implements the standard <strong>PagerDuty Events API v2 (<code className="text-blue-600 font-mono">/api/v2/enqueue</code>)</strong>. Point Datadog, Prometheus, or Grafana alerts directly to your OpsKnight server and incidents triage immediately.
+              OpsKnight accepts PagerDuty Events API v2 ingest at{" "}
+              <code className="text-blue-600 font-mono">/api/integrations/pagerduty/v2/enqueue</code>.
+              That is an adapter — not a PagerDuty clone of the whole product.
             </p>
           </div>
         </div>
 
         <Link
-          href="/compare/pagerduty"
+          href={withTrailingSlash("/docs/v1.3/integrations/custom/pagerduty-emulation/")}
           className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-blue-600/20"
         >
-          Explore Migration
+          Events API v2 setup
           <ArrowRight className="w-4 h-4" />
         </Link>
       </div>

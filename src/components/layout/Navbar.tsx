@@ -12,7 +12,7 @@ const navItems = [
   { label: "Compare", href: "/compare" },
   { label: "Changelog", href: "/changelog" },
   { label: "Docs", href: BRAND.links.docs },
-  { label: "Contact", href: "/contact" },
+  { label: "Community", href: "/contact" },
 ];
 
 export function Navbar() {

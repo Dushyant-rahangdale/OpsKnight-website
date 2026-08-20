@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
@@ -34,9 +35,12 @@ export default function PrivacyPage() {
             for aggregate traffic. It is not used to profile individuals across
             the web.
           </p>
-          <h2 className="pt-2 text-2xl font-semibold text-[#111827]">Contact</h2>
+          <h2 className="pt-2 text-2xl font-semibold text-[#111827]">Questions</h2>
           <p>
-            Questions: {BRAND.links.email} or the GitHub repository.
+            <Link href="/contact" className="text-[#2563eb] hover:underline">
+              Community
+            </Link>
+            , {BRAND.links.email}, or the GitHub repository.
           </p>
         </div>
       </div>

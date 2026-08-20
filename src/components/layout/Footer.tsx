@@ -17,7 +17,7 @@ const footerLinks = {
     { label: "Helm charts", href: BRAND.links.helmCharts },
   ],
   community: [
-    { label: "Contact", href: "/contact" },
+    { label: "Community", href: "/contact" },
     { label: "GitHub Discussions", href: BRAND.links.discussions },
     { label: "Issues", href: BRAND.links.issues },
     { label: "Contributing", href: BRAND.links.contributing },

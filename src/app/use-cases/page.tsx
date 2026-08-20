@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
+import { latestDocsHref } from "@/lib/docs/paths";
 
 const title = "Use cases";
 const description =
@@ -17,7 +18,7 @@ const cases = [
   {
     title: "Incident data stays on your network",
     body: "Rotations, timelines, and postmortems live in your Postgres. That matters when the systems you page about are not allowed to ship their outages to a third-party SaaS.",
-    href: "/docs/latest/security/",
+    href: latestDocsHref("security"),
     cta: "Security model",
   },
   {
@@ -29,7 +30,7 @@ const cases = [
   {
     title: "Slack you already run",
     body: "War rooms and ChatOps are outbound Slack you configure. Teams and Google Chat are outgoing webhooks. There is no native voice channel in this release.",
-    href: "/docs/latest/integrations/communication/slack-chatops/",
+    href: latestDocsHref("integrations/communication/slack-chatops"),
     cta: "Slack ChatOps",
   },
 ];

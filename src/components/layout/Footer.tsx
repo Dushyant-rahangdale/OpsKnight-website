@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Github, Mail, Heart } from "lucide-react";
 import { BRAND } from "@/lib/brand";
+import { latestDocsHref } from "@/lib/docs/paths";
 import { BrandLockup } from "@/components/brand/BrandLockup";
 
 const footerLinks = {
@@ -15,7 +16,7 @@ const footerLinks = {
   resources: [
     { label: "Install", href: "/install" },
     { label: "Documentation", href: BRAND.links.docs },
-    { label: "Quickstart", href: "/docs/latest/getting-started/" },
+    { label: "Quickstart", href: latestDocsHref("getting-started") },
     { label: "Helm charts", href: BRAND.links.helmCharts },
     { label: "Brand", href: "/brand" },
   ],

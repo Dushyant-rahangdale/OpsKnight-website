@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { BRAND } from '@/lib/brand';
+import { latestDocsHref } from '@/lib/docs/paths';
 import IntegrationsGrid from './IntegrationsGrid';
 import { Blocks, ShieldCheck, Webhook } from 'lucide-react';
 import Link from 'next/link';
@@ -61,7 +62,7 @@ export default function IntegrationsPage() {
 
               <div className="pt-2">
                 <Link
-                  href="/docs/v1.3/integrations/custom/webhooks/"
+                  href={latestDocsHref("integrations/custom/webhooks")}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#d21a1b] hover:bg-[#b41516] text-white text-xs font-bold transition-all shadow-md shadow-red-700/20"
                 >
                   Read Custom Webhook Documentation

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 import { CopyBlock } from "@/components/brand/CopyBlock";
+import { latestDocsHref } from "@/lib/docs/paths";
 
 const title = "Install OpsKnight";
 const description =
@@ -83,7 +84,7 @@ docker compose up -d`}
             <CopyBlock label="helm" value={BRAND.deploy.helm} />
             <p className="mt-3">
               <Link
-                href="/docs/latest/deployment/helm/"
+                href={latestDocsHref("deployment/helm")}
                 className="text-sm font-semibold text-[#d21a1b] hover:underline"
               >
                 Helm deployment docs
@@ -97,7 +98,7 @@ docker compose up -d`}
               There is no OpsKnight Cloud signup. Native voice paging is not in
               this release. SAML is not in this release (local accounts and OIDC
               are). After install, the canonical reference is the{" "}
-              <Link href="/docs/latest/getting-started/installation/" className="font-medium text-[#111827] underline">
+              <Link href={latestDocsHref("getting-started/installation")} className="font-medium text-[#111827] underline">
                 installation guide
               </Link>
               .

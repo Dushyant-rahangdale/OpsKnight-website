@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Activity, Calendar, MessageSquare, ShieldCheck, BarChart3, Check } from "lucide-react";
 import { BRAND } from "@/lib/brand";
+import { latestDocsHref } from "@/lib/docs/paths";
 
 type TourTab = {
   id: string;
@@ -59,7 +60,7 @@ const TOUR_TABS: TourTab[] = [
   {
     id: "escalation",
     name: "Escalation",
-    image: "/docs/v1.3/assets/escalation-policies.png",
+    image: latestDocsHref("assets/escalation-policies.png"),
     heading: "If they miss it, the next person is paged.",
     description:
       "Steps with delays. Email, SMS, push, Slack, WhatsApp, or a webhook. No phone calls from OpsKnight itself.",

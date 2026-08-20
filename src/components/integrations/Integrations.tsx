@@ -2,20 +2,21 @@
 
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
+import { latestDocsHref } from "@/lib/docs/paths";
 import { integrationIcons } from "@/components/icons/IntegrationIcons";
 import { ArrowRight } from "lucide-react";
 
 const logos = [
-  { name: "Datadog", icon: integrationIcons.datadog, href: "/docs/v1.3/integrations/apm-monitoring/datadog/" },
-  { name: "Prometheus", icon: integrationIcons.prometheus, href: "/docs/v1.3/integrations/metrics-alerting/prometheus/" },
-  { name: "Grafana", icon: integrationIcons.grafana, href: "/docs/v1.3/integrations/apm-monitoring/grafana/" },
-  { name: "Sentry", icon: integrationIcons.sentry, href: "/docs/v1.3/integrations/apm-monitoring/sentry/" },
-  { name: "CloudWatch", icon: integrationIcons.cloudwatch, href: "/docs/v1.3/integrations/cloud/aws-cloudwatch/" },
-  { name: "New Relic", icon: integrationIcons.newrelic, href: "/docs/v1.3/integrations/apm-monitoring/new-relic/" },
-  { name: "Slack", icon: integrationIcons.slack, href: "/docs/v1.3/integrations/communication/slack/" },
-  { name: "PagerDuty Events API v2", icon: integrationIcons.pagerduty, href: "/docs/v1.3/integrations/custom/pagerduty-emulation/" },
-  { name: "Jira Cloud", icon: integrationIcons.jira, href: "/docs/v1.3/integrations/issue-tracking/jira/" },
-  { name: "GitHub", icon: integrationIcons.github, href: "/docs/v1.3/integrations/ci-cd/github/" },
+  { name: "Datadog", icon: integrationIcons.datadog, href: latestDocsHref("integrations/apm-monitoring/datadog") },
+  { name: "Prometheus", icon: integrationIcons.prometheus, href: latestDocsHref("integrations/metrics-alerting/prometheus") },
+  { name: "Grafana", icon: integrationIcons.grafana, href: latestDocsHref("integrations/apm-monitoring/grafana") },
+  { name: "Sentry", icon: integrationIcons.sentry, href: latestDocsHref("integrations/apm-monitoring/sentry") },
+  { name: "CloudWatch", icon: integrationIcons.cloudwatch, href: latestDocsHref("integrations/cloud/aws-cloudwatch") },
+  { name: "New Relic", icon: integrationIcons.newrelic, href: latestDocsHref("integrations/apm-monitoring/new-relic") },
+  { name: "Slack", icon: integrationIcons.slack, href: latestDocsHref("integrations/communication/slack") },
+  { name: "PagerDuty Events API v2", icon: integrationIcons.pagerduty, href: latestDocsHref("integrations/custom/pagerduty-emulation") },
+  { name: "Jira Cloud", icon: integrationIcons.jira, href: latestDocsHref("integrations/issue-tracking/jira") },
+  { name: "GitHub", icon: integrationIcons.github, href: latestDocsHref("integrations/ci-cd/github") },
 ];
 
 export function Integrations() {

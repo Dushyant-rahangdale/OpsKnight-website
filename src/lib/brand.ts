@@ -2,9 +2,14 @@
  * OpsKnight brand — single source of truth for marketing copy, SEO, and deploy facts.
  */
 
+import { latestDocsHref } from "@/lib/docs/paths";
+
+/** Bump this when you ship. Footer/about use it. Docs URLs use latestDocsHref, not this. */
+const PRODUCT_VERSION = "1.3.1";
+
 export const BRAND = {
   name: "OpsKnight",
-  version: "1.3.1",
+  version: PRODUCT_VERSION,
   tagline: "Self-hosted on-call & incident response",
   description:
     "Self-hosted incident command center: on-call rotations, paging, Slack war rooms, status pages, and MTTA/MTTR — on your infrastructure.",
@@ -16,12 +21,12 @@ export const BRAND = {
   stack: "Next.js 15, React 19, Prisma, Postgres, Docker Compose / Helm",
 
   status: "Accepting Contributions",
-  statusMessage: "v1.3.1",
+  statusMessage: `v${PRODUCT_VERSION}`,
 
   links: {
     github: "https://github.com/opsknight-labs/OpsKnight",
     sponsor: "https://github.com/sponsors/dushyant-rahangdale",
-    docs: "/docs/latest/",
+    docs: latestDocsHref(),
     email: "help@opsknight.com",
     status: "https://status.opsknight.com",
     issues: "https://github.com/opsknight-labs/OpsKnight/issues",

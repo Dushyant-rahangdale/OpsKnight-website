@@ -324,16 +324,16 @@ export const COMPARE_SECTIONS: CompareSection[] = [
         },
       },
       {
-        feature: "PagerDuty Events API v2 drop-in",
+        feature: "PagerDuty Events API v2 ingest",
         source: "OpsKnight docs: POST /api/integrations/pagerduty/v2/enqueue. PD: events.pagerduty.com/v2/enqueue. Others ingest their own formats or run a migrator.",
         values: {
           opsknight: "Yes — ingest adapter (routing_key payload). Not a PD clone",
           pagerduty: "Native Events API v2",
-          incidentio: "No drop-in enqueue. Can sit alongside PD or replace it",
-          opsgenie: "Own API / migrators — not Events API v2 drop-in",
+          incidentio: "No Events API v2 ingest adapter. Can sit alongside PD or replace it",
+          opsgenie: "Own API / migrators — not Events API v2 ingest",
           squadcast: "Migrator tool; incoming webhooks use Squadcast JSON, not PD enqueue",
-          splunk: "Own REST / integrations — not Events API v2 drop-in",
-          grafana: "Migrators from PD exist; IRM ingest is not PD /v2/enqueue drop-in",
+          splunk: "Own REST / integrations — not Events API v2 ingest",
+          grafana: "Migrators from PD exist; IRM ingest is not PD /v2/enqueue",
         },
       },
       {
@@ -433,7 +433,7 @@ export const HONEST_BLURB: Record<string, { title: string; body: string }> = {
   },
   squadcast: {
     title: "Squadcast",
-    body: "SolarWinds Incident Response (Squadcast): per-user SaaS with voice, Slack/Teams apps, and status pages from Premium. Incoming alerts use Squadcast webhooks, not PagerDuty Events API v2 drop-in. OpsKnight is self-hosted with no seat meter.",
+    body: "SolarWinds Incident Response (Squadcast): per-user SaaS with voice, Slack/Teams apps, and status pages from Premium. Incoming alerts use Squadcast webhooks, not PagerDuty Events API v2 ingest. OpsKnight is self-hosted with no seat meter.",
   },
   splunk: {
     title: "Splunk On-Call",

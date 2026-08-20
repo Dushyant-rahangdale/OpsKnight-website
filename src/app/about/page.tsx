@@ -5,7 +5,7 @@ import { BRAND } from "@/lib/brand";
 export const metadata: Metadata = {
   title: "About OpsKnight",
   description:
-    "OpsKnight is a self-hosted incident command center — an open-source PagerDuty and OpsGenie alternative.",
+    "OpsKnight is a self-hosted incident command center. Other product names are used only to identify them. OpsKnight is not affiliated with PagerDuty or Atlassian.",
 };
 
 export default function AboutPage() {

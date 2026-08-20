@@ -111,7 +111,8 @@ export function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-3 border-t border-slate-800 pt-8 md:flex-row">
           <p className="text-sm text-slate-500">
-            © {new Date().getFullYear()} {BRAND.name}. {BRAND.license}.
+            © {new Date().getFullYear()} {BRAND.name}. {BRAND.license}. Other
+            product names are trademarks of their owners. No affiliation.
           </p>
           <a
             href={BRAND.links.status}

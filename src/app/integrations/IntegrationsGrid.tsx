@@ -487,9 +487,9 @@ const allIntegrations: IntegrationItem[] = [
     name: 'PagerDuty Events API v2',
     category: 'ChatOps & Collaboration',
     iconKey: 'pagerduty',
-    desc: 'Drop-in replacement for /v2/enqueue. Point existing PagerDuty webhooks to OpsKnight with 0 code changes.',
+    desc: 'Ingest adapter for Events API v2 payloads. Change the destination URL. Not a PagerDuty product and not a guarantee of every vendor integration.',
     docPath: '/docs/v1.3/integrations/custom/pagerduty-emulation/',
-    protocol: 'Drop-in API v2',
+    protocol: 'Events API v2 ingest',
     webhookSlug: 'pagerduty-v2',
     samplePayload: {
       routing_key: 'YOUR_INTEGRATION_KEY',
@@ -553,7 +553,7 @@ export default function IntegrationsGrid() {
   return (
     <div className="space-y-12">
       
-      {/* PagerDuty Drop-in Emulation Banner */}
+      {/* Events API v2 ingest banner */}
       <div className="p-6 sm:p-8 rounded-3xl bg-white border border-blue-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 p-2 shrink-0 flex items-center justify-center shadow-inner">

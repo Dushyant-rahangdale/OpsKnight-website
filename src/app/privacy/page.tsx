@@ -14,26 +14,35 @@ export default function PrivacyPage() {
         <h1 className="text-4xl font-semibold tracking-tight text-[#111827]">
           Privacy Policy
         </h1>
-        <p className="mt-4 text-sm text-slate-500">Last updated: August 18, 2026</p>
+        <p className="mt-4 text-sm text-slate-500">Last updated: August 20, 2026</p>
         <div className="mt-8 space-y-6 text-base leading-relaxed text-[#4b5563]">
           <p>
-            This policy covers the public website at {BRAND.domain}. It does not
-            cover data inside a self-hosted OpsKnight instance.
+            Operator of this website: {BRAND.authors[0].name} ({BRAND.links.email}
+            ). This policy covers {BRAND.domain} only. It does not cover data
+            inside a self-hosted OpsKnight instance — that data stays on the
+            machines of whoever runs the software.
           </p>
           <h2 className="pt-2 text-2xl font-semibold text-[#111827]">
             Self-hosted product
           </h2>
           <p>
             When you run OpsKnight, incident data, schedules, and users stay on
-            your infrastructure. The project maintainers cannot see that data.
+            your infrastructure. Project maintainers cannot see that data. There
+            is no OpsKnight-hosted cloud that stores your incidents.
           </p>
           <h2 className="pt-2 text-2xl font-semibold text-[#111827]">
             This website
           </h2>
           <p>
-            The marketing site may use privacy-respecting analytics (Cloudflare)
-            for aggregate traffic. It is not used to profile individuals across
-            the web.
+            The site source does not load a third-party analytics or advertising
+            pixel. Pages are served via Cloudflare Pages. Cloudflare, as CDN,
+            may process request metadata (IP address, user agent, URL) under
+            their terms to deliver and protect the site. We do not sell that
+            data.
+          </p>
+          <p>
+            If you email {BRAND.links.email} or open a GitHub issue, GitHub or
+            your mail provider process that message under their policies.
           </p>
           <h2 className="pt-2 text-2xl font-semibold text-[#111827]">Questions</h2>
           <p>

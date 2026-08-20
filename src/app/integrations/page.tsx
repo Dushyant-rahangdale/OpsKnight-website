@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { BRAND } from '@/lib/brand';
 import IntegrationsGrid from './IntegrationsGrid';
-import { Blocks, ShieldCheck, Terminal, Webhook } from 'lucide-react';
+import { Blocks, ShieldCheck, Webhook } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -52,10 +52,6 @@ export default function IntegrationsPage() {
                 <div className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
                   HMAC-SHA256 Signed
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Terminal className="w-4 h-4 text-blue-600" />
-                  Sub-15ms Ingestion
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Blocks className="w-4 h-4 text-slate-700" />

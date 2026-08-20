@@ -3,7 +3,7 @@ import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: `Terms of Service for ${BRAND.name}.`,
+  description: `Terms for the ${BRAND.name} website. The software is licensed under Apache-2.0.`,
 };
 
 export default function TermsPage() {
@@ -13,36 +13,45 @@ export default function TermsPage() {
         <h1 className="text-4xl font-semibold tracking-tight text-[#111827]">
           Terms of Service
         </h1>
-        <p className="mt-4 text-sm text-slate-500">Last updated: August 18, 2026</p>
+        <p className="mt-4 text-sm text-slate-500">Last updated: August 20, 2026</p>
         <div className="mt-8 space-y-6 text-base leading-relaxed text-[#4b5563]">
           <p>
-            These terms cover the OpsKnight website. Use of the software is
-            governed by the {BRAND.license} license in the source repository.
+            These terms cover the public website at {BRAND.domain}. Downloading
+            or running the OpsKnight software is governed only by the{" "}
+            <a
+              href={BRAND.links.license}
+              className="text-[#2563eb] hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Apache License 2.0
+            </a>{" "}
+            in the source repository — not by a separate commercial EULA.
           </p>
           <h2 className="pt-2 text-2xl font-semibold text-[#111827]">
-            {BRAND.license} License
+            Apache License 2.0
           </h2>
           <p>
-            OpsKnight is open-source software distributed under the Apache
-            License, Version 2.0. By downloading or running the software, you
-            agree to that license. The full text is in the repository LICENSE
-            file.
+            Copyright notices, patent grant, redistribution conditions, and the
+            disclaimer of warranty and limitation of liability are those in
+            Apache License 2.0, including Sections 7 (Disclaimer of Warranty)
+            and 8 (Limitation of Liability). We do not add a MIT-style license
+            on top of that.
           </p>
-          <h2 className="pt-2 text-2xl font-semibold text-[#111827]">No warranty</h2>
+          <h2 className="pt-2 text-2xl font-semibold text-[#111827]">
+            Website
+          </h2>
           <p>
-            THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
-            EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-            MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-            NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
-            BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
-            ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-            CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-            SOFTWARE.
+            The marketing site is provided as-is. There is no support SLA.
+            Trademarks of other companies (including PagerDuty, Slack, and
+            Grafana) belong to their owners. OpsKnight is not affiliated with
+            them. Names and marks appear only to identify products we compare
+            or ingest from.
           </p>
           <h2 className="pt-2 text-2xl font-semibold text-[#111827]">Changes</h2>
           <p>
-            We may update these terms. We will try to give at least 30 days’
-            notice before material changes take effect.
+            We may update these terms. Material changes will be dated at the
+            top of this page.
           </p>
         </div>
       </div>

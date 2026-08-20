@@ -46,7 +46,7 @@ export const BRAND = {
   seo: {
     title: "OpsKnight | Self-hosted on-call & incident response",
     description:
-      "Self-hosted incident command center for on-call, paging, Slack war rooms, status pages, and SLA analytics. Unlimited users. Apache-2.0. PagerDuty Events API v2 drop-in.",
+      "Self-hosted incident command center for on-call, paging, Slack war rooms, status pages, and SLA analytics. Unlimited users. Apache-2.0. PagerDuty Events API v2 ingest adapter.",
     keywords: [
       "incident management",
       "on-call",

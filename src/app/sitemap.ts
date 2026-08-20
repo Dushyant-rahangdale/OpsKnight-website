@@ -28,11 +28,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    ...["/changelog", "/integrations", "/about", "/privacy", "/terms", "/install", "/brand", "/use-cases", "/compare/pagerduty", "/compare/opsgenie", "/compare/squadcast", "/compare/incident-io", "/compare/grafana-oncall"].map((route) => ({
+      url: `${baseUrl}${route}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
   ];
 
   for (const version of DOC_VERSIONS) {
     routes.push({
-      url: `${baseUrl}/docs/${version.id}`,
+      url: `${baseUrl}/docs/${version.id}/`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.8,
@@ -42,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const slug of slugs) {
       if (slug.length === 0) continue;
       routes.push({
-        url: `${baseUrl}/docs/${version.id}/${slug.join("/")}`,
+        url: `${baseUrl}/docs/${version.id}/${slug.join("/")}/`,
         lastModified,
         changeFrequency: "monthly",
         priority: 0.6,

@@ -1,0 +1,43 @@
+import Link from "next/link";
+import Image from "next/image";
+import { BRAND } from "@/lib/brand";
+
+type BrandLockupProps = {
+  href?: string;
+  size?: number;
+  subtitle?: string;
+  className?: string;
+};
+
+export function BrandLockup({
+  href = "/",
+  size = 28,
+  subtitle,
+  className = "",
+}: BrandLockupProps) {
+  return (
+    <Link
+      href={href}
+      className={`inline-flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b] ${className}`}
+    >
+      <Image
+        src={BRAND.assets.logo}
+        alt=""
+        width={size}
+        height={size}
+        className="object-contain"
+        style={{ width: size, height: size }}
+      />
+      <span className="flex min-w-0 flex-col leading-none">
+        <span className="truncate text-[15px] font-semibold tracking-tight text-white">
+          {BRAND.name}
+        </span>
+        {subtitle ? (
+          <span className="mt-1 font-mono text-[11px] tracking-wide text-slate-400">
+            {subtitle}
+          </span>
+        ) : null}
+      </span>
+    </Link>
+  );
+}

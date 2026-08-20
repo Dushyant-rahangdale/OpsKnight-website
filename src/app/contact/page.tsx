@@ -1,146 +1,161 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Mail, MessageSquare, Shield } from "lucide-react";
+import { ArrowRight, BookOpen, Github, Mail, MessageSquare, Shield } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
-const contactCards = [
-    {
-        title: "Open a GitHub issue",
-        description:
-            "Bug reports, feature requests, and technical questions are handled in the repo.",
-        href: BRAND.links.issues,
-        cta: "Create issue",
-        icon: MessageSquare,
-        tone: "from-emerald-500/30 to-emerald-500/0",
-    },
-    {
-        title: "Email support",
-        description:
-            "Reach the team directly for private questions, security concerns, or partnerships.",
-        href: `mailto:${BRAND.links.email}`,
-        cta: BRAND.links.email,
-        icon: Mail,
-        tone: "from-cyan-500/30 to-cyan-500/0",
-    },
+const paths = [
+  {
+    n: "01",
+    title: "You are installing or configuring",
+    body: "Start in the docs. Most “it doesn’t start” questions are Compose secrets or the first-boot keys.",
+    href: BRAND.links.docs,
+    cta: "Open docs",
+    icon: BookOpen,
+    external: false,
+  },
+  {
+    n: "02",
+    title: "Something is broken in the product",
+    body: "File a GitHub issue. Include Compose vs Helm, version, and logs. That is the public tracker — not a private queue.",
+    href: BRAND.links.issues,
+    cta: "Open an issue",
+    icon: Github,
+    external: true,
+  },
+  {
+    n: "03",
+    title: "You want to talk it through",
+    body: "Discussions are for how-to threads and design questions that are not a bug.",
+    href: BRAND.links.discussions,
+    cta: "Open Discussions",
+    icon: MessageSquare,
+    external: true,
+  },
 ];
 
-const containerMotion = {
-    hidden: { opacity: 0 },
-    show: {
-        opacity: 1,
-        transition: { staggerChildren: 0.08 },
-    },
-};
-
-const itemMotion = {
-    hidden: { opacity: 0, y: 16 },
-    show: { opacity: 1, y: 0 },
-};
-
 export default function ContactPage() {
-    return (
-        <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
-            <div className="absolute top-1/3 left-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]" />
-            <div className="absolute top-16 right-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-[120px]" />
-
-            <main className="relative z-10 pt-28 pb-24">
-                <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.div
-                        variants={containerMotion}
-                        initial="hidden"
-                        animate="show"
-                        className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center"
-                    >
-                        <div>
-                            <motion.span
-                                variants={itemMotion}
-                                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold mb-4"
-                            >
-                                <Shield className="w-3 h-3" />
-                                Contact OpsKnight
-                            </motion.span>
-                            <motion.h1
-                                variants={itemMotion}
-                                className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
-                            >
-                                Need help or want to collaborate?
-                            </motion.h1>
-                            <motion.p
-                                variants={itemMotion}
-                                className="text-lg sm:text-xl text-slate-300 max-w-2xl"
-                            >
-                                We handle support in GitHub issues for transparency, plus email for private requests.
-                                Choose the option that fits your request.
-                            </motion.p>
-                        </div>
-                        <motion.div
-                            variants={itemMotion}
-                            className="rounded-2xl border border-white/10 bg-slate-900/60 p-6"
-                        >
-                            <h2 className="text-lg font-semibold mb-4">Support checklist</h2>
-                            <ul className="space-y-3 text-sm text-slate-300">
-                                <li>Share your deployment type (Docker, Kubernetes, or PWA).</li>
-                                <li>Include logs or screenshots when possible.</li>
-                                <li>Tell us your expected behavior and what happened.</li>
-                            </ul>
-                        </motion.div>
-                    </motion.div>
-                </section>
-
-                <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-                    <div className="grid gap-6 md:grid-cols-2">
-                        {contactCards.map((card) => (
-                            <motion.div
-                                key={card.title}
-                                variants={itemMotion}
-                                initial="hidden"
-                                whileInView="show"
-                                viewport={{ once: true }}
-                                className="relative rounded-2xl border border-white/10 bg-slate-900/60 p-6"
-                            >
-                                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${card.tone} pointer-events-none`} />
-                                <div className="relative">
-                                    <card.icon className="w-6 h-6 text-white/70 mb-4" />
-                                    <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
-                                    <p className="text-sm text-slate-300 mb-6">{card.description}</p>
-                                    <Link
-                                        href={card.href}
-                                        target="_blank"
-                                        className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold transition-all"
-                                    >
-                                        {card.cta}
-                                        <ArrowRight className="w-4 h-4" />
-                                    </Link>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </section>
-
-                <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-                    <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 md:p-8">
-                        <div className="flex flex-wrap items-center justify-between gap-4">
-                            <div>
-                                <h2 className="text-xl font-semibold mb-2">Stay in the loop</h2>
-                                <p className="text-sm text-slate-300">
-                                    Follow development updates and releases directly in GitHub.
-                                </p>
-                            </div>
-                            <Link
-                                href={BRAND.links.github}
-                                target="_blank"
-                                className="inline-flex items-center gap-2 px-5 py-2 rounded-xl border border-white/10 bg-white/5 text-sm font-semibold text-white hover:bg-white/10 transition"
-                            >
-                                Visit GitHub
-                                <ArrowRight className="w-4 h-4" />
-                            </Link>
-                        </div>
-                    </div>
-                </section>
-            </main>
+  return (
+    <div className="min-h-screen bg-[#f8fafc]">
+      <section className="relative overflow-hidden border-b border-slate-200 pt-28 pb-16">
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <div
+            className="absolute inset-0 opacity-[0.45]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+            }}
+          />
         </div>
-    );
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(16rem,0.8fr)]">
+            <header className="max-w-2xl">
+              <p className="mb-3 font-mono text-[11px] font-medium tracking-wide text-slate-500">
+                Community · v{BRAND.version} · {BRAND.license}
+              </p>
+              <h1 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-5xl sm:leading-[1.12]">
+                The people who write OpsKnight are on GitHub. There is no ticket desk.
+              </h1>
+              <p className="mt-5 text-base leading-relaxed text-[#4b5563] sm:text-lg">
+                We named this Community on purpose. “Contact” sounds like a sales
+                form and an SLA. This project is self-hosted software — you get
+                answers in the open, or a private note when the topic should stay
+                private.
+              </p>
+            </header>
+
+            <aside className="overflow-hidden rounded-[14px] border border-slate-800 bg-[#0f172a] p-6 text-slate-200">
+              <p className="font-mono text-[11px] font-medium tracking-wide text-slate-400">
+                Private only
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                Partnerships, press, and things that should not be a public issue.
+                Not on-call coverage for your install.
+              </p>
+              <a
+                href={`mailto:${BRAND.links.email}`}
+                className="mt-5 inline-flex items-center gap-2 font-mono text-sm text-white hover:underline"
+              >
+                <Mail className="h-4 w-4 text-slate-400" />
+                {BRAND.links.email}
+              </a>
+              <Link
+                href={BRAND.links.security}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 flex items-center gap-2 text-sm text-slate-300 hover:text-white hover:underline"
+              >
+                <Shield className="h-4 w-4 text-slate-400" />
+                Security advisories — not a public bug ticket
+              </Link>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-slate-200 bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <p className="mb-3 font-mono text-[11px] font-medium tracking-wide text-slate-500">
+            Pick a door
+          </p>
+          <h2 className="text-2xl font-semibold tracking-tight text-[#111827] sm:text-3xl">
+            Three public paths. One private mailbox.
+          </h2>
+
+          <ol className="mt-10 grid gap-px overflow-hidden rounded-[14px] border border-slate-200 bg-slate-200 lg:grid-cols-3">
+            {paths.map((path) => {
+              const Icon = path.icon;
+              const className =
+                "flex h-full flex-col bg-white p-6 md:p-8 hover:bg-slate-50";
+              const inner = (
+                <>
+                  <div className="mb-6 flex items-center justify-between">
+                    <Icon className="h-5 w-5 text-[#d21a1b]" strokeWidth={1.75} />
+                    <span className="font-mono text-[11px] text-slate-400">{path.n}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-[#111827]">{path.title}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-[#4b5563]">{path.body}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#d21a1b]">
+                    {path.cta}
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
+                </>
+              );
+              return (
+                <li key={path.n} className="bg-white">
+                  {path.external ? (
+                    <a href={path.href} target="_blank" rel="noopener noreferrer" className={className}>
+                      {inner}
+                    </a>
+                  ) : (
+                    <Link href={path.href} className={className}>
+                      {inner}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+
+          <div className="mt-8 rounded-[14px] border border-slate-200 bg-[#f8fafc] p-6 md:p-8">
+            <h3 className="text-base font-semibold text-[#111827]">When you file an issue</h3>
+            <ul className="mt-4 grid gap-3 text-sm text-[#4b5563] sm:grid-cols-3">
+              <li>
+                <span className="font-mono text-[11px] text-slate-400">01 · Install</span>
+                <p className="mt-1">Compose, Helm, or Docker — and {BRAND.name} {BRAND.version} if you know it.</p>
+              </li>
+              <li>
+                <span className="font-mono text-[11px] text-slate-400">02 · Evidence</span>
+                <p className="mt-1">Logs or a screenshot. Redact secrets. Do not paste ENCRYPTION_KEY.</p>
+              </li>
+              <li>
+                <span className="font-mono text-[11px] text-slate-400">03 · Expectation</span>
+                <p className="mt-1">What you thought would happen, and what actually happened.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

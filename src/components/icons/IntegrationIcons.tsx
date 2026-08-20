@@ -1,156 +1,77 @@
-import { Mail, MessageSquare, Bell } from "lucide-react";
+import React from "react";
+import Image from "next/image";
 
-// Integration SVG icons - simple, recognizable logos
+function BrandMark({
+    src,
+    alt,
+}: {
+    src: string;
+    alt: string;
+}) {
+    return (
+        <Image
+            src={src}
+            alt={alt}
+            width={40}
+            height={40}
+            unoptimized
+            className="w-full h-full object-contain p-1"
+        />
+    );
+}
+
+/**
+ * Official vendor marks from Simple Icons, Wikimedia, and VectorLogoZone.
+ * Channel-only items (email / push / webhook) use generic glyphs, not fake brands.
+ */
 export const integrationIcons = {
-    email: <Mail className="w-full h-full" />,
-    sms: <MessageSquare className="w-full h-full" />,
-    push: <Bell className="w-full h-full" />,
-    cloudwatch: (
-        <svg viewBox="0 0 40 40" fill="currentColor" className="w-full h-full">
-            <path d="M20 4L4 12v16l16 8 16-8V12L20 4zm0 3.5l11 5.5-11 5.5-11-5.5 11-5.5z" fill="#FF9900" />
-            <path d="M20 20v12l11-5.5v-12L20 20z" fill="#FF9900" opacity="0.7" />
-            <path d="M20 20v12L9 26.5v-12L20 20z" fill="#FF9900" opacity="0.5" />
-        </svg>
+    email: (
+        <Image src="/integrations/email.svg" alt="Email" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
     ),
-    datadog: (
-        <svg viewBox="0 0 40 40" fill="currentColor" className="w-full h-full">
-            <circle cx="20" cy="20" r="16" fill="#632CA6" />
-            <path d="M28 16c-2 0-3 1-4 2l-2-1c0-2-1-3-3-3s-3 1-3 3l-2 1c-1-1-2-2-4-2-2 0-4 2-4 4s2 4 4 4c2 0 3-1 4-2l2 1c0 2 1 3 3 3s3-1 3-3l2-1c1 1 2 2 4 2 2 0 4-2 4-4s-2-4-4-4z" fill="white" />
-        </svg>
-    ),
-    prometheus: (
-        <svg viewBox="0 0 40 40" fill="currentColor" className="w-full h-full">
-            <circle cx="20" cy="20" r="16" fill="#E6522C" />
-            <path d="M20 8a12 12 0 100 24 12 12 0 000-24zm0 4a2 2 0 110 4 2 2 0 010-4zm-6 4a2 2 0 110 4 2 2 0 010-4zm12 0a2 2 0 110 4 2 2 0 010-4zm-6 6a2 2 0 110 4 2 2 0 010-4z" fill="white" />
-        </svg>
-    ),
-    grafana: (
-        <svg viewBox="0 0 40 40" fill="currentColor" className="w-full h-full">
-            <circle cx="20" cy="20" r="16" fill="#F46800" />
-            <circle cx="20" cy="20" r="8" fill="white" />
-            <circle cx="20" cy="20" r="4" fill="#F46800" />
-        </svg>
-    ),
-    sentry: (
-        <svg viewBox="0 0 40 40" fill="currentColor" className="w-full h-full">
-            <circle cx="20" cy="20" r="16" fill="#362D59" />
-            <path d="M20 10c-5.5 0-10 4.5-10 10h4c0-3.3 2.7-6 6-6s6 2.7 6 6h4c0-5.5-4.5-10-10-10z" fill="#FB4226" />
-        </svg>
-    ),
-    newrelic: (
-        <svg viewBox="0 0 40 40" fill="currentColor" className="w-full h-full">
-            <rect x="4" y="4" width="32" height="32" rx="4" fill="#00AC69" />
-            <path d="M20 12l-8 4.5v9L20 30l8-4.5v-9L20 12z" fill="white" />
-        </svg>
-    ),
-    github: (
-        <svg viewBox="0 0 40 40" fill="currentColor" className="w-full h-full">
-            <circle cx="20" cy="20" r="16" fill="#24292E" />
-            <path d="M20 8a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0020 8z" fill="white" />
-        </svg>
-    ),
-    azure: (
-        <svg viewBox="0 0 40 40" fill="currentColor" className="w-full h-full">
-            <rect x="4" y="4" width="32" height="32" rx="4" fill="#0078D4" />
-            <path d="M13 28l7-20h4l-11 20h-4zm9-8l5 8h8l-8-12-5 4z" fill="white" />
-        </svg>
+    sms: <BrandMark src="/integrations/twilio.svg" alt="Twilio SMS" />,
+    push: (
+        <Image src="/integrations/push.svg" alt="Push notifications" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
     ),
     webhook: (
-        <svg viewBox="0 0 40 40" fill="currentColor" className="w-full h-full">
-            <rect x="4" y="4" width="32" height="32" rx="4" fill="#4A5568" />
-            <path d="M14 20h4l-2 6h4l-6 8 2-8h-4l2-6zm8 0h4l2-6h-4l6-8-2 8h4l-2 6h-4" fill="#10B981" />
-        </svg>
+        <Image src="/integrations/webhook.svg" alt="Webhooks" width={40} height={40} unoptimized className="w-full h-full object-contain p-1" />
     ),
-    googlecloud: (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="24" height="24" rx="4" fill="#4285F4" />
-            <path d="M12.19 2.38a9.344 9.344 0 0 0-9.234 6.893c.053-.02-.055.013 0 0-3.875 2.551-3.922 8.11-.247 10.941l.006-.007-.007.03a6.717 6.717 0 0 0 4.077 1.356h5.173l.03.03h5.192c6.687.053 9.376-8.605 3.835-12.35a9.365 9.365 0 0 0-2.821-4.552l-.043.043.006-.05A9.344 9.344 0 0 0 12.19 2.38zm-.358 4.146c1.244-.04 2.518.368 3.486 1.15a5.186 5.186 0 0 1 1.862 4.078v.518c3.53-.07 3.53 5.262 0 5.193h-5.193l-.008.009v-.04H6.785a2.59 2.59 0 0 1-1.067-.23h.001a2.597 2.597 0 1 1 3.437-3.437l3.013-3.012A6.747 6.747 0 0 0 8.11 8.24c.018-.01.04-.026.054-.023a5.186 5.186 0 0 1 3.67-1.69z" fill="#ffffff" />
-        </svg>
-    ),
-    splunk: (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="24" height="24" rx="4" fill="#000000" />
-            <path d="M23.348 11.911l-2.241-1.091v-.65L24 11.621v.593l-2.893 1.438v-.636zm-5.397 1.841h-.961v-5.31h.961v3.116h.102l1.28-1.481.723.31-1.23 1.316 1.453 1.809-.888.311-1.44-1.996zm-2.577-.002v-2.068a2.685 2.685 0 0 0-.026-.42.791.791 0 0 0-.09-.26c-.113-.202-.308-.304-.59-.304a.888.888 0 0 0-.461.113.673.673 0 0 0-.286.33 1.012 1.012 0 0 0-.07.263c-.012.13-.019.262-.017.395v1.95h-.961v-3.614h.961l.002.485c.185-.2.373-.348.566-.437.192-.089.418-.134.673-.134.286 0 .527.058.721.177a1.016 1.016 0 0 1 .475.665 1.972 1.972 0 0 1 .054.448c.002.1.004.22.004.358v2.053zm-4.115.002l-.002-.485a1.783 1.783 0 0 1-.565.437 1.597 1.597 0 0 1-.674.135c-.285 0-.524-.057-.72-.17a.972.972 0 0 1-.425-.504.75.75 0 0 1-.054-.167 1.918 1.918 0 0 1-.033-.199 2.033 2.033 0 0 1-.017-.258 15.516 15.516 0 0 1-.005-.355V10.13h.956v2.07c-.003.141.006.282.026.42.015.092.045.18.09.26.113.204.308.306.59.306.36 0 .606-.15.74-.449.035-.082.06-.168.074-.257.017-.134.024-.269.022-.403v-1.95h.955v3.624zM7.184 8.44h.955v5.31h-.955zM5.759 11.9c0-.396-.08-.708-.24-.937a.759.759 0 0 0-.657-.345.804.804 0 0 0-.693.366c-.171.245-.256.574-.253.99 0 .405.084.723.25.957a.796.796 0 0 0 .69.347.685.685 0 0 0 .433-.135.985.985 0 0 0 .277-.34c.071-.14.121-.292.147-.448.03-.151.043-.3.046-.455m1.01-.036c.003.266-.04.532-.129.786-.082.23-.204.441-.364.626-.31.361-.764.567-1.24.563a1.67 1.67 0 0 1-.313-.028 1.041 1.041 0 0 1-.275-.098 1.33 1.33 0 0 1-.257-.178 2.379 2.379 0 0 1-.265-.268v2.293h-.929v-5.425h.93l.004.529c.169-.212.353-.368.55-.468.197-.1.426-.15.688-.147a1.509 1.509 0 0 1 1.156.507c.148.166.259.361.33.571.08.236.12.485.115.737m-4.21.89a.946.946 0 0 1-.102.441 1.007 1.007 0 0 1-.282.345c-.13.1-.275.173-.43.22a1.8 1.8 0 0 1-.546.08 1.985 1.985 0 0 1-.637-.097 1.964 1.964 0 0 1-.563-.32l.312-.505c.15.126.284.217.405.275.115.057.24.087.368.087a.557.557 0 0 0 .373-.12.396.396 0 0 0 .14-.322.475.475 0 0 0-.12-.318 1.306 1.306 0 0 0-.187-.173 9.231 9.231 0 0 0-.308-.232 6.787 6.787 0 0 1-.281-.21 2.11 2.11 0 0 1-.252-.232 1.039 1.039 0 0 1-.18-.275.826.826 0 0 1-.069-.347.893.893 0 0 1 .094-.409.935.935 0 0 1 .255-.314 1.22 1.22 0 0 1 .39-.203c.16-.05.327-.074.494-.072.184 0 .368.026.545.076.174.05.338.123.488.219l-.282.454a1.05 1.05 0 0 0-.608-.201.504.504 0 0 0-.323.102.307.307 0 0 0-.126.253c0 .098.041.193.113.26.074.078.203.186.385.325.185.136.336.253.457.355.104.085.202.182.286.286.065.08.115.173.145.273a.808.808 0 0 1 .046.299Z" fill="#ffffff" />
-        </svg>
-    ),
-    dynatrace: (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="24" height="24" rx="4" fill="#1496FF" />
-            <path d="M9.372 0c-.31.006-.93.09-1.521.654-.872.824-5.225 4.957-6.973 6.617-.79.754-.72 1.595-.72 1.664v.377c.067-.292.187-.5.427-.825.496-.616 1.3-.788 1.627-.822a64.238 64.238 0 01.002 0 64.238 64.238 0 016.528-.55c4.335-.136 7.197.226 7.197.226l6.085-5.794s-3.188-.6-6.82-1.027a93.4 93.4 0 00-5.64-.514c-.02 0-.09-.008-.192-.006zm13.56 2.508l-6.066 5.79s.222 2.881-.137 7.2c-.189 2.45-.584 4.866-.875 6.494-.052.326-.256 1.114-.925 1.594-.29.198-.49.295-.748.363 1.546-.51 1.091-7.047 1.091-7.047-4.335.137-7.214-.223-7.214-.223l-6.085 5.793s3.223.634 6.856 1.045c2.056.24 4.833.429 5.227.463.023 0 .045-.007.068-.012-.013.003-.022.009-.035.012.138 0 .26.015.38.015.084 0 .924.105 1.712-.648 1.748-1.663 6.084-5.81 6.94-6.634.789-.754.72-1.594.72-1.68a81.846 81.846 0 00-.206-5.654 101.75 101.75 0 00-.701-6.872zM3.855 8.306c-1.73.002-3.508.208-3.696 1.021.017 1.216.05 3.137.205 5.28.24 3.65.703 6.887.703 6.887l6.083-5.79c-.017.016-.24-2.88.12-7.2 0 0-1.684-.201-3.416-.2z" fill="#ffffff" />
-        </svg>
-    ),
-    appdynamics: (
-        <svg viewBox="0 0 256 286" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="256" height="286" rx="32" fill="#00BCEB" />
-            <path d="M99.5761907,1.0658141e-13 C185.966675,1.0658141e-13 256,70.0333249 256,156.423809 C256,210.137004 228.927093,257.526983 187.682377,285.692646 L164.600102,233.270102 C186.400321,214.805223 200.239167,187.230634 200.239167,156.423809 C200.239167,100.829182 155.170818,55.7608326 99.5761907,55.7608326 C95.2460769,55.7608326 90.9798199,56.0342364 86.7937409,56.5647231 L63.7069589,4.13189484 C75.2251468,1.42947388 87.233733,1.0658141e-13 99.5761907,1.0658141e-13 Z M36.4477957,78.7305601 L114.706156,257.365346 C110.397439,257.923042 106.004013,258.210657 101.543411,258.210657 C45.4625336,258.210657 0,212.748123 0,156.667246 C0,125.357494 14.1704388,97.357425 36.4477957,78.7305601 Z" fill="#ffffff" />
-        </svg>
-    ),
-    elastic: (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="24" height="24" rx="4" fill="#005571" />
-            <path d="M20.345 16.33l-3.959-.926-1.05-2.01 5.177-4.535a3.962 3.962 0 012.559 3.702 4.006 4.006 0 01-2.727 3.77m-2.976 4.68c-.616 0-1.22-.207-1.714-.587l.782-4.077 3.596.841c.115.31.172.642.172.987a2.839 2.839 0 01-2.836 2.836m-2.637-.586a5.92 5.92 0 01-4.908 2.6A5.947 5.947 0 014 15.905l5.167-4.67 5.272 2.403 1.167 2.23zM.928 11.443a4.007 4.007 0 012.726-3.77l3.95.933.927 1.98-5.05 4.565a3.97 3.97 0 01-2.553-3.708m5.703-8.45a2.841 2.841 0 011.723.58l-.789 4.092-3.598-.85a2.842 2.842 0 01-.172-.986A2.84 2.84 0 016.63 2.992m2.66.59A5.92 5.92 0 0120.1 6.93c0 .4-.038.781-.114 1.164l-5.299 4.643-5.251-2.394-1.026-2.19zM24 12.571a4.723 4.723 0 00-3.124-4.454 6.695 6.695 0 00.126-1.29A6.789 6.789 0 0014.22.047 6.769 6.769 0 008.727 2.86a3.586 3.586 0 00-2.204-.754A3.604 3.604 0 003.15 6.959 4.786 4.786 0 000 11.431 4.727 4.727 0 003.139 15.9a6.876 6.876 0 00-.124 1.289 6.773 6.773 0 006.765 6.765c2.19 0 4.22-1.052 5.49-2.824a3.568 3.568 0 002.207.769 3.603 3.603 0 003.374-4.854A4.785 4.785 0 0024 12.572" fill="#ffffff" />
-        </svg>
-    ),
-    honeycomb: (
-        <svg viewBox="0 0 64 64" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="64" height="64" rx="10" fill="#FFB020" />
-            <path d="M13.43 32.846l4.484 7.74-4.484 7.762H4.484L0 40.587l4.484-7.74z" fill="#ffffff" />
-            <path d="M32.508 18.908l5.457 9.433-5.457 9.433h-10.87L16.18 28.34l5.457-9.433z" fill="#ffffff" />
-            <path d="M32.317 43.337l5.436 9.433-5.436 9.433H21.425l-5.457-9.433 5.457-9.433z" fill="#ffffff" />
-            <path d="M56.83 1.798L64 14.213 56.83 26.65H42.47L35.3 14.213l7.17-12.415z" fill="#ffffff" />
-        </svg>
-    ),
-    bitbucket: (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="24" height="24" rx="4" fill="#0052CC" />
-            <path d="M.778 1.213a.768.768 0 00-.768.892l3.263 19.81c.084.5.515.868 1.022.873H19.95a.772.772 0 00.77-.646l3.27-20.03a.768.768 0 00-.768-.891zM14.52 15.53H9.522L8.17 8.466h7.561z" fill="#ffffff" />
-        </svg>
-    ),
-    uptimerobot: (
-        <svg viewBox="0 0 32 32" fill="currentColor" className="w-full h-full">
-            <path d="M0 0h32v32H0V0z" fill="#EBFBF1" />
-            <path d="M22.848 18.696a7.848 7.848 0 100-15.696 7.848 7.848 0 000 15.696z" fill="#3BD671" />
-            <path d="M7.334 6v18.666H27.6V27H5V6h2.334zm17.841 3.842l1.65 1.65-6.659 6.658-3.5-3.499-5.008 5.007-1.65-1.65 6.658-6.658 3.5 3.499 5.01-5.007z" fill="#131A26" />
-        </svg>
-    ),
-    pingdom: (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="24" height="24" rx="4" fill="#FFF000" />
-            <path d="M11.96 17.804l7.959-3.396-7.049 7.241c-.124-1.315-.432-2.61-.91-3.844v-.001zM24 11.118c-5.101-.236-10.208.414-15.087 1.92 1.024 1.073 1.881 2.292 2.535 3.621 4.042-2.25 9.646-5.123 12.552-5.531v-.015.005zm-12.574.275l.207-.06c1.538-.459 3.049-1.015 4.523-1.656 1.492-.585 2.896-1.38 4.159-2.367 1.345-1.069 2.355-2.499 2.915-4.122.12-.267.211-.549.267-.837-2.024 2.76-10.041 3.048-10.041 3.048l1.89-1.734C9.84 3.684 4.47 5.424 0 8.645c3.03.322 5.877 1.596 8.139 3.634 1.086-.336 2.196-.576 3.286-.879v-.006l.001-.001z" fill="#0f172a" />
-        </svg>
-    ),
-    betterstack: (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="24" height="24" rx="4" fill="#000000" />
-            <path d="m.7792 10.7479-.7654 6.6384a2.0957 2.0957 0 0 0 .696 1.8122l1.8965 1.672c.6494.5725 1.658.0145 1.5185-.84L2.6039 10.705c-.1723-1.056-1.7022-1.02-1.8247.0429Zm12.3733 8.714L8.63 6.431c-.5023-1.4472-2.6082-1.3845-3.0203.0898l-1.376 4.9234c-.156.559-.216.8822.0005 1.4212h.5225l1.8993 6.0694c.294.7324.9017 1.3009 1.6611 1.5538l2.8315.9435c1.2417.4137 2.4268-.7513 2.004-1.97zm10.6297-1.0332L15.7907 3.4433c-.6971-1.3072-2.5779-1.2727-3.227.0589l-1.9652 3.9555c-.2375.487-.1274.6608.07.9435.1585.2268.526.2447.6758.012.147-.2287.488-.2076.6058.0375l5.1379 10.687a2.735 2.735 0 0 0 2.1416 1.6016l2.7183.3476c1.4628.1924 2.5299-1.3539 1.8343-2.6582z" fill="#ffffff" />
-        </svg>
-    ),
-    uptimekuma: (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="24" height="24" rx="4" fill="#5CDD8B" />
-            <path d="M11.759.955c-4.071 0-7.93 2.265-10.06 5.774l-.16.263-.116.284c-1.81 4.44-2.188 9.118.621 12.459 2.67 3.174 6.221 3.328 9.477 3.308 3.256-.02 6.323-.482 8.995-2.032C22.75 19.714 24 16.917 24 14.53c0-2.388-.724-4.698-1.882-7.343l-.112-.257-.148-.238C19.683 3.2 15.83.955 11.758.955Zm0 3.868c2.919 0 5.19 1.305 6.816 3.914 2.076 4.747 2.076 7.724 0 8.929-3.116 1.808-11.234 2.359-13.57-.42-1.558-1.853-1.558-4.69 0-8.51 1.584-2.608 3.835-3.913 6.754-3.913z" fill="#ffffff" />
-        </svg>
-    ),
-    slack: (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="24" height="24" rx="4" fill="#4A154B" />
-            <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.52H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.52h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.52V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.522 2.521 2.528 2.528 0 0 1-2.52-2.521V2.522A2.528 2.528 0 0 1 15.165 0a2.528 2.528 0 0 1 2.522 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.522 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.52h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.522 2.527 2.527 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.522h-6.313z" fill="#ffffff" />
-        </svg>
-    ),
-    jira: (
-        <svg viewBox="0 0 24 24" className="w-full h-full">
-            <rect width="24" height="24" rx="5" fill="#0052CC" />
-            <path d="M11.571 11.523H.345a.345.345 0 00-.345.345v.357c0 6.27 5.084 11.354 11.354 11.354h.217a.345.345 0 00.345-.345v-11.366a.345.345 0 00-.345-.345z" fill="#FFFFFF" />
-            <path d="M23.655 11.523h-11.226a.345.345 0 00-.345.345v11.366c0 .19.155.345.345.345h.217c6.27 0 11.354-5.084 11.354-11.354v-.357a.345.345 0 00-.345-.345z" fill="#2684FF" />
-            <path d="M12.083.421a.345.345 0 00-.345.345v10.412a.345.345 0 00.345.345h11.226a.345.345 0 00.345-.345v-.357C23.654 5.551 18.57 .467 12.3.467h-.217z" fill="#0052CC" />
-        </svg>
-    ),
-    pagerduty: (
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-            <rect x="0" y="0" width="24" height="24" rx="4" fill="#000000" />
-            <path d="M17.68 8.647h-4.325v7.794H9.863V4.859h3.692c2.81 0 4.125 1.705 4.125 3.788zm-2.518 0c0-1.127-.63-1.87-1.897-1.87h-1.076v3.74h1.076c1.267 0 1.897-.743 1.897-1.87z" fill="#06AC38" />
-        </svg>
-    ),
+    twilio: <BrandMark src="/integrations/twilio.svg" alt="Twilio" />,
+
+    datadog: <BrandMark src="/integrations/datadog.svg" alt="Datadog" />,
+    prometheus: <BrandMark src="/integrations/prometheus.svg" alt="Prometheus" />,
+    grafana: <BrandMark src="/integrations/grafana.svg" alt="Grafana" />,
+    sentry: <BrandMark src="/integrations/sentry.svg" alt="Sentry" />,
+    newrelic: <BrandMark src="/integrations/newrelic.svg" alt="New Relic" />,
+    dynatrace: <BrandMark src="/integrations/dynatrace.svg" alt="Dynatrace" />,
+    appdynamics: <BrandMark src="/integrations/appdynamics.svg" alt="AppDynamics" />,
+    honeycomb: <BrandMark src="/integrations/honeycomb.svg" alt="Honeycomb" />,
+    splunk: <BrandMark src="/integrations/splunk.svg" alt="Splunk" />,
+
+    cloudwatch: <BrandMark src="/integrations/cloudwatch.svg" alt="AWS CloudWatch" />,
+    azure: <BrandMark src="/integrations/azure.svg" alt="Microsoft Azure" />,
+    googlecloud: <BrandMark src="/integrations/googlecloud.svg" alt="Google Cloud" />,
+
+    zabbix: <BrandMark src="/integrations/zabbix.svg" alt="Zabbix" />,
+    nagios: <BrandMark src="/integrations/nagios.svg" alt="Nagios" />,
+    icinga: <BrandMark src="/integrations/icinga.svg" alt="Icinga 2" />,
+
+    github: <BrandMark src="/integrations/github.svg" alt="GitHub" />,
+    gitlab: <BrandMark src="/integrations/gitlab.svg" alt="GitLab" />,
+    bitbucket: <BrandMark src="/integrations/bitbucket.svg" alt="Bitbucket" />,
+    vercel: <BrandMark src="/integrations/vercel.svg" alt="Vercel" />,
+
+    uptimerobot: <BrandMark src="/integrations/uptimerobot.png" alt="UptimeRobot" />,
+    pingdom: <BrandMark src="/integrations/pingdom.svg" alt="Pingdom" />,
+    betterstack: <BrandMark src="/integrations/betterstack.svg" alt="Better Stack" />,
+    uptimekuma: <BrandMark src="/integrations/uptimekuma.svg" alt="Uptime Kuma" />,
+
+    slack: <BrandMark src="/integrations/slack.svg" alt="Slack" />,
+    jira: <BrandMark src="/integrations/jira.svg" alt="Jira Cloud" />,
+    whatsapp: <BrandMark src="/integrations/whatsapp.svg" alt="WhatsApp" />,
+    pagerduty: <BrandMark src="/integrations/pagerduty.svg" alt="PagerDuty" />,
+
+    kubernetes: <BrandMark src="/integrations/kubernetes.svg" alt="Kubernetes" />,
+    postgres: <BrandMark src="/integrations/postgres.svg" alt="PostgreSQL" />,
 };
 
 export type IntegrationKey = keyof typeof integrationIcons;

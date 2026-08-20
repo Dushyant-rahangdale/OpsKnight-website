@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Manrope, JetBrains_Mono } from "next/font/google"; // [MODIFIED]
+import { Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { BRAND } from "@/lib/brand";
 import { ConditionalNavbar } from "@/components/layout/ConditionalNavbar";
@@ -10,11 +10,6 @@ const baseUrl = `https://${BRAND.domain}`;
 const mergedKeywords = Array.from(
   new Set([...(BRAND.keywords || []), ...(BRAND.seo.keywords || [])])
 );
-const twitterHandle =
-  BRAND.links.twitter?.includes("twitter.com/")
-    ? `@${BRAND.links.twitter.split("twitter.com/")[1]?.replace(/\/.*/, "")}`
-    : undefined;
-
 const structuredData = [
   {
     "@context": "https://schema.org",
@@ -22,7 +17,7 @@ const structuredData = [
     name: BRAND.name,
     url: baseUrl,
     logo: `${baseUrl}${BRAND.assets.logo}`,
-    sameAs: [BRAND.links.github, BRAND.links.twitter].filter(Boolean),
+    sameAs: [BRAND.links.github],
   },
   {
     "@context": "https://schema.org",
@@ -34,6 +29,17 @@ const structuredData = [
       "@type": "Organization",
       name: BRAND.name,
     },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "OpsKnight",
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Docker, Kubernetes, Linux",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    license: BRAND.licenseUrl,
+    url: baseUrl,
+    description: BRAND.seo.description,
   },
 ];
 
@@ -49,7 +55,6 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  // ... (unchanged)
   title: {
     default: BRAND.seo.title,
     template: `%s | ${BRAND.name}`,
@@ -75,7 +80,7 @@ export const metadata: Metadata = {
         url: BRAND.assets.banner,
         width: 1200,
         height: 630,
-        alt: `${BRAND.name} - ${BRAND.tagline}`,
+        alt: `${BRAND.name} — ${BRAND.tagline}`,
       },
     ],
     type: "website",
@@ -85,15 +90,16 @@ export const metadata: Metadata = {
     title: BRAND.seo.title,
     description: BRAND.seo.description,
     images: [BRAND.assets.banner],
-    site: twitterHandle,
-    creator: twitterHandle,
+    creator: BRAND.authors[0]?.twitter
+      ? `@${BRAND.authors[0].twitter.split("twitter.com/")[1]?.replace(/\/.*/, "")}`
+      : undefined,
   },
   icons: {
     icon: [
-      { url: '/logo.svg', type: 'image/svg+xml' },
-      { url: '/logo.png', type: 'image/png' },
+      { url: "/logo.svg", type: "image/svg+xml" },
+      { url: "/logo.png", type: "image/png" },
     ],
-    apple: '/logo.png', // Fallback to logo.png as explicit apple icon might be missing
+    apple: "/logo.png",
   },
   metadataBase: new URL(baseUrl),
 };
@@ -104,7 +110,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
         className={`${manrope.variable} ${jetBrainsMono.variable} antialiased bg-background text-foreground`}
         suppressHydrationWarning

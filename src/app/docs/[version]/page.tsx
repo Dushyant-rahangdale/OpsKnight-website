@@ -1,25 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getDocPage } from "@/lib/docs/content";
+import { getDocPage, getDocFilePath } from "@/lib/docs/content";
 import { getSidebar } from "@/lib/docs/sidebar";
 import { DocsToc } from "@/components/docs/DocsToc";
+import { DocsArticleBody } from "@/components/docs/DocsArticleBody";
 import { DOC_VERSIONS } from "@/lib/docs/versions";
 import { BRAND } from "@/lib/brand";
-import {
-  Rocket,
-  Lightbulb,
-  Settings,
-  Plug,
-  Code2,
-  Server,
-  Shield,
-  Boxes,
-  Smartphone,
-  ArrowRight,
-  BookOpen,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, Code2, Rocket } from "lucide-react";
 
 export const dynamicParams = false;
 export const dynamic = "force-static";
@@ -34,23 +22,14 @@ export async function generateMetadata({
   const title = `Docs (${version})`;
   const description =
     doc?.description ||
-    `Documentation for ${BRAND.name} ${version}, including setup guides, integrations, and API references.`;
+    `Documentation for ${BRAND.name} ${version}: install, paging, incidents, and API.`;
 
   return {
     title,
     description,
-    alternates: {
-      canonical: `/docs/${version}`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `/docs/${version}`,
-    },
-    twitter: {
-      title,
-      description,
-    },
+    alternates: { canonical: `/docs/${version}/` },
+    openGraph: { title, description, url: `/docs/${version}/` },
+    twitter: { title, description },
   };
 }
 
@@ -58,75 +37,38 @@ export async function generateStaticParams() {
   return DOC_VERSIONS.map((v) => ({ version: v.id }));
 }
 
-// Section icons and colors mapping
-const SECTION_CONFIG: Record<string, {
-  icon: React.ElementType;
-  color: string;
-  gradient: string;
-  description: string;
-}> = {
-  "getting-started": {
-    icon: Rocket,
-    color: "text-amber-400",
-    gradient: "from-amber-500 to-orange-500",
-    description: "Quick start guides and installation",
+const TASK_CARDS = [
+  {
+    title: "Install on your machines",
+    description: "Compose, Helm, and the secrets first boot needs.",
+    slug: ["getting-started", "installation"],
   },
-  "core-concepts": {
-    icon: Lightbulb,
-    color: "text-cyan-400",
-    gradient: "from-cyan-500 to-blue-500",
-    description: "Understand the fundamentals",
+  {
+    title: "Who gets paged",
+    description: "Email, SMS, push, Slack, WhatsApp, webhooks — not voice.",
+    slug: ["administration", "notifications"],
   },
-  administration: {
-    icon: Settings,
-    color: "text-emerald-400",
-    gradient: "from-emerald-500 to-teal-500",
-    description: "Configuration and management",
+  {
+    title: "When something breaks",
+    description: "Incidents, acknowledge, assign, and write what happened.",
+    slug: ["core-concepts", "incidents"],
   },
-  integrations: {
-    icon: Plug,
-    color: "text-blue-400",
-    gradient: "from-blue-500 to-indigo-500",
-    description: "Connect with external services",
+  {
+    title: "Slack rooms",
+    description: "A channel for the incident, if this version includes ChatOps.",
+    slug: ["integrations", "communication", "slack-chatops"],
   },
-  api: {
-    icon: Code2,
-    color: "text-rose-400",
-    gradient: "from-rose-500 to-pink-500",
-    description: "API reference and endpoints",
+  {
+    title: "Status page",
+    description: "Tell customers what is down. One page per install.",
+    slug: ["core-concepts", "status-page"],
   },
-  deployment: {
-    icon: Server,
-    color: "text-lime-400",
-    gradient: "from-lime-500 to-green-500",
-    description: "Deploy to production",
+  {
+    title: "API",
+    description: "Events ingest and incident APIs for this version.",
+    slug: ["api"],
   },
-  security: {
-    icon: Shield,
-    color: "text-red-400",
-    gradient: "from-red-500 to-rose-500",
-    description: "Security best practices",
-  },
-  architecture: {
-    icon: Boxes,
-    color: "text-indigo-400",
-    gradient: "from-indigo-500 to-purple-500",
-    description: "System design and structure",
-  },
-  mobile: {
-    icon: Smartphone,
-    color: "text-teal-400",
-    gradient: "from-teal-500 to-cyan-500",
-    description: "Mobile app development",
-  },
-};
-
-function getSectionKey(href?: string): string | undefined {
-  if (!href) return undefined;
-  const parts = href.split("/").filter(Boolean);
-  if (parts.length < 3) return undefined;
-  return parts[2];
-}
+];
 
 export default async function DocsIndexPage({
   params,
@@ -137,141 +79,86 @@ export default async function DocsIndexPage({
   const doc = await getDocPage(version, []);
   if (!doc) notFound();
   const sidebar = getSidebar(version);
-  const sections = sidebar.slice(0, 9);
+
+  const cards = TASK_CARDS.filter((card) => getDocFilePath(version, card.slug));
 
   return (
-    <div className="space-y-8">
-      {/* Hero Section */}
-      <section className="relative rounded-3xl overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-slate-900/70 to-slate-900/90" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none" />
-
-        {/* Border */}
-        <div className="absolute inset-0 rounded-3xl border border-white/10" />
-
-        <div className="relative px-8 py-12 md:px-12 md:py-16">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5" />
-              v{version} Documentation
-            </span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
-            {doc.title}
-          </h1>
-
-          <p className="text-slate-400 max-w-2xl mt-4 text-lg leading-relaxed">
-            {doc.description ??
-              "Dive into the OpsKnight platform, learn the core concepts, and follow step-by-step guides to get operational fast."}
-          </p>
-
-          {/* Quick actions */}
-          <div className="flex flex-wrap items-center gap-3 mt-8">
-            <Link
-              href={`/docs/${version}/getting-started/installation`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 text-white font-medium text-sm hover:bg-emerald-400 transition-colors"
-            >
-              <Rocket className="w-4 h-4" />
-              Quick Start
-            </Link>
-            <Link
-              href={`/docs/${version}/api`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white font-medium text-sm hover:bg-white/10 transition-colors"
-            >
-              <Code2 className="w-4 h-4" />
-              API Reference
-            </Link>
-          </div>
+    <div className="space-y-10">
+      <section>
+        <p className="mb-3 font-mono text-[11px] text-slate-500">
+          {BRAND.name} · {version}
+        </p>
+        <h1 className="text-4xl font-semibold tracking-tight text-[#111827] sm:text-[2.75rem]">
+          Documentation
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[#4b5563]">
+          How to run OpsKnight, page the right person, and keep a record of the
+          night. Written for this version — switch in the sidebar for older
+          releases.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link
+            href={`/docs/${version}/getting-started/installation/`}
+            className="inline-flex h-11 items-center gap-2 rounded-[12px] bg-[#d21a1b] px-5 text-sm font-semibold text-white hover:bg-[#b41516]"
+          >
+            <Rocket className="h-4 w-4" />
+            Install
+          </Link>
+          <Link
+            href={`/docs/${version}/api/`}
+            className="inline-flex h-11 items-center gap-2 rounded-[12px] border border-slate-200 bg-white px-5 text-sm font-medium text-slate-800 hover:bg-slate-50"
+          >
+            <Code2 className="h-4 w-4" />
+            API
+          </Link>
         </div>
       </section>
 
-      {/* Sections Grid */}
+      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {cards.map((card) => (
+          <Link
+            key={card.slug.join("/")}
+            href={`/docs/${version}/${card.slug.join("/")}/`}
+            className="rounded-[14px] border border-slate-200 bg-white p-5 hover:border-slate-300"
+          >
+            <h2 className="text-base font-semibold text-[#111827]">{card.title}</h2>
+            <p className="mt-2 text-sm leading-relaxed text-[#4b5563]">
+              {card.description}
+            </p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#d21a1b]">
+              Open
+              <ArrowRight className="h-3.5 w-3.5" />
+            </span>
+          </Link>
+        ))}
+      </section>
+
       <section>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-white flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-emerald-400" />
-            Browse Documentation
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {sections.map((section) => {
-            const sectionKey = getSectionKey(section.children?.[0]?.href) || getSectionKey(section.href);
-            const config = sectionKey ? SECTION_CONFIG[sectionKey] : undefined;
-            const Icon = config?.icon || BookOpen;
-
+        <h2 className="mb-4 text-lg font-semibold text-[#111827]">All sections</h2>
+        <div className="grid gap-2 sm:grid-cols-2">
+          {sidebar.map((section) => {
+            const href = section.href || section.children?.[0]?.href;
+            if (!href) return null;
             return (
-              <div
+              <Link
                 key={section.title}
-                className="group relative rounded-2xl overflow-hidden"
+                href={href}
+                className="rounded-[12px] border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-800 hover:bg-slate-50"
               >
-                {/* Hover glow */}
-                <div className={`absolute -inset-0.5 bg-gradient-to-r ${config?.gradient || "from-emerald-500 to-cyan-500"} rounded-2xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
-
-                {/* Card */}
-                <div className="relative p-5 bg-slate-900/80 border border-white/10 rounded-2xl hover:border-white/20 transition-all h-full">
-                  {/* Icon */}
-                  <div className={`inline-flex p-2.5 rounded-xl bg-gradient-to-br ${config?.gradient || "from-emerald-500 to-cyan-500"} mb-4`}>
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-lg font-semibold text-white group-hover:text-emerald-50 transition-colors">
-                    {section.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm text-slate-400 mt-2 group-hover:text-slate-300 transition-colors">
-                    {config?.description || (section.children?.length
-                      ? `${section.children.length} guides available`
-                      : "Explore the fundamentals and workflows.")}
-                  </p>
-
-                  {/* Link */}
-                  {(section.href || section.children?.[0]?.href) && (
-                    <Link
-                      href={section.href || section.children?.[0]?.href || "#"}
-                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
-                    >
-                      Explore
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  )}
-                </div>
-              </div>
+                {section.title}
+              </Link>
             );
           })}
         </div>
       </section>
 
-      {/* Content Grid */}
-      <div className="grid lg:grid-cols-[1fr_260px] gap-8">
-        <article className="rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-sm p-8">
-          <h2 className="text-2xl font-semibold text-white mb-6 pb-4 border-b border-white/10 flex items-center gap-2">
-            <span className="w-1 h-6 bg-emerald-500 rounded-full" />
-            Overview
+      <div className="grid gap-8 lg:grid-cols-[1fr_260px]">
+        <article className="rounded-[14px] border border-slate-200 bg-white p-8">
+          <h2 className="mb-6 border-b border-slate-200 pb-4 text-xl font-semibold text-[#111827]">
+            This version
           </h2>
-          <div
-            className="docs-content prose prose-invert prose-slate max-w-none
-              prose-headings:text-white prose-headings:font-semibold
-              prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-4
-              prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-3
-              prose-p:text-slate-300 prose-p:leading-relaxed
-              prose-a:text-emerald-400 prose-a:no-underline hover:prose-a:text-emerald-300
-              prose-strong:text-white
-              prose-code:text-emerald-300 prose-code:bg-slate-800/80 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
-              prose-pre:bg-slate-800/80 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl
-              prose-ul:text-slate-300 prose-ol:text-slate-300
-              prose-li:marker:text-emerald-500
-              prose-blockquote:border-l-emerald-500 prose-blockquote:bg-emerald-500/5 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-slate-300
-            "
-            dangerouslySetInnerHTML={{ __html: doc.html }}
-          />
+          <DocsArticleBody html={doc.html} />
         </article>
-
         <aside className="hidden lg:block">
           <div className="sticky top-24">
             <DocsToc headings={doc.headings} />

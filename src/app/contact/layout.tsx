@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { BRAND } from "@/lib/brand";
 
-const title = `Contact ${BRAND.name}`;
-const description =
-  `Get support, report issues, or reach the ${BRAND.name} team for partnerships and security inquiries.`;
+const title = `Community | ${BRAND.name}`;
+const description = `GitHub issues, discussions, email, and security advisories for ${BRAND.name}. There is no ticket desk and no SLA.`;
 
 export const metadata: Metadata = {
   title,

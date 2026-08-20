@@ -1,360 +1,343 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { usePathname } from "next/navigation"
-import Link from "next/link"
-import Image from "next/image"
+import * as React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
-    Rocket,
-    Lightbulb,
-    Settings,
-    Plug,
-    Code2,
-    Server,
-    Shield,
-    Boxes,
-    Smartphone,
-    ChevronDown,
-    ExternalLink,
-    BookOpen,
-} from "lucide-react"
-
+  BookOpen,
+  Boxes,
+  ChevronDown,
+  Code2,
+  ExternalLink,
+  Lightbulb,
+  Plug,
+  Rocket,
+  Server,
+  Settings,
+  Shield,
+  Smartphone,
+} from "lucide-react";
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    SidebarRail,
-} from "@/components/ui/sidebar"
-import { SidebarItem } from "@/lib/docs/sidebar"
-import { DocsVersionSwitcher } from "@/components/docs/DocsVersionSwitcher"
-import { DocsSearch } from "@/components/docs/DocsSearch"
-import { cn } from "@/lib/utils"
-import { BRAND } from "@/lib/brand"
-import type { DocsVersion } from "@/lib/docs/types"
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarRail,
+} from "@/components/ui/sidebar";
+import { SidebarItem } from "@/lib/docs/sidebar";
+import { DocsVersionSwitcher } from "@/components/docs/DocsVersionSwitcher";
+import { DocsSearch } from "@/components/docs/DocsSearch";
+import { pathsMatch } from "@/lib/docs/paths";
+import { cn } from "@/lib/utils";
+import { BRAND } from "@/lib/brand";
+import { BrandLockup } from "@/components/brand/BrandLockup";
+import type { DocsVersion } from "@/lib/docs/types";
 
-// Section configuration with icons and colors
-const SECTION_CONFIG: Record<string, {
-    icon: React.ElementType;
-    label: string;
-    active: string;
-    gradient: string;
-}> = {
-    "getting-started": {
-        icon: Rocket,
-        label: "text-amber-400",
-        active: "data-[active=true]:border-l-amber-400 data-[active=true]:bg-amber-500/10 data-[active=true]:text-amber-100",
-        gradient: "from-amber-500 to-orange-500",
-    },
-    "core-concepts": {
-        icon: Lightbulb,
-        label: "text-cyan-400",
-        active: "data-[active=true]:border-l-cyan-400 data-[active=true]:bg-cyan-500/10 data-[active=true]:text-cyan-100",
-        gradient: "from-cyan-500 to-blue-500",
-    },
-    administration: {
-        icon: Settings,
-        label: "text-emerald-400",
-        active: "data-[active=true]:border-l-emerald-400 data-[active=true]:bg-emerald-500/10 data-[active=true]:text-emerald-100",
-        gradient: "from-emerald-500 to-teal-500",
-    },
-    integrations: {
-        icon: Plug,
-        label: "text-blue-400",
-        active: "data-[active=true]:border-l-blue-400 data-[active=true]:bg-blue-500/10 data-[active=true]:text-blue-100",
-        gradient: "from-blue-500 to-indigo-500",
-    },
-    api: {
-        icon: Code2,
-        label: "text-rose-400",
-        active: "data-[active=true]:border-l-rose-400 data-[active=true]:bg-rose-500/10 data-[active=true]:text-rose-100",
-        gradient: "from-rose-500 to-pink-500",
-    },
-    deployment: {
-        icon: Server,
-        label: "text-lime-400",
-        active: "data-[active=true]:border-l-lime-400 data-[active=true]:bg-lime-500/10 data-[active=true]:text-lime-100",
-        gradient: "from-lime-500 to-green-500",
-    },
-    security: {
-        icon: Shield,
-        label: "text-red-400",
-        active: "data-[active=true]:border-l-red-400 data-[active=true]:bg-red-500/10 data-[active=true]:text-red-100",
-        gradient: "from-red-500 to-rose-500",
-    },
-    architecture: {
-        icon: Boxes,
-        label: "text-indigo-400",
-        active: "data-[active=true]:border-l-indigo-400 data-[active=true]:bg-indigo-500/10 data-[active=true]:text-indigo-100",
-        gradient: "from-indigo-500 to-purple-500",
-    },
-    mobile: {
-        icon: Smartphone,
-        label: "text-teal-400",
-        active: "data-[active=true]:border-l-teal-400 data-[active=true]:bg-teal-500/10 data-[active=true]:text-teal-100",
-        gradient: "from-teal-500 to-cyan-500",
-    },
-}
+const SECTION_ICONS: Record<string, React.ElementType> = {
+  "getting-started": Rocket,
+  "core-concepts": Lightbulb,
+  administration: Settings,
+  integrations: Plug,
+  api: Code2,
+  deployment: Server,
+  security: Shield,
+  architecture: Boxes,
+  mobile: Smartphone,
+};
 
 function getSectionKeyFromHref(href?: string) {
-    if (!href) return undefined
-    const parts = href.split("/").filter(Boolean)
-    if (parts.length < 3) return undefined
-    return parts[2]
+  if (!href) return undefined;
+  const parts = href.split("/").filter(Boolean);
+  if (parts.length < 3) return undefined;
+  return parts[2];
 }
 
-function getSectionConfig(sectionKey?: string) {
-    if (!sectionKey) return undefined
-    return SECTION_CONFIG[sectionKey]
+function pathMatches(href: string | undefined, active: string) {
+  return pathsMatch(href, active);
 }
 
-// Collapsible section component
-function CollapsibleSection({
-    item,
-    activePath,
-    defaultOpen = false,
+function sectionContainsPath(item: SidebarItem, active: string): boolean {
+  if (pathMatches(item.href, active)) return true;
+  return item.children?.some((child) => sectionContainsPath(child, active)) ?? false;
+}
+
+function NavLink({
+  item,
+  activePath,
+  nested = false,
 }: {
-    item: SidebarItem;
-    activePath: string;
-    defaultOpen?: boolean;
+  item: SidebarItem;
+  activePath: string;
+  nested?: boolean;
 }) {
-    const sectionKey = getSectionKeyFromHref(item.children?.[0]?.href)
-    const config = getSectionConfig(sectionKey)
-    const Icon = config?.icon || BookOpen
+  const isDirectActive = pathMatches(item.href, activePath);
+  const containsActive = sectionContainsPath(item, activePath);
+  const [isOpen, setIsOpen] = React.useState(containsActive);
 
-    // Check if any child is active
-    const hasActiveChild = item.children?.some(child => child.href === activePath) || false
-    const [isOpen, setIsOpen] = React.useState(defaultOpen || hasActiveChild)
+  React.useEffect(() => {
+    if (containsActive) setIsOpen(true);
+  }, [containsActive]);
 
-    // Update open state when active child changes
-    React.useEffect(() => {
-        if (hasActiveChild) setIsOpen(true)
-    }, [hasActiveChild])
-
+  if (item.children && item.children.length > 0) {
     return (
-        <SidebarGroup>
-            {/* Section Header - Clickable */}
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-start justify-between px-2 py-3 rounded-lg hover:bg-white/5 transition-colors group h-auto"
+      <div className={nested ? "ml-1.5 mt-1" : "mt-1"}>
+        <div
+          className={cn(
+            "flex w-full items-center justify-between rounded-md transition-colors group",
+            isDirectActive ? "bg-white/10" : "hover:bg-white/5"
+          )}
+        >
+          {item.href ? (
+            <Link
+              href={item.href}
+              onClick={() => setIsOpen(true)}
+              className={cn(
+                "flex-1 truncate px-2 py-1.5 text-[12px] font-medium transition-colors text-left",
+                isDirectActive
+                  ? "text-white font-bold"
+                  : containsActive
+                    ? "text-[#fca5a5]"
+                    : "text-slate-400 group-hover:text-white"
+              )}
             >
-                <div className="flex items-start gap-3 flex-1 min-w-0">
-                    {/* Icon with gradient background */}
-                    <div className={cn(
-                        "p-1.5 rounded-lg transition-all shrink-0 mt-0.5",
-                        hasActiveChild
-                            ? `bg-gradient-to-br ${config?.gradient || "from-emerald-500 to-cyan-500"} shadow-lg`
-                            : "bg-slate-800/80 group-hover:bg-slate-700"
-                    )}>
-                        <Icon className={cn(
-                            "w-3.5 h-3.5",
-                            hasActiveChild ? "text-white" : "text-slate-400 group-hover:text-slate-300"
-                        )} />
-                    </div>
+              {item.title}
+            </Link>
+          ) : (
+            <span className="flex-1 truncate px-2 py-1 text-[11px] font-medium uppercase tracking-wide text-slate-500">
+              {item.title}
+            </span>
+          )}
 
-                    {/* Title */}
-                    <SidebarGroupLabel
-                        className={cn(
-                            "text-xs font-bold uppercase tracking-widest transition-colors p-0 m-0 whitespace-normal text-left leading-relaxed h-auto block w-full",
-                            hasActiveChild ? config?.label : "text-slate-500 group-hover:text-slate-400"
-                        )}
-                    >
-                        {item.title}
-                    </SidebarGroupLabel>
-                </div>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsOpen((v) => !v);
+            }}
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded p-1 text-slate-400 hover:bg-white/10 hover:text-white"
+            aria-label={isOpen ? `Collapse ${item.title}` : `Expand ${item.title}`}
+          >
+            <ChevronDown
+              className={cn(
+                "h-3.5 w-3.5 text-slate-500 transition-transform duration-200",
+                isOpen && "rotate-180"
+              )}
+            />
+          </button>
+        </div>
 
-                {/* Chevron */}
-                <ChevronDown className={cn(
-                    "w-4 h-4 text-slate-500 transition-transform duration-200",
-                    isOpen ? "rotate-180" : ""
-                )} />
-            </button>
+        {isOpen && (
+          <ul className="mt-0.5 space-y-0.5 border-l border-white/10 pl-2">
+            {item.children.map((child) => (
+              <li key={child.title}>
+                <NavLink item={child} activePath={activePath} nested />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    );
+  }
 
-            {/* Children - Collapsible */}
-            <div className={cn(
-                "overflow-hidden transition-all duration-200",
-                isOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
-            )}>
-                <SidebarGroupContent className="mt-1">
-                    <SidebarMenu>
-                        {item.children?.map((child) => (
-                            <SidebarMenuItem key={child.title} className="mb-1">
-                                <SidebarMenuButton
-                                    asChild
-                                    isActive={child.href === activePath}
-                                    className={cn(
-                                        "ml-6 border-l-2 border-transparent text-slate-400 hover:text-white hover:bg-white/5 data-[active=true]:bg-white/10 data-[active=true]:text-white data-[active=true]:font-medium h-auto py-3 whitespace-normal items-start",
-                                        config?.active
-                                    )}
-                                >
-                                    {child.href ? (
-                                        <Link href={child.href} className="flex items-start gap-3 leading-relaxed min-w-0">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shrink-0 mt-2.5" />
-                                            <span className="whitespace-normal break-words block min-w-0 flex-1">
-                                                {child.title}
-                                            </span>
-                                        </Link>
-                                    ) : (
-                                        <span className="flex items-start gap-3 leading-relaxed min-w-0">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shrink-0 mt-2.5" />
-                                            <span className="whitespace-normal break-words block min-w-0 flex-1">
-                                                {child.title}
-                                            </span>
-                                        </span>
-                                    )}
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        ))}
-                    </SidebarMenu>
-                </SidebarGroupContent>
-            </div>
-        </SidebarGroup>
-    )
+  if (!item.href) {
+    return (
+      <span className="block px-2 py-1.5 text-[13px] text-slate-500">{item.title}</span>
+    );
+  }
+
+  const active = pathMatches(item.href, activePath);
+  return (
+    <Link
+      href={item.href}
+      className={cn(
+        "block rounded-md border-l-2 px-2 py-1.5 text-[13px] leading-snug transition-colors",
+        nested ? "ml-0" : "ml-1",
+        active
+          ? "border-[#d21a1b] bg-white/10 text-white font-medium"
+          : "border-transparent text-slate-400 hover:bg-white/5 hover:text-white"
+      )}
+    >
+      {item.title}
+    </Link>
+  );
 }
 
-// Helper to render recursive items
-function renderSidebarItems(items: SidebarItem[], pathname: string, activePath: string) {
-    return items.map((item, index) => {
-        const isActive = item.href ? activePath === item.href : false
-        const sectionKey = getSectionKeyFromHref(item.href)
-        const config = getSectionConfig(sectionKey)
+function CollapsibleSection({
+  item,
+  activePath,
+}: {
+  item: SidebarItem;
+  activePath: string;
+}) {
+  const sectionKey =
+    getSectionKeyFromHref(item.children?.[0]?.href) ||
+    getSectionKeyFromHref(item.href);
+  const Icon = (sectionKey && SECTION_ICONS[sectionKey]) || BookOpen;
+  const isDirectActive = pathMatches(item.href, activePath);
+  const containsActive = sectionContainsPath(item, activePath);
+  const [isOpen, setIsOpen] = React.useState(containsActive);
 
-        // Group Header (Level 0 with children)
-        if (item.children && item.children.length > 0) {
-            return (
-                <CollapsibleSection
-                    key={item.title}
-                    item={item}
-                    activePath={activePath}
-                    defaultOpen={index < 2} // First two sections open by default
-                />
-            )
-        }
+  React.useEffect(() => {
+    if (containsActive) setIsOpen(true);
+  }, [containsActive]);
 
-        // Standalone Item
-        return (
-            <SidebarMenuItem key={item.title} className="mb-1">
-                <SidebarMenuButton
-                    asChild
-                    isActive={isActive}
-                    className={cn(
-                        "border-l-2 border-transparent text-slate-400 hover:text-white hover:bg-white/5 data-[active=true]:bg-white/10 data-[active=true]:text-white h-auto py-3 whitespace-normal items-start",
-                        config?.active
-                    )}
-                >
-                    {item.href ? (
-                        <Link href={item.href} className="flex items-start gap-3 leading-relaxed min-w-0">
-                            <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shrink-0 mt-2.5" />
-                            <span className="whitespace-normal break-words block min-w-0 flex-1">
-                                {item.title}
-                            </span>
-                        </Link>
-                    ) : (
-                        <span className="flex items-start gap-3 leading-relaxed min-w-0">
-                            <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40 shrink-0 mt-2.5" />
-                            <span className="whitespace-normal break-words block min-w-0 flex-1">
-                                {item.title}
-                            </span>
-                        </span>
-                    )}
-                </SidebarMenuButton>
-            </SidebarMenuItem>
-        )
-    })
+  return (
+    <SidebarGroup className="p-0">
+      <div
+        className={cn(
+          "flex w-full items-center justify-between rounded-lg transition-colors group",
+          isDirectActive ? "bg-white/10" : "hover:bg-white/5"
+        )}
+      >
+        {item.href ? (
+          <Link
+            href={item.href}
+            onClick={() => setIsOpen(true)}
+            className="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-left"
+          >
+            <Icon
+              className={cn(
+                "h-4 w-4 shrink-0 transition-colors",
+                isDirectActive
+                  ? "text-red-400"
+                  : containsActive
+                    ? "text-[#fca5a5]"
+                    : "text-slate-500 group-hover:text-slate-300"
+              )}
+            />
+            <span
+              className={cn(
+                "min-w-0 flex-1 truncate text-[12px] font-semibold tracking-wide transition-colors",
+                isDirectActive
+                  ? "text-white font-bold"
+                  : containsActive
+                    ? "text-white"
+                    : "text-slate-300 group-hover:text-white"
+              )}
+            >
+              {item.title}
+            </span>
+          </Link>
+        ) : (
+          <div className="flex min-w-0 flex-1 items-center gap-2 px-2 py-2 text-left">
+            <Icon
+              className={cn(
+                "h-4 w-4 shrink-0",
+                containsActive ? "text-[#fca5a5]" : "text-slate-500"
+              )}
+            />
+            <span
+              className={cn(
+                "min-w-0 flex-1 truncate text-[12px] font-semibold tracking-wide",
+                containsActive ? "text-white" : "text-slate-300"
+              )}
+            >
+              {item.title}
+            </span>
+          </div>
+        )}
+
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsOpen((v) => !v);
+          }}
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md p-1.5 text-slate-400 hover:bg-white/10 hover:text-white"
+          aria-label={isOpen ? `Collapse ${item.title}` : `Expand ${item.title}`}
+        >
+          <ChevronDown
+            className={cn(
+              "h-4 w-4 shrink-0 text-slate-500 transition-transform duration-200",
+              isOpen && "rotate-180"
+            )}
+          />
+        </button>
+      </div>
+
+      {isOpen && (
+        <SidebarGroupContent className="pb-2">
+          <SidebarMenu>
+            {item.children?.map((child) => (
+              <SidebarMenuItem key={child.title}>
+                <NavLink item={child} activePath={activePath} />
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroupContent>
+      )}
+    </SidebarGroup>
+  );
 }
 
 export function NewDocsSidebar({
-    items,
-    version,
-    versions,
+  items,
+  version,
+  versions,
 }: {
-    items: SidebarItem[];
-    version: string;
-    versions: DocsVersion[];
+  items: SidebarItem[];
+  version: string;
+  versions: DocsVersion[];
 }) {
-    const pathname = usePathname()
-    const activePath = pathname?.split("#")[0] ?? ""
+  const pathname = usePathname();
+  const activePath = pathname?.split("#")[0] ?? "";
 
-    return (
-        <Sidebar className="border-r border-white/10 [&_[data-sidebar=sidebar]]:!bg-slate-900">
-            <SidebarHeader className="border-b border-white/5 pb-4">
-                {/* Logo Section */}
-                <Link href="/" className="group flex items-center gap-3 px-2 pt-2 hover:opacity-90 transition-all">
-                    <div className="relative flex h-9 w-9 items-center justify-center shrink-0">
-                        {/* Glow effect */}
-                        <div className="absolute inset-0 bg-emerald-500/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <Image
-                            src="/logo-mark.png"
-                            alt="OpsKnight Logo"
-                            width={32}
-                            height={32}
-                            className="relative w-8 h-8 object-contain"
-                        />
-                    </div>
-                    <div className="flex flex-col gap-0.5 leading-none transition-all group-data-[collapsible=icon]:hidden">
-                        <span className="font-bold text-white group-hover:text-emerald-50 transition-colors">OpsKnight</span>
-                        <span className="text-[10px] text-emerald-400/70 uppercase tracking-wider font-medium">Documentation</span>
-                    </div>
-                </Link>
-
-                {/* Version Switcher */}
-                <div className="mt-4 px-2">
-                    <DocsVersionSwitcher currentVersion={version} versions={versions} />
-                </div>
-
-                {/* Search - Mobile Only */}
-                <div className="mt-2 px-2 md:hidden">
-                    <DocsSearch version={version} />
-                </div>
-
-
-            </SidebarHeader>
-
-            {/* Navigation */}
-            <SidebarContent className="custom-scrollbar px-2 py-4">
-                <div className="space-y-2">
-                    {renderSidebarItems(items, pathname || "", activePath)}
-                </div>
-            </SidebarContent>
-
-            {/* Footer */}
-            <div className="border-t border-white/5 p-4 mt-auto space-y-3">
-                {/* Quick Links */}
-                <div className="grid grid-cols-2 gap-2">
-                    <Link
-                        href="/"
-                        className="flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-                    >
-                        Home
-                    </Link>
-                    <Link
-                        href="/compare"
-                        className="flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-                    >
-                        Compare
-                    </Link>
-                </div>
-
-                {/* GitHub Link */}
-                <Link
-                    href={BRAND.links.github}
-                    target="_blank"
-                    className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/20 text-xs text-emerald-400 hover:from-emerald-500/20 hover:to-cyan-500/20 transition-all group"
-                >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                    </svg>
-                    <span>Star on GitHub</span>
-                    <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
-                </Link>
+  return (
+    <Sidebar className="border-r border-white/10 [&_[data-sidebar=sidebar]]:!bg-[#0f172a]">
+      <SidebarHeader className="shrink-0 border-b border-white/10 pb-3">
+        <BrandLockup href="/" size={32} subtitle="Documentation" className="px-2 pt-1" />
+        <div className="mt-3 px-1">
+          <DocsVersionSwitcher currentVersion={version} versions={versions} />
+        </div>
+        <div className="mt-2 px-1 md:hidden">
+          <DocsSearch version={version} />
+        </div>
+      </SidebarHeader>
+      <SidebarContent className="custom-scrollbar px-2 py-2">
+        {items.map((item) =>
+          item.children && item.children.length > 0 ? (
+            <CollapsibleSection
+              key={item.title}
+              item={item}
+              activePath={activePath}
+            />
+          ) : (
+            <div key={item.title} className="px-1">
+              <NavLink item={item} activePath={activePath} />
             </div>
-
-            <SidebarRail />
-        </Sidebar>
-    )
+          )
+        )}
+      </SidebarContent>
+      <SidebarFooter className="shrink-0 border-t border-white/10">
+        <div className="flex flex-col gap-1.5">
+          <Link
+            href="/"
+            className="rounded-lg px-2 py-1.5 text-xs text-slate-400 hover:bg-white/5 hover:text-white"
+          >
+            Home
+          </Link>
+          <Link
+            href="/changelog"
+            className="rounded-lg px-2 py-1.5 text-xs text-slate-400 hover:bg-white/5 hover:text-white"
+          >
+            Changelog
+          </Link>
+          <Link
+            href={BRAND.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs text-slate-400 hover:bg-white/5 hover:text-white"
+          >
+            GitHub
+            <ExternalLink className="h-3 w-3" />
+          </Link>
+        </div>
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
+  );
 }

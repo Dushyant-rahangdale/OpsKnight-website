@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getDocPage, getAllDocSlugs } from "@/lib/docs/content";
+import { getDocPage, getAllDocSlugs, getDocFilePath } from "@/lib/docs/content";
 import { DocsToc } from "@/components/docs/DocsToc";
+import { DocsArticleBody } from "@/components/docs/DocsArticleBody";
 import { DOC_VERSIONS } from "@/lib/docs/versions";
 import { ChevronRight, Clock, BookOpen } from "lucide-react";
+import { DocsPrevNext } from "@/components/docs/DocsPrevNext";
 import { BRAND } from "@/lib/brand";
+import { docsHref } from "@/lib/docs/paths";
 
 export const dynamicParams = false;
 // export const dynamic = "force-static";
@@ -24,8 +27,8 @@ export async function generateMetadata({
 
   const canonical =
     doc.slug.length > 0
-      ? `/docs/${version}/${doc.slug.join("/")}`
-      : `/docs/${version}`;
+      ? docsHref(version, doc.slug)
+      : docsHref(version);
   const title = doc.title;
   const description =
     doc.description ||
@@ -63,23 +66,6 @@ export async function generateStaticParams() {
   return params;
 }
 
-// Section colors mapping
-const SECTION_COLORS: Record<string, { badge: string; border: string }> = {
-  "getting-started": { badge: "bg-amber-500/10 text-amber-400 border-amber-500/20", border: "border-l-amber-500" },
-  "core-concepts": { badge: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20", border: "border-l-cyan-500" },
-  "administration": { badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20", border: "border-l-emerald-500" },
-  "integrations": { badge: "bg-blue-500/10 text-blue-400 border-blue-500/20", border: "border-l-blue-500" },
-  "api": { badge: "bg-rose-500/10 text-rose-400 border-rose-500/20", border: "border-l-rose-500" },
-  "deployment": { badge: "bg-lime-500/10 text-lime-400 border-lime-500/20", border: "border-l-lime-500" },
-  "security": { badge: "bg-red-500/10 text-red-400 border-red-500/20", border: "border-l-red-500" },
-  "architecture": { badge: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20", border: "border-l-indigo-500" },
-  "mobile": { badge: "bg-teal-500/10 text-teal-400 border-teal-500/20", border: "border-l-teal-500" },
-};
-
-function getSectionFromSlug(slug: string[]): string | undefined {
-  return slug.length > 0 ? slug[0] : undefined;
-}
-
 function estimateReadTime(html: string): number {
   // Strip HTML tags and count words
   const text = html.replace(/<[^>]*>/g, " ");
@@ -97,34 +83,37 @@ export default async function DocsPage({
   const doc = await getDocPage(version, slug);
   if (!doc) notFound();
 
-  const section = getSectionFromSlug(slug);
-  const sectionColors = section ? SECTION_COLORS[section] : undefined;
+  const section = slug[0];
   const readTime = estimateReadTime(doc.html);
+  const filePath = getDocFilePath(version, slug);
+  const githubDocPath = filePath?.includes("content/docs/")
+    ? filePath.split("content/docs/")[1]
+    : `${version}/README.md`;
+  const editUrl = `${BRAND.links.github}/blob/main/docs/${githubDocPath}`;
 
-  // Build breadcrumb
   const breadcrumbs = [
-    { label: "Docs", href: `/docs/${version}` },
+    { label: "Docs", href: docsHref(version) },
     ...slug.map((s, i) => ({
       label: s.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
-      href: `/docs/${version}/${slug.slice(0, i + 1).join("/")}`,
+      href: docsHref(version, slug.slice(0, i + 1)),
     })),
   ];
 
   return (
-    <div className="grid lg:grid-cols-[1fr_260px] gap-8">
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_15rem] xl:grid-cols-[minmax(0,1fr)_16rem]">
       <article className="space-y-6">
         {/* Article Header */}
-        <div className={`rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-sm overflow-hidden ${sectionColors?.border ? `border-l-4 ${sectionColors.border}` : ""}`}>
+        <div className="overflow-hidden rounded-[14px] border border-slate-200 bg-white">
           {/* Breadcrumbs */}
-          <div className="px-6 py-3 border-b border-white/5 bg-slate-900/50">
+          <div className="px-6 py-3 border-b border-slate-200 bg-slate-50">
             <nav className="flex items-center gap-1.5 text-xs">
               {breadcrumbs.map((crumb, i) => (
                 <span key={crumb.href} className="flex items-center gap-1.5">
-                  {i > 0 && <ChevronRight className="w-3 h-3 text-slate-600" />}
+                  {i > 0 && <ChevronRight className="w-3 h-3 text-slate-400" />}
                   {i === breadcrumbs.length - 1 ? (
-                    <span className="text-slate-300 font-medium">{crumb.label}</span>
+                    <span className="text-slate-800 font-medium">{crumb.label}</span>
                   ) : (
-                    <Link href={crumb.href} className="text-slate-500 hover:text-slate-300 transition-colors">
+                    <Link href={crumb.href} className="text-slate-500 hover:text-slate-800 transition-colors">
                       {crumb.label}
                     </Link>
                   )}
@@ -138,9 +127,9 @@ export default async function DocsPage({
             {/* Meta badges */}
             <div className="flex flex-wrap items-center gap-3 mb-4">
               {section && (
-                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-medium ${sectionColors?.badge || "bg-slate-500/10 text-slate-400 border-slate-500/20"}`}>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-600">
                   <BookOpen className="w-3 h-3" />
-                  {section.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase())}
+                  {section.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
                 </span>
               )}
               <span className="flex items-center gap-1.5 text-xs text-slate-500">
@@ -150,53 +139,33 @@ export default async function DocsPage({
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-semibold text-slate-900 tracking-tight">
               {doc.title}
             </h1>
 
-            {/* Description */}
             {doc.description && (
-              <p className="mt-3 text-slate-400 text-lg leading-relaxed max-w-3xl">
+              <p className="mt-3 text-slate-600 text-lg leading-relaxed max-w-3xl">
                 {doc.description}
               </p>
             )}
           </div>
         </div>
 
-        {/* Article Content */}
-        <div className="rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-sm p-8">
-          <div
-            className="docs-content prose prose-invert prose-slate max-w-none
-              prose-headings:text-white prose-headings:font-semibold prose-headings:tracking-tight
-              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-white/10
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-              prose-p:text-slate-300 prose-p:leading-relaxed
-              prose-a:text-emerald-400 prose-a:no-underline hover:prose-a:text-emerald-300 prose-a:transition-colors
-              prose-strong:text-white prose-strong:font-semibold
-              prose-code:text-emerald-300 prose-code:bg-slate-800/80 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:font-normal prose-code:before:content-none prose-code:after:content-none
-              prose-pre:bg-slate-800/80 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl
-              prose-ul:text-slate-300 prose-ol:text-slate-300
-              prose-li:marker:text-emerald-500
-              prose-blockquote:border-l-emerald-500 prose-blockquote:bg-emerald-500/5 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-slate-300 prose-blockquote:not-italic
-              prose-table:border-collapse
-              prose-th:bg-slate-800/80 prose-th:text-slate-200 prose-th:font-semibold prose-th:px-4 prose-th:py-2
-              prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-white/10
-              prose-img:rounded-xl prose-img:border prose-img:border-white/10
-              prose-hr:border-white/10
-            "
-            dangerouslySetInnerHTML={{ __html: doc.html }}
-          />
+        <div className="rounded-[14px] border border-slate-200 bg-white px-6 py-8 sm:px-10">
+          <DocsArticleBody html={doc.html} />
+          <DocsPrevNext version={version} currentPath={docsHref(version, slug)} />
         </div>
 
         {/* Footer Navigation */}
-        <div className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-slate-900/40">
+        <div className="flex items-center justify-between p-4 rounded-[12px] border border-slate-200 bg-white">
           <p className="text-xs text-slate-500">
             Last updated for {version}
           </p>
           <Link
-            href={BRAND.links.github}
+            href={editUrl}
             target="_blank"
-            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-emerald-400 transition-colors"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-red-600 transition-colors"
           >
             Edit this page on GitHub
             <ChevronRight className="w-3 h-3" />

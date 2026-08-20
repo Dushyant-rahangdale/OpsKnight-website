@@ -28,8 +28,8 @@ export function BrandLockup({
         className="object-contain"
         style={{ width: size, height: size }}
       />
-      <span className="flex min-w-0 flex-col leading-none">
-        <span className="truncate text-[15px] font-semibold tracking-tight text-white">
+      <span className="flex min-w-0 flex-col">
+        <span className="text-[15px] font-semibold leading-snug tracking-tight text-white">
           {BRAND.name}
         </span>
         {subtitle ? (

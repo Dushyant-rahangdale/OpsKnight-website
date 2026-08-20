@@ -554,14 +554,14 @@ export default function IntegrationsGrid() {
     <div className="space-y-12">
       
       {/* Events API v2 ingest banner */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white border border-blue-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white border border-red-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 p-2 shrink-0 flex items-center justify-center shadow-inner">
             {integrationIcons.pagerduty}
           </div>
           <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold uppercase tracking-wider mb-1">
-              <Sparkles className="w-3 h-3 text-blue-600" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-50 border border-red-200 text-red-700 text-[11px] font-bold uppercase tracking-wider mb-1">
+              <Sparkles className="w-3 h-3 text-red-600" />
               Drop-In Migration Endpoint
             </div>
             <h3 className="text-lg font-bold text-slate-900">
@@ -569,7 +569,7 @@ export default function IntegrationsGrid() {
             </h3>
             <p className="text-xs text-slate-600 max-w-2xl mt-1">
               OpsKnight accepts PagerDuty Events API v2 ingest at{" "}
-              <code className="text-blue-600 font-mono">/api/integrations/pagerduty/v2/enqueue</code>.
+              <code className="text-red-600 font-mono">/api/integrations/pagerduty/v2/enqueue</code>.
               That is an adapter — not a PagerDuty clone of the whole product.
             </p>
           </div>
@@ -577,7 +577,7 @@ export default function IntegrationsGrid() {
 
         <Link
           href={withTrailingSlash("/docs/v1.3/integrations/custom/pagerduty-emulation/")}
-          className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-blue-600/20"
+          className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#d21a1b] hover:bg-[#b41516] text-white text-xs font-bold transition-all shadow-md shadow-red-700/20"
         >
           Events API v2 setup
           <ArrowRight className="w-4 h-4" />
@@ -594,7 +594,7 @@ export default function IntegrationsGrid() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={`Search ${BRAND.integrationCountLabel} integrations by name, APM, cloud, or protocol…`}
-            className="w-full bg-white border border-slate-300 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 shadow-sm"
+            className="w-full bg-white border border-slate-300 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#d21a1b] shadow-sm"
           />
           {searchQuery && (
             <button
@@ -614,7 +614,7 @@ export default function IntegrationsGrid() {
               onClick={() => setActiveCategory(cat)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all border ${
                 activeCategory === cat
-                  ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+                  ? 'bg-[#d21a1b] text-white border-red-600 shadow-md'
                   : 'bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 border-slate-200 shadow-sm'
               }`}
             >
@@ -630,19 +630,19 @@ export default function IntegrationsGrid() {
           <div
             key={integration.id}
             onClick={() => setSelectedIntegration(integration)}
-            className="group flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-500/40 hover:shadow-md transition-all cursor-pointer shadow-sm relative overflow-hidden"
+            className="group flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200 hover:border-red-500/40 hover:shadow-md transition-all cursor-pointer shadow-sm relative overflow-hidden"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 p-2 flex items-center justify-center shrink-0">
                   {integrationIcons[integration.iconKey]}
                 </div>
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-blue-50 border border-blue-200 text-blue-700">
+                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-red-50 border border-red-200 text-red-700">
                   {integration.protocol}
                 </span>
               </div>
 
-              <h3 className="font-bold text-slate-900 text-base group-hover:text-blue-600 transition-colors mb-1.5">
+              <h3 className="font-bold text-slate-900 text-base group-hover:text-red-600 transition-colors mb-1.5">
                 {integration.name}
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed mb-4">
@@ -650,9 +650,9 @@ export default function IntegrationsGrid() {
               </p>
             </div>
 
-            <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-blue-600 group-hover:text-blue-700">
+            <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-red-600 group-hover:text-red-700">
               <span className="flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5 text-blue-600" />
+                <Zap className="w-3.5 h-3.5 text-red-600" />
                 Inspect Payload
               </span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -669,7 +669,7 @@ export default function IntegrationsGrid() {
               setSearchQuery('');
               setActiveCategory('All');
             }}
-            className="mt-3 text-xs font-semibold text-blue-400 hover:underline"
+            className="mt-3 text-xs font-semibold text-red-400 hover:underline"
           >
             Reset search filters
           </button>
@@ -689,7 +689,7 @@ export default function IntegrationsGrid() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="px-2.5 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] font-mono font-bold">
+                    <span className="px-2.5 py-0.5 rounded-md bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] font-mono font-bold">
                       {selectedIntegration.category}
                     </span>
                     <span className="text-xs text-slate-400">• Native Webhook Ingestion</span>
@@ -716,10 +716,10 @@ export default function IntegrationsGrid() {
             {/* Webhook Endpoint Box */}
             <div className="space-y-2">
               <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <Code2 className="w-3.5 h-3.5 text-blue-400" />
+                <Code2 className="w-3.5 h-3.5 text-red-400" />
                 Ingestion Endpoint (POST)
               </label>
-              <div className="flex items-center justify-between p-3 rounded-xl bg-black/60 border border-white/10 font-mono text-xs text-sky-400">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-black/60 border border-white/10 font-mono text-xs text-red-400">
                 <span className="truncate pr-3">
                   https://opsknight.yourdomain.com/api/webhooks/{selectedIntegration.webhookSlug}
                 </span>
@@ -741,9 +741,9 @@ export default function IntegrationsGrid() {
                 Forensic Security & Authentication
               </label>
               <div className="p-3 rounded-xl bg-slate-950/80 border border-white/5 text-xs font-mono space-y-1 text-slate-300">
-                <div><span className="text-blue-400">Content-Type:</span> application/json</div>
-                <div><span className="text-blue-400">X-OpsKnight-Signature:</span> HMAC-SHA256(payload, secret)</div>
-                <div><span className="text-blue-400">X-OpsKnight-Timestamp:</span> Unix Epoch Seconds (5-min replay protection)</div>
+                <div><span className="text-red-400">Content-Type:</span> application/json</div>
+                <div><span className="text-red-400">X-OpsKnight-Signature:</span> HMAC-SHA256(payload, secret)</div>
+                <div><span className="text-red-400">X-OpsKnight-Timestamp:</span> Unix Epoch Seconds (5-min replay protection)</div>
               </div>
             </div>
 
@@ -756,7 +756,7 @@ export default function IntegrationsGrid() {
                 </label>
                 <button
                   onClick={() => handleCopyPayload(selectedIntegration.samplePayload)}
-                  className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1"
+                  className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1"
                 >
                   {copiedPayload ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
                   {copiedPayload ? 'Copied' : 'Copy JSON'}
@@ -773,13 +773,13 @@ export default function IntegrationsGrid() {
                 onClick={() => handleCopyCurl(selectedIntegration)}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-all border border-white/10"
               >
-                {copiedCurl ? <Check className="w-4 h-4 text-emerald-400" /> : <Terminal className="w-4 h-4 text-sky-400" />}
+                {copiedCurl ? <Check className="w-4 h-4 text-emerald-400" /> : <Terminal className="w-4 h-4 text-red-400" />}
                 {copiedCurl ? 'cURL Command Copied!' : 'Copy cURL Test Command'}
               </button>
 
               <Link
                 href={withTrailingSlash(selectedIntegration.docPath)}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#d21a1b] hover:bg-[#b41516] text-white text-xs font-bold transition-all shadow-md"
               >
                 Read Setup Guide
                 <ExternalLink className="w-3.5 h-3.5" />

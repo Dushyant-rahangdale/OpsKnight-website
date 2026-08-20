@@ -60,7 +60,7 @@ export function DocsToc({ headings }: { headings: TocItem[] }) {
                 onClick={(e) => handleClick(e, item.id)}
                 className={`block border-l-2 py-1 pl-3 text-sm leading-snug ${
                   isActive
-                    ? "border-[#2563eb] font-medium text-[#111827]"
+                    ? "border-[#d21a1b] font-medium text-[#111827]"
                     : "border-transparent text-slate-500 hover:text-[#111827]"
                 }`}
               >

@@ -123,7 +123,8 @@ export const BRAND_COLORS = {
   muted: "#4b5563",
   chrome: "#0f172a",
   chromeMuted: "#1e293b",
-  accent: "#2563eb",
+  accent: "#d21a1b",
+  accentHover: "#b41516",
   success: "#059669",
   error: "#be123c",
 } as const;

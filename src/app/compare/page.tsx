@@ -35,11 +35,11 @@ export default function ComparePage() {
               <Link
                 key={vendor.slug}
                 href={vendor.href}
-                className="rounded-[12px] border border-slate-200 bg-white p-4 hover:border-slate-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+                className="rounded-[12px] border border-slate-200 bg-white p-4 hover:border-slate-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
               >
                 <p className="text-sm font-semibold text-[#111827]">{vendor.name}</p>
                 <p className="mt-1 text-[11px] text-[#4b5563]">{vendor.category}</p>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#2563eb]">
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#d21a1b]">
                   vs {BRAND.name}
                   <ArrowRight className="h-3 w-3" />
                 </span>
@@ -61,7 +61,7 @@ export default function ComparePage() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#2563eb] hover:underline"
+                  className="text-[#d21a1b] hover:underline"
                 >
                   {link.label}
                 </a>
@@ -78,13 +78,13 @@ export default function ComparePage() {
         <div className="mt-16 flex flex-wrap items-center gap-4">
           <Link
             href={BRAND.links.docs}
-            className="inline-flex h-11 items-center rounded-[12px] bg-[#2563eb] px-6 text-sm font-semibold text-white hover:bg-blue-700"
+            className="inline-flex h-11 items-center rounded-[12px] bg-[#d21a1b] px-6 text-sm font-semibold text-white hover:bg-[#b41516]"
           >
             Install
           </Link>
           <Link
             href={BRAND.links.github}
-            className="text-sm font-medium text-[#2563eb] hover:underline"
+            className="text-sm font-medium text-[#d21a1b] hover:underline"
           >
             Source on GitHub
           </Link>

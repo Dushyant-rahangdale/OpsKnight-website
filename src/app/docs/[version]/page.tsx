@@ -99,7 +99,7 @@ export default async function DocsIndexPage({
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href={`/docs/${version}/getting-started/installation/`}
-            className="inline-flex h-11 items-center gap-2 rounded-[12px] bg-[#2563eb] px-5 text-sm font-semibold text-white hover:bg-blue-700"
+            className="inline-flex h-11 items-center gap-2 rounded-[12px] bg-[#d21a1b] px-5 text-sm font-semibold text-white hover:bg-[#b41516]"
           >
             <Rocket className="h-4 w-4" />
             Install
@@ -125,7 +125,7 @@ export default async function DocsIndexPage({
             <p className="mt-2 text-sm leading-relaxed text-[#4b5563]">
               {card.description}
             </p>
-            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#2563eb]">
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#d21a1b]">
               Open
               <ArrowRight className="h-3.5 w-3.5" />
             </span>

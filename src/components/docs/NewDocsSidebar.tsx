@@ -100,7 +100,7 @@ function NavLink({
                 isDirectActive
                   ? "text-white font-bold"
                   : containsActive
-                    ? "text-[#93c5fd]"
+                    ? "text-[#fca5a5]"
                     : "text-slate-400 group-hover:text-white"
               )}
             >
@@ -157,7 +157,7 @@ function NavLink({
         "block rounded-md border-l-2 px-2 py-1.5 text-[13px] leading-snug transition-colors",
         nested ? "ml-0" : "ml-1",
         active
-          ? "border-[#2563eb] bg-white/10 text-white font-medium"
+          ? "border-[#d21a1b] bg-white/10 text-white font-medium"
           : "border-transparent text-slate-400 hover:bg-white/5 hover:text-white"
       )}
     >
@@ -203,9 +203,9 @@ function CollapsibleSection({
               className={cn(
                 "h-4 w-4 shrink-0 transition-colors",
                 isDirectActive
-                  ? "text-blue-400"
+                  ? "text-red-400"
                   : containsActive
-                    ? "text-[#93c5fd]"
+                    ? "text-[#fca5a5]"
                     : "text-slate-500 group-hover:text-slate-300"
               )}
             />
@@ -227,7 +227,7 @@ function CollapsibleSection({
             <Icon
               className={cn(
                 "h-4 w-4 shrink-0",
-                containsActive ? "text-[#93c5fd]" : "text-slate-500"
+                containsActive ? "text-[#fca5a5]" : "text-slate-500"
               )}
             />
             <span

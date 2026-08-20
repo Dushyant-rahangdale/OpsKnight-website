@@ -62,7 +62,7 @@ export default function UseCasesPage() {
               <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">{item.body}</p>
               <Link
                 href={item.href}
-                className="mt-4 inline-block text-sm font-semibold text-[#2563eb] hover:underline"
+                className="mt-4 inline-block text-sm font-semibold text-[#d21a1b] hover:underline"
               >
                 {item.cta}
               </Link>

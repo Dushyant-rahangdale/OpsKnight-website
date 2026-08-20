@@ -38,7 +38,7 @@ export function Footer() {
   return (
     <footer className="relative border-t border-slate-800 bg-[#0f172a] pt-16 pb-10">
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-[#2563eb] via-[#2563eb]/30 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-[#d21a1b] via-[#d21a1b]/30 to-transparent"
         aria-hidden
       />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -57,14 +57,14 @@ export function Footer() {
                 href={BRAND.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+                className="hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
                 aria-label="GitHub"
               >
                 <Github className="h-5 w-5" />
               </a>
               <a
                 href={`mailto:${BRAND.links.email}`}
-                className="hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+                className="hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
                 aria-label="Email"
               >
                 <Mail className="h-5 w-5" />
@@ -73,7 +73,7 @@ export function Footer() {
                 href={BRAND.links.sponsor}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+                className="hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
                 aria-label="Sponsor"
               >
                 <Heart className="h-5 w-5" />
@@ -96,7 +96,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+                      className="text-sm text-slate-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
                     >
                       {link.label}
                     </Link>
@@ -116,7 +116,7 @@ export function Footer() {
             href={BRAND.links.status}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-slate-400 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+            className="flex items-center gap-2 text-sm text-slate-400 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
           >
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#059669]" />
             Live status demo

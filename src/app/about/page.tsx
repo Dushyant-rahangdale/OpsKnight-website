@@ -71,7 +71,7 @@ export default function AboutPage() {
             href={BRAND.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 items-center rounded-[12px] bg-[#2563eb] px-5 text-sm font-semibold text-white hover:bg-blue-700"
+            className="inline-flex h-10 items-center rounded-[12px] bg-[#d21a1b] px-5 text-sm font-semibold text-white hover:bg-[#b41516]"
           >
             GitHub
           </a>

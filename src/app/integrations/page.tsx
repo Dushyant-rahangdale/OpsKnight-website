@@ -17,7 +17,7 @@ export default function IntegrationsPage() {
         
         {/* Header */}
         <header className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-600 text-xs font-semibold mb-4">
             <Blocks className="w-3.5 h-3.5" />
             {BRAND.integrationCountLabel} native integrations · no plugins
           </div>
@@ -37,7 +37,7 @@ export default function IntegrationsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-6 space-y-4">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-600 text-xs font-bold uppercase tracking-wider">
                 <Webhook className="w-3.5 h-3.5" />
                 Custom Ingestion API
               </div>
@@ -62,7 +62,7 @@ export default function IntegrationsPage() {
               <div className="pt-2">
                 <Link
                   href="/docs/v1.3/integrations/custom/webhooks/"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-blue-600/20"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#d21a1b] hover:bg-[#b41516] text-white text-xs font-bold transition-all shadow-md shadow-red-700/20"
                 >
                   Read Custom Webhook Documentation
                 </Link>

@@ -22,7 +22,7 @@ export function Features() {
           <article className="overflow-hidden rounded-[16px] border border-slate-200 bg-white">
             <div className="grid lg:grid-cols-[1.4fr_1fr]">
               <div className="p-8 md:p-10">
-                <p className="font-mono text-[11px] font-medium tracking-wide text-[#2563eb]">
+                <p className="font-mono text-[11px] font-medium tracking-wide text-[#d21a1b]">
                   01 · Who gets woken up
                 </p>
                 <h3 className="mt-4 text-2xl font-semibold tracking-tight text-[#111827] sm:text-3xl">
@@ -60,7 +60,7 @@ export function Features() {
 
           <div className="grid gap-4 lg:grid-cols-5">
             <article className="rounded-[16px] border border-slate-800 bg-[#0f172a] p-8 text-white lg:col-span-3 md:p-10">
-              <p className="font-mono text-[11px] font-medium tracking-wide text-blue-300">
+              <p className="font-mono text-[11px] font-medium tracking-wide text-red-300">
                 02 · How the team talks
               </p>
               <h3 className="mt-4 text-2xl font-semibold tracking-tight">
@@ -79,7 +79,7 @@ export function Features() {
             </article>
 
             <article className="rounded-[16px] border border-slate-200 bg-white p-8 lg:col-span-2 md:p-10">
-              <p className="font-mono text-[11px] font-medium tracking-wide text-[#2563eb]">
+              <p className="font-mono text-[11px] font-medium tracking-wide text-[#d21a1b]">
                 03 · What customers see
               </p>
               <h3 className="mt-4 text-xl font-semibold tracking-tight text-[#111827]">
@@ -94,7 +94,7 @@ export function Features() {
                 href={BRAND.links.status}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#2563eb] hover:underline"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#d21a1b] hover:underline"
               >
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#059669]" />
                 Live example

@@ -9,7 +9,7 @@ import {
 function Cell({ value, highlight }: { value: CompareCell; highlight?: boolean }) {
   if (value === true) {
     return (
-      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-[#2563eb]">
+      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-red-50 text-[#d21a1b]">
         <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
       </span>
     );
@@ -44,7 +44,7 @@ export function CompareTable() {
                 key={vendor.id}
                 className={
                   vendor.highlight
-                    ? "border-x border-slate-200 bg-blue-50 px-3 py-3.5 text-sm font-semibold text-[#2563eb]"
+                    ? "border-x border-slate-200 bg-red-50 px-3 py-3.5 text-sm font-semibold text-[#d21a1b]"
                     : "bg-slate-50 px-3 py-3.5 text-sm font-medium text-slate-600"
                 }
               >
@@ -77,7 +77,7 @@ export function CompareTable() {
                       key={vendor.id}
                       className={
                         vendor.highlight
-                          ? "border-x border-slate-100 bg-blue-50/40 px-3 py-3 align-top"
+                          ? "border-x border-slate-100 bg-red-50/40 px-3 py-3 align-top"
                           : "px-3 py-3 align-top"
                       }
                     >

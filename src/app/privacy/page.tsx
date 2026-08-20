@@ -46,7 +46,7 @@ export default function PrivacyPage() {
           </p>
           <h2 className="pt-2 text-2xl font-semibold text-[#111827]">Questions</h2>
           <p>
-            <Link href="/contact" className="text-[#2563eb] hover:underline">
+            <Link href="/contact" className="text-[#d21a1b] hover:underline">
               Community
             </Link>
             , {BRAND.links.email}, or the GitHub repository.

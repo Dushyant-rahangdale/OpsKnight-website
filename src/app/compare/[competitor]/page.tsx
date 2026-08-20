@@ -20,7 +20,7 @@ const ALIAS_SLUGS = ["incident-io", "victorops"] as const;
 function Cell({ value }: { value: CompareCell }) {
   if (value === true) {
     return (
-      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-[#2563eb]">
+      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-red-50 text-[#d21a1b]">
         <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
       </span>
     );
@@ -99,7 +99,7 @@ export default async function CompetitorComparePage({
                 href={vendor.href}
                 className={`rounded-full border px-3 py-1.5 text-xs font-medium ${
                   active
-                    ? "border-blue-600 bg-blue-50 text-blue-700"
+                    ? "border-red-600 bg-red-50 text-red-700"
                     : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
                 }`}
               >
@@ -118,7 +118,7 @@ export default async function CompetitorComparePage({
                   <th className="px-4 py-3 text-xs font-medium uppercase tracking-wide text-slate-500">
                     Capability
                   </th>
-                  <th className="border-x border-slate-200 bg-blue-50 px-4 py-3 text-sm font-semibold text-[#2563eb]">
+                  <th className="border-x border-slate-200 bg-red-50 px-4 py-3 text-sm font-semibold text-[#d21a1b]">
                     {BRAND.name}
                   </th>
                   <th className="px-4 py-3 text-sm font-medium text-slate-600">{blurb.title}</th>
@@ -140,7 +140,7 @@ export default async function CompetitorComparePage({
                             <p className="mt-1 text-[11px] leading-snug text-slate-400">{row.source}</p>
                           ) : null}
                         </td>
-                        <td className="border-x border-slate-100 bg-blue-50/40 px-4 py-3">
+                        <td className="border-x border-slate-100 bg-red-50/40 px-4 py-3">
                           <Cell value={row.values.opsknight} />
                         </td>
                         <td className="px-4 py-3">
@@ -161,7 +161,7 @@ export default async function CompetitorComparePage({
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#2563eb] hover:underline"
+                  className="text-[#d21a1b] hover:underline"
                 >
                   {link.label}
                 </a>
@@ -173,14 +173,14 @@ export default async function CompetitorComparePage({
         <div className="flex flex-wrap items-center gap-4">
           <Link
             href="/compare"
-            className="inline-flex h-11 items-center rounded-[12px] bg-[#2563eb] px-6 text-sm font-semibold text-white hover:bg-blue-700"
+            className="inline-flex h-11 items-center rounded-[12px] bg-[#d21a1b] px-6 text-sm font-semibold text-white hover:bg-[#b41516]"
           >
             Full matrix and cost sketch
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
           <Link
             href={BRAND.links.docs}
-            className="text-sm font-medium text-[#2563eb] hover:underline"
+            className="text-sm font-medium text-[#d21a1b] hover:underline"
           >
             Install docs
           </Link>

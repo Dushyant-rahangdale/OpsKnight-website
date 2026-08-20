@@ -153,7 +153,7 @@ export function ProductTour() {
               <ul className="mt-5 space-y-2">
                 {currentTab.notes.map((note) => (
                   <li key={note} className="flex items-start gap-2 text-sm text-slate-700">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#2563eb]" strokeWidth={2} />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#d21a1b]" strokeWidth={2} />
                     {note}
                   </li>
                 ))}
@@ -163,7 +163,7 @@ export function ProductTour() {
                   href={BRAND.links.status}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[#2563eb] hover:underline"
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[#d21a1b] hover:underline"
                 >
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#059669]" />
                   Live status example

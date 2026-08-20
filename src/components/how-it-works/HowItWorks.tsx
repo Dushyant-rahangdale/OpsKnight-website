@@ -57,7 +57,7 @@ export function HowItWorks() {
             return (
               <li key={step.n} className="bg-white p-6">
                 <div className="mb-4 flex items-center justify-between">
-                  <Icon className="h-5 w-5 text-[#2563eb]" strokeWidth={1.75} />
+                  <Icon className="h-5 w-5 text-[#d21a1b]" strokeWidth={1.75} />
                   <span className="font-mono text-[11px] text-slate-400">{step.n}</span>
                 </div>
                 <h3 className="text-base font-semibold text-[#111827]">{step.title}</h3>

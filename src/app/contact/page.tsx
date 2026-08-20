@@ -110,12 +110,12 @@ export default function ContactPage() {
               const inner = (
                 <>
                   <div className="mb-6 flex items-center justify-between">
-                    <Icon className="h-5 w-5 text-[#2563eb]" strokeWidth={1.75} />
+                    <Icon className="h-5 w-5 text-[#d21a1b]" strokeWidth={1.75} />
                     <span className="font-mono text-[11px] text-slate-400">{path.n}</span>
                   </div>
                   <h3 className="text-lg font-semibold text-[#111827]">{path.title}</h3>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-[#4b5563]">{path.body}</p>
-                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#2563eb]">
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#d21a1b]">
                     {path.cta}
                     <ArrowRight className="h-4 w-4" />
                   </span>

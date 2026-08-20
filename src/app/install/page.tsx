@@ -84,7 +84,7 @@ docker compose up -d`}
             <p className="mt-3">
               <Link
                 href="/docs/latest/deployment/helm/"
-                className="text-sm font-semibold text-[#2563eb] hover:underline"
+                className="text-sm font-semibold text-[#d21a1b] hover:underline"
               >
                 Helm deployment docs
               </Link>

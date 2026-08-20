@@ -45,7 +45,7 @@ export function Comparison() {
         <div className="mt-8">
           <Link
             href="/compare"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#2563eb] hover:underline"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#d21a1b] hover:underline"
           >
             Full matrix and a cost sketch (your invoice rates)
             <ArrowRight className="h-4 w-4" />

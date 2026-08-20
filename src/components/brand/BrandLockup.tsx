@@ -18,7 +18,7 @@ export function BrandLockup({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] ${className}`}
+      className={`inline-flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b] ${className}`}
     >
       <Image
         src={BRAND.assets.logo}

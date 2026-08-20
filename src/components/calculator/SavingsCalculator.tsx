@@ -131,7 +131,7 @@ export function SavingsCalculator() {
           <select
             value={planId}
             onChange={(e) => setPlanId(e.target.value)}
-            className="h-9 w-full rounded-[10px] border border-slate-200 bg-white px-2 font-sans text-xs text-slate-900 focus:border-[#2563eb] focus:outline-none"
+            className="h-9 w-full rounded-[10px] border border-slate-200 bg-white px-2 font-sans text-xs text-slate-900 focus:border-[#d21a1b] focus:outline-none"
           >
             {vendorPlans.map((p) => (
               <option key={p.id} value={p.id}>
@@ -150,7 +150,7 @@ export function SavingsCalculator() {
             max={5000}
             value={engineers}
             onChange={(e) => setEngineers(Math.max(1, parseInt(e.target.value, 10) || 1))}
-            className="h-9 w-full rounded-[10px] border border-slate-200 bg-white px-2 font-mono text-xs text-slate-900 focus:border-[#2563eb] focus:outline-none"
+            className="h-9 w-full rounded-[10px] border border-slate-200 bg-white px-2 font-mono text-xs text-slate-900 focus:border-[#d21a1b] focus:outline-none"
           />
         </label>
         {plan.kind === "custom" ? (
@@ -165,7 +165,7 @@ export function SavingsCalculator() {
               placeholder="Invoice"
               value={customRate}
               onChange={(e) => setCustomRate(e.target.value)}
-              className="h-9 w-full rounded-[10px] border border-slate-200 bg-white px-2 font-mono text-xs text-slate-900 focus:border-[#2563eb] focus:outline-none"
+              className="h-9 w-full rounded-[10px] border border-slate-200 bg-white px-2 font-mono text-xs text-slate-900 focus:border-[#d21a1b] focus:outline-none"
             />
           </label>
         ) : (
@@ -225,7 +225,7 @@ export function SavingsCalculator() {
             placeholder="Your bill for this workload"
             value={k8sMonthly}
             onChange={(e) => setK8sMonthly(e.target.value)}
-            className="h-9 w-full max-w-xs rounded-[10px] border border-slate-200 px-2 font-mono text-xs focus:border-[#2563eb] focus:outline-none"
+            className="h-9 w-full max-w-xs rounded-[10px] border border-slate-200 px-2 font-mono text-xs focus:border-[#d21a1b] focus:outline-none"
           />
         </label>
       ) : null}
@@ -243,8 +243,8 @@ export function SavingsCalculator() {
             {quote.amount != null ? formatCurrency(quote.amount) : "—"}
           </p>
         </div>
-        <div className="border-r border-slate-200 bg-blue-50/60 px-2 py-3">
-          <p className="text-[10px] font-medium uppercase tracking-wide text-blue-700">
+        <div className="border-r border-slate-200 bg-red-50/60 px-2 py-3">
+          <p className="text-[10px] font-medium uppercase tracking-wide text-red-700">
             {BRAND.name}
           </p>
           <p className="mt-0.5 font-mono text-lg font-semibold text-slate-900 sm:text-xl">
@@ -264,7 +264,7 @@ export function SavingsCalculator() {
         {plan.sourceUrl ? (
           <>
             {" "}
-            <a href={plan.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-[#2563eb] hover:underline">
+            <a href={plan.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-[#d21a1b] hover:underline">
               Source
             </a>
           </>

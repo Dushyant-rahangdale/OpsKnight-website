@@ -20,7 +20,7 @@ export default function TermsPage() {
             or running the OpsKnight software is governed only by the{" "}
             <a
               href={BRAND.links.license}
-              className="text-[#2563eb] hover:underline"
+              className="text-[#d21a1b] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >

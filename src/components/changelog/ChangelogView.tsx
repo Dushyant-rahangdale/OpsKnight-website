@@ -19,11 +19,11 @@ const FILTERS: { id: "all" | ChangeKind; label: string }[] = [
 ];
 
 const KIND_TONE: Record<ChangeKind, string> = {
-  added: "bg-blue-50 text-[#2563eb]",
+  added: "bg-red-50 text-[#d21a1b]",
   security: "bg-emerald-50 text-emerald-700",
   fixed: "bg-amber-50 text-amber-800",
   changed: "bg-slate-100 text-slate-600",
-  performance: "bg-sky-50 text-sky-800",
+  performance: "bg-red-50 text-red-800",
 };
 
 function CopyPull({ tag }: { tag: string }) {
@@ -43,7 +43,7 @@ function CopyPull({ tag }: { tag: string }) {
           setCopied(true);
           setTimeout(() => setCopied(false), 1600);
         }}
-        className="shrink-0 rounded-md p-2 text-slate-400 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+        className="shrink-0 rounded-md p-2 text-slate-400 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
         aria-label="Copy docker pull command"
       >
         {copied ? (
@@ -78,7 +78,7 @@ function ReleaseArticle({
           {release.version}
         </h2>
         {release.badge && (
-          <span className="rounded-full bg-[#2563eb] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+          <span className="rounded-full bg-[#d21a1b] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
             {release.badge}
           </span>
         )}
@@ -94,7 +94,7 @@ function ReleaseArticle({
         href={release.githubReleaseUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[#2563eb] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+        className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[#d21a1b] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
       >
         Notes on GitHub
         <ArrowUpRight className="h-3.5 w-3.5" />
@@ -183,7 +183,7 @@ export function ChangelogView() {
             href={BRAND.links.releases}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 items-center rounded-[12px] bg-[#2563eb] px-4 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2"
+            className="inline-flex h-10 items-center rounded-[12px] bg-[#d21a1b] px-4 text-sm font-semibold text-white hover:bg-[#b41516] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b] focus-visible:ring-offset-2"
           >
             All GitHub releases
           </Link>
@@ -208,7 +208,7 @@ export function ChangelogView() {
             role="tab"
             aria-selected={filter === f.id}
             onClick={() => setFilter(f.id)}
-            className={`rounded-full px-3 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb] ${
+            className={`rounded-full px-3 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b] ${
               filter === f.id
                 ? "bg-[#0f172a] text-white"
                 : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
@@ -238,13 +238,13 @@ export function ChangelogView() {
                       !shown
                         ? "border-transparent text-slate-300"
                         : active === rel.slug
-                          ? "border-[#2563eb] font-semibold text-[#111827]"
+                          ? "border-[#d21a1b] font-semibold text-[#111827]"
                           : "border-transparent text-slate-500 hover:text-[#111827]"
                     }`}
                   >
                     {rel.version}
                     {rel.badge ? (
-                      <span className="ml-2 font-sans text-[10px] font-medium uppercase tracking-wide text-[#2563eb]">
+                      <span className="ml-2 font-sans text-[10px] font-medium uppercase tracking-wide text-[#d21a1b]">
                         {rel.badge}
                       </span>
                     ) : null}

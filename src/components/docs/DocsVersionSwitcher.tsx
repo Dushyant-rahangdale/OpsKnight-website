@@ -50,7 +50,7 @@ export function DocsVersionSwitcher({
       >
         <span className="font-mono text-[13px]">{currentVersion}</span>
         {isLatest(currentVersion) && (
-          <span className="rounded-full bg-[#2563eb]/20 px-1.5 py-0.5 text-[10px] font-medium text-[#93c5fd]">
+          <span className="rounded-full bg-[#d21a1b]/20 px-1.5 py-0.5 text-[10px] font-medium text-[#fca5a5]">
             Latest
           </span>
         )}
@@ -77,7 +77,7 @@ export function DocsVersionSwitcher({
                 {isLatest(version.id) && (
                   <span className="text-[10px] text-slate-500">Latest</span>
                 )}
-                {isSelected && <Check className="h-3.5 w-3.5 text-[#60a5fa]" />}
+                {isSelected && <Check className="h-3.5 w-3.5 text-[#f87171]" />}
               </button>
             );
           })}

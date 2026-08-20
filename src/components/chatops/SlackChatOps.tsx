@@ -75,7 +75,7 @@ export function SlackChatOps() {
               </div>
               <div className="text-[11px] text-slate-400 truncate flex items-center gap-1.5 mt-0.5">
                 <span>🚨 High-EC2-CPUUtilization | HIGH |</span>
-                <span className="text-sky-400 hover:underline cursor-pointer">https://opsknight.com/incidents/...</span>
+                <span className="text-red-400 hover:underline cursor-pointer">https://opsknight.com/incidents/...</span>
               </div>
             </div>
 
@@ -143,7 +143,7 @@ export function SlackChatOps() {
                   <span className="text-slate-500 text-[11px]">14:30</span>
                 </div>
                 <div className="text-slate-300 text-xs mt-0.5">
-                  set the channel topic: 🚨 High-EC2-CPUUtilization | HIGH | <span className="text-sky-400 hover:underline">https://opsknight.com/incidents/cmsx07k9q00w4cq1iu5y5hh7q</span>
+                  set the channel topic: 🚨 High-EC2-CPUUtilization | HIGH | <span className="text-red-400 hover:underline">https://opsknight.com/incidents/cmsx07k9q00w4cq1iu5y5hh7q</span>
                 </div>
               </div>
             </div>
@@ -224,7 +224,7 @@ export function SlackChatOps() {
                     <div className="flex items-center gap-1.5">
                       <Video size={14} className="text-slate-400" />
                       <span>Video Bridge: </span>
-                      <span className="text-sky-400 hover:underline cursor-pointer">https://meet.jit.si/opsknight-inc-u5y5hh7q</span>
+                      <span className="text-red-400 hover:underline cursor-pointer">https://meet.jit.si/opsknight-inc-u5y5hh7q</span>
                     </div>
                   </div>
 
@@ -285,12 +285,12 @@ export function SlackChatOps() {
                   </div>
 
                   {/* Jitsi Video Bridge Unfurl Box */}
-                  <div className="border-l-4 border-l-sky-500 pl-3 py-1.5 bg-[#222529]/60 rounded-r-lg max-w-lg space-y-1">
+                  <div className="border-l-4 border-l-red-500 pl-3 py-1.5 bg-[#222529]/60 rounded-r-lg max-w-lg space-y-1">
                     <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-medium">
-                      <div className="w-3.5 h-3.5 bg-sky-500 rounded-sm flex items-center justify-center text-[9px] text-white font-bold">J</div>
+                      <div className="w-3.5 h-3.5 bg-red-500 rounded-sm flex items-center justify-center text-[9px] text-white font-bold">J</div>
                       <span>meet.jit.si</span>
                     </div>
-                    <div className="font-bold text-sky-400 text-xs hover:underline cursor-pointer">
+                    <div className="font-bold text-red-400 text-xs hover:underline cursor-pointer">
                       Jitsi Meet
                     </div>
                     <div className="text-[11px] text-slate-400">
@@ -338,7 +338,7 @@ export function SlackChatOps() {
           {/* Slack Input Box Footer */}
           <div className="p-3 bg-[#222529] border-t border-[#2c3136]">
             <div className="bg-[#1a1d21] border border-white/10 rounded-lg p-2.5 text-slate-400 text-xs flex items-center justify-between">
-              <span className="text-slate-500">Send message or run <code className="text-sky-400 font-mono">/incident</code> command to #inc-y5hh7q-opsknight...</span>
+              <span className="text-slate-500">Send message or run <code className="text-red-400 font-mono">/incident</code> command to #inc-y5hh7q-opsknight...</span>
               <div className="flex items-center gap-2 text-slate-500">
                 <span className="text-xs">⚡</span>
                 <span className="text-xs">Aa</span>

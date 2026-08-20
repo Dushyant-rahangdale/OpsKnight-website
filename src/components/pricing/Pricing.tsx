@@ -44,7 +44,7 @@ export function Pricing() {
           <ul className="mt-8 grid grid-cols-1 gap-3 md:grid-cols-2">
             {features.map((feature) => (
               <li key={feature} className="flex items-center gap-2.5 text-sm text-slate-700">
-                <Check className="h-4 w-4 shrink-0 text-[#2563eb]" strokeWidth={2} />
+                <Check className="h-4 w-4 shrink-0 text-[#d21a1b]" strokeWidth={2} />
                 {feature}
               </li>
             ))}

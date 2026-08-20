@@ -34,7 +34,7 @@ export function CTA() {
             <button
               type="button"
               onClick={copyToClipboard}
-              className="rounded-md p-1.5 text-slate-500 hover:bg-white hover:text-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]"
+              className="rounded-md p-1.5 text-slate-500 hover:bg-white hover:text-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
               aria-label="Copy compose flow"
             >
               {copied ? (

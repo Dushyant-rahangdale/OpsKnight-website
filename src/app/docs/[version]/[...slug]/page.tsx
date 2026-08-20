@@ -165,7 +165,7 @@ export default async function DocsPage({
             href={editUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-blue-600 transition-colors"
+            className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-red-600 transition-colors"
           >
             Edit this page on GitHub
             <ChevronRight className="w-3 h-3" />

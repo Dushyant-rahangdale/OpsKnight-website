@@ -17,7 +17,7 @@ const swatches: { name: string; hex: string; use: string }[] = [
   { name: "Chrome", hex: BRAND_COLORS.chrome, use: "Night surfaces: nav, footer, command chrome" },
   { name: "Canvas", hex: BRAND_COLORS.canvas, use: "Page background" },
   { name: "Ink", hex: BRAND_COLORS.ink, use: "Headings and body on canvas" },
-  { name: "Pager", hex: BRAND_COLORS.accent, use: "Buttons and live signal" },
+  { name: "Shield", hex: BRAND_COLORS.accent, use: "Buttons, links, and live signal — from the logo" },
   { name: "Clear", hex: BRAND_COLORS.success, use: "Resolved / healthy" },
   { name: "Severity", hex: BRAND_COLORS.error, use: "Error and critical only" },
 ];
@@ -40,11 +40,11 @@ export default function BrandPage() {
             Brand · {BRAND.version}
           </p>
           <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-5xl">
-            Night chrome. Pager blue.
+            Night chrome. Shield red.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
             Use the OpsKnight logo as shipped. Do not replace it with a new mark.
-            Blue is for actions, not the whole page.
+            The shield red is for actions, not the whole page.
           </p>
         </div>
       </section>

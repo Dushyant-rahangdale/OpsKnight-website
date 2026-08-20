@@ -53,7 +53,7 @@ export function Integrations() {
         <div className="mt-8">
           <Link
             href="/integrations"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#2563eb] hover:underline"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#d21a1b] hover:underline"
           >
             All {BRAND.integrationCountLabel} parsers and sample payloads
             <ArrowRight className="h-4 w-4" />

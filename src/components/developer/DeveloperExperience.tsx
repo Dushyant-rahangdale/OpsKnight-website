@@ -60,7 +60,7 @@ export function DeveloperExperience() {
     <section className="bg-slate-950 py-24 px-6 md:px-12 lg:px-24 border-t border-white/5">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-6">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold mb-6">
             Developer Experience
           </span>
           <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6">
@@ -81,7 +81,7 @@ export function DeveloperExperience() {
                     onClick={() => setActiveTab(tab.id)}
                     className={`pb-3 text-sm font-medium transition-colors border-b-2 whitespace-nowrap ${
                       activeTab === tab.id
-                        ? 'border-blue-500 text-white'
+                        ? 'border-red-500 text-white'
                         : 'border-transparent text-slate-400 hover:text-slate-200'
                     }`}
                   >
@@ -96,8 +96,8 @@ export function DeveloperExperience() {
                 >
                   {copied ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-blue-400" />
-                      <span className="text-blue-400 font-medium">Copied!</span>
+                      <Check className="w-3.5 h-3.5 text-red-400" />
+                      <span className="text-red-400 font-medium">Copied!</span>
                     </>
                   ) : (
                     <>
@@ -117,7 +117,7 @@ export function DeveloperExperience() {
                 aria-label="Copy code"
               >
                 {copied ? (
-                  <Check className="w-4 h-4 text-blue-400" />
+                  <Check className="w-4 h-4 text-red-400" />
                 ) : (
                   <Copy className="w-4 h-4" />
                 )}

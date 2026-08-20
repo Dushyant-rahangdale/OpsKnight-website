@@ -2,12 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import { COMPETITORS } from "@/lib/competitors";
-import {
-  COMPARE_AS_OF,
-  COMPARE_FOOTNOTE,
-  COMPARE_SOURCE_LINKS,
-  OPKNIGHT_GAPS,
-} from "@/lib/compare-matrix";
+import { COMPARE_AS_OF, COMPARE_FOOTNOTE, COMPARE_SOURCE_LINKS } from "@/lib/compare-matrix";
 import { CompareTable } from "@/components/comparison/CompareTable";
 import { SavingsCalculator } from "@/components/calculator/SavingsCalculator";
 
@@ -75,39 +70,12 @@ export default function ComparePage() {
           </ul>
         </section>
 
-        <section className="mt-14 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-[14px] border border-slate-200 bg-white p-6 md:p-8">
-            <h2 className="text-lg font-semibold text-[#111827]">In v{BRAND.version}</h2>
-            <ul className="mt-4 space-y-2 text-sm text-[#4b5563]">
-              <li>Incidents, schedules, escalation policies, teams, services</li>
-              <li>Email, Twilio SMS, push, Slack, WhatsApp, outbound webhooks</li>
-              <li>Slack ChatOps war rooms; Jitsi / Meet / Zoom URL bridges</li>
-              <li>Status page with custom domain and privacy modes</li>
-              <li>Postmortems, action items, MTTA/MTTR/SLA analytics</li>
-              <li>PagerDuty Events API v2 drop-in, Jira Cloud sync</li>
-              <li>OIDC SSO, RBAC, audit log, API keys, encrypted secrets</li>
-              <li>Mobile PWA with push and biometrics</li>
-            </ul>
-          </div>
-          <div className="rounded-[14px] border border-slate-200 bg-white p-6 md:p-8">
-            <h2 className="text-lg font-semibold text-[#111827]">Not in this release</h2>
-            <ul className="mt-4 space-y-3">
-              {OPKNIGHT_GAPS.map((gap) => (
-                <li key={gap.item}>
-                  <p className="text-sm font-medium text-[#111827]">{gap.item}</p>
-                  <p className="mt-0.5 text-xs leading-relaxed text-[#4b5563]">{gap.detail}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
         <section className="mt-14">
           <h2 className="mb-2 text-xl font-semibold text-[#111827]">Cost sketch</h2>
           <p className="mb-6 max-w-2xl text-sm text-[#4b5563]">
-            {BRAND.name} software is $0. You pay for a VM or cluster you already
-            run. Enter the per-user rate on your current invoice — we do not
-            publish third-party list prices as facts.
+            {BRAND.name} software is $0. Pick a public list plan from a vendor that
+            is still selling seats. Confirm the number on their pricing page
+            before you treat it as an invoice.
           </p>
           <SavingsCalculator />
         </section>

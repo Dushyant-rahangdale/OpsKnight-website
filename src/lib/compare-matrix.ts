@@ -109,15 +109,15 @@ export const COMPARE_SECTIONS: CompareSection[] = [
       },
       {
         feature: "User pricing model",
-        source: "Public list pages as of 20 Aug 2026. PagerDuty and Splunk do not publish a single list price here.",
+        source: "Public list pages as of 20 Aug 2026.",
         values: {
           opsknight: "$0 software; unlimited users in the product",
-          pagerduty: "Per-user SaaS (plan + add-ons; ask PD)",
+          pagerduty: "Professional $25/user/mo or $21 annual (pagerduty.com/pricing). Business/Enterprise not extracted as a single number here; add-ons extra",
           incidentio: "Per seat: Responder + optional On-call. Team from $15/user/mo annual; On-call +$10. Pro $25 + $20 On-call",
           opsgenie: "No new sales. Existing per-user Cloud. Features moving to JSM. Support ends 5 Apr 2027",
           squadcast: "Per user. Pro from $15/user/mo annual; Premium from $24 (squadcast.com/pricing)",
-          splunk: "Commercial SKU / Observability bundle (sales quote)",
-          grafana: "Cloud IRM: 3 active users on Free; then ~$20/active user + $19/mo platform fee (IRM product page)",
+          splunk: "Public starting SKU $5/user/mo annual, up to 10 seats; larger is sales",
+          grafana: "Cloud IRM: $19/mo platform includes 3 active users, then $20/extra (IRM product page)",
         },
       },
       {

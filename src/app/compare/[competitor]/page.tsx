@@ -5,8 +5,11 @@ import { ArrowRight, Check, Minus } from "lucide-react";
 import { COMPETITORS } from "@/lib/competitors";
 import { BRAND } from "@/lib/brand";
 import {
+  COMPARE_AS_OF,
   COMPARE_FOOTNOTE,
   COMPARE_SECTIONS,
+  COMPARE_SOURCE_LINKS,
+  HONEST_BLURB,
   type CompareCell,
   vendorIdFromCompareSlug,
 } from "@/lib/compare-matrix";
@@ -31,33 +34,6 @@ function Cell({ value }: { value: CompareCell }) {
   }
   return <span className="text-sm leading-snug text-slate-700">{value}</span>;
 }
-
-const HONEST_BLURB: Record<string, { title: string; body: string }> = {
-  pagerduty: {
-    title: "PagerDuty",
-    body: "Vendor-hosted incident and on-call, typically sold per user. OpsKnight is software you host. Tools that already send Events API v2 can keep that payload shape.",
-  },
-  incidentio: {
-    title: "incident.io",
-    body: "Vendor-hosted incident response, typically Slack-first. Sold as SaaS. OpsKnight runs in your VPC and includes Slack war rooms in v1.3.1; it is not a hosted incident.io clone.",
-  },
-  opsgenie: {
-    title: "Opsgenie",
-    body: "Atlassian’s SaaS on-call product. OpsKnight is independent software you host; Jira Cloud sync ships in v1.3.1. We do not claim Atlassian’s current product roadmap.",
-  },
-  squadcast: {
-    title: "Squadcast",
-    body: "Vendor-hosted on-call and incident SaaS. OpsKnight is self-hosted with no seat meter in the product.",
-  },
-  splunk: {
-    title: "Splunk On-Call",
-    body: "Formerly VictorOps. Vendor-hosted on-call. OpsKnight is a separate self-hosted stack, not a Splunk add-on.",
-  },
-  grafana: {
-    title: "Grafana OnCall",
-    body: "Open-source OnCall (AGPL) and Grafana Cloud. OpsKnight is Apache-2.0, ships incident + status page + postmortems in one app, and does not require the Grafana microservice stack.",
-  },
-};
 
 export function generateStaticParams() {
   return [
@@ -104,7 +80,7 @@ export default async function CompetitorComparePage({
       <div className="mx-auto max-w-5xl space-y-14">
         <header className="max-w-3xl">
           <p className="mb-3 font-mono text-[11px] font-medium tracking-wide text-slate-500">
-            Compare · v{BRAND.version}
+            Compare · v{BRAND.version} · as of {COMPARE_AS_OF}
           </p>
           <h1 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-5xl">
             {BRAND.name} vs {blurb.title}
@@ -158,7 +134,12 @@ export default async function CompetitorComparePage({
                     </tr>
                     {section.rows.map((row) => (
                       <tr key={`${section.title}-${row.feature}`} className="border-t border-slate-100">
-                        <td className="px-4 py-3 text-sm font-medium text-[#111827]">{row.feature}</td>
+                        <td className="px-4 py-3">
+                          <p className="text-sm font-medium text-[#111827]">{row.feature}</p>
+                          {row.source ? (
+                            <p className="mt-1 text-[11px] leading-snug text-slate-400">{row.source}</p>
+                          ) : null}
+                        </td>
                         <td className="border-x border-slate-100 bg-blue-50/40 px-4 py-3">
                           <Cell value={row.values.opsknight} />
                         </td>
@@ -173,6 +154,20 @@ export default async function CompetitorComparePage({
             </table>
           </div>
           <p className="mt-3 text-xs leading-relaxed text-slate-500">{COMPARE_FOOTNOTE}</p>
+          <ul className="mt-3 columns-1 gap-x-8 text-[11px] leading-relaxed text-slate-500 sm:columns-2">
+            {COMPARE_SOURCE_LINKS.map((link) => (
+              <li key={link.href} className="break-inside-avoid pb-1">
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#2563eb] hover:underline"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <div className="flex flex-wrap items-center gap-4">
@@ -187,7 +182,7 @@ export default async function CompetitorComparePage({
             href={BRAND.links.docs}
             className="text-sm font-medium text-[#2563eb] hover:underline"
           >
-            Deploy docs
+            Install docs
           </Link>
         </div>
       </div>

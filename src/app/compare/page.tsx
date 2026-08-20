@@ -2,7 +2,12 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import { COMPETITORS } from "@/lib/competitors";
-import { COMPARE_FOOTNOTE, OPKNIGHT_GAPS } from "@/lib/compare-matrix";
+import {
+  COMPARE_AS_OF,
+  COMPARE_FOOTNOTE,
+  COMPARE_SOURCE_LINKS,
+  OPKNIGHT_GAPS,
+} from "@/lib/compare-matrix";
 import { CompareTable } from "@/components/comparison/CompareTable";
 import { SavingsCalculator } from "@/components/calculator/SavingsCalculator";
 
@@ -12,7 +17,7 @@ export default function ComparePage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="max-w-3xl">
           <p className="mb-3 font-mono text-[11px] font-medium tracking-wide text-slate-500">
-            Compare · v{BRAND.version}
+            Compare · v{BRAND.version} · as of {COMPARE_AS_OF}
           </p>
           <h1 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-5xl">
             OpsKnight next to the rest of the on-call market.
@@ -20,8 +25,9 @@ export default function ComparePage() {
           <p className="mt-4 text-base leading-relaxed text-[#4b5563] sm:text-lg">
             The {BRAND.name} column is what ships in {BRAND.version}: incidents,
             on-call, Slack war rooms, status page, {BRAND.integrationCountLabel}{" "}
-            inbound parsers, {BRAND.license}. Other columns describe how those
-            products are sold (SaaS vs self-host), not a full vendor audit.
+            inbound parsers, {BRAND.license}. Other columns are taken from each
+            vendor’s own docs and public pricing pages — including Opsgenie’s
+            end of support and Grafana OnCall OSS being archived.
           </p>
         </header>
 
@@ -53,6 +59,20 @@ export default function ComparePage() {
           <p className="mt-4 max-w-4xl text-xs leading-relaxed text-slate-500">
             {COMPARE_FOOTNOTE}
           </p>
+          <ul className="mt-3 columns-1 gap-x-8 text-[11px] leading-relaxed text-slate-500 sm:columns-2 lg:columns-3">
+            {COMPARE_SOURCE_LINKS.map((link) => (
+              <li key={link.href} className="break-inside-avoid pb-1">
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#2563eb] hover:underline"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section className="mt-14 grid gap-6 lg:grid-cols-2">
@@ -97,7 +117,7 @@ export default function ComparePage() {
             href={BRAND.links.docs}
             className="inline-flex h-11 items-center rounded-[12px] bg-[#2563eb] px-6 text-sm font-semibold text-white hover:bg-blue-700"
           >
-            Deploy
+            Install
           </Link>
           <Link
             href={BRAND.links.github}

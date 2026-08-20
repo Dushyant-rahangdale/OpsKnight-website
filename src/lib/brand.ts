@@ -9,7 +9,7 @@ export const BRAND = {
   description:
     "Self-hosted incident command center: on-call rotations, paging, Slack war rooms, status pages, and MTTA/MTTR — on your infrastructure.",
   fullDescription:
-    "OpsKnight is a self-hosted incident command center — an alternative to PagerDuty, incident.io, Opsgenie, Squadcast, Splunk On-Call, and Grafana OnCall.",
+    "OpsKnight is a self-hosted incident command center — an alternative to PagerDuty, incident.io, Opsgenie, Squadcast, Splunk On-Call, and Grafana Cloud IRM.",
   domain: "opsknight.com",
   integrationCount: 27,
   integrationCountLabel: "27",
@@ -168,5 +168,5 @@ export const COMPETITORS = [
   "Opsgenie",
   "Squadcast",
   "Splunk On-Call",
-  "Grafana OnCall",
+  "Grafana Cloud IRM",
 ] as const;

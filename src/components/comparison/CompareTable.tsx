@@ -68,6 +68,9 @@ export function CompareTable() {
                 <tr key={`${section.title}-${row.feature}`} className="border-t border-slate-100">
                   <td className="sticky left-0 z-10 bg-white px-4 py-3 align-top">
                     <p className="text-sm font-medium text-[#111827]">{row.feature}</p>
+                    {row.source ? (
+                      <p className="mt-1 max-w-[14rem] text-[11px] leading-snug text-slate-400">{row.source}</p>
+                    ) : null}
                   </td>
                   {COMPARE_VENDORS.map((vendor) => (
                     <td

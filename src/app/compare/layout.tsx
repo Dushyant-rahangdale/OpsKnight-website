@@ -3,7 +3,7 @@ import { BRAND } from "@/lib/brand";
 
 const title = `Compare ${BRAND.name}`;
 const description =
-  `Compare ${BRAND.name} with PagerDuty, incident.io, Opsgenie, Squadcast, Splunk On-Call, and Grafana OnCall.`;
+  `Compare ${BRAND.name} with PagerDuty, incident.io, Opsgenie, Squadcast, Splunk On-Call, and Grafana Cloud IRM.`;
 
 export const metadata: Metadata = {
   title,

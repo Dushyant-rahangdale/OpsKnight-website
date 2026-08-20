@@ -38,8 +38,8 @@ export const COMPETITORS: Competitor[] = [
     name: "Opsgenie",
     shortName: "Opsgenie",
     href: "/compare/opsgenie",
-    category: "Atlassian SaaS",
-    commercialModel: "Vendor-hosted, per-seat (typical)",
+    category: "Atlassian — EOL 5 Apr 2027",
+    commercialModel: "No new sales; existing per-user Cloud",
   },
   {
     slug: "squadcast",
@@ -59,11 +59,11 @@ export const COMPETITORS: Competitor[] = [
   },
   {
     slug: "grafana-oncall",
-    name: "Grafana OnCall",
-    shortName: "Grafana",
+    name: "Grafana Cloud IRM",
+    shortName: "Grafana IRM",
     href: "/compare/grafana-oncall",
-    category: "OSS / Grafana Cloud",
-    commercialModel: "Self-host OSS (AGPL) and/or Grafana Cloud paid",
+    category: "Grafana Cloud (OnCall OSS archived)",
+    commercialModel: "SaaS; ~$20/active user after 3 free",
   },
 ];
 

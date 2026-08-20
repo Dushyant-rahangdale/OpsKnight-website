@@ -42,7 +42,7 @@ export function Pricing() {
               </div>
               <div className="mt-8 flex flex-col gap-3">
                 <Link
-                  href="/install"
+                  href="/#run"
                   className="inline-flex h-11 items-center justify-center rounded-[12px] bg-[#d21a1b] px-6 text-sm font-semibold text-white hover:bg-[#b41516]"
                 >
                   Install

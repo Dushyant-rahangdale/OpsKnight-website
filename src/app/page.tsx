@@ -3,11 +3,10 @@ import { Hero } from "@/components/hero/Hero";
 import { HowItWorks } from "@/components/how-it-works/HowItWorks";
 import { ProductTour } from "@/components/showcase/ProductTour";
 import { Features } from "@/components/features/Features";
-import { StatusPageShowcase } from "@/components/showcase/StatusPageShowcase";
+import { InstallMethods } from "@/components/showcase/InstallMethods";
 import { Integrations } from "@/components/integrations/Integrations";
 import { Comparison } from "@/components/comparison/Comparison";
 import { Pricing } from "@/components/pricing/Pricing";
-import { CTA } from "@/components/cta/CTA";
 import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
@@ -30,11 +29,10 @@ export default function Home() {
       <HowItWorks />
       <ProductTour />
       <Features />
-      <StatusPageShowcase />
+      <InstallMethods />
       <Integrations />
       <Comparison />
       <Pricing />
-      <CTA />
     </>
   );
 }

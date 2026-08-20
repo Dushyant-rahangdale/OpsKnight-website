@@ -33,7 +33,7 @@ const items = [
     icon: Globe,
     title: "Customer status page",
     body: "Public, restricted, or private. Optional custom domain and email subscribe. One page per install.",
-    href: "/#status-page",
+    href: BRAND.links.status,
   },
   {
     n: "05",
@@ -92,7 +92,13 @@ export function Features() {
             return (
               <li key={item.title}>
                 {item.href ? (
-                  <Link href={item.href} className="block h-full">
+                  <Link
+                    href={item.href}
+                    className="block h-full"
+                    {...(item.href.startsWith("http")
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
                     {card}
                   </Link>
                 ) : (

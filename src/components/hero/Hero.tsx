@@ -1,30 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Copy, Check, Github } from "lucide-react";
+import { ArrowRight, Github } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
-type DeployTab = "compose" | "docker" | "helm" | "kustomize";
-
 export function Hero() {
-  const [activeDeploy, setActiveDeploy] = useState<DeployTab>("compose");
-  const [copied, setCopied] = useState(false);
-
-  const deployCommands: Record<DeployTab, string> = {
-    compose: BRAND.deploy.compose,
-    docker: BRAND.deploy.docker,
-    helm: BRAND.deploy.helm,
-    kustomize: BRAND.deploy.kustomize,
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(deployCommands[activeDeploy]);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <section className="relative overflow-hidden border-b border-slate-200 bg-[#f8fafc] pt-24 pb-16 md:pt-28 md:pb-20">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
@@ -60,7 +42,7 @@ export function Hero() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
-                href="/install"
+                href="#run"
                 className="inline-flex h-12 w-full items-center justify-center rounded-[12px] bg-[#d21a1b] px-7 text-sm font-semibold tracking-wide text-white shadow-sm shadow-red-700/20 transition-all hover:bg-[#b41516] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b] sm:w-auto"
               >
                 Install
@@ -76,10 +58,12 @@ export function Hero() {
                 GitHub
               </Link>
               <Link
-                href="#status-page"
+                href={BRAND.links.status}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-center text-sm font-semibold text-slate-700 hover:text-slate-900 hover:underline sm:text-left"
               >
-                Status page
+                Live status
               </Link>
             </div>
 
@@ -118,52 +102,6 @@ export function Hero() {
                 className="h-auto w-full"
               />
             </div>
-          </div>
-        </div>
-
-        <div className="mx-auto mt-12 max-w-4xl lg:mx-0 lg:max-w-none">
-          <div className="overflow-hidden rounded-[16px] border border-slate-800 bg-[#0f172a] shadow-lg shadow-slate-900/10">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 bg-slate-900/90 px-4 py-3">
-              <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-[#020617] p-1">
-                {(["compose", "docker", "helm", "kustomize"] as const).map((tab) => (
-                  <button
-                    key={tab}
-                    type="button"
-                    onClick={() => setActiveDeploy(tab)}
-                    className={`rounded-lg px-3 py-1 font-mono text-xs font-semibold transition-all ${
-                      activeDeploy === tab
-                        ? "bg-slate-800 text-white"
-                        : "text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    {tab === "compose" ? "Compose" : tab === "docker" ? "Docker" : tab === "helm" ? "Helm" : "Kustomize"}
-                  </button>
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={handleCopy}
-                className="flex items-center gap-1.5 rounded-lg bg-slate-800 px-3 py-1.5 font-mono text-xs font-semibold text-slate-200 hover:bg-slate-700"
-              >
-                {copied ? (
-                  <>
-                    <Check className="h-3.5 w-3.5 text-[#059669]" />
-                    <span className="text-[#059669]">Copied</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="h-3.5 w-3.5 text-slate-400" />
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
-            </div>
-            <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-slate-200 sm:p-5 sm:text-[13px]">
-              {deployCommands[activeDeploy]}
-            </pre>
-            <p className="border-t border-slate-800 px-4 py-3 text-left text-[11px] leading-relaxed text-slate-400">
-              {BRAND.deploy.secretsNote}
-            </p>
           </div>
         </div>
       </div>

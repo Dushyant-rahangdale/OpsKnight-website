@@ -11,7 +11,8 @@ const footerLinks = {
     { label: "Use cases", href: "/use-cases" },
     { label: "Compare", href: "/compare" },
     { label: "Changelog", href: "/changelog" },
-    { label: "Status demo", href: BRAND.links.status },
+    { label: "Status page", href: "/#status-page" },
+    { label: "Live status", href: BRAND.links.status },
   ],
   resources: [
     { label: "Install", href: "/install" },

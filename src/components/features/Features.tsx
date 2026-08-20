@@ -87,17 +87,14 @@ export function Features() {
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
                 Public, restricted, or private. Your own domain if you want.
-                Subscribers get updates. This is one page you configure — not
-                unlimited separate sites per team.
+                Subscribers get updates. One page per install — not unlimited
+                sites per team.
               </p>
               <Link
-                href={BRAND.links.status}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/#status-page"
                 className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#d21a1b] hover:underline"
               >
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#059669]" />
-                Live example
+                How we ship it
               </Link>
             </article>
           </div>

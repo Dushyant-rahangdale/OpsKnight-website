@@ -8,6 +8,7 @@ import { BrandLockup } from "@/components/brand/BrandLockup";
 
 const navItems = [
   { label: "Product", href: "/#product-tour" },
+  { label: "Status", href: "/#status-page" },
   { label: "Integrations", href: "/integrations" },
   { label: "Compare", href: "/compare" },
   { label: "Changelog", href: "/changelog" },

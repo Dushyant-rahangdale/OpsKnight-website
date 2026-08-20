@@ -76,10 +76,10 @@ export function Hero() {
                 GitHub
               </Link>
               <Link
-                href="#product-tour"
+                href="#status-page"
                 className="text-center text-sm font-semibold text-slate-700 hover:text-slate-900 hover:underline sm:text-left"
               >
-                See the product
+                Status page
               </Link>
             </div>
 

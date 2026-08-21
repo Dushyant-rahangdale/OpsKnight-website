@@ -13,6 +13,7 @@ import {
   type CompareCell,
   vendorIdFromCompareSlug,
 } from "@/lib/compare-matrix";
+import { PagerDutyMigrationHelper } from "@/components/comparison/PagerDutyMigrationHelper";
 import { notFound } from "next/navigation";
 
 const ALIAS_SLUGS = ["incident-io", "victorops"] as const;
@@ -169,6 +170,20 @@ export default async function CompetitorComparePage({
             ))}
           </ul>
         </section>
+
+        {vendorId === "pagerduty" && (
+          <section className="space-y-4">
+            <div>
+              <h2 className="text-xl font-semibold text-[#111827]">
+                Zero-Code Drop-In Ingest Adapter
+              </h2>
+              <p className="mt-1 text-sm text-[#4b5563]">
+                Already sending alerts to Events API v2? OpsKnight provides a native ingest adapter so you can point Alertmanager, Terraform, and Datadog webhooks directly to OpsKnight without rewriting alert rules.
+              </p>
+            </div>
+            <PagerDutyMigrationHelper />
+          </section>
+        )}
 
         <div className="flex flex-wrap items-center gap-4">
           <Link

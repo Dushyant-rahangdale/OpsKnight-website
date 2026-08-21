@@ -81,6 +81,7 @@ export default async function DocsIndexPage({
   const sidebar = getSidebar(version);
 
   const cards = TASK_CARDS.filter((card) => getDocFilePath(version, card.slug));
+  const editUrl = `${BRAND.links.github}/blob/main/docs/${version}/README.md`;
 
   return (
     <div className="space-y-10">
@@ -152,16 +153,16 @@ export default async function DocsIndexPage({
         </div>
       </section>
 
-      <div className="grid gap-8 lg:grid-cols-[1fr_260px]">
-        <article className="rounded-[14px] border border-slate-200 bg-white p-8">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_15rem] xl:grid-cols-[minmax(0,1fr)_16rem]">
+        <article className="min-w-0 rounded-[14px] border border-slate-200 bg-white p-8">
           <h2 className="mb-6 border-b border-slate-200 pb-4 text-xl font-semibold text-[#111827]">
             This version
           </h2>
           <DocsArticleBody html={doc.html} />
         </article>
         <aside className="hidden lg:block">
-          <div className="sticky top-24">
-            <DocsToc headings={doc.headings} />
+          <div className="sticky top-20 pl-2">
+            <DocsToc headings={doc.headings} editUrl={editUrl} />
           </div>
         </aside>
       </div>

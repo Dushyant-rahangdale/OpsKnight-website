@@ -780,17 +780,19 @@ h4 {
 
 .docs-callout,
 .docs-content .callout {
-  padding: 0.9rem 1.1rem;
+  padding: 1rem 1.25rem;
   border-radius: 12px;
-  margin: 1.25rem 0;
+  margin: 1.5rem 0;
   border: 1px solid;
   border-left-width: 4px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
 }
 
 .docs-callout-label {
   display: inline-block;
-  margin-right: 0.35rem;
-  font-size: 0.7rem;
+  margin-right: 0.45rem;
+  font-size: 0.725rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -799,10 +801,14 @@ h4 {
 
 .docs-callout-info,
 .docs-content .callout-info {
-  background: #fef2f2;
-  border-color: #fecaca;
-  border-left-color: #d21a1b;
-  color: #7f1d1d;
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  border-left-color: #0284c7;
+  color: #0f172a;
+}
+
+.docs-callout-info .docs-callout-label {
+  color: #0284c7;
 }
 
 .docs-callout-warning,
@@ -810,23 +816,35 @@ h4 {
   background: #fffbeb;
   border-color: #fde68a;
   border-left-color: #d97706;
-  color: #92400e;
+  color: #78350f;
+}
+
+.docs-callout-warning .docs-callout-label {
+  color: #b45309;
 }
 
 .docs-callout-danger,
 .docs-content .callout-danger {
-  background: #fff1f2;
-  border-color: #fecdd3;
-  border-left-color: #be123c;
-  color: #9f1239;
+  background: #fef2f2;
+  border-color: #fecaca;
+  border-left-color: #d21a1b;
+  color: #7f1d1d;
+}
+
+.docs-callout-danger .docs-callout-label {
+  color: #b41516;
 }
 
 .docs-callout-success,
 .docs-content .callout-success {
-  background: #ecfdf5;
-  border-color: #a7f3d0;
+  background: #f0fdf4;
+  border-color: #bbf7d0;
   border-left-color: #059669;
-  color: #065f46;
+  color: #064e3b;
+}
+
+.docs-callout-success .docs-callout-label {
+  color: #047857;
 }
 
 .prose :where(sup)>a {

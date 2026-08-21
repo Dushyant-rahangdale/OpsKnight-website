@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getDocPage, getAllDocSlugs, getDocFilePath } from "@/lib/docs/content";
 import { DocsToc } from "@/components/docs/DocsToc";
+import { DocsMobileToc } from "@/components/docs/DocsMobileToc";
 import { DocsArticleBody } from "@/components/docs/DocsArticleBody";
 import { DOC_VERSIONS } from "@/lib/docs/versions";
 import { ChevronRight, Clock, BookOpen } from "lucide-react";
@@ -101,7 +102,7 @@ export default async function DocsPage({
 
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_15rem] xl:grid-cols-[minmax(0,1fr)_16rem]">
-      <article className="space-y-6">
+      <article className="space-y-6 min-w-0">
         {/* Article Header */}
         <div className="overflow-hidden rounded-[14px] border border-slate-200 bg-white">
           {/* Breadcrumbs */}
@@ -111,9 +112,9 @@ export default async function DocsPage({
                 <span key={crumb.href} className="flex items-center gap-1.5">
                   {i > 0 && <ChevronRight className="w-3 h-3 text-slate-400" />}
                   {i === breadcrumbs.length - 1 ? (
-                    <span className="text-slate-800 font-medium">{crumb.label}</span>
+                    <span className="text-slate-900 font-semibold">{crumb.label}</span>
                   ) : (
-                    <Link href={crumb.href} className="text-slate-500 hover:text-slate-800 transition-colors">
+                    <Link href={crumb.href} className="text-slate-500 hover:text-[#d21a1b] transition-colors">
                       {crumb.label}
                     </Link>
                   )}
@@ -123,12 +124,12 @@ export default async function DocsPage({
           </div>
 
           {/* Title Section */}
-          <div className="px-8 py-6">
+          <div className="px-6 sm:px-8 py-6">
             {/* Meta badges */}
             <div className="flex flex-wrap items-center gap-3 mb-4">
               {section && (
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-600">
-                  <BookOpen className="w-3 h-3" />
+                  <BookOpen className="w-3 h-3 text-[#d21a1b]" />
                   {section.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
                 </span>
               )}
@@ -151,6 +152,10 @@ export default async function DocsPage({
           </div>
         </div>
 
+        {/* Mobile Quick Jump TOC */}
+        <DocsMobileToc headings={doc.headings} />
+
+        {/* Article Body */}
         <div className="rounded-[14px] border border-slate-200 bg-white px-6 py-8 sm:px-10">
           <DocsArticleBody html={doc.html} />
           <DocsPrevNext version={version} currentPath={docsHref(version, slug)} />
@@ -165,7 +170,7 @@ export default async function DocsPage({
             href={editUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-red-600 transition-colors"
+            className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-[#d21a1b] transition-colors font-medium"
           >
             Edit this page on GitHub
             <ChevronRight className="w-3 h-3" />
@@ -175,8 +180,8 @@ export default async function DocsPage({
 
       {/* Table of Contents Sidebar */}
       <aside className="hidden lg:block">
-        <div className="sticky top-24">
-          <DocsToc headings={doc.headings} />
+        <div className="sticky top-20 pl-2">
+          <DocsToc headings={doc.headings} editUrl={editUrl} />
         </div>
       </aside>
     </div>

@@ -79,14 +79,14 @@ docker compose up -d`}
             </p>
           </div>
 
-          {/* Production Configuration & Multi-Provider Builder */}
+          {/* In-Console Provider Configuration */}
           <div>
             <div className="mb-4">
               <h2 className="text-xl font-semibold text-[#111827]">
-                Production Stack Configurator
+                In-Console Notification &amp; Auth Configuration
               </h2>
               <p className="mt-1 text-sm text-[#4b5563]">
-                Configure Slack ChatOps, SMS providers (Twilio / AWS SNS), Email (SMTP / Resend), and OIDC SSO to generate a production-ready <span className="font-mono text-xs">.env</span> and <span className="font-mono text-xs">docker-compose.prod.yml</span>.
+                Operational credentials never clutter your server environment. Configure Slack ChatOps, SMS (Twilio / AWS SNS), Email (SMTP / Resend / SendGrid / SES), and OIDC SSO directly in the Web Console under <span className="font-mono text-xs text-[#111827]">Settings → Notification Providers</span> — encrypted at rest in Postgres with your <code className="font-mono text-xs text-[#111827]">ENCRYPTION_KEY</code>.
               </p>
             </div>
             <ProductionConfigurator />

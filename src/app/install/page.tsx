@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 import { CopyBlock } from "@/components/brand/CopyBlock";
+import { SecretsGenerator } from "@/components/showcase/SecretsGenerator";
 import { latestDocsHref } from "@/lib/docs/paths";
 
 const title = "Install OpsKnight";
@@ -49,7 +50,9 @@ export default function InstallPage() {
               </li>
               <li>A stable HTTPS base URL in production (auth callbacks)</li>
             </ul>
-            <p className="mt-4 text-sm text-slate-500">{BRAND.deploy.secretsNote}</p>
+            <div className="mt-6">
+              <SecretsGenerator />
+            </div>
           </div>
 
           <div>

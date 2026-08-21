@@ -14,7 +14,7 @@ const footerLinks = {
     { label: "Status page", href: BRAND.links.status },
   ],
   resources: [
-    { label: "Install", href: "/#run" },
+    { label: "Install", href: "/install" },
     { label: "Documentation", href: BRAND.links.docs },
     { label: "Quickstart", href: latestDocsHref("getting-started") },
     { label: "Helm charts", href: BRAND.links.helmCharts },

@@ -1,20 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BRAND } from "@/lib/brand";
+import { CopyBlock } from "@/components/brand/CopyBlock";
+import { PageToc } from "@/components/common/PageToc";
 import { latestDocsHref } from "@/lib/docs/paths";
-import {
-  ShieldCheck,
-  Lock,
-  Key,
-  FileCheck,
-  Server,
-  Network,
-  Users,
-  EyeOff,
-  ArrowRight,
-  CheckCircle2,
-} from "lucide-react";
 
-const title = "Security & Hardening Architecture";
+const title = "Security & Hardening";
 const description =
   "Cryptographic envelope encryption (AES-256-CBC), timing-safe webhook verification, OIDC SSO, and VPC network isolation in OpsKnight.";
 
@@ -26,22 +17,39 @@ export const metadata: Metadata = {
 };
 
 const ENCRYPTED_FIELDS = [
-  { provider: "Jira Cloud", fields: ["apiToken", "webhookSecret"], purpose: "Two-way issue syncing" },
-  { provider: "SSO / OIDC", fields: ["clientSecret"], purpose: "Identity provider authentication" },
-  { provider: "Slack ChatOps", fields: ["botToken", "signingSecret", "clientSecret"], purpose: "War room bot & interactive actions" },
-  { provider: "Twilio", fields: ["authToken", "whatsappAuthToken"], purpose: "SMS & WhatsApp paging" },
-  { provider: "AWS SNS / SES", fields: ["secretAccessKey"], purpose: "High-volume SMS & email delivery" },
-  { provider: "Email (Resend / SendGrid / SMTP)", fields: ["apiKey", "password"], purpose: "Incident reports & status updates" },
-  { provider: "Web Push", fields: ["vapidPrivateKey"], purpose: "Browser push notifications" },
+  { provider: "Jira Cloud", fields: "apiToken, webhookSecret", purpose: "Two-way issue synchronization" },
+  { provider: "SSO / OIDC", fields: "clientSecret", purpose: "OAuth2/OIDC client secrets" },
+  { provider: "Slack ChatOps", fields: "botToken, signingSecret, clientSecret", purpose: "War room bot & interactive actions" },
+  { provider: "Twilio", fields: "authToken, whatsappAuthToken", purpose: "SMS & WhatsApp paging keys" },
+  { provider: "AWS SNS / SES", fields: "secretAccessKey", purpose: "High-volume delivery credentials" },
+  { provider: "Email (Resend / SendGrid / SMTP)", fields: "apiKey, password", purpose: "Incident reports & status updates" },
+  { provider: "Web Push", fields: "vapidPrivateKey", purpose: "Browser push notification keys" },
 ];
 
 const SIGNATURE_PROVIDERS = [
   { name: "GitHub", header: "x-hub-signature-256", algorithm: "HMAC-SHA256", format: "sha256=<hex_digest>" },
-  { name: "Slack ChatOps", header: "x-slack-signature", algorithm: "HMAC-SHA256", format: "v0=<hex_digest> (timestamped)" },
+  { name: "Slack ChatOps", header: "x-slack-signature", algorithm: "HMAC-SHA256", format: "v0=<hex_digest> (with timestamp)" },
   { name: "Sentry", header: "sentry-hook-signature", algorithm: "HMAC-SHA256", format: "<hex_digest>" },
   { name: "Grafana", header: "x-grafana-signature", algorithm: "HMAC-SHA256", format: "<hex_digest>" },
   { name: "GitLab", header: "x-gitlab-token", algorithm: "Constant-time token", format: "<secret_token>" },
-  { name: "Generic Webhook", header: "x-signature / x-webhook-signature", algorithm: "HMAC-SHA256", format: "<hex_digest>" },
+  { name: "Generic Webhooks", header: "x-signature / x-webhook-signature", algorithm: "HMAC-SHA256", format: "<hex_digest>" },
+];
+
+const TOC_SECTIONS = [
+  { id: "envelope-encryption", title: "Two-Tier Envelope Encryption" },
+  { id: "webhook-verification", title: "Inbound Webhook Verification" },
+  { id: "identity-sso", title: "Identity, OIDC SSO & Roles" },
+  { id: "network-isolation", title: "VPC Network Isolation & Zero Telemetry" },
+  { id: "what-this-is-not", title: "What this is not" },
+];
+
+const SECURITY_SPECS = [
+  { label: "Storage Cipher", value: "AES-256-CBC (V2)" },
+  { label: "Master Key", value: "256-bit Hex (Env)" },
+  { label: "Ingest Verification", value: "HMAC-SHA256 (Constant-time)" },
+  { label: "Anti-Replay Window", value: "300 seconds" },
+  { label: "Identity", value: "OIDC SSO + RBAC" },
+  { label: "External Telemetry", value: "None (0 beacons)" },
 ];
 
 export default function SecurityPage() {
@@ -49,281 +57,237 @@ export default function SecurityPage() {
     <div className="min-h-screen bg-[#f8fafc]">
       {/* Header */}
       <section className="border-b border-slate-200 pt-28 pb-16">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 text-xs font-semibold mb-4">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Fail-Closed Security Model · 100% Self-Hosted</span>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="mb-3 font-mono text-[11px] font-medium tracking-wide text-slate-500">
+              Security · {BRAND.version} · {BRAND.license}
+            </p>
+            <h1 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-5xl sm:leading-[1.12]">
+              Incident data and credentials stay on your network.
+            </h1>
+            <p className="mt-5 text-base leading-relaxed text-[#4b5563] sm:text-lg">
+              OpsKnight operates on a fail-closed, zero-trust security model. There is no external cloud, no telemetry beacons, and no vendor phone-home. Operational credentials are encrypted at rest with AES-256-CBC envelope encryption, and inbound alert webhooks are authenticated with constant-time cryptographic verification.
+            </p>
           </div>
-          <h1 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-5xl sm:leading-[1.12]">
-            Security, Cryptography &amp; Hardening
-          </h1>
-          <p className="mt-5 text-base leading-relaxed text-[#4b5563] sm:text-lg max-w-2xl mx-auto">
-            Incident data, on-call schedules, and API credentials stay within your VPC. Designed with zero third-party telemetry, cryptographic envelope encryption, and timing-safe webhook verification.
-          </p>
         </div>
       </section>
 
-      {/* Main Content */}
-      <main className="py-16">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
-          
-          {/* 1. Envelope Encryption Architecture */}
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-50 text-[#d21a1b]">
-                <Key className="h-5 w-5" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">1. Two-Tier Envelope Encryption (AES-256-CBC)</h2>
-                <p className="mt-1 text-sm text-slate-600">
-                  Operational credentials are never stored in plaintext and never clutter your environment variables. OpsKnight implements V2 Envelope Encryption:
+      {/* Main Content Layout with Sticky Right Rail */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] xl:grid-cols-[minmax(0,1fr)_20rem]">
+            
+            {/* Main Content Column */}
+            <article className="min-w-0 space-y-12 max-w-3xl">
+              
+              {/* 1. Envelope Encryption */}
+              <div id="envelope-encryption" className="scroll-mt-28">
+                <h2 className="text-xl font-semibold text-[#111827]">
+                  Two-Tier Envelope Encryption (AES-256-CBC)
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+                  Credentials entered into the Web Console (Slack bot tokens, SMTP passwords, Twilio keys, OIDC client secrets) are encrypted before touching PostgreSQL. OpsKnight uses a two-tier Envelope Encryption model (V2):
                 </p>
-              </div>
-            </div>
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-[#4b5563]">
+                  <li>
+                    The master key is configured strictly through the <code className="font-mono text-xs text-[#111827]">ENCRYPTION_KEY</code> environment variable (never stored in the database).
+                  </li>
+                  <li>
+                    Each secret is encrypted with a unique, dynamically generated Data Encryption Key (DEK).
+                  </li>
+                  <li>
+                    Ciphertext is stored as <code className="font-mono text-xs text-[#111827]">v2:&lt;dekIv&gt;:&lt;encryptedDek&gt;:&lt;payloadIv&gt;:&lt;encryptedPayload&gt;</code>.
+                  </li>
+                </ul>
 
-            {/* Architecture Flow Box */}
-            <div className="overflow-hidden rounded-xl border border-slate-800 bg-[#0f172a] p-5 font-mono text-xs text-slate-200">
-              <div className="text-[11px] text-slate-400 mb-3 font-sans font-semibold uppercase tracking-wider">
-                Cryptographic Key Hierarchy
-              </div>
-              <div className="space-y-2 text-slate-300">
-                <p className="text-amber-400">ENCRYPTION_KEY (Master Key — supplied strictly via environment variable)</p>
-                <p className="text-slate-500 pl-4">│  (32 bytes / 256 bits, 64 hex characters)</p>
-                <p className="text-slate-500 pl-4">▼</p>
-                <p className="text-sky-400 pl-4">Encrypts a unique Data Encryption Key (DEK) generated per secret</p>
-                <p className="text-slate-500 pl-8">│</p>
-                <p className="text-slate-500 pl-8">▼</p>
-                <p className="text-emerald-400 pl-8">DEK encrypts the raw operational secret via AES-256-CBC</p>
-                <p className="text-slate-500 pl-12">│</p>
-                <p className="text-slate-500 pl-12">▼</p>
-                <p className="text-slate-300 pl-12">
-                  Stored in PostgreSQL: <span className="text-emerald-300">v2:&lt;dekIv&gt;:&lt;encryptedDek&gt;:&lt;payloadIv&gt;:&lt;encryptedPayload&gt;</span>
-                </p>
-              </div>
-            </div>
-
-            {/* What Gets Encrypted Table */}
-            <div>
-              <h3 className="text-sm font-bold text-slate-900 mb-3">Fields Encrypted at Rest in PostgreSQL</h3>
-              <div className="overflow-x-auto rounded-xl border border-slate-200">
-                <table className="w-full text-left text-xs">
-                  <thead className="border-b border-slate-200 bg-slate-50 font-mono text-[11px] uppercase tracking-wider text-slate-500">
-                    <tr>
-                      <th className="px-4 py-3">Provider / Subsystem</th>
-                      <th className="px-4 py-3">Encrypted Field(s)</th>
-                      <th className="px-4 py-3">Purpose</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100 font-mono">
-                    {ENCRYPTED_FIELDS.map((item) => (
-                      <tr key={item.provider}>
-                        <td className="px-4 py-2.5 font-bold text-slate-800 font-sans">{item.provider}</td>
-                        <td className="px-4 py-2.5 text-[#d21a1b]">{item.fields.join(", ")}</td>
-                        <td className="px-4 py-2.5 text-slate-600 font-sans">{item.purpose}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between pt-2">
-              <Link
-                href={latestDocsHref("security/encryption")}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-[#d21a1b] hover:underline"
-              >
-                <span>Read envelope encryption guide &amp; key rotation docs</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          </section>
-
-          {/* 2. Webhook Authentication & Anti-Replay */}
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-600">
-                <Lock className="h-5 w-5" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">2. Inbound Webhook Verification &amp; Anti-Replay</h2>
-                <p className="mt-1 text-sm text-slate-600">
-                  Every incoming alert webhook is validated before reaching incident processing logic.
-                </p>
-              </div>
-            </div>
-
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-5 space-y-2">
-                <div className="flex items-center gap-2 text-slate-900 font-semibold text-sm">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                  <span>Timing-Safe Cryptographic Equality</span>
+                <div className="mt-6">
+                  <p className="mb-2 text-xs font-medium text-slate-700">Generate a 32-byte (256-bit) master encryption key:</p>
+                  <CopyBlock label="bash" value="openssl rand -hex 32" />
                 </div>
-                <p className="text-xs leading-relaxed text-slate-600">
-                  OpsKnight executes constant-time comparisons using <code className="font-mono text-[#111827]">crypto.timingSafeEqual</code> with dummy buffer evaluation on length mismatches, eliminating timing side-channel attack vectors on secret tokens.
-                </p>
-              </div>
 
-              <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-5 space-y-2">
-                <div className="flex items-center gap-2 text-slate-900 font-semibold text-sm">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                  <span>Outbound Anti-Replay Protection</span>
+                <div className="mt-6 overflow-hidden rounded-[14px] border border-slate-200 bg-white">
+                  <div className="border-b border-slate-200 bg-slate-50 px-4 py-2.5">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-600 font-mono">
+                      Fields Encrypted at Rest in PostgreSQL
+                    </h3>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs">
+                      <thead className="border-b border-slate-200 bg-slate-50/50 font-mono text-[11px] text-slate-500">
+                        <tr>
+                          <th className="px-4 py-2.5">Provider / Subsystem</th>
+                          <th className="px-4 py-2.5">Encrypted Field(s)</th>
+                          <th className="px-4 py-2.5">Purpose</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 font-mono text-slate-700">
+                        {ENCRYPTED_FIELDS.map((item) => (
+                          <tr key={item.provider}>
+                            <td className="px-4 py-2.5 font-sans font-medium text-slate-900">{item.provider}</td>
+                            <td className="px-4 py-2.5 text-[#d21a1b]">{item.fields}</td>
+                            <td className="px-4 py-2.5 font-sans text-slate-500">{item.purpose}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <p className="text-xs leading-relaxed text-slate-600">
-                  Outbound notifications bind signatures to Unix timestamps (<code className="font-mono text-[#111827]">X-OpsKnight-Timestamp</code> + <code className="font-mono text-[#111827]">X-OpsKnight-Signature</code>) with a strict 300-second expiration window to neutralize replay attacks.
+                <p className="mt-3">
+                  <Link
+                    href={latestDocsHref("security/encryption")}
+                    className="text-sm font-semibold text-[#d21a1b] hover:underline"
+                  >
+                    Envelope encryption &amp; key rotation docs →
+                  </Link>
                 </p>
               </div>
-            </div>
 
-            {/* Signature Matrix */}
-            <div>
-              <h3 className="text-sm font-bold text-slate-900 mb-3">Native Webhook Verification Algorithms</h3>
-              <div className="overflow-x-auto rounded-xl border border-slate-200">
-                <table className="w-full text-left text-xs">
-                  <thead className="border-b border-slate-200 bg-slate-50 font-mono text-[11px] uppercase tracking-wider text-slate-500">
-                    <tr>
-                      <th className="px-4 py-3">Integration</th>
-                      <th className="px-4 py-3">Signature Header</th>
-                      <th className="px-4 py-3">Algorithm</th>
-                      <th className="px-4 py-3">Payload Format</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100 font-mono">
-                    {SIGNATURE_PROVIDERS.map((p) => (
-                      <tr key={p.name}>
-                        <td className="px-4 py-2.5 font-bold text-slate-800 font-sans">{p.name}</td>
-                        <td className="px-4 py-2.5 text-sky-700">{p.header}</td>
-                        <td className="px-4 py-2.5 text-slate-700">{p.algorithm}</td>
-                        <td className="px-4 py-2.5 text-slate-500">{p.format}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between pt-2">
-              <Link
-                href={latestDocsHref("security/webhook-verification")}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-[#d21a1b] hover:underline"
-              >
-                <span>Read webhook authentication &amp; signature docs</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          </section>
-
-          {/* 3. Identity, SSO & Access Governance */}
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
-                <Users className="h-5 w-5" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">3. Identity, OIDC SSO &amp; Role Governance</h2>
-                <p className="mt-1 text-sm text-slate-600">
-                  Authenticate your team via your existing enterprise identity provider with granular role boundaries.
+              {/* 2. Webhook Verification */}
+              <div id="webhook-verification" className="scroll-mt-28 border-t border-slate-200 pt-10">
+                <h2 className="text-xl font-semibold text-[#111827]">
+                  Inbound Webhook Verification &amp; Anti-Replay
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+                  Every inbound monitoring integration route enforces cryptographic authentication before payloads reach incident business logic:
                 </p>
-              </div>
-            </div>
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-[#4b5563]">
+                  <li>
+                    <strong>Timing-Safe Equality</strong>: Secret tokens and signatures are evaluated using <code className="font-mono text-xs text-[#111827]">crypto.timingSafeEqual</code> with dummy buffer evaluation on length mismatches to eliminate timing side-channel leaks.
+                  </li>
+                  <li>
+                    <strong>Outbound Anti-Replay</strong>: Outbound notifications bind signatures to Unix timestamps (<code className="font-mono text-xs text-[#111827]">X-OpsKnight-Timestamp</code> + <code className="font-mono text-xs text-[#111827]">X-OpsKnight-Signature</code>) with a strict 300-second expiration window.
+                  </li>
+                </ul>
 
-            <div className="grid gap-4 sm:grid-cols-3 text-xs">
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
-                <span className="font-bold text-slate-900 block text-sm">OIDC Single Sign-On</span>
-                <p className="text-slate-600 leading-relaxed">
-                  Direct integration with Google Workspace, Okta, Azure AD, Keycloak, and Authentik. Supports auto-provisioning and domain allowlisting.
-                </p>
-              </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
-                <span className="font-bold text-slate-900 block text-sm">Workspace RBAC</span>
-                <p className="text-slate-600 leading-relaxed">
-                  Three distinct workspace tiers: <code className="text-[#d21a1b]">USER</code> (scoped to assigned teams), <code className="text-[#d21a1b]">RESPONDER</code> (global response), and <code className="text-[#d21a1b]">ADMIN</code> (governance).
-                </p>
-              </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-2">
-                <span className="font-bold text-slate-900 block text-sm">Team-Level Roles</span>
-                <p className="text-slate-600 leading-relaxed">
-                  Independent team governance: <code className="text-[#d21a1b]">MEMBER</code>, <code className="text-[#d21a1b]">ADMIN</code>, and <code className="text-[#d21a1b]">OWNER</code> with last-owner protection.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between pt-2">
-              <Link
-                href={latestDocsHref("security/oidc-setup")}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-[#d21a1b] hover:underline"
-              >
-                <span>Read OIDC SSO configuration guide</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-              <Link
-                href={latestDocsHref("security/authorization")}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:underline"
-              >
-                <span>Role authorization matrix</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          </section>
-
-          {/* 4. Production Hardening & Network Isolation */}
-          <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                <Network className="h-5 w-5" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">4. Production Network Isolation &amp; Zero Telemetry</h2>
-                <p className="mt-1 text-sm text-slate-600">
-                  Built for zero outbound leaks and strict network segmentation.
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-3 text-xs">
-              <div className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <EyeOff className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-bold text-slate-900 block">Zero Third-Party Telemetry or Analytics</span>
-                  <span className="text-slate-600 leading-relaxed mt-0.5 block">
-                    OpsKnight contains zero tracking beacons, telemetry pings, or phone-home mechanisms. All crash data, audit trails, and metrics stay entirely within your database.
-                  </span>
+                <div className="mt-6 overflow-hidden rounded-[14px] border border-slate-200 bg-white">
+                  <div className="border-b border-slate-200 bg-slate-50 px-4 py-2.5">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-600 font-mono">
+                      Supported Inbound Signature Verifiers
+                    </h3>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs">
+                      <thead className="border-b border-slate-200 bg-slate-50/50 font-mono text-[11px] text-slate-500">
+                        <tr>
+                          <th className="px-4 py-2.5">Provider</th>
+                          <th className="px-4 py-2.5">Signature Header</th>
+                          <th className="px-4 py-2.5">Algorithm</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 font-mono text-slate-700">
+                        {SIGNATURE_PROVIDERS.map((p) => (
+                          <tr key={p.name}>
+                            <td className="px-4 py-2.5 font-sans font-medium text-slate-900">{p.name}</td>
+                            <td className="px-4 py-2.5 text-slate-600">{p.header}</td>
+                            <td className="px-4 py-2.5 text-slate-600">{p.algorithm}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+                <p className="mt-3">
+                  <Link
+                    href={latestDocsHref("security/webhook-verification")}
+                    className="text-sm font-semibold text-[#d21a1b] hover:underline"
+                  >
+                    Webhook signature verification docs →
+                  </Link>
+                </p>
               </div>
 
-              <div className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <Server className="h-4 w-4 text-sky-600 shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-bold text-slate-900 block">PostgreSQL Port 5432 Isolation</span>
-                  <span className="text-slate-600 leading-relaxed mt-0.5 block">
-                    In production deployments, the database port is never published to the public internet. Communication occurs strictly over internal container networks or VPC security groups.
-                  </span>
-                </div>
+              {/* 3. Identity, SSO & RBAC */}
+              <div id="identity-sso" className="scroll-mt-28 border-t border-slate-200 pt-10">
+                <h2 className="text-xl font-semibold text-[#111827]">
+                  Identity, OIDC SSO &amp; Role Governance
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+                  OpsKnight supports local accounts and OpenID Connect (OIDC) single sign-on with Google Workspace, Okta, Azure AD, Keycloak, and Authentik.
+                </p>
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-[#4b5563]">
+                  <li>
+                    <strong>Workspace Roles</strong>: <code className="font-mono text-xs text-[#111827]">USER</code> (scoped to assigned teams/services), <code className="font-mono text-xs text-[#111827]">RESPONDER</code> (global response), and <code className="font-mono text-xs text-[#111827]">ADMIN</code> (system settings and user governance).
+                  </li>
+                  <li>
+                    <strong>Team Roles</strong>: Independent team-level classification (<code className="font-mono text-xs text-[#111827]">MEMBER</code>, <code className="font-mono text-xs text-[#111827]">ADMIN</code>, <code className="font-mono text-xs text-[#111827]">OWNER</code>) with last-owner demotion protection.
+                  </li>
+                  <li>
+                    <strong>Auto-Provisioning &amp; Allowlisting</strong>: Restrict sign-in to verified corporate email domains.
+                  </li>
+                </ul>
+                <p className="mt-3">
+                  <Link
+                    href={latestDocsHref("security/oidc-setup")}
+                    className="text-sm font-semibold text-[#d21a1b] hover:underline"
+                  >
+                    OIDC SSO configuration guide →
+                  </Link>
+                </p>
               </div>
 
-              <div className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <FileCheck className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-bold text-slate-900 block">Non-Root Container UID &amp; Read-Only Security Context</span>
-                  <span className="text-slate-600 leading-relaxed mt-0.5 block">
-                    Official container images run as non-root unprivileged users, compatible with Kubernetes restricted security standards and OpenShift SCC.
-                  </span>
-                </div>
+              {/* 4. Production Network Isolation */}
+              <div id="network-isolation" className="scroll-mt-28 border-t border-slate-200 pt-10">
+                <h2 className="text-xl font-semibold text-[#111827]">
+                  VPC Network Isolation &amp; Zero Telemetry
+                </h2>
+                <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[#4b5563]">
+                  <li>
+                    <strong>Zero External Telemetry</strong>: No Google Analytics, no PostHog, no Sentry phone-home, no tracking pixels. All logs and audit trails remain in your PostgreSQL database.
+                  </li>
+                  <li>
+                    <strong>Database Isolation</strong>: Keep PostgreSQL (port 5432) on private internal container networks or VPC security groups.
+                  </li>
+                  <li>
+                    <strong>TLS Reverse Proxying</strong>: Always terminate TLS at Nginx, Caddy, or an Ingress Controller and forward <code className="font-mono text-xs text-[#111827]">X-Forwarded-Proto</code> and <code className="font-mono text-xs text-[#111827]">X-Forwarded-Host</code>.
+                  </li>
+                  <li>
+                    <strong>Non-Root Containers</strong>: Container images run as unprivileged users, compatible with Kubernetes restricted pod security standards.
+                  </li>
+                </ul>
               </div>
-            </div>
 
-            <div className="flex items-center justify-between pt-2">
-              <Link
-                href={latestDocsHref("deployment/docker")}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-[#d21a1b] hover:underline"
-              >
-                <span>Production deployment hardening guide</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          </section>
+              {/* 5. What this is not */}
+              <div id="what-this-is-not" className="scroll-mt-28 rounded-[14px] border border-slate-200 bg-white p-6">
+                <h2 className="text-lg font-semibold text-[#111827]">What this is not</h2>
+                <p className="mt-3 text-sm leading-relaxed text-[#4b5563]">
+                  There is no hosted SaaS cloud holding your encryption keys. If you lose your <code className="font-mono text-xs text-[#111827]">ENCRYPTION_KEY</code>, encrypted secrets cannot be recovered. Always store backups of your environment secrets in a dedicated secrets manager (AWS Secrets Manager, HashiCorp Vault, GCP Secret Manager).
+                </p>
+              </div>
 
+              <div className="flex flex-wrap items-center gap-4 pt-4">
+                <Link
+                  href="/install"
+                  className="inline-flex h-11 items-center rounded-[12px] bg-[#d21a1b] px-6 text-sm font-semibold text-white hover:bg-[#b41516]"
+                >
+                  Deploy OpsKnight
+                </Link>
+                <Link
+                  href={latestDocsHref("security")}
+                  className="text-sm font-semibold text-[#d21a1b] hover:underline"
+                >
+                  Full security documentation
+                </Link>
+              </div>
+
+            </article>
+
+            {/* Sticky Right Rail on Large Screens */}
+            <aside className="hidden lg:block">
+              <div className="sticky top-24 pl-4 border-l border-slate-200/80">
+                <PageToc
+                  sections={TOC_SECTIONS}
+                  specs={SECURITY_SPECS}
+                  quickCommand="openssl rand -hex 32"
+                  quickCommandLabel="Keygen 1-Liner"
+                  docLink={latestDocsHref("security")}
+                  docLinkLabel="Security Reference Docs"
+                />
+              </div>
+            </aside>
+
+          </div>
         </div>
-      </main>
+      </section>
     </div>
   );
 }

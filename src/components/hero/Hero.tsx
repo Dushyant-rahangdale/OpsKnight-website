@@ -61,9 +61,13 @@ export function Hero() {
                 href={BRAND.links.status}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-center text-sm font-semibold text-slate-700 hover:text-slate-900 hover:underline sm:text-left"
+                className="inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-[12px] border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 sm:w-auto"
               >
-                Live status
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                </span>
+                <span>Live status</span>
               </Link>
             </div>
 

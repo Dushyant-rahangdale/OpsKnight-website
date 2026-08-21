@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Copy, Check } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import { latestDocsHref } from "@/lib/docs/paths";
+import { SecretsGenerator } from "@/components/showcase/SecretsGenerator";
 
 type DeployTab = "compose" | "docker" | "helm" | "kustomize";
 
@@ -90,6 +91,11 @@ export function InstallMethods() {
           <p className="border-t border-slate-800 px-4 py-3 text-[11px] leading-relaxed text-slate-400">
             {BRAND.deploy.secretsNote}
           </p>
+        </div>
+
+        {/* First-boot deployment requirements & secret generator callout */}
+        <div className="mt-6">
+          <SecretsGenerator />
         </div>
 
         <p className="mt-6 text-sm text-[#4b5563]">

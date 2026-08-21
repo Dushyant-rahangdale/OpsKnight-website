@@ -42,7 +42,7 @@ export function Hero() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
-                href="#run"
+                href="/install"
                 className="inline-flex h-12 w-full items-center justify-center rounded-[12px] bg-[#d21a1b] px-7 text-sm font-semibold tracking-wide text-white shadow-sm shadow-red-700/20 transition-all hover:bg-[#b41516] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b] sm:w-auto"
               >
                 Install

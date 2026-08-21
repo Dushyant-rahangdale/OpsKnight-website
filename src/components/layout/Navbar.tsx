@@ -8,7 +8,7 @@ import { BrandLockup } from "@/components/brand/BrandLockup";
 
 const navItems = [
   { label: "Product", href: "/#product-tour" },
-  { label: "Install", href: "/#run" },
+  { label: "Install", href: "/install" },
   { label: "Integrations", href: "/integrations" },
   { label: "Compare", href: "/compare" },
   { label: "Changelog", href: "/changelog" },
@@ -52,7 +52,7 @@ export function Navbar() {
               GitHub
             </Link>
             <Link
-              href="/#run"
+              href="/install"
               className="inline-flex h-8 items-center justify-center rounded-[10px] bg-[#d21a1b] px-3.5 text-xs font-semibold text-white transition-colors hover:bg-[#b41516] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
             >
               Install
@@ -93,7 +93,7 @@ export function Navbar() {
                 GitHub
               </Link>
               <Link
-                href="/#run"
+                href="/install"
                 className="mx-3 mt-2 inline-flex h-10 items-center justify-center rounded-[10px] bg-[#d21a1b] text-sm font-semibold text-white"
                 onClick={() => setIsOpen(false)}
               >

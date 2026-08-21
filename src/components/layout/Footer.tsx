@@ -15,6 +15,7 @@ const footerLinks = {
   ],
   resources: [
     { label: "Install", href: "/install" },
+    { label: "Security & Hardening", href: "/security" },
     { label: "Documentation", href: BRAND.links.docs },
     { label: "Quickstart", href: latestDocsHref("getting-started") },
     { label: "Helm charts", href: BRAND.links.helmCharts },

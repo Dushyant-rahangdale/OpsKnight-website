@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, Github } from "lucide-react";
+import { Menu, X, Github, Search } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 import { BrandLockup } from "@/components/brand/BrandLockup";
 
@@ -19,6 +19,10 @@ const navItems = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenSearch = () => {
+    window.dispatchEvent(new Event("open-global-search"));
+  };
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 border-b border-slate-800 bg-[#0f172a]">
@@ -42,12 +46,24 @@ export function Navbar() {
             ))}
           </div>
 
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-2.5 md:flex">
+            <button
+              type="button"
+              onClick={handleOpenSearch}
+              className="flex items-center gap-2 rounded-lg border border-slate-700/80 bg-slate-800/80 px-2.5 py-1 text-xs text-slate-300 hover:border-slate-600 hover:text-white transition-colors"
+              aria-label="Search documentation and website"
+            >
+              <Search className="h-3.5 w-3.5 text-slate-400" />
+              <span>Search</span>
+              <kbd className="rounded bg-slate-900 px-1.5 py-0.5 font-mono text-[10px] text-slate-400">
+                ⌘K
+              </kbd>
+            </button>
             <Link
               href={BRAND.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
             >
               <Github className="h-4 w-4" />
               GitHub
@@ -74,6 +90,20 @@ export function Navbar() {
         {isOpen && (
           <div className="border-t border-slate-800 py-3 md:hidden">
             <div className="flex flex-col gap-0.5">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false);
+                  handleOpenSearch();
+                }}
+                className="flex items-center gap-2 rounded-md px-3 py-2.5 text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white text-left"
+              >
+                <Search className="h-4 w-4 text-slate-400" />
+                <span>Search</span>
+                <kbd className="ml-auto rounded bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-400">
+                  ⌘K
+                </kbd>
+              </button>
               {navItems.map((item) => (
                 <Link
                   key={item.label}

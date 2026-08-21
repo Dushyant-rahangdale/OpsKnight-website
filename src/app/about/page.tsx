@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
+import { PageToc } from "@/components/common/PageToc";
+import { latestDocsHref } from "@/lib/docs/paths";
 
 export const metadata: Metadata = {
   title: "About OpsKnight",
@@ -8,87 +10,154 @@ export const metadata: Metadata = {
     "OpsKnight is self-hosted incident command. Other product names identify those products. Not affiliated with PagerDuty or Atlassian.",
 };
 
+const TOC_SECTIONS = [
+  { id: "overview", title: "Overview" },
+  { id: "who-it-is-for", title: "Who it is for" },
+  { id: "who-it-is-not-for", title: "Who it is not for" },
+  { id: "mission", title: "Mission" },
+  { id: "license", title: "License & Open Source" },
+  { id: "maintainer", title: "Maintainer & Contact" },
+];
+
+const ABOUT_SPECS = [
+  { label: "License", value: BRAND.license },
+  { label: "Current Version", value: BRAND.version },
+  { label: "Deployment", value: "100% Self-Hosted" },
+  { label: "Supported Ingests", value: BRAND.integrationCountLabel },
+  { label: "Cloud Pricing", value: "$0 (Free Forever)" },
+];
+
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#f8fafc] pt-32 pb-24 px-6">
-      <div className="mx-auto max-w-3xl">
-        <p className="mb-3 font-mono text-[11px] text-slate-500">{BRAND.version}</p>
-        <h1 className="text-4xl font-semibold tracking-tight text-[#111827]">
-          About {BRAND.name}
-        </h1>
-        <div className="mt-8 space-y-6 text-base leading-relaxed text-[#4b5563]">
-          <p>
-            OpsKnight is a self-hosted incident command center. It exists because
-            per-seat on-call products get expensive as teams grow, and because
-            incident data belongs on the same infrastructure as the systems it
-            describes.
-          </p>
-          <p>
-            OpsKnight is self-hosted incident command. It is not a clone of
-            anyone else’s product.
-          </p>
-          <h2 className="pt-4 text-2xl font-semibold text-[#111827]">Who it is for</h2>
-          <p>
-            SRE and platform teams that already run Postgres, Docker, or
-            Kubernetes. Teams that cannot put incident timelines in a vendor
-            cloud. Teams that would rather operate a pager than meter seats.
-            {BRAND.integrationCountLabel} inbound parsers, Slack war rooms, one
-            status page, local accounts and OIDC.
-          </p>
-          <h2 className="pt-4 text-2xl font-semibold text-[#111827]">Who it is not for</h2>
-          <p>
-            Anyone who needs a hosted cloud, native voice calls, or SAML in this
-            release. Anyone who needs a PagerDuty clone — Events API v2 is an
-            ingest adapter. Change the destination URL and test.
-          </p>
-          <h2 className="pt-4 text-2xl font-semibold text-[#111827]">Mission</h2>
-          <p>
-            Make on-call, paging, war rooms, status pages, and postmortems
-            available to any engineering team that can run Docker Compose or Helm
-            — without a SaaS lock-in.
-          </p>
-          <h2 className="pt-4 text-2xl font-semibold text-[#111827]">License</h2>
-          <p>
-            The product is licensed under {BRAND.license}. Source lives on GitHub.
-            There is no hosted Enterprise Cloud offering.
-          </p>
-          <h2 className="pt-4 text-2xl font-semibold text-[#111827]">Maintainer</h2>
-          <p>
-            Created and maintained by{" "}
-            <a
-              href={BRAND.authors[0].url}
-              className="font-medium text-[#111827] underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {BRAND.authors[0].name}
-            </a>
-            . Press and partnership notes: {BRAND.links.email}.
-          </p>
+    <main className="min-h-screen bg-[#f8fafc]">
+      {/* Header */}
+      <section className="border-b border-slate-200 pt-28 pb-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="mb-3 font-mono text-[11px] font-medium tracking-wide text-slate-500">
+              About · {BRAND.version} · {BRAND.license}
+            </p>
+            <h1 className="text-3xl font-semibold tracking-tight text-[#111827] sm:text-5xl sm:leading-[1.12]">
+              About {BRAND.name}
+            </h1>
+            <p className="mt-5 text-base leading-relaxed text-[#4b5563] sm:text-lg">
+              OpsKnight is a self-hosted incident command center and on-call platform. It exists because per-seat on-call SaaS gets prohibitively expensive as engineering teams scale, and because incident data belongs on the infrastructure you operate.
+            </p>
+          </div>
         </div>
-        <div className="mt-12 flex flex-wrap gap-3">
-          <a
-            href={BRAND.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-10 items-center rounded-[12px] bg-[#d21a1b] px-5 text-sm font-semibold text-white hover:bg-[#b41516]"
-          >
-            GitHub
-          </a>
-          <Link
-            href="/install"
-            className="inline-flex h-10 items-center rounded-[12px] border border-slate-200 bg-white px-5 text-sm font-medium text-slate-800 hover:bg-slate-50"
-          >
-            Install
-          </Link>
-          <Link
-            href="/brand"
-            className="inline-flex h-10 items-center rounded-[12px] border border-slate-200 bg-white px-5 text-sm font-medium text-slate-800 hover:bg-slate-50"
-          >
-            Brand
-          </Link>
+      </section>
+
+      {/* Main Content Layout with Sticky Right Rail */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] xl:grid-cols-[minmax(0,1fr)_20rem]">
+            
+            {/* Main Content Column */}
+            <article className="min-w-0 space-y-10 max-w-3xl text-sm leading-relaxed text-[#4b5563]">
+              
+              <div id="overview" className="scroll-mt-28 space-y-4">
+                <p>
+                  OpsKnight provides end-to-end alerting, paging, escalation policies, Slack ChatOps war rooms, public status pages, and postmortem incident timelines without third-party vendor lock-in.
+                </p>
+                <p>
+                  OpsKnight is purpose-built self-hosted incident command. It is not a clone of anyone else’s proprietary cloud product.
+                </p>
+              </div>
+
+              <div id="who-it-is-for" className="scroll-mt-28 border-t border-slate-200 pt-10">
+                <h2 className="text-xl font-semibold text-[#111827]">Who it is for</h2>
+                <p className="mt-3">
+                  SRE, DevOps, and platform teams that already run Postgres, Docker, or Kubernetes. Teams with strict compliance requirements (HIPAA, SOC 2, GDPR, Financial) that cannot place real-time incident timelines and architecture metadata in a multi-tenant vendor cloud.
+                </p>
+                <p className="mt-2">
+                  Teams that would rather operate a resilient on-call pager than meter developer seats. Includes {BRAND.integrationCountLabel} inbound parsers, Slack war room bots, status pages, local accounts, and OIDC enterprise SSO.
+                </p>
+              </div>
+
+              <div id="who-it-is-not-for" className="scroll-mt-28 border-t border-slate-200 pt-10">
+                <h2 className="text-xl font-semibold text-[#111827]">Who it is not for</h2>
+                <p className="mt-3">
+                  Anyone who needs a hosted SaaS cloud, native voice phone calls, or SAML in this release (local accounts and OIDC single sign-on are supported).
+                </p>
+                <p className="mt-2">
+                  Anyone looking for a PagerDuty or Opsgenie clone — our Events API v2 is an inbound ingest adapter designed to make migration seamless. Change your webhook destination URL and test immediately.
+                </p>
+              </div>
+
+              <div id="mission" className="scroll-mt-28 border-t border-slate-200 pt-10">
+                <h2 className="text-xl font-semibold text-[#111827]">Mission</h2>
+                <p className="mt-3">
+                  Make modern on-call, paging, war rooms, status pages, and postmortems freely available to any engineering team that can run Docker Compose or Helm — without a SaaS subscription tax.
+                </p>
+              </div>
+
+              <div id="license" className="scroll-mt-28 border-t border-slate-200 pt-10">
+                <h2 className="text-xl font-semibold text-[#111827]">License &amp; Open Source</h2>
+                <p className="mt-3">
+                  OpsKnight is licensed under {BRAND.license}. Source code is openly available on GitHub. There is no hidden enterprise tier or artificial seat metering.
+                </p>
+              </div>
+
+              <div id="maintainer" className="scroll-mt-28 border-t border-slate-200 pt-10">
+                <h2 className="text-xl font-semibold text-[#111827]">Maintainer &amp; Contact</h2>
+                <p className="mt-3">
+                  Created and maintained by{" "}
+                  <a
+                    href={BRAND.authors[0].url}
+                    className="font-medium text-[#111827] underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {BRAND.authors[0].name}
+                  </a>
+                  . For security disclosures, press, or partnership inquiries:{" "}
+                  <a href={`mailto:${BRAND.links.email}`} className="text-[#d21a1b] font-medium hover:underline">
+                    {BRAND.links.email}
+                  </a>
+                  .
+                </p>
+              </div>
+
+              <div className="mt-12 flex flex-wrap gap-3 pt-4 border-t border-slate-200">
+                <a
+                  href={BRAND.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-10 items-center rounded-[12px] bg-[#d21a1b] px-5 text-sm font-semibold text-white hover:bg-[#b41516]"
+                >
+                  GitHub Repository
+                </a>
+                <Link
+                  href="/install"
+                  className="inline-flex h-10 items-center rounded-[12px] border border-slate-200 bg-white px-5 text-sm font-medium text-slate-800 hover:bg-slate-50"
+                >
+                  Install OpsKnight
+                </Link>
+                <Link
+                  href="/security"
+                  className="inline-flex h-10 items-center rounded-[12px] border border-slate-200 bg-white px-5 text-sm font-medium text-slate-800 hover:bg-slate-50"
+                >
+                  Security Architecture
+                </Link>
+              </div>
+
+            </article>
+
+            {/* Sticky Right Rail */}
+            <aside className="hidden lg:block">
+              <div className="sticky top-24 pl-4 border-l border-slate-200/80">
+                <PageToc
+                  sections={TOC_SECTIONS}
+                  specs={ABOUT_SPECS}
+                  docLink={latestDocsHref("getting-started")}
+                  docLinkLabel="Getting Started Docs"
+                />
+              </div>
+            </aside>
+
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

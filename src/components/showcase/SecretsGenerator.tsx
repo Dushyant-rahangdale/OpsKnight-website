@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Copy, Check, RefreshCw, Key, ShieldCheck, Terminal, Database, Sparkles } from "lucide-react";
+import { Copy, Check, RefreshCw, Key, ShieldCheck, Terminal, Database } from "lucide-react";
 
 function generateBase64Secret(): string {
   if (typeof window === "undefined" || !window.crypto) return "";

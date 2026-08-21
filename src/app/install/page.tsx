@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 import { CopyBlock } from "@/components/brand/CopyBlock";
 import { SecretsGenerator } from "@/components/showcase/SecretsGenerator";
+import { ProductionConfigurator } from "@/components/showcase/ProductionConfigurator";
 import { latestDocsHref } from "@/lib/docs/paths";
 
 const title = "Install OpsKnight";
@@ -20,7 +21,7 @@ export default function InstallPage() {
   return (
     <div className="min-h-screen bg-[#f8fafc]">
       <section className="border-b border-slate-200 pt-28 pb-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <p className="mb-3 font-mono text-[11px] font-medium tracking-wide text-slate-500">
             Install · {BRAND.version} · {BRAND.license}
           </p>
@@ -37,7 +38,7 @@ export default function InstallPage() {
       </section>
 
       <section className="py-16">
-        <div className="mx-auto max-w-3xl space-y-12 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl space-y-12 px-4 sm:px-6 lg:px-8">
           <div>
             <h2 className="text-xl font-semibold text-[#111827]">You need</h2>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-[#4b5563]">
@@ -76,6 +77,19 @@ docker compose up -d`}
               <span className="font-mono">openssl rand -hex 32</span>. Then open{" "}
               <span className="font-mono">http://localhost:3000</span>.
             </p>
+          </div>
+
+          {/* Production Configuration & Multi-Provider Builder */}
+          <div>
+            <div className="mb-4">
+              <h2 className="text-xl font-semibold text-[#111827]">
+                Production Stack Configurator
+              </h2>
+              <p className="mt-1 text-sm text-[#4b5563]">
+                Configure Slack ChatOps, SMS providers (Twilio / AWS SNS), Email (SMTP / Resend), and OIDC SSO to generate a production-ready <span className="font-mono text-xs">.env</span> and <span className="font-mono text-xs">docker-compose.prod.yml</span>.
+              </p>
+            </div>
+            <ProductionConfigurator />
           </div>
 
           <div>

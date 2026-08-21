@@ -10,6 +10,7 @@ const navItems = [
   { label: "Product", href: "/#product-tour" },
   { label: "Install", href: "/install" },
   { label: "Integrations", href: "/integrations" },
+  { label: "Security", href: "/security" },
   { label: "Compare", href: "/compare" },
   { label: "Changelog", href: "/changelog" },
   { label: "Docs", href: BRAND.links.docs },

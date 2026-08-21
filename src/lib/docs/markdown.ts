@@ -180,26 +180,37 @@ function rehypeCallouts() {
     visit(tree as Node, "element", (node: HastElement) => {
       if (node.tagName !== "blockquote") return;
       const raw = textContent(node).trim();
-      const match = /^(note|warning|tip|important|caution|info)\s*[:—-]\s*/i.exec(raw);
-      if (!match) return;
-      const kind = match[1].toLowerCase();
+      
+      // Match GitHub-style [!NOTE], [!WARNING], etc., or standard "Note:", "**Note**:"
+      const ghMatch = /^\[!(NOTE|WARNING|TIP|IMPORTANT|CAUTION)\]\s*/i.exec(raw);
+      const standardMatch = /^(\*\*)?(Note|Warning|Tip|Important|Caution|Info)(\*\*)?\s*[:—-]\s*/i.exec(raw);
+      
+      if (!ghMatch && !standardMatch) return;
+      
+      const kind = (ghMatch ? ghMatch[1] : standardMatch![2]).toLowerCase();
       const variant =
-        kind === "warning" || kind === "caution"
+        kind === "warning"
           ? "warning"
           : kind === "tip"
             ? "success"
-            : kind === "important"
+            : kind === "important" || kind === "caution"
               ? "danger"
               : "info";
+
       node.tagName = "div";
       setClass(node, ["docs-callout", `docs-callout-${variant}`]);
       const label = kind.charAt(0).toUpperCase() + kind.slice(1);
+      
       const firstP = node.children?.find((child) => (child as HastElement).tagName === "p") as
         | HastElement
         | undefined;
       if (!firstP) return;
-      const prefix = new RegExp(`^${kind}\\s*[:—-]\\s*`, "i");
-      const rest = textContent(firstP).replace(prefix, "");
+
+      const prefixRegex = ghMatch
+        ? /^\[!(NOTE|WARNING|TIP|IMPORTANT|CAUTION)\]\s*/i
+        : /^(\*\*)?(Note|Warning|Tip|Important|Caution|Info)(\*\*)?\s*[:—-]\s*/i;
+      
+      const rest = textContent(firstP).replace(prefixRegex, "");
       firstP.children = [
         {
           type: "element",

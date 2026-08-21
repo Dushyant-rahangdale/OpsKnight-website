@@ -676,114 +676,153 @@ export default function IntegrationsGrid() {
         </div>
       )}
 
-      {/* Interactive Webhook Modal / Drawer */}
+      {/* Interactive Webhook Modal - Sleek Rectangular 2-Column Design */}
       {selectedIntegration && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="relative w-full max-w-2xl rounded-3xl bg-slate-900 border border-white/15 shadow-2xl p-6 sm:p-8 text-white space-y-6 max-h-[90vh] overflow-y-auto">
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setSelectedIntegration(null);
+          }}
+        >
+          <div className="relative w-full max-w-4xl rounded-2xl bg-[#0f172a] border border-slate-800 shadow-2xl overflow-hidden text-slate-200 animate-in fade-in zoom-in-95 duration-150">
             
-            {/* Modal Header */}
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white p-2.5 shrink-0 shadow-md flex items-center justify-center">
+            {/* Modal Top Header Bar */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/90">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 p-2 shrink-0 flex items-center justify-center shadow-sm">
                   {integrationIcons[selectedIntegration.iconKey]}
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="px-2.5 py-0.5 rounded-md bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] font-mono font-bold">
+                  <div className="flex items-center gap-2">
+                    <span className="text-base font-bold text-white">
+                      {selectedIntegration.name}
+                    </span>
+                    <span className="px-2 py-0.5 rounded bg-[#d21a1b]/15 text-[#d21a1b] text-[10px] font-mono font-semibold">
                       {selectedIntegration.category}
                     </span>
-                    <span className="text-xs text-slate-400">• Native Webhook Ingestion</span>
                   </div>
-                  <h3 className="text-2xl font-extrabold text-white">
-                    {selectedIntegration.name}
-                  </h3>
+                  <p className="text-xs text-slate-400">
+                    Native first-party webhook parser with HMAC-SHA256 verification
+                  </p>
                 </div>
               </div>
 
               <button
                 onClick={() => setSelectedIntegration(null)}
-                className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
                 title="Close"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <p className="text-sm text-slate-300 leading-relaxed">
-              {selectedIntegration.desc}
-            </p>
+            {/* Modal 2-Column Body */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 max-h-[80vh] overflow-y-auto">
+              
+              {/* Left Column: Details, Endpoint, & Security */}
+              <div className="lg:col-span-5 p-6 space-y-4 border-b lg:border-b-0 lg:border-r border-slate-800 bg-slate-900/40 flex flex-col justify-between">
+                <div className="space-y-4">
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    {selectedIntegration.desc}
+                  </p>
 
-            {/* Webhook Endpoint Box */}
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <Code2 className="w-3.5 h-3.5 text-red-400" />
-                Ingestion Endpoint (POST)
-              </label>
-              <div className="flex items-center justify-between p-3 rounded-xl bg-black/60 border border-white/10 font-mono text-xs text-red-400">
-                <span className="truncate pr-3">
-                  https://opsknight.yourdomain.com/api/webhooks/{selectedIntegration.webhookSlug}
-                </span>
-                <button
-                  onClick={() => handleCopyWebhook(selectedIntegration.webhookSlug)}
-                  className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all shrink-0 flex items-center gap-1"
-                  title="Copy Endpoint"
-                >
-                  {copiedWebhook ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span className="text-[10px] font-sans">{copiedWebhook ? 'Copied!' : 'Copy'}</span>
-                </button>
+                  {/* Webhook Endpoint Box */}
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-mono font-medium text-slate-400 flex items-center gap-1.5">
+                      <Code2 className="w-3.5 h-3.5 text-[#d21a1b]" />
+                      Ingestion Endpoint
+                    </label>
+                    <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#020617] border border-slate-800 font-mono text-xs text-slate-200">
+                      <span className="truncate pr-2 text-slate-300 text-[11px]">
+                        /api/webhooks/{selectedIntegration.webhookSlug}
+                      </span>
+                      <button
+                        onClick={() => handleCopyWebhook(selectedIntegration.webhookSlug)}
+                        className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all shrink-0 flex items-center gap-1 text-[11px]"
+                        title="Copy Endpoint"
+                      >
+                        {copiedWebhook ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                        <span>{copiedWebhook ? 'Copied' : 'Copy'}</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Forensic Security Details */}
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-mono font-medium text-slate-400 flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                      Security &amp; Ingestion Headers
+                    </label>
+                    <div className="p-3 rounded-xl bg-[#020617] border border-slate-800 text-[11px] font-mono space-y-1.5 text-slate-300">
+                      <div className="flex justify-between">
+                        <span className="text-slate-500">Content-Type:</span>
+                        <span className="text-slate-300">application/json</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-500">Signature:</span>
+                        <span className="text-emerald-400 font-medium">HMAC-SHA256</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-500">Protocol:</span>
+                        <span className="text-slate-300">{selectedIntegration.protocol}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Left Column Bottom Action */}
+                <div className="pt-3 border-t border-slate-800/80">
+                  <Link
+                    href={selectedIntegration.docPath}
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#d21a1b] hover:bg-[#b41516] text-white text-xs font-semibold transition-all shadow-md"
+                  >
+                    Read {selectedIntegration.name} Guide
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
               </div>
-            </div>
 
-            {/* Required Headers Box */}
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                Forensic Security & Authentication
-              </label>
-              <div className="p-3 rounded-xl bg-slate-950/80 border border-white/5 text-xs font-mono space-y-1 text-slate-300">
-                <div><span className="text-red-400">Content-Type:</span> application/json</div>
-                <div><span className="text-red-400">X-OpsKnight-Signature:</span> HMAC-SHA256(payload, secret)</div>
-                <div><span className="text-red-400">X-OpsKnight-Timestamp:</span> Unix Epoch Seconds (5-min replay protection)</div>
+              {/* Right Column: Interactive Code & Payload Viewer */}
+              <div className="lg:col-span-7 p-6 space-y-3 bg-[#020617] flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1 rounded-lg border border-slate-800 bg-slate-900/90 p-0.5 font-mono text-xs">
+                      <span className="flex items-center gap-1.5 rounded px-2.5 py-1 bg-slate-800 font-semibold text-white">
+                        <Terminal className="w-3.5 h-3.5 text-amber-400" />
+                        Sample JSON Ingestion Payload
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={() => handleCopyPayload(selectedIntegration.samplePayload)}
+                      className="inline-flex items-center gap-1 rounded-lg border border-slate-800 bg-slate-900 px-2.5 py-1 font-mono text-xs text-slate-300 hover:text-white transition-colors"
+                    >
+                      {copiedPayload ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
+                      <span>{copiedPayload ? 'Copied' : 'Copy JSON'}</span>
+                    </button>
+                  </div>
+
+                  {/* Preformatted JSON Output */}
+                  <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800/90 text-[11px] font-mono leading-relaxed text-emerald-300 overflow-x-auto max-h-[260px] custom-scrollbar">
+                    {JSON.stringify(selectedIntegration.samplePayload, null, 2)}
+                  </pre>
+                </div>
+
+                {/* Right Bottom cURL Action */}
+                <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-3">
+                  <p className="text-[11px] text-slate-500 font-mono">
+                    Ready to test against your local/staging instance
+                  </p>
+                  <button
+                    onClick={() => handleCopyCurl(selectedIntegration)}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-mono font-medium transition-colors shrink-0"
+                  >
+                    {copiedCurl ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Terminal className="w-3.5 h-3.5 text-slate-300" />}
+                    <span>{copiedCurl ? 'cURL Copied!' : 'Copy cURL Command'}</span>
+                  </button>
+                </div>
               </div>
-            </div>
 
-            {/* Sample Payload */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                  <Terminal className="w-3.5 h-3.5 text-amber-400" />
-                  Sample JSON Ingestion Payload
-                </label>
-                <button
-                  onClick={() => handleCopyPayload(selectedIntegration.samplePayload)}
-                  className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1"
-                >
-                  {copiedPayload ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                  {copiedPayload ? 'Copied' : 'Copy JSON'}
-                </button>
-              </div>
-              <pre className="p-4 rounded-xl bg-black/80 border border-white/10 text-xs font-mono text-emerald-300 overflow-x-auto max-h-48">
-                {JSON.stringify(selectedIntegration.samplePayload, null, 2)}
-              </pre>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/10">
-              <button
-                onClick={() => handleCopyCurl(selectedIntegration)}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-all border border-white/10"
-              >
-                {copiedCurl ? <Check className="w-4 h-4 text-emerald-400" /> : <Terminal className="w-4 h-4 text-red-400" />}
-                {copiedCurl ? 'cURL Command Copied!' : 'Copy cURL Test Command'}
-              </button>
-
-              <Link
-                href={selectedIntegration.docPath}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#d21a1b] hover:bg-[#b41516] text-white text-xs font-bold transition-all shadow-md"
-              >
-                Read Setup Guide
-                <ExternalLink className="w-3.5 h-3.5" />
-              </Link>
             </div>
 
           </div>

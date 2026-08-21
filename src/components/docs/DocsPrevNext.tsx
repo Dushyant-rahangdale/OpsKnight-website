@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getSidebar, SidebarItem } from "@/lib/docs/sidebar";
 import { withTrailingSlash } from "@/lib/docs/paths";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export function DocsPrevNext({ version, currentPath }: { version: string; currentPath: string }) {
   const sidebar = getSidebar(version);
@@ -27,14 +28,19 @@ export function DocsPrevNext({ version, currentPath }: { version: string; curren
   if (!prev && !next) return null;
 
   return (
-    <div className="mt-10 grid gap-3 border-t border-slate-200 pt-6 sm:grid-cols-2">
+    <div className="mt-12 grid gap-4 border-t border-slate-200/90 pt-8 sm:grid-cols-2">
       {prev ? (
         <Link
           href={prev.href}
-          className="rounded-[12px] border border-slate-200 bg-slate-50 px-4 py-3 hover:border-slate-300 hover:bg-white"
+          className="group flex flex-col justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-4 transition-all hover:-translate-y-0.5 hover:border-[#d21a1b]/40 hover:bg-white hover:shadow-sm"
         >
-          <span className="block font-mono text-[10px] uppercase tracking-wider text-slate-500">Previous</span>
-          <span className="mt-1 block text-sm font-medium text-slate-900">← {prev.title}</span>
+          <span className="flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-400 group-hover:text-[#d21a1b] transition-colors">
+            <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-1" />
+            Previous
+          </span>
+          <span className="mt-2 text-sm font-semibold text-slate-800 group-hover:text-slate-900 line-clamp-1">
+            {prev.title}
+          </span>
         </Link>
       ) : (
         <div />
@@ -42,10 +48,15 @@ export function DocsPrevNext({ version, currentPath }: { version: string; curren
       {next ? (
         <Link
           href={next.href}
-          className="rounded-[12px] border border-slate-200 bg-slate-50 px-4 py-3 text-right hover:border-slate-300 hover:bg-white"
+          className="group flex flex-col justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-4 text-right transition-all hover:-translate-y-0.5 hover:border-[#d21a1b]/40 hover:bg-white hover:shadow-sm sm:col-start-2"
         >
-          <span className="block font-mono text-[10px] uppercase tracking-wider text-slate-500">Next</span>
-          <span className="mt-1 block text-sm font-medium text-slate-900">{next.title} →</span>
+          <span className="flex items-center justify-end gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-400 group-hover:text-[#d21a1b] transition-colors">
+            Next
+            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+          </span>
+          <span className="mt-2 text-sm font-semibold text-slate-800 group-hover:text-slate-900 line-clamp-1">
+            {next.title}
+          </span>
         </Link>
       ) : null}
     </div>

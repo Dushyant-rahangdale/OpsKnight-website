@@ -161,6 +161,9 @@ export function GlobalCommandPalette() {
       onClick={() => setIsOpen(false)}
     >
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site and Documentation Search"
         className="w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-700/80 bg-[#0f172a] shadow-2xl shadow-black/60 animate-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
         onKeyDown={handleListKeyDown}
@@ -171,6 +174,14 @@ export function GlobalCommandPalette() {
           <input
             ref={inputRef}
             type="text"
+            role="combobox"
+            aria-expanded="true"
+            aria-controls="search-results-list"
+            aria-activedescendant={
+              filteredItems[selectedIndex]
+                ? `search-opt-${selectedIndex}`
+                : undefined
+            }
             value={query}
             onChange={(e) => {
               setQuery(e.target.value);
@@ -194,7 +205,13 @@ export function GlobalCommandPalette() {
         </div>
 
         {/* Results List */}
-        <div ref={listRef} className="max-h-[380px] overflow-y-auto p-2 space-y-1 custom-scrollbar">
+        <div
+          id="search-results-list"
+          role="listbox"
+          aria-label="Search results"
+          ref={listRef}
+          className="max-h-[380px] overflow-y-auto p-2 space-y-1 custom-scrollbar"
+        >
           {filteredItems.length === 0 ? (
             <div className="py-12 text-center text-xs text-slate-400">
               No results found for &ldquo;<span className="text-slate-200">{query}</span>&rdquo;
@@ -206,6 +223,9 @@ export function GlobalCommandPalette() {
               return (
                 <div
                   key={`${item.href}-${item.title}`}
+                  id={`search-opt-${index}`}
+                  role="option"
+                  aria-selected={isSelected}
                   onClick={() => navigateTo(item.href)}
                   onMouseEnter={() => setSelectedIndex(index)}
                   className={`flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3.5 py-2.5 transition-all text-xs ${

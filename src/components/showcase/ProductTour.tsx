@@ -104,7 +104,11 @@ export function ProductTour() {
           </p>
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-2">
+        <div
+          role="tablist"
+          aria-label="Product feature screens"
+          className="mt-10 flex flex-wrap gap-2"
+        >
           {TOUR_TABS.map((tab) => {
             const Icon =
               tab.id === "incidents"
@@ -120,6 +124,10 @@ export function ProductTour() {
             return (
               <button
                 key={tab.id}
+                id={`tour-tab-${tab.id}`}
+                role="tab"
+                aria-selected={isActive}
+                aria-controls={`tour-tabpanel-${tab.id}`}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 className={`inline-flex items-center gap-2 rounded-[10px] border px-3.5 py-2 text-sm font-medium ${
@@ -135,7 +143,13 @@ export function ProductTour() {
           })}
         </div>
 
-        <div className="mt-8 overflow-hidden rounded-[14px] border border-slate-200 bg-slate-50">
+        <div
+          id={`tour-tabpanel-${currentTab.id}`}
+          role="tabpanel"
+          aria-labelledby={`tour-tab-${currentTab.id}`}
+          tabIndex={0}
+          className="mt-8 overflow-hidden rounded-[14px] border border-slate-200 bg-slate-50"
+        >
           <div className="grid lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,1fr)]">
             <div className="bg-[#0f172a] p-4 sm:p-6">
               {currentTab.image ? (
@@ -144,6 +158,7 @@ export function ProductTour() {
                   alt={currentTab.heading}
                   width={1600}
                   height={900}
+                  sizes="(max-width: 1024px) 100vw, 60vw"
                   className="h-auto w-full rounded-[12px] border border-slate-700"
                 />
               ) : null}

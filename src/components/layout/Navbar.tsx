@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X, Github, Search } from "lucide-react";
 import { BRAND } from "@/lib/brand";
@@ -18,10 +19,19 @@ const navItems = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenSearch = () => {
     window.dispatchEvent(new Event("open-global-search"));
+  };
+
+  const isItemActive = (href: string) => {
+    if (href.startsWith("/#") || href === "/") return false;
+    if (href === "/docs" || href.startsWith("/docs")) {
+      return pathname.startsWith("/docs");
+    }
+    return pathname === href || pathname.startsWith(`${href}/`);
   };
 
   return (
@@ -35,15 +45,23 @@ export function Navbar() {
           <BrandLockup size={28} />
 
           <div className="hidden items-center gap-0.5 md:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="rounded-md px-3 py-1.5 text-sm font-medium leading-snug text-slate-300 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const active = isItemActive(item.href);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`rounded-md px-3 py-1.5 text-sm font-medium leading-snug transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b] ${
+                    active
+                      ? "bg-slate-800 text-white font-semibold shadow-inner"
+                      : "text-slate-300 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="hidden items-center gap-2.5 md:flex">
@@ -104,16 +122,24 @@ export function Navbar() {
                   ⌘K
                 </kbd>
               </button>
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="rounded-md px-3 py-2.5 text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const active = isItemActive(item.href);
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
+                      active
+                        ? "bg-slate-800 text-white font-semibold"
+                        : "text-slate-300 hover:bg-white/5 hover:text-white"
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
               <Link
                 href={BRAND.links.github}
                 target="_blank"

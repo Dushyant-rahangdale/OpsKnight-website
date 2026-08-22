@@ -5,9 +5,23 @@ import { PageToc } from "@/components/common/PageToc";
 import { latestDocsHref } from "@/lib/docs/paths";
 
 export const metadata: Metadata = {
-  title: "About OpsKnight",
+  title: "About",
   description:
     "OpsKnight is self-hosted incident command. Other product names identify those products. Not affiliated with PagerDuty or Atlassian.",
+  alternates: {
+    canonical: "/about/",
+  },
+  openGraph: {
+    title: `About | ${BRAND.name}`,
+    description:
+      "OpsKnight is self-hosted incident command. Other product names identify those products. Not affiliated with PagerDuty or Atlassian.",
+    url: "/about/",
+  },
+  twitter: {
+    title: `About | ${BRAND.name}`,
+    description:
+      "OpsKnight is self-hosted incident command. Other product names identify those products. Not affiliated with PagerDuty or Atlassian.",
+  },
 };
 
 const TOC_SECTIONS = [

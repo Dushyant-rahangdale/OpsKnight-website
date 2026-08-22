@@ -23,7 +23,7 @@ export default async function DocsLayout({
     <SidebarProvider defaultOpen>
       <NewDocsSidebar items={sidebar} version={version} versions={DOC_VERSIONS} />
       <SidebarInset className="min-h-screen bg-[#f8fafc]">
-        <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-3 border-b border-slate-200 bg-[#0f172a] px-4">
+        <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-3 border-b border-slate-800 bg-[#0f172a] px-4">
           <SidebarTrigger className="-ml-1 text-slate-400 hover:text-white" />
           <div className="h-4 w-px bg-slate-700" />
           <nav className="flex items-center gap-2 text-sm">

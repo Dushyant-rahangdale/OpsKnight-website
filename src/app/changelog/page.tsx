@@ -5,6 +5,20 @@ export const metadata: Metadata = {
   title: "Changelog",
   description:
     "What shipped in each OpsKnight release — new integrations, Slack rooms, security, and tagged GHCR images.",
+  alternates: {
+    canonical: "/changelog/",
+  },
+  openGraph: {
+    title: "Changelog | OpsKnight",
+    description:
+      "What shipped in each OpsKnight release — new integrations, Slack rooms, security, and tagged GHCR images.",
+    url: "/changelog/",
+  },
+  twitter: {
+    title: "Changelog | OpsKnight",
+    description:
+      "What shipped in each OpsKnight release — new integrations, Slack rooms, security, and tagged GHCR images.",
+  },
 };
 
 export default function ChangelogPage() {

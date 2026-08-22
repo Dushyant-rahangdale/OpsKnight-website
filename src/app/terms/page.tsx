@@ -4,11 +4,23 @@ import { BRAND } from "@/lib/brand";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: `Terms for the ${BRAND.name} website. The software is licensed under Apache-2.0.`,
+  alternates: {
+    canonical: "/terms/",
+  },
+  openGraph: {
+    title: `Terms of Service | ${BRAND.name}`,
+    description: `Terms for the ${BRAND.name} website. The software is licensed under Apache-2.0.`,
+    url: "/terms/",
+  },
+  twitter: {
+    title: `Terms of Service | ${BRAND.name}`,
+    description: `Terms for the ${BRAND.name} website. The software is licensed under Apache-2.0.`,
+  },
 };
 
 export default function TermsPage() {
   return (
-    <main className="min-h-screen bg-[#f8fafc] pt-32 pb-24 px-6">
+    <main className="min-h-screen bg-[#f8fafc] pt-28 pb-16 px-6">
       <div className="mx-auto max-w-3xl">
         <h1 className="text-4xl font-semibold tracking-tight text-[#111827]">
           Terms of Service

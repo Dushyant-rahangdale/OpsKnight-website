@@ -91,9 +91,6 @@ export const metadata: Metadata = {
     title: BRAND.seo.title,
     description: BRAND.seo.description,
     images: [BRAND.assets.banner],
-    creator: BRAND.authors[0]?.twitter
-      ? `@${BRAND.authors[0].twitter.split("twitter.com/")[1]?.replace(/\/.*/, "")}`
-      : undefined,
   },
   icons: {
     icon: [

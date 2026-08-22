@@ -256,11 +256,11 @@ export default function UseCasesPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d21a1b]" />
-                      <span>OIDC and SAML 2.0 Single Sign-On integration with Okta, Azure AD, and Keycloak.</span>
+                      <span>OIDC Single Sign-On integration with Okta, Azure AD, and Keycloak (SAML is not in this release).</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d21a1b]" />
-                      <span>AES-256-GCM envelope encryption protecting stored integration secrets and notification tokens.</span>
+                      <span>AES-256-CBC (V2) envelope encryption protecting stored integration secrets and notification tokens.</span>
                     </li>
                   </ul>
                   <div className="mt-5 border-t border-slate-100 pt-4">

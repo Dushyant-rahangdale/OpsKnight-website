@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { BRAND } from "@/lib/brand";
 
-const title = `Compare ${BRAND.name}`;
+const title = "Compare Alternative On-Call Tools";
 const description =
   `Compare ${BRAND.name} with PagerDuty, incident.io, Opsgenie, Squadcast, Splunk On-Call, and Grafana Cloud IRM.`;
 
@@ -9,15 +9,15 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: {
-    canonical: "/compare",
+    canonical: "/compare/",
   },
   openGraph: {
-    title,
+    title: `Compare Alternative On-Call Tools | ${BRAND.name}`,
     description,
-    url: "/compare",
+    url: "/compare/",
   },
   twitter: {
-    title,
+    title: `Compare Alternative On-Call Tools | ${BRAND.name}`,
     description,
   },
 };

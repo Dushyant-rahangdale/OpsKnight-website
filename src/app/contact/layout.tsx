@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 import { BRAND } from "@/lib/brand";
 
-const title = `Community | ${BRAND.name}`;
+const title = "Community";
 const description = `GitHub issues, discussions, email, and security advisories for ${BRAND.name}. There is no ticket desk and no SLA.`;
 
 export const metadata: Metadata = {
   title,
   description,
   alternates: {
-    canonical: "/contact",
+    canonical: "/contact/",
   },
   openGraph: {
-    title,
+    title: `Community | ${BRAND.name}`,
     description,
-    url: "/contact",
+    url: "/contact/",
   },
   twitter: {
-    title,
+    title: `Community | ${BRAND.name}`,
     description,
   },
 };

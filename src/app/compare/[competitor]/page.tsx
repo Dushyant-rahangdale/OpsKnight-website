@@ -53,9 +53,25 @@ export async function generateMetadata({
   const { competitor: slug } = await params;
   const vendorId = vendorIdFromCompareSlug(slug);
   const name = HONEST_BLURB[vendorId ?? ""]?.title ?? "this product";
+  const title = `OpsKnight vs ${name}`;
+  const description = `How OpsKnight v${BRAND.version} compares with ${name}: self-host vs SaaS, ${BRAND.license}, and capabilities that actually ship.`;
+  const canonical = `/compare/${slug}/`;
+
   return {
-    title: `OpsKnight vs ${name}`,
-    description: `How OpsKnight v${BRAND.version} compares with ${name}: self-host vs SaaS, ${BRAND.license}, and capabilities that actually ship.`,
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title: `${title} | ${BRAND.name}`,
+      description,
+      url: canonical,
+    },
+    twitter: {
+      title: `${title} | ${BRAND.name}`,
+      description,
+    },
   };
 }
 

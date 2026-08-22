@@ -161,7 +161,7 @@ route:
         </div>
 
         <Link
-          href={latestDocsHref("integrations/metrics-alerting/grafana")}
+          href={latestDocsHref("integrations/apm-monitoring/grafana")}
           className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-[#d21a1b] hover:underline"
         >
           <span>Grafana webhook docs</span>

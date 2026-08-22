@@ -6,8 +6,20 @@ import { Blocks, ShieldCheck, Webhook } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Integrations Ecosystem | OpsKnight',
+  title: 'Integrations Ecosystem',
   description: `Connect your observability stack with ${BRAND.integrationCountLabel} native integrations. HMAC-signed ingest, no plugins.`,
+  alternates: {
+    canonical: '/integrations/',
+  },
+  openGraph: {
+    title: `Integrations Ecosystem | ${BRAND.name}`,
+    description: `Connect your observability stack with ${BRAND.integrationCountLabel} native integrations. HMAC-signed ingest, no plugins.`,
+    url: '/integrations/',
+  },
+  twitter: {
+    title: `Integrations Ecosystem | ${BRAND.name}`,
+    description: `Connect your observability stack with ${BRAND.integrationCountLabel} native integrations. HMAC-signed ingest, no plugins.`,
+  },
 };
 
 export default function IntegrationsPage() {

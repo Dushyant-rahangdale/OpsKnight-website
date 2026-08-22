@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export function CopyCodeButton() {
+  const pathname = usePathname();
+
   useEffect(() => {
     const frames = document.querySelectorAll<HTMLElement>(".docs-code");
     const cleanups: Array<() => void> = [];
@@ -28,7 +31,7 @@ export function CopyCodeButton() {
     });
 
     return () => cleanups.forEach((fn) => fn());
-  }, []);
+  }, [pathname]);
 
   return null;
 }

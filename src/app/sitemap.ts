@@ -11,28 +11,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
   const routes: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+      url: `${baseUrl}/`,
       lastModified,
       changeFrequency: "weekly",
       priority: 1,
     },
-    {
-      url: `${baseUrl}/compare`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    ...["/changelog", "/integrations", "/about", "/privacy", "/terms", "/install", "/brand", "/use-cases", "/compare/pagerduty", "/compare/opsgenie", "/compare/squadcast", "/compare/incident-io", "/compare/grafana-oncall"].map((route) => ({
+    ...[
+      "/install/",
+      "/security/",
+      "/integrations/",
+      "/compare/",
+      "/compare/pagerduty/",
+      "/compare/opsgenie/",
+      "/compare/squadcast/",
+      "/compare/incidentio/",
+      "/compare/grafana-oncall/",
+      "/compare/splunk/",
+      "/changelog/",
+      "/about/",
+      "/use-cases/",
+      "/contact/",
+      "/brand/",
+      "/privacy/",
+      "/terms/",
+    ].map((route) => ({
       url: `${baseUrl}${route}`,
       lastModified,
       changeFrequency: "monthly" as const,
-      priority: 0.6,
+      priority: route === "/install/" || route === "/security/" || route === "/compare/" ? 0.8 : 0.6,
     })),
   ];
 

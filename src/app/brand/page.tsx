@@ -170,8 +170,8 @@ export default function BrandPage() {
                 <div className="mt-4">
                   <CopyBlock
                     label="curl"
-                    value={`curl -O https://opsknight.com/assets/logo.svg
-curl -O https://opsknight.com/assets/logo-mark.png`}
+                    value={`curl -O https://opsknight.com/logo.svg
+curl -O https://opsknight.com/logo-mark.png`}
                   />
                 </div>
               </div>
@@ -184,7 +184,7 @@ curl -O https://opsknight.com/assets/logo-mark.png`}
                 <PageToc
                   sections={TOC_SECTIONS}
                   specs={BRAND_SPECS}
-                  quickCommand="curl -O https://opsknight.com/assets/logo.svg"
+                  quickCommand="curl -O https://opsknight.com/logo.svg"
                   quickCommandLabel="Download SVG"
                   docLink={BRAND.links.github}
                   docLinkLabel="GitHub Repository"

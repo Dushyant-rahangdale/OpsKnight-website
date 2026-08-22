@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { latestDocsHref } from '@/lib/docs/paths';
 import { 
@@ -555,6 +555,21 @@ export default function IntegrationsGrid() {
     setTimeout(() => setCopiedCurl(false), 2000);
   }, []);
 
+  useEffect(() => {
+    if (!selectedIntegration) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedIntegration(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [selectedIntegration]);
+
   return (
     <div className="space-y-12">
       
@@ -634,8 +649,17 @@ export default function IntegrationsGrid() {
         {filteredIntegrations.map((integration) => (
           <div
             key={integration.id}
+            role="button"
+            tabIndex={0}
+            aria-label={`Inspect ${integration.name} webhook payload`}
             onClick={() => setSelectedIntegration(integration)}
-            className="group flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200 hover:border-red-500/40 hover:shadow-md transition-all cursor-pointer shadow-sm relative overflow-hidden"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setSelectedIntegration(integration);
+              }
+            }}
+            className="group flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200 hover:border-red-500/40 hover:shadow-md transition-all cursor-pointer shadow-sm relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d21a1b]"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
@@ -689,7 +713,12 @@ export default function IntegrationsGrid() {
             if (e.target === e.currentTarget) setSelectedIntegration(null);
           }}
         >
-          <div className="relative w-full max-w-4xl rounded-2xl bg-[#0f172a] border border-slate-800 shadow-2xl overflow-hidden text-slate-200 animate-in fade-in zoom-in-95 duration-150">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${selectedIntegration.name} Webhook Details`}
+            className="relative w-full max-w-4xl rounded-2xl bg-[#0f172a] border border-slate-800 shadow-2xl overflow-hidden text-slate-200 animate-in fade-in zoom-in-95 duration-150"
+          >
             
             {/* Modal Top Header Bar */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/90">

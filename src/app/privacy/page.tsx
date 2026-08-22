@@ -5,11 +5,23 @@ import { BRAND } from "@/lib/brand";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: `Privacy policy for the ${BRAND.name} website.`,
+  alternates: {
+    canonical: "/privacy/",
+  },
+  openGraph: {
+    title: `Privacy Policy | ${BRAND.name}`,
+    description: `Privacy policy for the ${BRAND.name} website.`,
+    url: "/privacy/",
+  },
+  twitter: {
+    title: `Privacy Policy | ${BRAND.name}`,
+    description: `Privacy policy for the ${BRAND.name} website.`,
+  },
 };
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-[#f8fafc] pt-32 pb-24 px-6">
+    <main className="min-h-screen bg-[#f8fafc] pt-28 pb-16 px-6">
       <div className="mx-auto max-w-3xl">
         <h1 className="text-4xl font-semibold tracking-tight text-[#111827]">
           Privacy Policy

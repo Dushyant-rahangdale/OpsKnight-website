@@ -1,20 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Github, Copy, Check, Terminal } from "lucide-react";
+import { ArrowRight, Github } from "lucide-react";
 import { BRAND } from "@/lib/brand";
 
 export function Hero() {
-  const [copied, setCopied] = useState(false);
-  const quickStartCmd = "git clone https://github.com/opsknight-labs/OpsKnight.git && cd OpsKnight && docker compose up -d";
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(quickStartCmd);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
   return (
     <section className="relative overflow-hidden border-b border-slate-200 bg-[#f8fafc] pt-24 pb-16 md:pt-28 md:pb-20">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
@@ -77,34 +69,6 @@ export function Hero() {
                 </span>
                 <span>Live status</span>
               </Link>
-            </div>
-
-            {/* Quick-start 1-liner command strip */}
-            <div className="mt-6 flex max-w-xl items-center justify-between gap-2 rounded-xl border border-slate-800 bg-[#0f172a] px-3.5 py-2.5 shadow-sm">
-              <div className="flex min-w-0 items-center gap-2 font-mono text-xs text-slate-300">
-                <Terminal className="h-3.5 w-3.5 shrink-0 text-[#d21a1b]" />
-                <span className="truncate text-slate-400">
-                  <span className="text-slate-500">$</span> git clone https://github.com/opsknight-labs/OpsKnight.git && docker compose up -d
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={handleCopy}
-                aria-label="Copy quick-start command"
-                className="flex shrink-0 items-center gap-1.5 rounded-lg bg-slate-800 px-2.5 py-1 font-mono text-xs font-semibold text-slate-200 hover:bg-slate-700 transition-colors"
-              >
-                {copied ? (
-                  <>
-                    <Check className="h-3.5 w-3.5 text-[#059669]" />
-                    <span className="text-[#059669]">Copied</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="h-3.5 w-3.5 text-slate-400" />
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
             </div>
 
             <dl className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">

@@ -64,6 +64,11 @@ export function getDocFilePath(version: string, slugParts: string[]) {
     path.join(root, ...target) + ".mdx",
     path.join(root, ...target, "README.md"),
     path.join(root, ...target, "index.md"),
+    // Also resolve integrations subcategories when 'integrations' prefix is omitted
+    path.join(root, "integrations", ...target) + ".md",
+    path.join(root, "integrations", ...target) + ".mdx",
+    path.join(root, "integrations", ...target, "README.md"),
+    path.join(root, "integrations", ...target, "index.md"),
   ];
 
   for (const filePath of fileCandidates) {
@@ -110,6 +115,10 @@ export function getAllDocSlugs(version: string) {
         const rel = path.relative(root, fullPath);
         const parts = normalizeSlugParts(rel.split(path.sep));
         slugs.push(parts);
+        // If it's inside integrations/category/name, also generate the category/name slug alias
+        if (parts[0] === "integrations" && parts.length > 2) {
+          slugs.push(parts.slice(1));
+        }
       }
     }
   }

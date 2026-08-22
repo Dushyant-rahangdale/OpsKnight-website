@@ -51,10 +51,18 @@ export function InstallMethods() {
 
         <div className="mt-10 overflow-hidden rounded-[16px] border border-slate-800 bg-[#0f172a] shadow-xl">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 bg-slate-900/90 px-4 py-3">
-            <div className="flex flex-wrap items-center gap-1 rounded-xl border border-slate-800 bg-[#020617] p-1">
+            <div
+              role="tablist"
+              aria-label="Deployment methods"
+              className="flex flex-wrap items-center gap-1 rounded-xl border border-slate-800 bg-[#020617] p-1"
+            >
               {TABS.map((tab) => (
                 <button
                   key={tab.id}
+                  id={`tab-${tab.id}`}
+                  role="tab"
+                  aria-selected={active === tab.id}
+                  aria-controls={`tabpanel-${tab.id}`}
                   type="button"
                   onClick={() => setActive(tab.id)}
                   className={`rounded-lg px-3 py-1.5 font-mono text-xs font-semibold transition-all ${
@@ -91,7 +99,13 @@ export function InstallMethods() {
               </button>
             </div>
           </div>
-          <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-slate-200 sm:p-5 sm:text-[13px] max-h-[340px] custom-scrollbar">
+          <pre
+            id={`tabpanel-${active}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${active}`}
+            tabIndex={0}
+            className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-slate-200 sm:p-5 sm:text-[13px] max-h-[340px] custom-scrollbar"
+          >
             {commands[active]}
           </pre>
           <p className="border-t border-slate-800 px-4 py-3 text-[11px] leading-relaxed text-slate-400">

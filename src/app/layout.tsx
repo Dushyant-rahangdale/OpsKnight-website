@@ -5,7 +5,7 @@ import "./globals.css";
 import { BRAND } from "@/lib/brand";
 import { ConditionalNavbar } from "@/components/layout/ConditionalNavbar";
 import { ConditionalFooter } from "@/components/layout/ConditionalFooter";
-import { GlobalCommandPalette } from "@/components/navigation/GlobalCommandPalette";
+import { ClientCommandPalette } from "@/components/navigation/ClientCommandPalette";
 
 const baseUrl = `https://${BRAND.domain}`;
 const mergedKeywords = Array.from(
@@ -124,7 +124,7 @@ export default function RootLayout({
         <ConditionalNavbar />
         <main>{children}</main>
         <ConditionalFooter />
-        <GlobalCommandPalette />
+        <ClientCommandPalette />
       </body>
     </html>
   );

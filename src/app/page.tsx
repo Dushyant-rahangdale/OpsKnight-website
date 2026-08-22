@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Hero } from "@/components/hero/Hero";
 import { HowItWorks } from "@/components/how-it-works/HowItWorks";
 import { ProductTour } from "@/components/showcase/ProductTour";
 import { Features } from "@/components/features/Features";
 import { InstallMethods } from "@/components/showcase/InstallMethods";
 import { Integrations } from "@/components/integrations/Integrations";
-import { Comparison } from "@/components/comparison/Comparison";
-import { Pricing } from "@/components/pricing/Pricing";
 import { BRAND } from "@/lib/brand";
+
+const Comparison = dynamic(
+  () => import("@/components/comparison/Comparison").then((mod) => mod.Comparison),
+  { ssr: true }
+);
+
+const Pricing = dynamic(
+  () => import("@/components/pricing/Pricing").then((mod) => mod.Pricing),
+  { ssr: true }
+);
 
 export const metadata: Metadata = {
   alternates: {

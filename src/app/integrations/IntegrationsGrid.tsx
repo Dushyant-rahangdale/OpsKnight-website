@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { latestDocsHref } from '@/lib/docs/paths';
 import { 
@@ -521,34 +521,39 @@ export default function IntegrationsGrid() {
   const [copiedPayload, setCopiedPayload] = useState(false);
   const [copiedCurl, setCopiedCurl] = useState(false);
 
-  const filteredIntegrations = allIntegrations.filter((item) => {
-    const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
-    const matchesSearch = 
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.protocol.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.category.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filteredIntegrations = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim();
+    return allIntegrations.filter((item) => {
+      const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
+      if (!matchesCategory) return false;
+      if (!q) return true;
+      return (
+        item.name.toLowerCase().includes(q) ||
+        item.desc.toLowerCase().includes(q) ||
+        item.protocol.toLowerCase().includes(q) ||
+        item.category.toLowerCase().includes(q)
+      );
+    });
+  }, [activeCategory, searchQuery]);
 
-  const handleCopyWebhook = (slug: string) => {
+  const handleCopyWebhook = useCallback((slug: string) => {
     navigator.clipboard.writeText(`https://opsknight.yourdomain.com/api/webhooks/${slug}`);
     setCopiedWebhook(true);
     setTimeout(() => setCopiedWebhook(false), 2000);
-  };
+  }, []);
 
-  const handleCopyPayload = (payload: Record<string, unknown>) => {
+  const handleCopyPayload = useCallback((payload: Record<string, unknown>) => {
     navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
     setCopiedPayload(true);
     setTimeout(() => setCopiedPayload(false), 2000);
-  };
+  }, []);
 
-  const handleCopyCurl = (item: IntegrationItem) => {
+  const handleCopyCurl = useCallback((item: IntegrationItem) => {
     const curl = `curl -X POST https://opsknight.yourdomain.com/api/webhooks/${item.webhookSlug} \\\n  -H "Content-Type: application/json" \\\n  -H "X-OpsKnight-Token: YOUR_INTEGRATION_SECRET" \\\n  -d '${JSON.stringify(item.samplePayload)}'`;
     navigator.clipboard.writeText(curl);
     setCopiedCurl(true);
     setTimeout(() => setCopiedCurl(false), 2000);
-  };
+  }, []);
 
   return (
     <div className="space-y-12">
